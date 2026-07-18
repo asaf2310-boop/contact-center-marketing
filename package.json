@@ -1,0 +1,24 @@
+{
+  "name": "contact-center-marketing",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test:validators": "node src/lib/israeliValidators.test.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.8",
+    "@vitejs/plugin-react": "^4.3.4",
+    "lucide-react": "^0.475.0",
+    "nodemailer": "^6.10.0",
+    "pdfkit": "^0.16.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.26.0",
+    "typescript": "^5.8.2",
+    "vite": "^6.4.3"
+  }
+}
