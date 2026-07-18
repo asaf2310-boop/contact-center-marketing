@@ -17,6 +17,7 @@ import {
   Users,
   Zap,
 } from "lucide-react";
+import ContactForm from "@/components/ContactForm";
 
 /* ---------- קישורים ---------- */
 
@@ -31,9 +32,7 @@ const mayaClinicDemoUrl =
 const mayaClinicBookingUrl = `${mayaClinicDemoUrl.replace(/\/$/, "")}/book`;
 const mayaClinicAdminUrl = `${mayaClinicDemoUrl.replace(/\/$/, "")}/admin`;
 
-const contactUrl =
-  import.meta.env.VITE_CONTACT_URL ||
-  "mailto:info@allincenter.co.il?subject=בקשת הדגמה — AllInCenter";
+const contactUrl = "#contact";
 
 /* ---------- אנימציית גילוי בגלילה ---------- */
 
@@ -544,6 +543,39 @@ export default function MarketingHome() {
               );
             })}
           </div>
+        </section>
+
+        {/* טופס יצירת קשר */}
+        <section className="section" id="contact">
+          <Reveal>
+            <div className="contact-section">
+              <div className="contact-section__copy">
+                <span className="kicker">בואו נדבר</span>
+                <h2>
+                  ספרו לנו מה העסק צריך, <span className="gradient-text">ונחזור עם כיוון</span>
+                </h2>
+                <p>
+                  השאירו פרטים ונחזור לשיחת היכרות קצרה. הפנייה נכנסת ישירות למערכת הלידים
+                  שלנו כדי שלא תלך לאיבוד.
+                </p>
+                <ul>
+                  <li>
+                    <CheckCircle2 size={18} />
+                    שיחת אבחון קצרה וללא התחייבות
+                  </li>
+                  <li>
+                    <CheckCircle2 size={18} />
+                    דמו שמותאם לתהליכים של העסק
+                  </li>
+                  <li>
+                    <CheckCircle2 size={18} />
+                    הערכת זמן ועלות לפני שמתחילים
+                  </li>
+                </ul>
+              </div>
+              <ContactForm />
+            </div>
+          </Reveal>
         </section>
 
         {/* CTA */}
