@@ -1332,6 +1332,292 @@ p {
   font-size: 0.8rem;
 }
 
+/* ---------- דף נחיתה (Landing / Facebook) ---------- */
+
+.lp-nav {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 22px;
+  background: var(--glass);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--line);
+}
+
+.lp-hero {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 46px 22px 30px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr);
+  align-items: center;
+  gap: 46px;
+}
+
+.lp-hero__copy h1 {
+  margin-top: 20px;
+  font-size: clamp(2.1rem, 4.6vw, 3.4rem);
+  font-weight: 900;
+  line-height: 1.14;
+  letter-spacing: -0.02em;
+  color: #241b45;
+}
+
+.lp-hero__sub {
+  margin-top: 18px;
+  max-width: 33rem;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.lp-hero__list {
+  list-style: none;
+  margin: 24px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.lp-hero__list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #3c3757;
+}
+
+.lp-hero__list svg {
+  color: var(--violet);
+  flex-shrink: 0;
+}
+
+.lp-trust {
+  margin-top: 26px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.lp-trust span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: #fff;
+  box-shadow: var(--shadow-soft);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #3c3757;
+}
+
+.lp-trust svg {
+  color: #059669;
+}
+
+.lp-form-wrap {
+  min-width: 0;
+}
+
+.lp-form-card {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(26rem 18rem at 100% 0%, rgba(139, 47, 214, 0.08), transparent 60%),
+    #fff;
+  box-shadow: var(--shadow);
+  padding: 30px;
+  scroll-margin-top: 90px;
+}
+
+.lp-form-card__head {
+  margin-bottom: 18px;
+}
+
+.lp-form-card__head h2 {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #241b45;
+}
+
+.lp-form-card__head p {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.lp-form-card .contact-form {
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+/* יתרונות */
+
+.lp-benefits {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 56px 22px 24px;
+}
+
+.lp-section-head {
+  max-width: 44rem;
+  margin: 0 auto 36px;
+  text-align: center;
+}
+
+.lp-section-head h2 {
+  margin-top: 12px;
+  font-size: clamp(1.7rem, 3.4vw, 2.4rem);
+  font-weight: 900;
+  color: #241b45;
+}
+
+.lp-benefits__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.lp-benefits__grid > .reveal {
+  display: flex;
+}
+
+.lp-benefit-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 24px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--card);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lp-benefit-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(139, 47, 214, 0.35);
+  box-shadow: 0 18px 50px rgba(58, 32, 120, 0.14);
+}
+
+.lp-benefit-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  background: linear-gradient(135deg, rgba(139, 47, 214, 0.12), rgba(25, 169, 242, 0.1));
+  border: 1px solid rgba(139, 47, 214, 0.22);
+  color: var(--violet-deep);
+}
+
+.lp-benefit-card h3 {
+  font-size: 1.06rem;
+  font-weight: 800;
+  color: #241b45;
+}
+
+.lp-benefit-card p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* הוכחה חברתית */
+
+.lp-social {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 30px 22px;
+}
+
+.lp-quote {
+  max-width: 52rem;
+  margin: 0 auto;
+  text-align: center;
+  padding: 40px 34px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line);
+  background: #fff;
+  box-shadow: var(--shadow-soft);
+}
+
+.lp-quote__stars {
+  display: inline-flex;
+  gap: 4px;
+  color: #f59e0b;
+}
+
+.lp-quote p {
+  margin-top: 16px;
+  font-size: 1.28rem;
+  font-weight: 700;
+  line-height: 1.6;
+  color: #241b45;
+}
+
+.lp-quote__stats {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 40px;
+  padding-top: 26px;
+  border-top: 1px solid var(--line);
+}
+
+.lp-quote__stats strong {
+  display: block;
+  font-size: 1.9rem;
+  font-weight: 900;
+  background: linear-gradient(120deg, #8b2fd6, #19a9f2);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.lp-quote__stats span {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.lp-final {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 30px 22px 24px;
+}
+
+/* כפתור צף לנייד */
+
+.lp-sticky-cta {
+  display: none;
+  position: fixed;
+  z-index: 50;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 15px 20px;
+  border-radius: 15px;
+  background: linear-gradient(120deg, var(--violet-deep), var(--violet) 55%, var(--blue));
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.02rem;
+  box-shadow: 0 14px 34px rgba(139, 47, 214, 0.4);
+}
+
 /* ---------- רספונסיב ---------- */
 
 @media (max-width: 1020px) {
@@ -1379,6 +1665,34 @@ p {
 
   .contact-section {
     grid-template-columns: 1fr;
+  }
+
+  .lp-hero {
+    grid-template-columns: 1fr;
+    gap: 34px;
+    padding-top: 32px;
+  }
+
+  .lp-hero__copy {
+    text-align: center;
+  }
+
+  .lp-hero__sub {
+    margin-inline: auto;
+  }
+
+  .lp-hero__list {
+    max-width: 24rem;
+    margin-inline: auto;
+    text-align: right;
+  }
+
+  .lp-trust {
+    justify-content: center;
+  }
+
+  .lp-benefits__grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -1431,5 +1745,33 @@ p {
 
   .contact-form__wide {
     grid-column: auto;
+  }
+
+  .lp-benefits__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lp-form-card {
+    padding: 22px 18px;
+  }
+
+  .lp-quote {
+    padding: 30px 20px;
+  }
+
+  .lp-quote__stats {
+    gap: 26px;
+  }
+
+  .lp-quote p {
+    font-size: 1.1rem;
+  }
+
+  .lp-sticky-cta {
+    display: flex;
+  }
+
+  .lp .footer {
+    margin-bottom: 78px;
   }
 }

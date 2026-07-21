@@ -209,6 +209,7 @@ const navLinks = [
   { href: "#platform", label: "הפלטפורמה" },
   { href: "#solutions", label: "המערכות" },
   { href: "#process", label: "איך זה עובד" },
+  { href: "/lp", label: "השארת פרטים" },
 ];
 
 const heroStats = [

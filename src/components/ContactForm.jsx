@@ -12,21 +12,24 @@ const initialForm = {
   consent: false,
 };
 
-function getAttribution() {
+function getAttribution(defaultSource) {
   const params = new URLSearchParams(window.location.search);
+  const fromFacebook = params.has("fbclid");
   return {
     pageUrl: window.location.href,
     utm: {
-      source: params.get("utm_source") || undefined,
-      medium: params.get("utm_medium") || undefined,
+      source: params.get("utm_source") || (fromFacebook ? "facebook" : undefined) || defaultSource || undefined,
+      medium: params.get("utm_medium") || (fromFacebook ? "social" : undefined) || undefined,
       campaign: params.get("utm_campaign") || undefined,
       content: params.get("utm_content") || undefined,
     },
   };
 }
 
-export default function ContactForm() {
-  const [form, setForm] = useState(initialForm);
+export default function ContactForm({ source, submitLabel, defaultInterest } = {}) {
+  const [form, setForm] = useState(() =>
+    defaultInterest ? { ...initialForm, interest: defaultInterest } : initialForm,
+  );
   const [status, setStatus] = useState("idle");
 
   function updateField(event) {
@@ -43,11 +46,11 @@ export default function ContactForm() {
       const response = await fetch("/api/contact-lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, ...getAttribution() }),
+        body: JSON.stringify({ ...form, ...getAttribution(source) }),
       });
 
       if (!response.ok) throw new Error("Submission failed");
-      setForm(initialForm);
+      setForm(defaultInterest ? { ...initialForm, interest: defaultInterest } : initialForm);
       setStatus("success");
     } catch {
       setStatus("error");
@@ -190,7 +193,7 @@ export default function ContactForm() {
         ) : (
           <>
             <Send size={18} />
-            שליחת הפנייה
+            {submitLabel || "שליחת הפנייה"}
           </>
         )}
       </button>
