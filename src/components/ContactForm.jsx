@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { AlertCircle, CheckCircle2, LoaderCircle, Send } from "lucide-react";
+import { trackLead } from "@/lib/fbpixel";
 
 const initialForm = {
   fullName: "",
@@ -52,6 +53,7 @@ export default function ContactForm({ source, submitLabel, defaultInterest } = {
       if (!response.ok) throw new Error("Submission failed");
       setForm(defaultInterest ? { ...initialForm, interest: defaultInterest } : initialForm);
       setStatus("success");
+      trackLead();
     } catch {
       setStatus("error");
     }
