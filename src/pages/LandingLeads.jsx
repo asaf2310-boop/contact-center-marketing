@@ -1,13 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
   ArrowLeft,
-  BadgeCheck,
   CalendarCheck,
-  Clock,
   CreditCard,
-  Lock,
   MapPin,
-  ShieldCheck,
   Sparkles,
   Star,
   Users,
@@ -70,12 +66,6 @@ const benefits = [
   },
 ];
 
-const trustPoints = [
-  { icon: Clock, label: "מענה תוך 24 שעות" },
-  { icon: ShieldCheck, label: "ללא התחייבות" },
-  { icon: Lock, label: "הפרטים מאובטחים" },
-];
-
 export default function LandingLeads() {
   const formRef = useRef(null);
 
@@ -121,35 +111,6 @@ export default function LandingLeads() {
                 השאירו פרטים ונחזור אליכם לשיחת אבחון קצרה + הדגמה חיה מותאמת לעסק שלכם.
                 בלי התחייבות, בלי עלות.
               </p>
-            </Reveal>
-            <Reveal delay={220}>
-              <ul className="lp-hero__list">
-                <li>
-                  <BadgeCheck size={19} />
-                  חיסכון של שעות עבודה ידנית בכל יום
-                </li>
-                <li>
-                  <BadgeCheck size={19} />
-                  מערכת מותאמת אישית לתהליכים שלכם
-                </li>
-                <li>
-                  <BadgeCheck size={19} />
-                  הקמה מהירה תוך 7–14 ימי עסקים
-                </li>
-              </ul>
-            </Reveal>
-            <Reveal delay={300}>
-              <div className="lp-trust">
-                {trustPoints.map((point) => {
-                  const Icon = point.icon;
-                  return (
-                    <span key={point.label}>
-                      <Icon size={16} />
-                      {point.label}
-                    </span>
-                  );
-                })}
-              </div>
             </Reveal>
           </div>
 
