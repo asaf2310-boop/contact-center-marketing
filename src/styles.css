@@ -37,6 +37,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
@@ -1334,6 +1335,11 @@ p {
 
 /* ---------- דף נחיתה (Landing / Facebook) ---------- */
 
+.lp {
+  overflow-x: clip;
+  max-width: 100%;
+}
+
 .lp-nav {
   position: sticky;
   top: 0;
@@ -1346,6 +1352,10 @@ p {
   background: var(--glass);
   backdrop-filter: blur(18px);
   border-bottom: 1px solid var(--line);
+}
+
+.lp-nav .nav__brand {
+  min-width: 0;
 }
 
 .lp-hero {
@@ -1597,27 +1607,6 @@ p {
   padding: 30px 22px 24px;
 }
 
-/* כפתור צף לנייד */
-
-.lp-sticky-cta {
-  display: none;
-  position: fixed;
-  z-index: 50;
-  bottom: 16px;
-  left: 16px;
-  right: 16px;
-  align-items: center;
-  justify-content: center;
-  gap: 9px;
-  padding: 15px 20px;
-  border-radius: 15px;
-  background: linear-gradient(120deg, var(--violet-deep), var(--violet) 55%, var(--blue));
-  color: #fff;
-  font-weight: 800;
-  font-size: 1.02rem;
-  box-shadow: 0 14px 34px rgba(139, 47, 214, 0.4);
-}
-
 /* ---------- רספונסיב ---------- */
 
 @media (max-width: 1020px) {
@@ -1765,13 +1754,5 @@ p {
 
   .lp-quote p {
     font-size: 1.1rem;
-  }
-
-  .lp-sticky-cta {
-    display: flex;
-  }
-
-  .lp .footer {
-    margin-bottom: 78px;
   }
 }

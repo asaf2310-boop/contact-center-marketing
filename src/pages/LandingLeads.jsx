@@ -7,7 +7,6 @@ import {
   CreditCard,
   Lock,
   MapPin,
-  MessageCircle,
   ShieldCheck,
   Sparkles,
   Star,
@@ -97,10 +96,6 @@ export default function LandingLeads() {
           <span>
             All<b>In</b>Center
           </span>
-        </a>
-        <a className="btn btn--primary btn--sm" href="#lead-form" onClick={scrollToForm}>
-          להשארת פרטים
-          <ArrowLeft size={16} />
         </a>
       </header>
 
@@ -262,12 +257,6 @@ export default function LandingLeads() {
           </small>
         </div>
       </footer>
-
-      {/* כפתור צף לנייד */}
-      <a className="lp-sticky-cta" href="#lead-form" onClick={scrollToForm}>
-        <MessageCircle size={18} />
-        השארת פרטים
-      </a>
     </div>
   );
 }
