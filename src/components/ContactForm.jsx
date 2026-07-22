@@ -53,8 +53,10 @@ export default function ContactForm({ source, submitLabel, defaultInterest } = {
       if (!response.ok) throw new Error("Submission failed");
       setForm(defaultInterest ? { ...initialForm, interest: defaultInterest } : initialForm);
       setStatus("success");
+      // Meta Lead only after API success (PageView unchanged elsewhere).
       trackLead();
-    } catch {
+    } catch (error) {
+      console.warn("Contact form submission failed — Lead event not sent", error);
       setStatus("error");
     }
   }
