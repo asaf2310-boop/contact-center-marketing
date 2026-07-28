@@ -1480,6 +1480,253 @@ p {
   background: transparent;
 }
 
+.lp-form-urgency {
+  margin: 14px 0 0;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.contact-form--compact .contact-form__grid {
+  grid-template-columns: 1fr;
+}
+
+.contact-form--compact .contact-form__submit {
+  min-height: 52px;
+  font-size: 1.05rem;
+}
+
+/* איך זה עובד */
+
+.lp-how {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 40px 22px 12px;
+}
+
+.lp-how__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.lp-how__grid > .reveal {
+  display: flex;
+}
+
+.lp-how-card {
+  flex: 1;
+  padding: 24px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--card);
+  box-shadow: var(--shadow-soft);
+}
+
+.lp-how-card__step {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background: linear-gradient(120deg, var(--violet), var(--blue));
+  color: #fff;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.lp-how-card h3 {
+  font-size: 1.08rem;
+  font-weight: 800;
+  color: #241b45;
+}
+
+.lp-how-card p {
+  margin-top: 8px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* תצוגת מוצר */
+
+.lp-product {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 36px 22px 12px;
+}
+
+.lp-product__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.lp-product__grid > .reveal {
+  display: flex;
+}
+
+.lp-product-card {
+  flex: 1;
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: #fff;
+  box-shadow: var(--shadow-soft);
+}
+
+.lp-product-card__screen {
+  position: relative;
+  min-height: 168px;
+  padding: 16px;
+  background:
+    radial-gradient(18rem 12rem at 0% 0%, rgba(139, 47, 214, 0.12), transparent 60%),
+    radial-gradient(18rem 12rem at 100% 100%, rgba(25, 169, 242, 0.12), transparent 55%),
+    #f7f5fc;
+}
+
+.lp-product-card__badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  color: var(--violet-deep);
+  opacity: 0.55;
+}
+
+.lp-product-card figcaption {
+  display: grid;
+  gap: 2px;
+  padding: 14px 16px 16px;
+  border-top: 1px solid var(--line);
+}
+
+.lp-product-card strong {
+  font-size: 1rem;
+  color: #241b45;
+}
+
+.lp-product-card span {
+  font-size: 0.86rem;
+  color: var(--muted);
+}
+
+.lp-mock {
+  height: 100%;
+  min-height: 136px;
+}
+
+.lp-mock--dashboard {
+  display: grid;
+  gap: 10px;
+}
+
+.lp-mock__row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.lp-mock__pill,
+.lp-mock__block,
+.lp-mock__wide {
+  display: block;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(139, 47, 214, 0.1);
+}
+
+.lp-mock__pill {
+  height: 38px;
+}
+
+.lp-mock__pill--strong {
+  background: linear-gradient(120deg, rgba(139, 47, 214, 0.55), rgba(25, 169, 242, 0.55));
+}
+
+.lp-mock__block {
+  height: 56px;
+}
+
+.lp-mock__wide {
+  height: 64px;
+}
+
+.lp-mock--calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.lp-mock--calendar span {
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.lp-mock--calendar span.is-active {
+  background: linear-gradient(120deg, rgba(139, 47, 214, 0.55), rgba(25, 169, 242, 0.45));
+}
+
+.lp-mock--crm {
+  display: grid;
+  gap: 10px;
+}
+
+.lp-mock--crm div {
+  display: grid;
+  grid-template-columns: 28px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.lp-mock--crm i {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: rgba(139, 47, 214, 0.25);
+}
+
+.lp-mock--crm b {
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(29, 22, 51, 0.12);
+}
+
+.lp-mock--crm em {
+  font-style: normal;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #4b4566;
+}
+
+.lp-mock--stats {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  padding-top: 18px;
+}
+
+.lp-mock--stats span {
+  flex: 1;
+  min-height: 24px;
+  border-radius: 10px 10px 4px 4px;
+  background: linear-gradient(180deg, rgba(139, 47, 214, 0.55), rgba(25, 169, 242, 0.35));
+}
+
+.lp-nav__cta {
+  flex-shrink: 0;
+}
+
+.lp-sticky-cta {
+  display: none;
+}
+
 /* יתרונות */
 
 .lp-benefits {
@@ -1691,6 +1938,14 @@ p {
     justify-content: center;
   }
 
+  .lp-how__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lp-product__grid {
+    grid-template-columns: 1fr;
+  }
+
   .lp-benefits__grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1765,6 +2020,34 @@ p {
 
   .lp-quote p {
     font-size: 1.1rem;
+  }
+
+  .lp {
+    padding-bottom: 84px;
+  }
+
+  .lp-nav__cta {
+    display: none;
+  }
+
+  .lp-sticky-cta {
+    display: block;
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 50;
+    padding: 12px 14px calc(12px + env(safe-area-inset-bottom));
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(16px);
+    border-top: 1px solid var(--line);
+    box-shadow: 0 -10px 30px rgba(58, 32, 120, 0.1);
+  }
+
+  .lp-sticky-cta .btn {
+    width: 100%;
+    min-height: 52px;
+    font-size: 1.05rem;
+    font-weight: 800;
   }
 }
 

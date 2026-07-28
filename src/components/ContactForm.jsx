@@ -27,7 +27,12 @@ function getAttribution(defaultSource) {
   };
 }
 
-export default function ContactForm({ source, submitLabel, defaultInterest } = {}) {
+export default function ContactForm({
+  source,
+  submitLabel,
+  defaultInterest,
+  compact = false,
+} = {}) {
   const [form, setForm] = useState(() =>
     defaultInterest ? { ...initialForm, interest: defaultInterest } : initialForm,
   );
@@ -68,7 +73,7 @@ export default function ContactForm({ source, submitLabel, defaultInterest } = {
           <CheckCircle2 size={34} />
         </span>
         <h3>הפנייה התקבלה בהצלחה</h3>
-        <p>הפרטים נכנסו למערכת הלידים שלנו. נחזור אליכם בהקדם.</p>
+        <p>מעולה — נחזור אליכם לתיאום הדגמה קצרה, בלי התחייבות.</p>
         <button type="button" className="btn btn--ghost btn--sm" onClick={() => setStatus("idle")}>
           שליחת פנייה נוספת
         </button>
@@ -77,9 +82,9 @@ export default function ContactForm({ source, submitLabel, defaultInterest } = {
   }
 
   return (
-    <form className="contact-form" onSubmit={submit}>
+    <form className={`contact-form${compact ? " contact-form--compact" : ""}`} onSubmit={submit}>
       <div className="contact-form__grid">
-        <label>
+        <label className={compact ? "contact-form__wide" : undefined}>
           <span>שם מלא *</span>
           <input
             name="fullName"
@@ -93,19 +98,21 @@ export default function ContactForm({ source, submitLabel, defaultInterest } = {
           />
         </label>
 
-        <label>
-          <span>שם העסק</span>
-          <input
-            name="businessName"
-            value={form.businessName}
-            onChange={updateField}
-            maxLength={140}
-            autoComplete="organization"
-            placeholder="שם העסק או החברה"
-          />
-        </label>
+        {!compact ? (
+          <label>
+            <span>שם העסק</span>
+            <input
+              name="businessName"
+              value={form.businessName}
+              onChange={updateField}
+              maxLength={140}
+              autoComplete="organization"
+              placeholder="שם העסק או החברה"
+            />
+          </label>
+        ) : null}
 
-        <label>
+        <label className={compact ? "contact-form__wide" : undefined}>
           <span>טלפון *</span>
           <input
             name="phone"
@@ -120,43 +127,61 @@ export default function ContactForm({ source, submitLabel, defaultInterest } = {
           />
         </label>
 
-        <label>
-          <span>אימייל</span>
-          <input
-            name="email"
-            type="email"
-            value={form.email}
-            onChange={updateField}
-            maxLength={254}
-            autoComplete="email"
-            placeholder="name@business.co.il"
-          />
-        </label>
+        {!compact ? (
+          <label>
+            <span>אימייל</span>
+            <input
+              name="email"
+              type="email"
+              value={form.email}
+              onChange={updateField}
+              maxLength={254}
+              autoComplete="email"
+              placeholder="name@business.co.il"
+            />
+          </label>
+        ) : null}
 
         <label className="contact-form__wide">
-          <span>מה מעניין אותך?</span>
+          <span>{compact ? "סוג העסק (אופציונלי)" : "מה מעניין אותך?"}</span>
           <select name="interest" value={form.interest} onChange={updateField}>
-            <option value="">בחרו מערכת או צורך</option>
-            <option value="מערכת ניהול מותאמת">מערכת ניהול מותאמת</option>
-            <option value="מערכת לידים ו-CRM">מערכת לידים ו‑CRM</option>
-            <option value="ניהול מוקד וצוותים">ניהול מוקד וצוותים</option>
-            <option value="ניהול קליניקה ותורים">ניהול קליניקה ותורים</option>
-            <option value="אוטומציות לעסק">אוטומציות לעסק</option>
-            <option value="אחר">אחר</option>
+            <option value="">{compact ? "בחרו סוג עסק" : "בחרו מערכת או צורך"}</option>
+            {compact ? (
+              <>
+                <option value="יופי וטיפוח">יופי וטיפוח</option>
+                <option value="מספרה">מספרה</option>
+                <option value="קליניקה / בריאות">קליניקה / בריאות</option>
+                <option value="כושר וספורט">כושר וספורט</option>
+                <option value="מסעדה / בית קפה">מסעדה / בית קפה</option>
+                <option value="שירותים מקצועיים">שירותים מקצועיים</option>
+                <option value="אחר">אחר</option>
+              </>
+            ) : (
+              <>
+                <option value="מערכת ניהול מותאמת">מערכת ניהול מותאמת</option>
+                <option value="מערכת לידים ו-CRM">מערכת לידים ו‑CRM</option>
+                <option value="ניהול מוקד וצוותים">ניהול מוקד וצוותים</option>
+                <option value="ניהול קליניקה ותורים">ניהול קליניקה ותורים</option>
+                <option value="אוטומציות לעסק">אוטומציות לעסק</option>
+                <option value="אחר">אחר</option>
+              </>
+            )}
           </select>
         </label>
 
-        <label className="contact-form__wide">
-          <span>ספרו לנו בקצרה על הצורך</span>
-          <textarea
-            name="message"
-            value={form.message}
-            onChange={updateField}
-            maxLength={2000}
-            rows={4}
-            placeholder="מה תרצו לייעל או לנהל טוב יותר?"
-          />
-        </label>
+        {!compact ? (
+          <label className="contact-form__wide">
+            <span>ספרו לנו בקצרה על הצורך</span>
+            <textarea
+              name="message"
+              value={form.message}
+              onChange={updateField}
+              maxLength={2000}
+              rows={4}
+              placeholder="מה תרצו לייעל או לנהל טוב יותר?"
+            />
+          </label>
+        ) : null}
       </div>
 
       <label className="contact-form__honeypot" aria-hidden="true">
@@ -201,7 +226,11 @@ export default function ContactForm({ source, submitLabel, defaultInterest } = {
           </>
         )}
       </button>
-      <small className="contact-form__note">הפרטים נשמרים באופן מאובטח במערכת הלידים שלנו.</small>
+      <small className="contact-form__note">
+        {compact
+          ? "הדגמה ללא התחייבות. הפרטים נשמרים באופן מאובטח."
+          : "הפרטים נשמרים באופן מאובטח במערכת הלידים שלנו."}
+      </small>
     </form>
   );
 }
