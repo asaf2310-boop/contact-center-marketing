@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AlertCircle, CheckCircle2, LoaderCircle, Send } from "lucide-react";
+import { AlertCircle, ArrowLeft, CheckCircle2, LoaderCircle } from "lucide-react";
 import { trackLead } from "@/lib/fbpixel";
 
 const initialForm = {
@@ -213,7 +213,10 @@ export default function ContactForm({
         </p>
       )}
 
-      <button className="btn btn--primary contact-form__submit" disabled={status === "sending"}>
+      <button
+        className={`btn btn--primary contact-form__submit${compact ? " lp-cta" : ""}`}
+        disabled={status === "sending"}
+      >
         {status === "sending" ? (
           <>
             <LoaderCircle className="spin" size={18} />
@@ -221,14 +224,14 @@ export default function ContactForm({
           </>
         ) : (
           <>
-            <Send size={18} />
             {submitLabel || "שליחת הפנייה"}
+            <ArrowLeft size={18} className="lp-cta__arrow" />
           </>
         )}
       </button>
       <small className="contact-form__note">
         {compact
-          ? "הדגמה ללא התחייבות. הפרטים נשמרים באופן מאובטח."
+          ? "הדגמה ללא התחייבות · הפרטים מאובטחים"
           : "הפרטים נשמרים באופן מאובטח במערכת הלידים שלנו."}
       </small>
     </form>
