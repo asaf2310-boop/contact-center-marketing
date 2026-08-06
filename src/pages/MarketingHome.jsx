@@ -282,9 +282,10 @@ const solutions = [
     id: "mayaclinic",
     icon: CalendarCheck,
     kicker: "קליניקות ועסקי שירות",
-    title: "Maya Clinic",
+    title: "מערכת ניהול תורים",
     description:
       "קביעת תורים אונליין, ניהול לקוחות, מעקב תשלומים ודוחות הכנסות — מערכת מלאה לקליניקה.",
+    video: "/videos/maya-queue-management.mp4",
     bullets: ["הזמנת תור עצמאית ללקוח", "ממשק ניהול מלא", "דוחות הכנסות וייצוא"],
     actions: [
       { label: "דמו הזמנת תור", href: mayaClinicBookingUrl, primary: true },
@@ -478,6 +479,18 @@ export default function MarketingHome() {
                     </div>
                     <h3>{solution.title}</h3>
                     <p>{solution.description}</p>
+                    {solution.video ? (
+                      <div className="solution-card__video">
+                        <video
+                          controls
+                          playsInline
+                          preload="metadata"
+                          title={`סרטון ${solution.title}`}
+                        >
+                          <source src={solution.video} type="video/mp4" />
+                        </video>
+                      </div>
+                    ) : null}
                     <ul>
                       {solution.bullets.map((bullet) => (
                         <li key={bullet}>

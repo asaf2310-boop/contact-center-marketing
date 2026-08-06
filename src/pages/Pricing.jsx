@@ -50,6 +50,7 @@ const products = [
     title: "מערכת ניהול תורים",
     description:
       "יומן חכם, קביעת תורים אונליין, תזכורות אוטומטיות וניהול לקוחות — הכול במקום אחד.",
+    video: "/videos/maya-queue-management.mp4",
     setup: "₪500",
     features: [
       "הזמנת תור עצמאית ללקוח",
@@ -139,6 +140,19 @@ export default function Pricing() {
 
                     <h2>{product.title}</h2>
                     <p className="pricing-card__desc">{product.description}</p>
+
+                    {product.video ? (
+                      <div className="pricing-card__video">
+                        <video
+                          controls
+                          playsInline
+                          preload="metadata"
+                          title={`סרטון ${product.title}`}
+                        >
+                          <source src={product.video} type="video/mp4" />
+                        </video>
+                      </div>
+                    ) : null}
 
                     <div className="pricing-card__setup">
                       <span className="pricing-card__setup-label">הקמה חד-פעמית</span>

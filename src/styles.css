@@ -961,6 +961,24 @@ p {
   flex-shrink: 0;
 }
 
+.solution-card__video,
+.pricing-card__video {
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: #0f0a1a;
+  aspect-ratio: 16 / 9;
+}
+
+.solution-card__video video,
+.pricing-card__video video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #0f0a1a;
+}
+
 .solution-card__actions {
   margin-top: auto;
   padding-top: 16px;
