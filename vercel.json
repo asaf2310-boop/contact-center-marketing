@@ -4,7 +4,11 @@
   "framework": "vite",
   "rewrites": [
     {
-      "source": "/((?!api/).*)",
+      "source": "/allincenter-pelecard",
+      "destination": "/allincenter-pelecard/index.html"
+    },
+    {
+      "source": "/((?!api/|allincenter-pelecard(?:/|$)).*)",
       "destination": "/index.html"
     }
   ]
