@@ -162,6 +162,7 @@ export default function ContactForm({
                 <option value="מערכת לידים ו-CRM">מערכת לידים ו‑CRM</option>
                 <option value="ניהול מוקד וצוותים">ניהול מוקד וצוותים</option>
                 <option value="ניהול קליניקה ותורים">ניהול קליניקה ותורים</option>
+                <option value="חבילת AllInCenter × פלאקארד">חבילת AllInCenter × פלאקארד</option>
                 <option value="אוטומציות לעסק">אוטומציות לעסק</option>
                 <option value="אחר">אחר</option>
               </>

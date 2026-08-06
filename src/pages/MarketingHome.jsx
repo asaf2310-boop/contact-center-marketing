@@ -209,6 +209,7 @@ const navLinks = [
   { href: "#platform", label: "הפלטפורמה" },
   { href: "#solutions", label: "המערכות" },
   { href: "#process", label: "איך זה עובד" },
+  { href: "/allincenter-pelecard", label: "חבילת פלאקארד" },
   { href: "/pricing", label: "מחירון" },
   { href: "/lp", label: "השארת פרטים" },
 ];
