@@ -4,11 +4,35 @@
   "framework": "vite",
   "rewrites": [
     {
+      "source": "/whatsapp",
+      "destination": "https://app.allincenter.co.il/whatsapp"
+    },
+    {
+      "source": "/whatsapp/:path*",
+      "destination": "https://app.allincenter.co.il/whatsapp/:path*"
+    },
+    {
+      "source": "/api/public/whatsapp-landing",
+      "destination": "https://app.allincenter.co.il/api/public/whatsapp-landing"
+    },
+    {
+      "source": "/api/public/whatsapp-consent/:path*",
+      "destination": "https://app.allincenter.co.il/api/public/whatsapp-consent/:path*"
+    },
+    {
+      "source": "/brand/:path*",
+      "destination": "https://app.allincenter.co.il/brand/:path*"
+    },
+    {
+      "source": "/_next/:path*",
+      "destination": "https://app.allincenter.co.il/_next/:path*"
+    },
+    {
       "source": "/allincenter-pelecard",
       "destination": "/allincenter-pelecard/index.html"
     },
     {
-      "source": "/((?!api/|allincenter-pelecard(?:/|$)).*)",
+      "source": "/((?!api/|allincenter-pelecard(?:/|$)|whatsapp(?:/|$)|brand(?:/|$)|_next(?:/|$)).*)",
       "destination": "/index.html"
     }
   ]
