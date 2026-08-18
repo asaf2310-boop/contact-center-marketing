@@ -32,7 +32,15 @@
       "destination": "/allincenter-pelecard/index.html"
     },
     {
-      "source": "/((?!api/|allincenter-pelecard(?:/|$)|whatsapp(?:/|$)|brand(?:/|$)|_next(?:/|$)).*)",
+      "source": "/ai",
+      "destination": "/ai/index.html"
+    },
+    {
+      "source": "/ai/",
+      "destination": "/ai/index.html"
+    },
+    {
+      "source": "/((?!api/|allincenter-pelecard(?:/|$)|ai(?:/|$)|whatsapp(?:/|$)|brand(?:/|$)|_next(?:/|$)).*)",
       "destination": "/index.html"
     }
   ]

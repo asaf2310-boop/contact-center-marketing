@@ -5,6 +5,7 @@ import { trackLead } from "@/lib/fbpixel";
 const initialForm = {
   fullName: "",
   businessName: "",
+  role: "",
   phone: "",
   email: "",
   interest: "",
@@ -12,6 +13,22 @@ const initialForm = {
   website: "",
   consent: false,
 };
+
+function buildInitialForm(defaultInterest) {
+  return defaultInterest ? { ...initialForm, interest: defaultInterest } : { ...initialForm };
+}
+
+function buildLeadPayload(form, source, { includeRole } = {}) {
+  const payload = { ...form, ...getAttribution(source) };
+  if (includeRole) {
+    const parts = [];
+    if (form.role) parts.push(`תפקיד: ${form.role}`);
+    if (form.message) parts.push(form.message);
+    payload.message = parts.join("\n\n");
+  }
+  delete payload.role;
+  return payload;
+}
 
 function getAttribution(defaultSource) {
   const params = new URLSearchParams(window.location.search);
@@ -32,10 +49,17 @@ export default function ContactForm({
   submitLabel,
   defaultInterest,
   compact = false,
+  showRole = false,
+  hideInterest = false,
+  emailRequired = false,
+  businessNameLabel,
+  messageLabel,
+  messagePlaceholder,
+  successTitle,
+  successBody,
+  note,
 } = {}) {
-  const [form, setForm] = useState(() =>
-    defaultInterest ? { ...initialForm, interest: defaultInterest } : initialForm,
-  );
+  const [form, setForm] = useState(() => buildInitialForm(defaultInterest));
   const [status, setStatus] = useState("idle");
 
   function updateField(event) {
@@ -52,11 +76,11 @@ export default function ContactForm({
       const response = await fetch("/api/contact-lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, ...getAttribution(source) }),
+        body: JSON.stringify(buildLeadPayload(form, source, { includeRole: showRole })),
       });
 
       if (!response.ok) throw new Error("Submission failed");
-      setForm(defaultInterest ? { ...initialForm, interest: defaultInterest } : initialForm);
+      setForm(buildInitialForm(defaultInterest));
       setStatus("success");
       // Meta Lead only after API success (PageView unchanged elsewhere).
       trackLead();
@@ -72,8 +96,8 @@ export default function ContactForm({
         <span>
           <CheckCircle2 size={34} />
         </span>
-        <h3>הפנייה התקבלה בהצלחה</h3>
-        <p>מעולה — נחזור אליכם לתיאום הדגמה קצרה, בלי התחייבות.</p>
+        <h3>{successTitle || "הפנייה התקבלה בהצלחה"}</h3>
+        <p>{successBody || "מעולה — נחזור אליכם לתיאום הדגמה קצרה, בלי התחייבות."}</p>
         <button type="button" className="btn btn--ghost btn--sm" onClick={() => setStatus("idle")}>
           שליחת פנייה נוספת
         </button>
@@ -100,7 +124,7 @@ export default function ContactForm({
 
         {!compact ? (
           <label>
-            <span>שם העסק</span>
+            <span>{businessNameLabel || "שם העסק"}</span>
             <input
               name="businessName"
               value={form.businessName}
@@ -108,6 +132,22 @@ export default function ContactForm({
               maxLength={140}
               autoComplete="organization"
               placeholder="שם העסק או החברה"
+              required={showRole}
+            />
+          </label>
+        ) : null}
+
+        {showRole ? (
+          <label>
+            <span>תפקיד *</span>
+            <input
+              name="role"
+              value={form.role}
+              onChange={updateField}
+              maxLength={80}
+              autoComplete="organization-title"
+              required
+              placeholder="מנכ״ל, סמנכ״ל תפעול, CIO..."
             />
           </label>
         ) : null}
@@ -128,8 +168,8 @@ export default function ContactForm({
         </label>
 
         {!compact ? (
-          <label>
-            <span>אימייל</span>
+          <label className={showRole ? "contact-form__wide" : undefined}>
+            <span>{emailRequired ? "אימייל *" : "אימייל"}</span>
             <input
               name="email"
               type="email"
@@ -138,48 +178,54 @@ export default function ContactForm({
               maxLength={254}
               autoComplete="email"
               placeholder="name@business.co.il"
+              required={emailRequired}
             />
           </label>
         ) : null}
 
-        <label className="contact-form__wide">
-          <span>{compact ? "סוג העסק (אופציונלי)" : "מה מעניין אותך?"}</span>
-          <select name="interest" value={form.interest} onChange={updateField}>
-            <option value="">{compact ? "בחרו סוג עסק" : "בחרו מערכת או צורך"}</option>
-            {compact ? (
-              <>
-                <option value="יופי וטיפוח">יופי וטיפוח</option>
-                <option value="מספרה">מספרה</option>
-                <option value="קליניקה / בריאות">קליניקה / בריאות</option>
-                <option value="כושר וספורט">כושר וספורט</option>
-                <option value="מסעדה / בית קפה">מסעדה / בית קפה</option>
-                <option value="שירותים מקצועיים">שירותים מקצועיים</option>
-                <option value="אחר">אחר</option>
-              </>
-            ) : (
-              <>
-                <option value="מערכת ניהול מותאמת">מערכת ניהול מותאמת</option>
-                <option value="מערכת לידים ו-CRM">מערכת לידים ו‑CRM</option>
-                <option value="ניהול מוקד וצוותים">ניהול מוקד וצוותים</option>
-                <option value="ניהול קליניקה ותורים">ניהול קליניקה ותורים</option>
-                <option value="חבילת AllInCenter × פלאקארד">חבילת AllInCenter × פלאקארד</option>
-                <option value="אוטומציות לעסק">אוטומציות לעסק</option>
-                <option value="אחר">אחר</option>
-              </>
-            )}
-          </select>
-        </label>
+        {hideInterest ? (
+          <input type="hidden" name="interest" value={form.interest} />
+        ) : (
+          <label className="contact-form__wide">
+            <span>{compact ? "סוג העסק (אופציונלי)" : "מה מעניין אותך?"}</span>
+            <select name="interest" value={form.interest} onChange={updateField}>
+              <option value="">{compact ? "בחרו סוג עסק" : "בחרו מערכת או צורך"}</option>
+              {compact ? (
+                <>
+                  <option value="יופי וטיפוח">יופי וטיפוח</option>
+                  <option value="מספרה">מספרה</option>
+                  <option value="קליניקה / בריאות">קליניקה / בריאות</option>
+                  <option value="כושר וספורט">כושר וספורט</option>
+                  <option value="מסעדה / בית קפה">מסעדה / בית קפה</option>
+                  <option value="שירותים מקצועיים">שירותים מקצועיים</option>
+                  <option value="אחר">אחר</option>
+                </>
+              ) : (
+                <>
+                  <option value="מערכת ניהול מותאמת">מערכת ניהול מותאמת</option>
+                  <option value="מערכת לידים ו-CRM">מערכת לידים ו‑CRM</option>
+                  <option value="ניהול מוקד וצוותים">ניהול מוקד וצוותים</option>
+                  <option value="ניהול קליניקה ותורים">ניהול קליניקה ותורים</option>
+                  <option value="חבילת AllInCenter × פלאקארד">חבילת AllInCenter × פלאקארד</option>
+                  <option value="אוטומציות לעסק">אוטומציות לעסק</option>
+                  <option value="אחר">אחר</option>
+                </>
+              )}
+            </select>
+          </label>
+        )}
 
         {!compact ? (
           <label className="contact-form__wide">
-            <span>ספרו לנו בקצרה על הצורך</span>
+            <span>{messageLabel || "ספרו לנו בקצרה על הצורך"}{showRole ? " *" : ""}</span>
             <textarea
               name="message"
               value={form.message}
               onChange={updateField}
               maxLength={2000}
               rows={4}
-              placeholder="מה תרצו לייעל או לנהל טוב יותר?"
+              placeholder={messagePlaceholder || "מה תרצו לייעל או לנהל טוב יותר?"}
+              required={showRole}
             />
           </label>
         ) : null}
@@ -231,9 +277,10 @@ export default function ContactForm({
         )}
       </button>
       <small className="contact-form__note">
-        {compact
-          ? "הדגמה ללא התחייבות · הפרטים מאובטחים"
-          : "הפרטים נשמרים באופן מאובטח במערכת הלידים שלנו."}
+        {note ||
+          (compact
+            ? "הדגמה ללא התחייבות · הפרטים מאובטחים"
+            : "הפרטים נשמרים באופן מאובטח במערכת הלידים שלנו.")}
       </small>
     </form>
   );

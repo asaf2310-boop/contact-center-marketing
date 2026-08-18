@@ -4,6 +4,7 @@ import MarketingHome from "@/pages/MarketingHome";
 import LandingLeads from "@/pages/LandingLeads";
 import Pricing from "@/pages/Pricing";
 import PelecardBrochure from "@/pages/PelecardBrochure";
+import AiConsulting from "@/pages/AiConsulting";
 import { trackPageView } from "@/lib/fbpixel";
 
 function RouteChangeTracker() {
@@ -33,6 +34,7 @@ export default function App() {
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/allincenter-pelecard" element={<PelecardBrochure />} />
         <Route path="/pelecard" element={<Navigate to="/allincenter-pelecard" replace />} />
+        <Route path="/ai" element={<AiConsulting />} />
       </Routes>
     </BrowserRouter>
   );
