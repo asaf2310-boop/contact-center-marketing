@@ -1,21 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { ArrowLeft, Bot, CheckCircle2 } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import SiteContactLine from "@/components/SiteContactLine";
 
-const approach = [
-  "התאמה לתהליך העסקי ולא להפך",
-  "פשטות בתפעול",
-  "אוטומציה במקום עבודה ידנית",
-  "שילוב AI כשיש לו ערך אמיתי",
-  "פתרון שמתאים גם לעסקים קטנים",
-];
-
 const navLinks = [
+  { href: "/about", label: "מי אנחנו" },
   { href: "/#platform", label: "הפלטפורמה" },
   { href: "/#solutions", label: "המערכות" },
   { href: "/allincenter-pelecard", label: "חבילת פלאקארד" },
   { href: "/pricing", label: "מחירון" },
-  { href: "/about", label: "מי אנחנו" },
 ];
 
 export default function About() {
@@ -48,33 +40,48 @@ export default function About() {
 
       <main className="about-main">
         <section className="about-hero">
-          <span className="tag">AllInCenter</span>
-          <h1>מי אנחנו</h1>
-          <div className="about-copy">
-            <p>AllInCenter הוקמה מתוך ניסיון של שנים בניהול שירות, תמיכה ותפעול, ומתוך הבנה שמערכות לעסק צריכות להתאים לתהליך העבודה — ולא להפך.</p>
-            <p>מאחורי AllInCenter עומד אסף אריאלי, מנהל Customer Experience &amp; Operations המתמחה גם ביישום AI ואוטומציה בתהליכים עסקיים.</p>
-            <p>אנחנו מפתחים מערכות מותאמות לעסקים בישראל לניהול תורים, לקוחות, לידים, תשלומים ואוטומציות — בהתאם לצרכים ולדרך שבה העסק באמת עובד.</p>
+          <div className="about-hero__glow" aria-hidden="true" />
+          <div className="about-hero__grid" aria-hidden="true" />
+          <div className="about-hero__content">
+            <h1>מי אנחנו</h1>
+            <div className="about-copy">
+              <p>AllInCenter הוקמה מתוך ניסיון של שנים בניהול שירות, תמיכה ותפעול, ומתוך הבנה שמערכות לעסק צריכות להתאים לתהליך העבודה — ולא להפך.</p>
+              <p>מאחורי AllInCenter עומד אסף אריאלי, מנהל Customer Experience &amp; Operations המתמחה גם ביישום AI ואוטומציה בתהליכים עסקיים.</p>
+              <p>אנחנו מפתחים מערכות מותאמות לעסקים בישראל לניהול תורים, לקוחות, לידים, תשלומים ואוטומציות — בהתאם לצרכים ולדרך שבה העסק באמת עובד.</p>
+            </div>
           </div>
         </section>
 
-        <section className="about-approach" aria-labelledby="approach-title">
-          <div>
-            <span className="tag">הגישה שלנו</span>
-            <h2 id="approach-title">מערכת שנבנית סביב העסק</h2>
+        <section className="about-story" aria-labelledby="story-title">
+          <div className="about-story__heading">
+            <span aria-hidden="true" />
+            <h2 id="story-title">AllInCenter נולדה מתוך העבודה בשטח</h2>
           </div>
-          <ul>
-            {approach.map((item) => (
-              <li key={item}><CheckCircle2 size={20} aria-hidden="true" /><span>{item}</span></li>
-            ))}
-          </ul>
+          <div className="about-story__copy">
+            <p>AllInCenter נולדה מתוך ניסיון בניהול שירות, תמיכה ותפעול ומתוך היכרות עם האתגרים היומיומיים של עסקים — עבודה בין מערכות שונות, תהליכים ידניים ומידע שלא תמיד נמצא במקום אחד.</p>
+            <p>המטרה שלנו היא לבנות מערכות שמתאימות לדרך שבה העסק באמת עובד: פשוטות לתפעול, ממוקדות בצורך העסקי ומשלבות אוטומציה ו-AI כשיש להם ערך אמיתי.</p>
+            <ul className="about-values" aria-label="הערכים שלנו">
+              <li>מותאם לעסק</li>
+              <li>פשוט לתפעול</li>
+              <li>אוטומציה חכמה</li>
+              <li>AI עם ערך אמיתי</li>
+            </ul>
+          </div>
         </section>
 
-        <section className="about-ai-cta" aria-labelledby="about-ai-title">
-          <Bot size={30} aria-hidden="true" />
-          <div>
-            <h2 id="about-ai-title">AI ואוטומציה בגישה עסקית</h2>
-            <a className="btn btn--primary" href="/ai">
-              הכירו את אסף ואת תחום ה-AI והאוטומציה <ArrowLeft size={18} />
+        <section className="about-founder" aria-labelledby="founder-title">
+          <div className="about-founder__photo">
+            <img src="/assets/asaf-ariely.png" alt="אסף אריאלי, מייסד AllInCenter" width="480" height="600" />
+          </div>
+          <div className="about-founder__content">
+            <div className="about-founder__heading">
+              <h2 id="founder-title">אסף אריאלי</h2>
+              <p>מייסד AllInCenter</p>
+              <span lang="en" dir="ltr">Customer Experience, Operations &amp; AI</span>
+            </div>
+            <p>אסף מגיע מעולמות ניהול השירות, התמיכה והתפעול ומשלב את הניסיון העסקי עם פיתוח מערכות, אוטומציות וכלי AI כדי להפוך תהליכים מורכבים לפשוטים ויעילים יותר.</p>
+            <a className="btn btn--ghost btn--sm about-founder__link" href="/ai">
+              הכירו את תחום ה-AI והאוטומציה <ArrowLeft size={17} aria-hidden="true" />
             </a>
           </div>
         </section>

@@ -173,13 +173,13 @@ function LeadsMapMock() {
 /* ---------- נתונים ---------- */
 
 const navLinks = [
+  { href: "/about", label: "מי אנחנו" },
   { href: "#platform", label: "הפלטפורמה" },
   { href: "#solutions", label: "המערכות" },
   { href: "#process", label: "איך זה עובד" },
   { href: "/allincenter-pelecard", label: "חבילת פלאקארד" },
   { href: "/pricing", label: "מחירון" },
   { href: "/lp", label: "השארת פרטים" },
-  { href: "/about", label: "מי אנחנו" },
 ];
 
 const heroStats = [
