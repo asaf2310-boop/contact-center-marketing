@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node scripts/prerender.mjs",
+    "indexnow": "node scripts/submit-indexnow.mjs",
     "preview": "vite preview",
     "test:validators": "node src/lib/israeliValidators.test.js"
   },
