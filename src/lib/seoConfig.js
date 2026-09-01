@@ -182,6 +182,58 @@ export const routeSeo = {
       },
     ]),
   },
+  "/restaurant-reservations": {
+    title: "מערכת הזמנות למסעדות | AllInCenter",
+    description:
+      "מערכת הזמנות וניהול שולחנות למסעדות בישראל, עם הזמנה אונליין ללקוחות, ניהול הזמנות, שולחנות ותהליך העבודה במקום אחד.",
+    canonical: `${SITE.url}/restaurant-reservations`,
+    ogImage: SITE.logo,
+    twitterCard: "summary",
+    jsonLd: graph([
+      {
+        "@type": "WebPage",
+        "@id": `${SITE.url}/restaurant-reservations#webpage`,
+        url: `${SITE.url}/restaurant-reservations`,
+        name: "מערכת הזמנות למסעדות | AllInCenter",
+        description:
+          "מערכת הזמנות וניהול שולחנות למסעדות בישראל, עם הזמנה אונליין ללקוחות, ניהול הזמנות, שולחנות ותהליך העבודה במקום אחד.",
+        inLanguage: SITE.language,
+        isPartOf: { "@id": websiteId },
+        about: { "@id": `${SITE.url}/restaurant-reservations#service` },
+      },
+      {
+        "@type": "Service",
+        "@id": `${SITE.url}/restaurant-reservations#service`,
+        name: "מערכת הזמנות למסעדות",
+        description:
+          "מערכת להזמנה וניהול שולחנות במסעדות, כולל הזמנה אונליין וניהול הזמנות מתוך ממשק אחד.",
+        provider: { "@id": orgId },
+        areaServed: SITE.areaServed,
+        url: `${SITE.url}/restaurant-reservations`,
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${SITE.url}/restaurant-reservations#breadcrumb`,
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "דף הבית", item: `${SITE.url}/` },
+          { "@type": "ListItem", position: 2, name: "מערכת הזמנות למסעדות", item: `${SITE.url}/restaurant-reservations` },
+        ],
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${SITE.url}/restaurant-reservations#faq`,
+        mainEntity: [
+          ["מהי מערכת הזמנות למסעדות?", "מערכת שמאפשרת לאורחים להזמין שולחן אונליין ולמסעדה לנהל את ההזמנות והשולחנות מתוך ממשק אחד."],
+          ["האם האורחים יכולים להזמין שולחן אונליין?", "כן. האורחים יכולים לבחור מספר סועדים, תאריך, שעה ואזור ישיבה בתהליך הזמנה דיגיטלי."],
+          ["האם ניתן לנהל את ההזמנות מתוך מערכת אחת?", "כן. מסכי הניהול מרכזים את ההזמנות ואת תמונת המצב של המסעדה במקום אחד."],
+          ["האם המערכת כוללת ניהול שולחנות?", "כן. המערכת כוללת מפת שולחנות ומסכי ניהול שמאפשרים לצוות לראות ולנהל את מצב ההושבה."],
+          ["האם המערכת מתאימה למסעדות בישראל?", "כן. המערכת מיועדת למסעדות בישראל וכוללת ממשק בעברית."],
+          ["האם ניתן להתאים את מערכת ההזמנות לצורת העבודה של המסעדה?", "כן. ניתן להתאים את תהליך ההזמנה והניהול לאופן העבודה של המסעדה."],
+          ["האם המערכת מחליפה ניהול ידני של הזמנות?", "המערכת מרכזת את תהליך ההזמנה והניהול הדיגיטלי וכך מפחיתה את הצורך לנהל מידע ידנית בין מקומות שונים."],
+        ].map(([name, text]) => ({ "@type": "Question", name, acceptedAnswer: { "@type": "Answer", text } })),
+      },
+    ]),
+  },
   "/allincenter-pelecard": {
     title: "AllInCenter + Pelecard | מערכת ניהול וסליקה לעסקים",
     description: "פתרון משולב של AllInCenter ו-Pelecard לניהול העסק, תשלומים, לקוחות ותהליכים במקום אחד.",

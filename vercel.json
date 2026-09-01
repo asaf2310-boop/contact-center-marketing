@@ -80,6 +80,14 @@
       "destination": "/appointment-management/index.html"
     },
     {
+      "source": "/restaurant-reservations",
+      "destination": "/restaurant-reservations/index.html"
+    },
+    {
+      "source": "/restaurant-reservations/",
+      "destination": "/restaurant-reservations/index.html"
+    },
+    {
       "source": "/allincenter-pelecard",
       "destination": "/allincenter-pelecard/index.html"
     },

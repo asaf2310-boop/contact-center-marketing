@@ -198,6 +198,7 @@ for (const loc of [
   "https://www.allincenter.co.il/ai",
   "https://www.allincenter.co.il/about",
   "https://www.allincenter.co.il/appointment-management",
+  "https://www.allincenter.co.il/restaurant-reservations",
   "https://www.allincenter.co.il/allincenter-pelecard",
 ]) {
   if (!sitemap.includes(`<loc>${loc}</loc>`)) fail(`sitemap.xml missing ${loc}`);

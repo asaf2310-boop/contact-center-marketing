@@ -249,7 +249,7 @@ const solutions = [
     title: "מערכת הזמנות",
     description: "מערכת לקבלת וניהול הזמנות אונליין, לקוחות ותהליך העבודה במקום אחד.",
     bullets: ["קבלת הזמנות אונליין", "ניהול הזמנות במקום אחד", "התאמה לתהליך העבודה של העסק"],
-    actions: [{ label: "לתיאום הדגמה", href: contactUrl, primary: true }],
+    actions: [{ label: "לפרטים על מערכת ההזמנות", href: "/restaurant-reservations", primary: true }],
   },
   {
     id: "contact-center",

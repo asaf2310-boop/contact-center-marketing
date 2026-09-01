@@ -7,6 +7,7 @@ import PelecardBrochure from "@/pages/PelecardBrochure";
 import AiConsulting from "@/pages/AiConsulting";
 import About from "@/pages/About";
 import AppointmentManagement from "@/pages/AppointmentManagement";
+import RestaurantReservations from "@/pages/RestaurantReservations";
 import NotFoundPage from "@/pages/NotFound";
 import Seo from "@/components/Seo";
 import { trackPageView } from "@/lib/fbpixel";
@@ -39,6 +40,7 @@ export function AppRoutes() {
         <Route path="/ai" element={<AiConsulting />} />
         <Route path="/about" element={<About />} />
         <Route path="/appointment-management" element={<AppointmentManagement />} />
+        <Route path="/restaurant-reservations" element={<RestaurantReservations />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>
