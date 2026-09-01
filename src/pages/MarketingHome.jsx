@@ -12,6 +12,7 @@ import {
   MapPin,
   Search,
   ShieldCheck,
+  ShoppingCart,
   Sparkles,
   TrendingUp,
   Users,
@@ -27,12 +28,6 @@ const contactCenterDemoUrl =
   import.meta.env.VITE_CONTACT_CENTER_DEMO_URL ||
   import.meta.env.VITE_PRODUCT_URL ||
   "https://smart-break-shift-demo.vercel.app";
-
-const mayaClinicDemoUrl =
-  import.meta.env.VITE_MAYACLINIC_DEMO_URL || "https://mayaclinic-demo.vercel.app";
-
-const mayaClinicBookingUrl = `${mayaClinicDemoUrl.replace(/\/$/, "")}/book`;
-const mayaClinicAdminUrl = `${mayaClinicDemoUrl.replace(/\/$/, "")}/admin`;
 
 const contactUrl = "#contact";
 
@@ -237,40 +232,83 @@ const bentoBlocks = [
 
 const solutions = [
   {
-    id: "contact-center",
-    icon: Headphones,
-    kicker: "מוקדים וצוותים",
-    title: "מוקד חכם",
-    description:
-      "ניהול זמינות נציגים, הפסקות, אילוצים ושיבוצי משמרות — עם תצוגת מצב חיה למנהלי מוקד ואחמ״שים.",
-    bullets: ["לוח זמינות והפסקות בזמן אמת", "שיבוץ משמרות לפי אילוצים", "פחות תיאומים בוואטסאפ"],
-    actions: [{ label: "לדמו החי", href: contactCenterDemoUrl, primary: true }],
-  },
-  {
     id: "mayaclinic",
     icon: CalendarCheck,
     kicker: "קליניקות ועסקי שירות",
     title: "מערכת ניהול תורים",
-    description:
-      "קביעת תורים אונליין, ניהול לקוחות, מעקב תשלומים ודוחות הכנסות — מערכת מלאה לקליניקה.",
-    video: "/videos/maya-queue-management.mp4",
-    bullets: ["הזמנת תור עצמאית ללקוח", "ממשק ניהול מלא", "דוחות הכנסות וייצוא"],
+    description: "זימון תורים אונליין, ניהול לקוחות, יומן ואוטומציות במקום אחד.",
+    bullets: ["הזמנה עצמאית ללקוחות", "ניהול יומן ולקוחות", "תזכורות ואוטומציות"],
     actions: [
-      { label: "דמו הזמנת תור", href: mayaClinicBookingUrl, primary: true },
-      { label: "דמו ניהול", href: mayaClinicAdminUrl },
+      { label: "לפרטים על מערכת התורים", href: "/appointment-management", primary: true },
     ],
   },
   {
-    id: "lead-scanner",
-    icon: MapPin,
-    kicker: "שיווק ומכירות",
-    title: "מערכת לידים חכמה",
-    description:
-      "איתור עסקים רלוונטיים דרך Google Maps, ניקוד הזדמנויות אוטומטי, וניהול כל הלידים עד לסגירת עסקה.",
-    bullets: ["סריקת עסקים לפי אזור ותחום", "ציון התאמה חכם לכל ליד", "מעקב סטטוס עד חתימת הסכם"],
-    actions: [{ label: "לבקשת הדגמה", href: contactUrl, primary: true }],
+    id: "orders",
+    icon: ShoppingCart,
+    kicker: "הזמנות ולקוחות",
+    title: "מערכת הזמנות",
+    description: "מערכת לקבלת וניהול הזמנות אונליין, לקוחות ותהליך העבודה במקום אחד.",
+    bullets: ["קבלת הזמנות אונליין", "ניהול הזמנות במקום אחד", "התאמה לתהליך העבודה של העסק"],
+    actions: [{ label: "לתיאום הדגמה", href: contactUrl, primary: true }],
+  },
+  {
+    id: "contact-center",
+    icon: Headphones,
+    kicker: "מוקדים וצוותים",
+    title: "מוקד חכם",
+    description: "מערכת לניהול העבודה במוקד, נציגים ותהליכי שירות ותמיכה במקום אחד.",
+    bullets: ["לוח זמינות והפסקות בזמן אמת", "שיבוץ משמרות לפי אילוצים", "פחות תיאומים בוואטסאפ"],
+    actions: [{ label: "לדמו החי", href: contactCenterDemoUrl, primary: true, external: true }],
   },
 ];
+
+function SolutionsSection() {
+  return (
+    <section className="section section--solutions" id="solutions">
+      <Reveal>
+        <div className="section__head">
+          <span className="kicker">המערכות</span>
+          <h2>המערכות שלנו</h2>
+          <p>שלוש מערכות מרכזיות שנבנו כדי לנהל את העבודה השוטפת של העסק בצורה פשוטה, מסודרת ומותאמת לתהליך שלכם.</p>
+        </div>
+      </Reveal>
+
+      <div className="solutions">
+        {solutions.map((solution, i) => {
+          const Icon = solution.icon;
+          return (
+            <Reveal key={solution.id} delay={i * 100}>
+              <article className="solution-card">
+                <div className="solution-card__top">
+                  <span className="solution-card__icon"><Icon size={22} /></span>
+                  <span className="solution-card__kicker">{solution.kicker}</span>
+                </div>
+                <h3>{solution.title}</h3>
+                <p>{solution.description}</p>
+                <ul>
+                  {solution.bullets.map((bullet) => <li key={bullet}><CheckCircle2 size={16} />{bullet}</li>)}
+                </ul>
+                <div className="solution-card__actions">
+                  {solution.actions.map((action) => (
+                    <a
+                      key={action.label}
+                      className={`btn ${action.primary ? "btn--primary" : "btn--ghost"} btn--sm`}
+                      href={action.href}
+                      {...(action.external ? { target: "_blank", rel: "noreferrer" } : {})}
+                    >
+                      {action.label}
+                      {action.external ? <ExternalLink size={15} /> : <ArrowLeft size={15} />}
+                    </a>
+                  ))}
+                </div>
+              </article>
+            </Reveal>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
 
 const processSteps = [
   {
@@ -380,6 +418,8 @@ export default function MarketingHome() {
           </Reveal>
         </section>
 
+        <SolutionsSection />
+
         {/* בנטו */}
         <section className="section" id="platform">
           <Reveal>
@@ -414,84 +454,6 @@ export default function MarketingHome() {
                       </div>
                     )}
                     {block.visual === "map" && <LeadsMapMock />}
-                  </article>
-                </Reveal>
-              );
-            })}
-          </div>
-        </section>
-
-        {/* מערכות */}
-        <section className="section" id="solutions">
-          <Reveal>
-            <div className="section__head">
-              <span className="kicker">המערכות</span>
-              <h2>
-                שלוש מערכות. <span className="gradient-text">הדגמות חיות.</span>
-              </h2>
-              <p>לא מצגות — מערכות אמיתיות שרצות בפרודקשן. פתחו דמו וראו בעצמכם.</p>
-            </div>
-          </Reveal>
-
-          <div className="solutions">
-            {solutions.map((solution, i) => {
-              const Icon = solution.icon;
-              return (
-                <Reveal key={solution.id} delay={i * 100}>
-                  <article className="solution-card">
-                    <div className="solution-card__top">
-                      <span className="solution-card__icon">
-                        <Icon size={22} />
-                      </span>
-                      <span className="solution-card__kicker">{solution.kicker}</span>
-                    </div>
-                    <h3>{solution.title}</h3>
-                    <p>{solution.description}</p>
-                    {solution.video ? (
-                      <div className="solution-card__video">
-                        <video
-                          controls
-                          playsInline
-                          preload="metadata"
-                          title={`סרטון ${solution.title}`}
-                        >
-                          <source src={solution.video} type="video/mp4" />
-                        </video>
-                      </div>
-                    ) : null}
-                    <ul>
-                      {solution.bullets.map((bullet) => (
-                        <li key={bullet}>
-                          <CheckCircle2 size={16} />
-                          {bullet}
-                        </li>
-                      ))}
-                    </ul>
-                    <div className="solution-card__actions">
-                      {solution.actions.map((action) =>
-                        action.href.startsWith("mailto:") ? (
-                          <a
-                            key={action.label}
-                            className={`btn ${action.primary ? "btn--primary" : "btn--ghost"} btn--sm`}
-                            href={action.href}
-                          >
-                            {action.label}
-                            <ArrowLeft size={15} />
-                          </a>
-                        ) : (
-                          <a
-                            key={action.label}
-                            className={`btn ${action.primary ? "btn--primary" : "btn--ghost"} btn--sm`}
-                            href={action.href}
-                            target="_blank"
-                            rel="noreferrer"
-                          >
-                            {action.label}
-                            <ExternalLink size={15} />
-                          </a>
-                        )
-                      )}
-                    </div>
                   </article>
                 </Reveal>
               );

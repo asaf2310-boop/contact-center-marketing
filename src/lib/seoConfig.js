@@ -121,6 +121,67 @@ export const routeSeo = {
       },
     ]),
   },
+  "/appointment-management": {
+    title: "מערכת ניהול וזימון תורים לעסקים | AllInCenter",
+    description:
+      "מערכת ניהול וזימון תורים לעסקים בישראל עם הזמנה אונליין, ניהול לקוחות, תזכורות, תשלומים ואוטומציות — בהתאמה לתהליך העבודה של העסק.",
+    canonical: `${SITE.url}/appointment-management`,
+    ogImage: SITE.logo,
+    twitterCard: "summary",
+    jsonLd: graph([
+      {
+        "@type": "WebPage",
+        "@id": `${SITE.url}/appointment-management#webpage`,
+        url: `${SITE.url}/appointment-management`,
+        name: "מערכת ניהול וזימון תורים לעסקים | AllInCenter",
+        description:
+          "מערכת ניהול וזימון תורים לעסקים בישראל עם הזמנה אונליין, ניהול לקוחות, תזכורות, תשלומים ואוטומציות — בהתאמה לתהליך העבודה של העסק.",
+        inLanguage: SITE.language,
+        isPartOf: { "@id": websiteId },
+        about: { "@id": `${SITE.url}/appointment-management#service` },
+      },
+      {
+        "@type": "Service",
+        "@id": `${SITE.url}/appointment-management#service`,
+        name: "מערכת ניהול וזימון תורים לעסקים",
+        description:
+          "מערכת לזימון תורים אונליין ולניהול תורים, לקוחות, תשלומים ואוטומציות עבור עסקים בישראל.",
+        provider: { "@id": orgId },
+        areaServed: SITE.areaServed,
+        url: `${SITE.url}/appointment-management`,
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${SITE.url}/appointment-management#breadcrumb`,
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "דף הבית", item: `${SITE.url}/` },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "מערכת ניהול וזימון תורים לעסקים",
+            item: `${SITE.url}/appointment-management`,
+          },
+        ],
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${SITE.url}/appointment-management#faq`,
+        mainEntity: [
+          ["מהי מערכת ניהול וזימון תורים?", "מערכת שמרכזת קביעת תורים אונליין, ניהול יומן ומידע על לקוחות במקום אחד."],
+          ["למי מתאימה מערכת זימון תורים של AllInCenter?", "לקוסמטיקאיות ועסקי יופי, מטפלים עצמאיים, קליניקות, נותני שירות ועסקים קטנים שמנהלים תורים."],
+          ["האם הלקוחות יכולים לקבוע תור לבד?", "כן. הלקוחות יכולים לבחור שירות וזמן פנוי ולקבוע תור אונליין."],
+          ["האם אפשר לנהל גם לקוחות ולא רק תורים?", "כן. המערכת משלבת ניהול לקוחות עם התורים והפעילות השוטפת של העסק."],
+          ["האם המערכת מתאימה לקוסמטיקאיות ומטפלים?", "כן. ניתן להתאים את סוגי השירותים, זמני הפעילות ותהליך קביעת התור לעסקי יופי ולטיפולים."],
+          ["האם ניתן להתאים את המערכת לתהליך העבודה של העסק?", "כן. המערכת מותאמת לסוגי השירותים, זמני הפעילות, אופן קביעת התורים והפעולות הנדרשות לאחר ההזמנה."],
+          ["האם המערכת מתאימה לעסקים בישראל?", "כן. AllInCenter מפתחת את המערכת עבור עסקים בישראל ובממשק עברי."],
+        ].map(([name, text]) => ({
+          "@type": "Question",
+          name,
+          acceptedAnswer: { "@type": "Answer", text },
+        })),
+      },
+    ]),
+  },
   "/allincenter-pelecard": {
     title: "AllInCenter + Pelecard | מערכת ניהול וסליקה לעסקים",
     description: "פתרון משולב של AllInCenter ו-Pelecard לניהול העסק, תשלומים, לקוחות ותהליכים במקום אחד.",

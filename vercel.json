@@ -72,6 +72,14 @@
       "destination": "/about/index.html"
     },
     {
+      "source": "/appointment-management",
+      "destination": "/appointment-management/index.html"
+    },
+    {
+      "source": "/appointment-management/",
+      "destination": "/appointment-management/index.html"
+    },
+    {
       "source": "/allincenter-pelecard",
       "destination": "/allincenter-pelecard/index.html"
     },
