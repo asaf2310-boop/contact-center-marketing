@@ -179,6 +179,7 @@ const navLinks = [
   { href: "/allincenter-pelecard", label: "חבילת פלאקארד" },
   { href: "/pricing", label: "מחירון" },
   { href: "/lp", label: "השארת פרטים" },
+  { href: "/about", label: "מי אנחנו" },
 ];
 
 const heroStats = [

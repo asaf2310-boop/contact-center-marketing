@@ -100,6 +100,27 @@ export const routeSeo = {
     twitterCard: "summary",
     jsonLd: graph(),
   },
+  "/about": {
+    title: "מי אנחנו | AllInCenter",
+    description:
+      "הכירו את AllInCenter ואת אסף אריאלי, שמאחורי פיתוח מערכות ניהול, אוטומציה ופתרונות מותאמים לעסקים בישראל.",
+    canonical: `${SITE.url}/about`,
+    ogImage: SITE.logo,
+    twitterCard: "summary",
+    jsonLd: graph([
+      {
+        "@type": "AboutPage",
+        "@id": `${SITE.url}/about#webpage`,
+        url: `${SITE.url}/about`,
+        name: "מי אנחנו | AllInCenter",
+        description:
+          "הכירו את AllInCenter ואת אסף אריאלי, שמאחורי פיתוח מערכות ניהול, אוטומציה ופתרונות מותאמים לעסקים בישראל.",
+        inLanguage: SITE.language,
+        about: { "@id": orgId },
+        isPartOf: { "@id": websiteId },
+      },
+    ]),
+  },
   "/allincenter-pelecard": {
     title: "AllInCenter + Pelecard | מערכת ניהול וסליקה לעסקים",
     description: "פתרון משולב של AllInCenter ו-Pelecard לניהול העסק, תשלומים, לקוחות ותהליכים במקום אחד.",

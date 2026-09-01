@@ -64,6 +64,14 @@
       "destination": "/ai/index.html"
     },
     {
+      "source": "/about",
+      "destination": "/about/index.html"
+    },
+    {
+      "source": "/about/",
+      "destination": "/about/index.html"
+    },
+    {
       "source": "/allincenter-pelecard",
       "destination": "/allincenter-pelecard/index.html"
     },

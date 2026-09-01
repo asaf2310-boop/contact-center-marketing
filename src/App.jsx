@@ -5,6 +5,7 @@ import LandingLeads from "@/pages/LandingLeads";
 import Pricing from "@/pages/Pricing";
 import PelecardBrochure from "@/pages/PelecardBrochure";
 import AiConsulting from "@/pages/AiConsulting";
+import About from "@/pages/About";
 import NotFoundPage from "@/pages/NotFound";
 import Seo from "@/components/Seo";
 import { trackPageView } from "@/lib/fbpixel";
@@ -35,6 +36,7 @@ export function AppRoutes() {
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/allincenter-pelecard" element={<PelecardBrochure />} />
         <Route path="/ai" element={<AiConsulting />} />
+        <Route path="/about" element={<About />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>

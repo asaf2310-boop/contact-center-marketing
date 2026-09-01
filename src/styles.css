@@ -1361,6 +1361,8 @@ p {
 
 .footer__links {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 22px;
   font-size: 0.9rem;
   color: var(--muted);
@@ -3831,6 +3833,77 @@ p {
 }
 
 /* ---------- עמוד ייעוץ AI (/ai) ---------- */
+
+/* ---------- עמוד מי אנחנו (/about) ---------- */
+
+.about-main {
+  position: relative;
+  z-index: 1;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 90px 22px 30px;
+}
+
+.about-hero {
+  max-width: 800px;
+}
+
+.about-hero h1 {
+  margin: 18px 0 26px;
+  font-size: clamp(2.5rem, 6vw, 4.8rem);
+  line-height: 1.05;
+  letter-spacing: -0.05em;
+}
+
+.about-copy {
+  display: grid;
+  gap: 16px;
+  color: var(--muted);
+  font-size: clamp(1.05rem, 2vw, 1.2rem);
+  line-height: 1.85;
+}
+
+.about-copy p { margin: 0; }
+
+.about-approach {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 48px;
+  margin-top: 70px;
+  padding: 38px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  box-shadow: var(--shadow-soft);
+}
+
+.about-approach h2 { margin-top: 16px; font-size: clamp(1.5rem, 3vw, 2.1rem); }
+.about-approach ul { display: grid; gap: 15px; margin: 0; padding: 0; list-style: none; }
+.about-approach li { display: flex; align-items: center; gap: 11px; font-weight: 700; }
+.about-approach li svg { flex-shrink: 0; color: #059669; }
+
+.about-ai-cta {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin-top: 28px;
+  padding: 30px 34px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, rgba(139, 47, 214, 0.1), rgba(25, 169, 242, 0.1));
+}
+
+.about-ai-cta > svg { flex-shrink: 0; color: var(--violet-deep); }
+.about-ai-cta h2 { margin: 0 0 16px; font-size: 1.35rem; }
+
+@media (max-width: 680px) {
+  .nav__links:has(a[href="/about"]) { display: flex; margin-inline: auto 10px; }
+  .nav__links:has(a[href="/about"]) a:not([href="/about"]) { display: none; }
+  .nav__links:has(a[href="/about"]) ~ .btn { flex-shrink: 0; }
+  .nav__inner:has(.nav__links a[href="/about"]) .nav__brand span { display: none; }
+  .about-main { padding-top: 58px; }
+  .about-approach { grid-template-columns: 1fr; gap: 28px; padding: 26px 22px; }
+  .about-ai-cta { align-items: flex-start; padding: 26px 22px; }
+}
 
 .ai-page {
   overflow-x: clip;
