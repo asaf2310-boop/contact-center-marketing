@@ -1,10 +1,12 @@
 import React, { useEffect, useRef } from "react";
-import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import MarketingHome from "@/pages/MarketingHome";
 import LandingLeads from "@/pages/LandingLeads";
 import Pricing from "@/pages/Pricing";
 import PelecardBrochure from "@/pages/PelecardBrochure";
 import AiConsulting from "@/pages/AiConsulting";
+import NotFoundPage from "@/pages/NotFound";
+import Seo from "@/components/Seo";
 import { trackPageView } from "@/lib/fbpixel";
 
 function RouteChangeTracker() {
@@ -12,8 +14,6 @@ function RouteChangeTracker() {
   const isInitialLoad = useRef(true);
 
   useEffect(() => {
-    // The base snippet in index.html already fires the first PageView,
-    // so skip the initial render to avoid double-counting it.
     if (isInitialLoad.current) {
       isInitialLoad.current = false;
       return;
@@ -24,18 +24,27 @@ function RouteChangeTracker() {
   return null;
 }
 
-export default function App() {
+export function AppRoutes() {
   return (
-    <BrowserRouter>
+    <>
+      <Seo />
       <RouteChangeTracker />
       <Routes>
         <Route path="/" element={<MarketingHome />} />
         <Route path="/lp" element={<LandingLeads />} />
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/allincenter-pelecard" element={<PelecardBrochure />} />
-        <Route path="/pelecard" element={<Navigate to="/allincenter-pelecard" replace />} />
         <Route path="/ai" element={<AiConsulting />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
+    </>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AppRoutes />
     </BrowserRouter>
   );
 }

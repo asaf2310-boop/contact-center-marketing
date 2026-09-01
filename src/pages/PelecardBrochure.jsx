@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ArrowLeft,
   CalendarCheck,
@@ -12,39 +12,8 @@ import {
   Sparkles,
 } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
-
-function Reveal({ children, className = "", delay = 0 }) {
-  const ref = useRef(null);
-  const [shown, setShown] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return undefined;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setShown(true);
-            observer.disconnect();
-          }
-        });
-      },
-      { threshold: 0.12 },
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <div
-      ref={ref}
-      className={`reveal ${shown ? "reveal--in" : ""} ${className}`}
-      style={delay ? { transitionDelay: `${delay}ms` } : undefined}
-    >
-      {children}
-    </div>
-  );
-}
+import Reveal from "@/components/Reveal";
+import SiteContactLine from "@/components/SiteContactLine";
 
 const packageDetails = [
   {
@@ -246,7 +215,7 @@ export default function PelecardBrochure() {
       <div className="brochure-bg" aria-hidden="true" />
 
       <header className={`brochure-nav ${scrolled ? "brochure-nav--scrolled" : ""}`}>
-        <div className="brochure-nav__inner">
+        <nav className="brochure-nav__inner">
           <a className="brochure-nav__home" href="/">
             חזרה לאתר
           </a>
@@ -254,7 +223,7 @@ export default function PelecardBrochure() {
             לשיחת התאמה
             <ArrowLeft size={16} />
           </a>
-        </div>
+        </nav>
       </header>
 
       <main>
@@ -300,7 +269,7 @@ export default function PelecardBrochure() {
           <Reveal delay={170}>
             <p className="brochure-hero__lead">
               AllInCenter ופלאקארד יחד — מערכת ניהול תורים או אתר, עם מערכת סליקה
-              מקצועית במקום אחד.
+              מקצועית במקום אחד לעסקים בישראל.
             </p>
           </Reveal>
         </section>
@@ -588,9 +557,10 @@ export default function PelecardBrochure() {
               <small>בשיתוף pelecard · Connect · Manage · Grow</small>
             </div>
           </div>
+          <SiteContactLine showAiLink />
           <small className="footer__note">
             © {new Date().getFullYear()} AllInCenter · allincenter.co.il · חבילת ניהול
-            וסליקה לעסקים
+            וסליקה לעסקים בישראל
           </small>
         </div>
       </footer>

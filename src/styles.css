@@ -1379,6 +1379,32 @@ p {
   font-size: 0.8rem;
 }
 
+.footer__contact {
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.footer__contact a:hover {
+  color: var(--violet-deep);
+}
+
+.not-found {
+  max-width: 640px;
+  margin: 120px auto 80px;
+  padding: 0 22px;
+  text-align: center;
+}
+
+.not-found h1 {
+  margin: 12px 0 16px;
+}
+
+.not-found__contact {
+  margin-top: 28px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
 /* ---------- דף נחיתה (Landing / Facebook) ---------- */
 
 .lp {
@@ -1400,8 +1426,9 @@ p {
   border-bottom: 1px solid var(--line);
 }
 
-.lp-nav .nav__brand {
-  min-width: 0;
+.lp-nav nav {
+  display: flex;
+  align-items: center;
 }
 
 .lp-nav .nav__brand img {

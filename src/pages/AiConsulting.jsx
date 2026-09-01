@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ArrowLeft,
   BarChart3,
@@ -18,53 +18,10 @@ import {
 } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
 import CaseStudyCard from "@/components/CaseStudyCard";
+import Reveal from "@/components/Reveal";
+import SiteContactLine from "@/components/SiteContactLine";
+import { getWhatsAppHref } from "@/lib/site";
 import { aiCaseStudies } from "@/data/aiCaseStudies";
-
-const PAGE_TITLE = "אסף אריאלי | AI & Automation Project Manager";
-const PAGE_DESCRIPTION =
-  "ייעוץ, ניהול והובלת פרויקטי AI ואוטומציה לחברות וארגונים — משלב זיהוי ההזדמנות והאפיון ועד לפיתוח והטמעה בפועל.";
-
-function getWhatsAppHref() {
-  const raw = import.meta.env.VITE_AI_WHATSAPP_PHONE || "0502677765";
-  let digits = String(raw).replace(/\D/g, "");
-  if (digits.startsWith("0")) digits = `972${digits.slice(1)}`;
-  if (!digits.startsWith("972")) digits = `972${digits}`;
-  const text = encodeURIComponent("היי אסף, ראיתי את עמוד הייעוץ ואשמח לבדוק תהליך שאפשר לשפר.");
-  return `https://wa.me/${digits}?text=${text}`;
-}
-
-function Reveal({ children, className = "", delay = 0 }) {
-  const ref = useRef(null);
-  const [shown, setShown] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return undefined;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setShown(true);
-            observer.disconnect();
-          }
-        });
-      },
-      { threshold: 0.14 },
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <div
-      ref={ref}
-      className={`reveal ${shown ? "reveal--in" : ""} ${className}`}
-      style={delay ? { transitionDelay: `${delay}ms` } : undefined}
-    >
-      {children}
-    </div>
-  );
-}
 
 const experienceCards = [
   {
@@ -201,7 +158,9 @@ const domains = [
 
 export default function AiConsulting() {
   const [scrolled, setScrolled] = useState(false);
-  const whatsappHref = getWhatsAppHref();
+  const whatsappHref = getWhatsAppHref(
+    "היי אסף, ראיתי את עמוד הייעוץ ואשמח לבדוק תהליך שאפשר לשפר.",
+  );
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -210,26 +169,12 @@ export default function AiConsulting() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => {
-    const previousTitle = document.title;
-    const descriptionTag = document.querySelector('meta[name="description"]');
-    const previousDescription = descriptionTag?.getAttribute("content");
-    document.title = PAGE_TITLE;
-    descriptionTag?.setAttribute("content", PAGE_DESCRIPTION);
-    return () => {
-      document.title = previousTitle;
-      if (descriptionTag && previousDescription) {
-        descriptionTag.setAttribute("content", previousDescription);
-      }
-    };
-  }, []);
-
   return (
     <div className="page ai-page">
       <div className="bg-aurora" aria-hidden="true" />
 
       <header className={`ai-nav ${scrolled ? "ai-nav--scrolled" : ""}`}>
-        <div className="ai-nav__inner">
+        <nav className="ai-nav__inner">
           <a className="ai-nav__brand" href="/">
             <img src="/assets/allincenter-logo.png" alt="AllInCenter" width="44" height="44" />
             <span className="ai-nav__names">
@@ -242,7 +187,7 @@ export default function AiConsulting() {
             בואו נדבר
             <ArrowLeft size={16} />
           </a>
-        </div>
+        </nav>
       </header>
 
       <main id="top">
@@ -624,6 +569,7 @@ export default function AiConsulting() {
             <a href="/">לאתר AllInCenter</a>
             <a href="#opportunity">יצירת קשר</a>
           </nav>
+          <SiteContactLine />
           <small className="footer__note">
             © {new Date().getFullYear()} AllInCenter · ייעוץ, ניהול והובלת פרויקטי AI ואוטומציה
           </small>

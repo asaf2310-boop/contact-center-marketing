@@ -1,7 +1,19 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "framework": "vite",
+  "framework": null,
+  "redirects": [
+    {
+      "source": "/pelecard",
+      "destination": "/allincenter-pelecard",
+      "permanent": true
+    },
+    {
+      "source": "/pelecard/",
+      "destination": "/allincenter-pelecard",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/whatsapp",
@@ -28,8 +40,20 @@
       "destination": "https://app.allincenter.co.il/_next/:path*"
     },
     {
-      "source": "/allincenter-pelecard",
-      "destination": "/allincenter-pelecard/index.html"
+      "source": "/lp",
+      "destination": "/lp/index.html"
+    },
+    {
+      "source": "/lp/",
+      "destination": "/lp/index.html"
+    },
+    {
+      "source": "/pricing",
+      "destination": "/pricing/index.html"
+    },
+    {
+      "source": "/pricing/",
+      "destination": "/pricing/index.html"
     },
     {
       "source": "/ai",
@@ -40,8 +64,32 @@
       "destination": "/ai/index.html"
     },
     {
-      "source": "/((?!api/|allincenter-pelecard(?:/|$)|ai(?:/|$)|whatsapp(?:/|$)|brand(?:/|$)|_next(?:/|$)).*)",
-      "destination": "/index.html"
+      "source": "/allincenter-pelecard",
+      "destination": "/allincenter-pelecard/index.html"
+    },
+    {
+      "source": "/allincenter-pelecard/",
+      "destination": "/allincenter-pelecard/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/robots.txt",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/plain; charset=utf-8"
+        }
+      ]
+    },
+    {
+      "source": "/sitemap.xml",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/xml; charset=utf-8"
+        }
+      ]
     }
   ]
 }

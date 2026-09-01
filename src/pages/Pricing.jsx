@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import {
   ArrowLeft,
   CalendarClock,
@@ -8,39 +8,8 @@ import {
   Repeat,
   Sparkles,
 } from "lucide-react";
-
-function Reveal({ children, className = "", delay = 0 }) {
-  const ref = useRef(null);
-  const [shown, setShown] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return undefined;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setShown(true);
-            observer.disconnect();
-          }
-        });
-      },
-      { threshold: 0.15 },
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <div
-      ref={ref}
-      className={`reveal ${shown ? "reveal--in" : ""} ${className}`}
-      style={delay ? { transitionDelay: `${delay}ms` } : undefined}
-    >
-      {children}
-    </div>
-  );
-}
+import Reveal from "@/components/Reveal";
+import SiteContactLine from "@/components/SiteContactLine";
 
 const products = [
   {
@@ -114,8 +83,9 @@ export default function Pricing() {
           </Reveal>
           <Reveal delay={160}>
             <p className="pricing-hero__sub">
-              בוחרים מוצר, בוחרים מסלול — חודשי קבוע או בנק שעות גמיש. הקמה חד-פעמית
-              וליווי מלא לאורך הדרך.
+              חבילות למערכות ניהול וזימון תורים לעסקים בישראל. בוחרים מוצר, בוחרים
+              מסלול — חודשי קבוע או בנק שעות גמיש. הקמה חד-פעמית וליווי מלא לאורך
+              הדרך.
             </p>
           </Reveal>
           <Reveal delay={220}>
@@ -217,9 +187,13 @@ export default function Pricing() {
               <small>Connect · Manage · Grow</small>
             </div>
           </div>
+          <nav className="footer__links">
+            <a href="/ai">ייעוץ AI ואוטומציה</a>
+          </nav>
+          <SiteContactLine />
           <small className="footer__note">
             © {new Date().getFullYear()} AllInCenter · allincenter.co.il · מערכות ניהול
-            מותאמות לעסק
+            מותאמות לעסקים בישראל
           </small>
         </div>
       </footer>

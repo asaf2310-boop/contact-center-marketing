@@ -1,4 +1,4 @@
-import React, { useEffect, useId, useRef, useState } from "react";
+import React, { useId, useRef, useState } from "react";
 import {
   ArrowLeft,
   BarChart3,
@@ -19,39 +19,9 @@ import {
   Zap,
 } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
-
-function Reveal({ children, className = "", delay = 0 }) {
-  const ref = useRef(null);
-  const [shown, setShown] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return undefined;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setShown(true);
-            observer.disconnect();
-          }
-        });
-      },
-      { threshold: 0.12 },
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <div
-      ref={ref}
-      className={`reveal ${shown ? "reveal--in" : ""} ${className}`}
-      style={delay ? { transitionDelay: `${delay}ms` } : undefined}
-    >
-      {children}
-    </div>
-  );
-}
+import Reveal from "@/components/Reveal";
+import SiteContactLine from "@/components/SiteContactLine";
+import { getWhatsAppHref } from "@/lib/site";
 
 function FaqItem({ question, answer }) {
   const [open, setOpen] = useState(false);
@@ -184,18 +154,6 @@ const faqItems = [
 
 const logoPlaceholders = ["לוגו לקוח", "לוגו לקוח", "לוגו לקוח", "לוגו לקוח", "לוגו לקוח"];
 
-function getWhatsAppHref() {
-  const raw =
-    import.meta.env.VITE_WHATSAPP_PHONE ||
-    import.meta.env.VITE_AGREEMENT_PROVIDER_PHONE ||
-    "0545201499";
-  let digits = String(raw).replace(/\D/g, "");
-  if (digits.startsWith("0")) digits = `972${digits.slice(1)}`;
-  if (!digits.startsWith("972")) digits = `972${digits}`;
-  const text = encodeURIComponent("היי, אשמח לדעת עוד על המערכת לניהול העסק");
-  return `https://wa.me/${digits}?text=${text}`;
-}
-
 function ProductMock({ kind }) {
   if (kind === "dashboard") {
     return (
@@ -303,10 +261,12 @@ export default function LandingLeads() {
             All<b>In</b>Center
           </span>
         </a>
-        <a className="btn btn--primary btn--sm lp-nav__cta lp-cta" href="#lead-form" onClick={scrollToForm}>
-          קבעו הדגמה בחינם
-          <ArrowLeft size={16} />
-        </a>
+        <nav>
+          <a className="btn btn--primary btn--sm lp-nav__cta lp-cta" href="#lead-form" onClick={scrollToForm}>
+            קבעו הדגמה בחינם
+            <ArrowLeft size={16} />
+          </a>
+        </nav>
       </header>
 
       <main>
@@ -337,8 +297,9 @@ export default function LandingLeads() {
             </Reveal>
             <Reveal delay={140}>
               <p className="lp-hero__sub">
-                פחות ביטולי תורים, יותר לקוחות מרוצים, וכל התפעול במקום אחד —
-                במקום וואטסאפ, אקסל וחמש מערכות שונות.
+                AllInCenter מפתחת מערכות ניהול מותאמות לעסקים בישראל — פחות ביטולי
+                תורים, יותר לקוחות מרוצים, וכל התפעול במקום אחד במקום וואטסאפ, אקסל
+                וחמש מערכות שונות.
               </p>
             </Reveal>
             <Reveal delay={180}>
@@ -538,9 +499,10 @@ export default function LandingLeads() {
               <small>Connect · Manage · Grow</small>
             </div>
           </div>
+          <SiteContactLine showAiLink />
           <small className="footer__note">
             © {new Date().getFullYear()} AllInCenter · allincenter.co.il · מערכות ניהול
-            מותאמות לעסק
+            מותאמות לעסקים בישראל
           </small>
         </div>
       </footer>

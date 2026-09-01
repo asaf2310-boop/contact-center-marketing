@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ArrowLeft,
   BarChart3,
@@ -18,6 +18,8 @@ import {
   Zap,
 } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
+import Reveal from "@/components/Reveal";
+import SiteContactLine from "@/components/SiteContactLine";
 
 /* ---------- קישורים ---------- */
 
@@ -33,41 +35,6 @@ const mayaClinicBookingUrl = `${mayaClinicDemoUrl.replace(/\/$/, "")}/book`;
 const mayaClinicAdminUrl = `${mayaClinicDemoUrl.replace(/\/$/, "")}/admin`;
 
 const contactUrl = "#contact";
-
-/* ---------- אנימציית גילוי בגלילה ---------- */
-
-function Reveal({ children, className = "", delay = 0 }) {
-  const ref = useRef(null);
-  const [shown, setShown] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return undefined;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setShown(true);
-            observer.disconnect();
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <div
-      ref={ref}
-      className={`reveal ${shown ? "reveal--in" : ""} ${className}`}
-      style={delay ? { transitionDelay: `${delay}ms` } : undefined}
-    >
-      {children}
-    </div>
-  );
-}
 
 /* ---------- מוקאפ דשבורד בהירו ---------- */
 
@@ -380,7 +347,7 @@ export default function MarketingHome() {
             </Reveal>
             <Reveal delay={160}>
               <p className="hero__sub">
-                AllInCenter בונה מערכות ניהול מותאמות אישית — תשלומים, לקוחות, תורים ולידים
+                AllInCenter מפתחת מערכות ניהול מותאמות לעסקים בישראל — תשלומים, לקוחות, תורים ולידים
                 במקום אחד. בלי גיליונות, בלי כפילויות, בלי לבזבז שעות צוות יקרות.
               </p>
             </Reveal>
@@ -636,10 +603,12 @@ export default function MarketingHome() {
               </a>
             ))}
             <a href={contactUrl}>יצירת קשר</a>
+            <a href="/ai">ייעוץ AI ואוטומציה</a>
           </nav>
+          <SiteContactLine />
           <small className="footer__note">
             © {new Date().getFullYear()} AllInCenter · allincenter.co.il · מערכות ניהול
-            מותאמות לעסק
+            מותאמות לעסקים בישראל
           </small>
         </div>
       </footer>

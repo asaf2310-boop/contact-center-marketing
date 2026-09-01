@@ -5,8 +5,8 @@ import {
   phoneDigitsOnly,
 } from "./israeliValidators.js";
 
-assert.equal(phoneDigitsOnly("054-520-1499"), "0545201499");
-assert.equal(getIsraeliPhoneError("0545201499", { required: true }), null);
+assert.equal(phoneDigitsOnly("050-267-7765"), "0502677765");
+assert.equal(getIsraeliPhoneError("0502677765", { required: true }), null);
 assert.equal(getEmailError("test@example.com", { required: true }), null);
 assert.ok(getIsraeliPhoneError("", { required: true }));
 
