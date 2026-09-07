@@ -10,7 +10,10 @@ const urlList = [
   `https://${host}/about`,
   `https://${host}/ai`,
   `https://${host}/allincenter-pelecard`,
+  `https://${host}/appointment-management`,
   `https://${host}/restaurant-reservations`,
+  `https://${host}/guides`,
+  `https://${host}/guides/how-to-choose-appointment-system`,
 ];
 
 const response = await fetch(endpoint, {
