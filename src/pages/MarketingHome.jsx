@@ -567,6 +567,7 @@ export default function MarketingHome() {
             ))}
             <a href={contactUrl}>יצירת קשר</a>
             <a href="/ai">ייעוץ AI ואוטומציה</a>
+            <a href="/guides">מרכז הידע</a>
           </nav>
           <SiteContactLine />
           <small className="footer__note">

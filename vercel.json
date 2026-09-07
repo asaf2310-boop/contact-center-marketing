@@ -94,6 +94,22 @@
     {
       "source": "/allincenter-pelecard/",
       "destination": "/allincenter-pelecard/index.html"
+    },
+    {
+      "source": "/guides",
+      "destination": "/guides/index.html"
+    },
+    {
+      "source": "/guides/",
+      "destination": "/guides/index.html"
+    },
+    {
+      "source": "/guides/how-to-choose-appointment-system",
+      "destination": "/guides/how-to-choose-appointment-system/index.html"
+    },
+    {
+      "source": "/guides/how-to-choose-appointment-system/",
+      "destination": "/guides/how-to-choose-appointment-system/index.html"
     }
   ],
   "headers": [

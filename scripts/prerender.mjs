@@ -200,6 +200,8 @@ for (const loc of [
   "https://www.allincenter.co.il/appointment-management",
   "https://www.allincenter.co.il/restaurant-reservations",
   "https://www.allincenter.co.il/allincenter-pelecard",
+  "https://www.allincenter.co.il/guides",
+  "https://www.allincenter.co.il/guides/how-to-choose-appointment-system",
 ]) {
   if (!sitemap.includes(`<loc>${loc}</loc>`)) fail(`sitemap.xml missing ${loc}`);
 }

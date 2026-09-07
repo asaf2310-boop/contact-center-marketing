@@ -160,12 +160,13 @@ export default function AppointmentManagement() {
             {faqs.map(([question, answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}
           </div>
         </section>
+        <aside className="appointment-guide-link">מתלבטים איזו מערכת מתאימה לכם? <a href="/guides/how-to-choose-appointment-system">קראו את המדריך לבחירת מערכת ניהול תורים.</a></aside>
       </main>
 
       <footer className="footer">
         <div className="footer__inner">
           <div className="footer__brand"><img src="/assets/allincenter-logo.png" alt="AllInCenter" /><div><strong>AllInCenter</strong><small>Connect · Manage · Grow</small></div></div>
-          <nav className="footer__links" aria-label="ניווט תחתון"><a href="/">דף הבית</a><a href="/pricing">מחירון</a><a href="/about">מי אנחנו</a><a href="/#contact">יצירת קשר</a><a href="/ai">ייעוץ AI ואוטומציה</a></nav>
+          <nav className="footer__links" aria-label="ניווט תחתון"><a href="/">דף הבית</a><a href="/pricing">מחירון</a><a href="/about">מי אנחנו</a><a href="/guides">מרכז הידע</a><a href="/#contact">יצירת קשר</a><a href="/ai">ייעוץ AI ואוטומציה</a></nav>
           <SiteContactLine />
           <small className="footer__note">© {new Date().getFullYear()} AllInCenter · allincenter.co.il · מערכות ניהול מותאמות לעסקים בישראל</small>
         </div>

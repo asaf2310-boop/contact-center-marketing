@@ -4096,6 +4096,48 @@ p {
 .appointment-faq summary { padding: 20px 2px; cursor: pointer; font-size: 1.05rem; font-weight: 800; }
 .appointment-faq details p { max-width: 720px; padding: 0 2px 20px; color: var(--muted); line-height: 1.75; }
 
+/* ---------- מרכז הידע ---------- */
+.guides-hero, .guides-list, .guide-main { width: min(100% - 44px, 1080px); margin-inline: auto; }
+.guides-hero { padding: 82px 0 46px; text-align: center; }
+.guides-hero .tag { margin-inline: auto; }
+.guides-hero h1 { margin-top: 16px; color: #241b45; font-size: clamp(2.35rem, 6vw, 4.25rem); line-height: 1.12; letter-spacing: -.04em; }
+.guides-hero p { max-width: 760px; margin: 22px auto 0; color: var(--muted); font-size: clamp(1.02rem, 2vw, 1.2rem); line-height: 1.85; }
+.guides-list { padding: 24px 0 88px; }
+.guides-list > h2 { margin-bottom: 24px; font-size: clamp(1.6rem, 3vw, 2.2rem); }
+.guides-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.guide-card { display: flex; flex-direction: column; min-height: 300px; padding: 30px; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--card); box-shadow: var(--shadow-soft); }
+.guide-card > span { color: var(--violet-deep); font-size: .82rem; font-weight: 800; }
+.guide-card h3 { margin-top: 14px; font-size: clamp(1.35rem, 2.5vw, 1.8rem); line-height: 1.35; }
+.guide-card p { margin-top: 14px; color: var(--muted); line-height: 1.75; }
+.guide-card a { display: inline-flex; align-items: center; gap: 7px; margin-top: auto; padding-top: 24px; color: var(--violet-deep); font-weight: 800; }
+.guide-main { max-width: 900px; padding: 44px 0 92px; }
+.breadcrumbs { display: flex; flex-wrap: wrap; gap: 8px; color: var(--muted); font-size: .88rem; line-height: 1.5; }
+.breadcrumbs a { color: var(--violet-deep); font-weight: 700; }
+.guide-article { margin-top: 28px; padding: clamp(24px, 5vw, 64px); border: 1px solid var(--line); border-radius: var(--radius-lg); background: rgba(255,255,255,.9); box-shadow: var(--shadow-soft); }
+.guide-article header h1 { margin-top: 12px; color: #241b45; font-size: clamp(2rem, 5vw, 3.35rem); line-height: 1.2; letter-spacing: -.035em; }
+.guide-content { max-width: 720px; margin-top: 36px; }
+.guide-content p { margin: 0 0 20px; color: #3c3757; font-size: 1.07rem; line-height: 1.9; }
+.guide-content section { margin-top: 42px; }
+.guide-content h2 { margin-bottom: 16px; color: #241b45; font-size: clamp(1.35rem, 3vw, 1.75rem); line-height: 1.4; }
+.guide-cta { margin-top: 52px; padding: 28px; border: 1px solid rgba(139,47,214,.14); border-radius: var(--radius); background: linear-gradient(135deg, rgba(139,47,214,.06), rgba(25,169,242,.06)); }
+.guide-cta h2 { margin-bottom: 18px; font-size: 1.35rem; }
+.guide-back { display: inline-block; margin-top: 28px; color: var(--violet-deep); font-weight: 700; }
+.appointment-guide-link { width: min(100% - 44px, 900px); margin: 20px auto 72px; padding: 22px 26px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); color: var(--muted); text-align: center; line-height: 1.7; }
+.appointment-guide-link a { color: var(--violet-deep); font-weight: 800; }
+
+@media (max-width: 680px) {
+  .guides-hero, .guides-list, .guide-main { width: min(100% - 28px, 1080px); }
+  .guides-hero { padding-top: 52px; text-align: start; }
+  .guides-hero .tag { margin-inline: 0; }
+  .guides-grid { grid-template-columns: 1fr; }
+  .guide-card { min-height: 0; padding: 24px; }
+  .guide-main { padding-top: 28px; }
+  .guide-article { padding: 24px 20px; border-radius: 20px; }
+  .guide-content p { font-size: 1rem; line-height: 1.85; }
+  .guide-cta { padding: 22px 18px; }
+  .guide-cta .btn { width: 100%; }
+}
+
 .restaurant-hero::after {
   content: "";
   position: absolute;

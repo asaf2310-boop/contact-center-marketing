@@ -8,6 +8,8 @@ import AiConsulting from "@/pages/AiConsulting";
 import About from "@/pages/About";
 import AppointmentManagement from "@/pages/AppointmentManagement";
 import RestaurantReservations from "@/pages/RestaurantReservations";
+import Guides from "@/pages/Guides";
+import GuideArticle from "@/pages/GuideArticle";
 import NotFoundPage from "@/pages/NotFound";
 import Seo from "@/components/Seo";
 import { trackPageView } from "@/lib/fbpixel";
@@ -41,6 +43,8 @@ export function AppRoutes() {
         <Route path="/about" element={<About />} />
         <Route path="/appointment-management" element={<AppointmentManagement />} />
         <Route path="/restaurant-reservations" element={<RestaurantReservations />} />
+        <Route path="/guides" element={<Guides />} />
+        <Route path="/guides/:slug" element={<GuideArticle />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>

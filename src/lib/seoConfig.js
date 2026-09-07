@@ -242,6 +242,30 @@ export const routeSeo = {
     twitterCard: "summary_large_image",
     jsonLd: graph(),
   },
+  "/guides": {
+    title: "מרכז הידע לעסקים | AllInCenter",
+    description: "מידע מעשי על מערכות ניהול, אוטומציה ו-AI לעסקים. מדריכים לבחירת מערכות, ייעול תהליכים וצמצום עבודה ידנית.",
+    canonical: `${SITE.url}/guides`,
+    ogImage: SITE.logo,
+    twitterCard: "summary",
+    jsonLd: graph([{ "@type": "CollectionPage", "@id": `${SITE.url}/guides#webpage`, url: `${SITE.url}/guides`, name: "מרכז הידע של AllInCenter", inLanguage: SITE.language, isPartOf: { "@id": websiteId } }]),
+  },
+  "/guides/how-to-choose-appointment-system": {
+    title: "איך לבחור מערכת ניהול תורים לעסק? 8 דברים שכדאי לבדוק | AllInCenter",
+    description: "איך בוחרים מערכת ניהול תורים לעסק? 8 דברים שכדאי לבדוק לפני שבוחרים מערכת לזימון תורים, ניהול לקוחות, תשלומים ואוטומציות.",
+    canonical: `${SITE.url}/guides/how-to-choose-appointment-system`,
+    ogImage: SITE.logo,
+    twitterCard: "summary",
+    jsonLd: graph([
+      { "@type": "WebPage", "@id": `${SITE.url}/guides/how-to-choose-appointment-system#webpage`, url: `${SITE.url}/guides/how-to-choose-appointment-system`, name: "איך לבחור מערכת ניהול תורים לעסק? 8 דברים שכדאי לבדוק", description: "איך בוחרים מערכת ניהול תורים לעסק? 8 דברים שכדאי לבדוק לפני שבוחרים מערכת לזימון תורים, ניהול לקוחות, תשלומים ואוטומציות.", inLanguage: SITE.language, isPartOf: { "@id": websiteId } },
+      { "@type": "Article", "@id": `${SITE.url}/guides/how-to-choose-appointment-system#article`, headline: "איך לבחור מערכת ניהול תורים לעסק? 8 דברים שכדאי לבדוק", description: "איך בוחרים מערכת ניהול תורים לעסק? 8 דברים שכדאי לבדוק לפני שבוחרים מערכת לזימון תורים, ניהול לקוחות, תשלומים ואוטומציות.", mainEntityOfPage: { "@id": `${SITE.url}/guides/how-to-choose-appointment-system#webpage` }, publisher: { "@id": orgId }, author: { "@id": orgId }, inLanguage: SITE.language },
+      { "@type": "BreadcrumbList", "@id": `${SITE.url}/guides/how-to-choose-appointment-system#breadcrumb`, itemListElement: [
+        { "@type": "ListItem", position: 1, name: "AllInCenter", item: `${SITE.url}/` },
+        { "@type": "ListItem", position: 2, name: "מרכז הידע", item: `${SITE.url}/guides` },
+        { "@type": "ListItem", position: 3, name: "איך לבחור מערכת ניהול תורים לעסק", item: `${SITE.url}/guides/how-to-choose-appointment-system` },
+      ] },
+    ]),
+  },
 };
 
 export const prerenderPaths = Object.keys(routeSeo);
