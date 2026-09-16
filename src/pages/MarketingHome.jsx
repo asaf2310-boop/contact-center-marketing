@@ -164,11 +164,11 @@ export default function MarketingHome() {
         </section>
 
         <section className="home-services-preview" aria-labelledby="services-heading">
-          <Reveal><div className="home-section-head"><span className="kicker">שירותים מקצועיים</span><h2 id="services-heading">השירותים שלנו</h2><p>תכנון, פיתוח וחיבור של תהליכים עסקיים — מהממשק ועד האוטומציה.</p></div></Reveal>
+          <Reveal><div className="home-section-head"><span className="kicker">שירותים מקצועיים</span><h2 id="services-heading">השירותים שלנו</h2><p>מערכות ניהול לעסק, וחיבור של האתר והחיפוש אל התורים, ההזמנות והפניות.</p></div></Reveal>
           <div className="home-service-grid">
-            <article><LayoutDashboard/><h3>פיתוח מערכות ניהול מותאמות</h3><p>מערכות שנבנות סביב הלקוחות, ההזמנות ותהליכי העבודה של העסק.</p><a href="/services">לפרטים <ArrowLeft size={15}/></a></article>
-            <article><Workflow/><h3>AI ואוטומציה לעסקים</h3><p>זיהוי, תכנון והובלת תהליכי AI ואוטומציה משלב האפיון ועד ההטמעה.</p><a href="/ai">לפרטים <ArrowLeft size={15}/></a></article>
-            <article><Sparkles/><h3>נראות בגוגל ובמנועי AI</h3><p>תשתית דיגיטלית שעוזרת לעסק להימצא, להיות מובן ולהפוך חשיפה לפניות.</p><a href="/google-ai-visibility">לפרטים <ArrowLeft size={15}/></a></article>
+            <article><LayoutDashboard/><h3>פיתוח מערכות ניהול מותאמות</h3><p>מערכות תורים, הזמנות וניהול שנבנות סביב הלקוחות ותהליכי העבודה של העסק.</p><a href="/services">לפרטים <ArrowLeft size={15}/></a></article>
+            <article><Workflow/><h3>חיבור ל‑WhatsApp ולאוטומציות</h3><p>ניתן לחבר את האתר ואת מערכות התורים או ההזמנות ל‑WhatsApp ולתהליכים חוזרים — בהתאם לעסק.</p><a href="/services">לפרטים <ArrowLeft size={15}/></a></article>
+            <article><Sparkles/><h3>בניית אתרים, SEO ונראות בחיפוש</h3><p>אתר ו‑SEO שמחברים חיפוש בגוגל ובמנועי AI לפנייה, לתור או להזמנה — בלי הבטחה לדירוג.</p><a href="/google-ai-visibility">לפרטים <ArrowLeft size={15}/></a></article>
           </div>
           <a className="home-all-link" href="/services">לכל השירותים <ArrowLeft size={17}/></a>
         </section>

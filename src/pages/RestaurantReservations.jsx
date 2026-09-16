@@ -115,6 +115,11 @@ export default function RestaurantReservations() {
           <ul>{["פחות עבודה ידנית", "מידע מרוכז במקום אחד", "שליטה טובה יותר בהזמנות", "תכנון שולחנות", "חוויית הזמנה פשוטה יותר לאורח"].map((item) => <li key={item}><CheckCircle2 size={18} />{item}</li>)}</ul>
         </section>
 
+        <section className="appointment-section appointment-custom" aria-labelledby="restaurant-search-title">
+          <div><span className="kicker">מחיפוש להזמנה</span><h2 id="restaurant-search-title">חיבור האתר לתהליך ההזמנה</h2></div>
+          <p>אפשר לחבר אתר או עמוד נחיתה של המסעדה ישירות לתהליך הזמנת השולחן, כדי שלקוחות שמגיעים מגוגל או ממנועי AI יוכלו להמשיך להזמנה. <a href="/google-ai-visibility">קראו איך בניית אתר ו‑SEO מתחברים למסלול הזה</a>.</p>
+        </section>
+
         <section className="appointment-section restaurant-tables" aria-labelledby="tables-title">
           <div className="restaurant-tables__copy">
             <span className="kicker">מפת רצפה</span><h2 id="tables-title">ניהול שולחנות ותמונת מצב במסעדה</h2>

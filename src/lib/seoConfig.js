@@ -58,11 +58,11 @@ const homeServices = [
   },
   {
     name: "אוטומציות לעסקים",
-    description: "תזכורות, אישורי תורים וזרימות עבודה אוטומטיות שחוסכות עבודה ידנית.",
+    description: "תזכורות, אישורי תורים וחיבור לתהליכים חוזרים, כולל אפשרות לחיבור WhatsApp בהתאם לתהליך העסק.",
   },
   {
-    name: "ניהול לידים",
-    description: "איתור לידים ממפות Google, ניקוד הזדמנויות וניהול הלידים עד לסגירה.",
+    name: "בניית אתרים, SEO וחיבור לפניות",
+    description: "בנייה או שיפור של אתר העסק, SEO וחיבור למערכת תורים, הזמנות או WhatsApp כדי להפוך חיפוש לפנייה.",
   },
 ];
 
@@ -155,7 +155,7 @@ export const routeSeo = {
   },
   "/services": {
     title: "שירותי AllInCenter לעסקים | פיתוח, אוטומציה ו-AI",
-    description: "שירותי AllInCenter לעסקים: פיתוח מערכות ניהול מותאמות, AI ואוטומציה, נראות בגוגל ובמנועי AI ואינטגרציות בין מערכות.",
+    description: "שירותי AllInCenter לעסקים: מערכות תורים והזמנות, בניית ושיפור אתרים, SEO, וחיבור ל‑WhatsApp ולאוטומציות.",
     canonical: `${SITE.url}/services`, ogImage: SITE.logo, twitterCard: "summary",
     jsonLd: graph([
       { "@type":"WebPage", "@id":`${SITE.url}/services#webpage`, url:`${SITE.url}/services`, name:"שירותי AllInCenter לעסקים", inLanguage:SITE.language, isPartOf:{"@id":websiteId} },
@@ -163,7 +163,7 @@ export const routeSeo = {
       { "@type":"ItemList", name:"שירותי AllInCenter", itemListElement:[
         {"@type":"ListItem",position:1,name:"פיתוח מערכות ניהול מותאמות"},
         {"@type":"ListItem",position:2,name:"AI ואוטומציה לעסקים",url:`${SITE.url}/ai`},
-        {"@type":"ListItem",position:3,name:"נראות בגוגל ובמנועי AI",url:`${SITE.url}/google-ai-visibility`},
+        {"@type":"ListItem",position:3,name:"בניית אתרים, SEO ונראות בחיפוש",url:`${SITE.url}/google-ai-visibility`},
         {"@type":"ListItem",position:4,name:"אינטגרציות וחיבור מערכות"},
       ]},
     ]),
@@ -214,7 +214,7 @@ export const routeSeo = {
         "@id": `${SITE.url}/appointment-management#service`,
         name: "מערכת ניהול וזימון תורים לעסקים",
         description:
-          "מערכת לזימון תורים אונליין ולניהול תורים, לקוחות, תשלומים ואוטומציות עבור עסקים בישראל.",
+          "מערכת לזימון תורים אונליין ולניהול תורים ולקוחות, שיכולה להחליף תיאום ידני — כולל תיאום דרך WhatsApp — וניתן לחבר אותה לזרימת WhatsApp בהתאם לתהליך העסק.",
         provider: { "@id": orgId },
         areaServed: SITE.areaServed,
         url: `${SITE.url}/appointment-management`,
@@ -243,6 +243,7 @@ export const routeSeo = {
           ["האם המערכת מתאימה לקוסמטיקאיות ומטפלים?", "כן. ניתן להתאים את סוגי השירותים, זמני הפעילות ותהליך קביעת התור לעסקי יופי ולטיפולים."],
           ["האם ניתן להתאים את המערכת לתהליך העבודה של העסק?", "כן. המערכת מותאמת לסוגי השירותים, זמני הפעילות, אופן קביעת התורים והפעולות הנדרשות לאחר ההזמנה."],
           ["האם המערכת מתאימה לעסקים בישראל?", "כן. AllInCenter מפתחת את המערכת עבור עסקים בישראל ובממשק עברי."],
+          ["האם המערכת מתאימה לעסקים שמנהלים תורים ב‑WhatsApp?", "כן. אפשר לעבור מתיאום ידני בצ׳אטים להזמנה אונליין ולניהול מרכזי. בהתאם לתהליך העסק, ניתן גם לחבר את הזרימה לבוט WhatsApp."],
         ].map(([name, text]) => ({
           "@type": "Question",
           name,
@@ -275,7 +276,7 @@ export const routeSeo = {
         "@id": `${SITE.url}/restaurant-reservations#service`,
         name: "מערכת הזמנות למסעדות",
         description:
-          "מערכת להזמנה וניהול שולחנות במסעדות, כולל הזמנה אונליין וניהול הזמנות מתוך ממשק אחד.",
+          "מערכת להזמנה וניהול שולחנות במסעדות, כולל הזמנה אונליין, ניהול הזמנות מתוך ממשק אחד, ואפשרות לחבר אתר או עמוד נחיתה לתהליך ההזמנה.",
         provider: { "@id": orgId },
         areaServed: SITE.areaServed,
         url: `${SITE.url}/restaurant-reservations`,
@@ -336,27 +337,26 @@ export const routeSeo = {
     ]),
   },
   "/google-ai-visibility": {
-    title: "קידום ונראות בגוגל ובמנועי AI | AllInCenter",
-    description: "עוזרים לעסקים מקומיים להופיע בצורה טובה יותר בגוגל, במפות ובמנועי AI, עם אתר מותאם, Google Business, תוכן, ביקורות ומערכת שמחברת את החשיפה לפניות ולקביעת תורים.",
+    title: "בניית אתרים, SEO ונראות במנועי AI | AllInCenter",
+    description: "בניית ושיפור אתרים לעסקים, SEO וחיבור למערכת תורים, מערכת הזמנות או WhatsApp — כדי להפוך חיפושים בגוגל ובמנועי AI לפניות וללקוחות.",
     canonical: `${SITE.url}/google-ai-visibility`,
     ogImage: SITE.logo,
     twitterCard: "summary",
     jsonLd: graph([
-      { "@type": "WebPage", "@id": `${SITE.url}/google-ai-visibility#webpage`, url: `${SITE.url}/google-ai-visibility`, name: "נראות בגוגל ובמנועי AI", description: "שירות לעסקים מקומיים המחבר אתר, Google Business, Local SEO, תוכן, ביקורות ומדידה כדי לחזק נראות ולהפוך חשיפה לפניות.", inLanguage: SITE.language, isPartOf: { "@id": websiteId }, about: { "@id": `${SITE.url}/google-ai-visibility#service` } },
-      { "@type": "Service", "@id": `${SITE.url}/google-ai-visibility#service`, name: "נראות בגוגל ובמנועי AI", description: "שירות לשיפור הנוכחות של עסקים מקומיים בגוגל, במפות ובמנועי AI באמצעות תשתית אתר, תוכן, פרופיל עסק, ביקורות ומדידה.", provider: { "@id": orgId }, areaServed: SITE.areaServed, url: `${SITE.url}/google-ai-visibility` },
+      { "@type": "WebPage", "@id": `${SITE.url}/google-ai-visibility#webpage`, url: `${SITE.url}/google-ai-visibility`, name: "בניית אתר, SEO וחיבור למערכת תורים או הזמנות", description: "בניית ושיפור אתרים לעסקים, SEO וחיבור למערכת תורים, מערכת הזמנות או WhatsApp — כדי להפוך חיפושים בגוגל ובמנועי AI לפניות וללקוחות.", inLanguage: SITE.language, isPartOf: { "@id": websiteId }, about: { "@id": `${SITE.url}/google-ai-visibility#service` } },
+      { "@type": "Service", "@id": `${SITE.url}/google-ai-visibility#service`, name: "בניית אתרים, SEO וחיבור למסלול פניות", description: "בנייה או שיפור של אתר העסק, SEO טכני ומבנה תוכן, וחיבור לטופס, WhatsApp, מערכת תורים או מערכת הזמנות. אין הבטחה לדירוג, ללידים או להופעה בתשובות AI.", provider: { "@id": orgId }, areaServed: SITE.areaServed, url: `${SITE.url}/google-ai-visibility` },
       { "@type": "BreadcrumbList", "@id": `${SITE.url}/google-ai-visibility#breadcrumb`, itemListElement: [
         { "@type": "ListItem", position: 1, name: "דף הבית", item: `${SITE.url}/` },
-        { "@type": "ListItem", position: 2, name: "נראות בגוגל ובמנועי AI", item: `${SITE.url}/google-ai-visibility` },
+        { "@type": "ListItem", position: 2, name: "בניית אתרים, SEO ונראות במנועי AI", item: `${SITE.url}/google-ai-visibility` },
       ] },
       { "@type": "FAQPage", "@id": `${SITE.url}/google-ai-visibility#faq`, mainEntity: [
-        ["האם אפשר להבטיח מקום ראשון בגוגל?", "לא. אף גורם רציני אינו יכול להבטיח מיקום ראשון. ניתן לבנות תשתית ולחזק לאורך זמן את הסיכוי להופיע בחיפושים רלוונטיים."],
-        ["כמה זמן לוקח לראות תוצאות?", "נראות אורגנית ומקומית נבנית בהדרגה ותלויה בתחרות, בנוכחות הקיימת, באתר, בביקורות ובגורמים נוספים."],
-        ["האם השירות כולל Google Business?", "כן, כאשר הוא רלוונטי לחבילת השירות ולעסק."],
-        ["האם אפשר לקדם עסק גם ב-ChatGPT?", "אי אפשר להבטיח הכללה בתשובות, אך ניתן לבנות אתר ונוכחות ציבורית שמקלים על מנועי AI לגלות ולהבין את העסק."],
-        ["האם חייבים אתר?", "אתר איכותי מומלץ מאוד, וניתן לבנות או לשפר אותו כחלק מהשירות."],
-        ["האם אתם מטפלים גם בביקורות?", "ניתן ליצור תהליך לבקשת ביקורות אמיתיות מלקוחות לאחר קבלת השירות."],
-        ["האם אפשר לחבר את זה למערכת התורים?", "כן. בשימוש במערכת התורים של AllInCenter ניתן לחבר קריאות לפעולה ותהליכי בקשת ביקורת."],
-        ["למי השירות מתאים?", "לעסקים מקומיים ונותני שירות שלקוחות מחפשים לפי שירות ואזור."],
+        ["האם אפשר להבטיח מקום ראשון בגוגל?", "לא. אף גורם רציני אינו יכול להבטיח מיקום ראשון, לידים או הכללה בתשובות של מנועי AI. אנחנו בונים אתר ותשתית SEO ומחזקים את הסיכוי להופיע בחיפושים רלוונטיים לאורך זמן."],
+        ["כמה זמן לוקח לראות תוצאות?", "נראות אורגנית נבנית בהדרגה ותלויה בתחרות, באתר הקיים, בתוכן ובגורמים נוספים. אין לוח זמנים מובטח."],
+        ["האם אתם מנהלים Google Business או ביקורות?", "לא. השירות מתמקד באתר, ב‑SEO ובחיבור למסלול פנייה או הזמנה. ניהול פרופיל Google Business או ביקורות אינו חלק מהשירות."],
+        ["האם אפשר לקדם עסק גם ב‑ChatGPT?", "אי אפשר להבטיח הכללה בתשובות. אפשר לבנות אתר ומידע ציבורי ברורים שמקלים על מנועי AI לגלות ולהבין את העסק."],
+        ["האם חייבים אתר?", "כן, זה הבסיס. אפשר לבנות אתר חדש או לשפר אתר קיים כחלק מהשירות."],
+        ["האם אפשר לחבר את האתר למערכת תורים או ל‑WhatsApp?", "כן. ניתן לחבר את האתר לטופס, לבוט WhatsApp, למערכת תורים או למערכת הזמנות — בהתאם לתהליך העסק."],
+        ["למי השירות מתאים?", "לעסקים מקומיים ונותני שירות שלקוחות מחפשים לפי שירות ואזור, ורוצים מסלול ברור מחיפוש לפנייה או הזמנה."],
       ].map(([name,text]) => ({ "@type": "Question", name, acceptedAnswer: { "@type": "Answer", text } })) },
     ]),
   },
