@@ -1,0 +1,12 @@
+import React from "react";
+import { ArrowLeft, CalendarCheck, Check, Headphones, Utensils } from "lucide-react";
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
+
+const products = [
+  { icon: CalendarCheck, title: "מערכת ניהול תורים", text: "ניהול תורים, לקוחות, זמינות ותהליכים במקום אחד.", points: ["הזמנה אונליין", "ניהול יומן ולקוחות", "תזכורות ואוטומציות"], href: "/appointment-management", image: "/assets/home-appointment-ui.jpg", alt: "ממשק מערכת ניהול התורים של AllInCenter" },
+  { icon: Utensils, title: "מערכת הזמנות למסעדות", text: "הזמנות שולחן ומפת ישיבה בסביבת ניהול אחת לצוות.", points: ["הזמנת שולחן אונליין", "ניהול הזמנות", "מפת שולחנות"], href: "/restaurant-reservations", image: "/assets/home-restaurant-dashboard.jpg", alt: "לוח הבקרה של מערכת ההזמנות למסעדות" },
+  { icon: Headphones, title: "מוקד חכם", text: "ניהול זמינות, הפסקות ושיבוץ משמרות לצוותי מוקד.", points: ["זמינות והפסקות", "שיבוץ לפי אילוצים", "תמונת מצב משותפת"], href: "#contact-center-note" },
+];
+
+export default function SystemsHub(){return <div className="page hub-page"><SiteHeader/><main><section className="hub-hero"><span className="kicker">מוצרי AllInCenter</span><h1>מערכות AllInCenter</h1><p>משפחה של מערכות ניהול פעילות בעברית, שנבנות סביב העבודה האמיתית של העסק ומפנות לכל מוצר ייעודי.</p></section><section className="hub-list" aria-label="מערכות AllInCenter">{products.map((p,i)=><article className={`hub-product ${i%2 ? "hub-product--reverse":""}`} key={p.title}><div className="hub-product__copy"><span className="home-eyebrow"><p.icon size={17}/>מערכת פעילה</span><h2>{p.title}</h2><p>{p.text}</p><ul>{p.points.map(x=><li key={x}><Check size={16}/>{x}</li>)}</ul>{p.image?<a className="btn btn--ghost" href={p.href}>לעמוד המוצר<ArrowLeft size={16}/></a>:<a className="btn btn--ghost" href="/#contact">לבקשת הדגמה<ArrowLeft size={16}/></a>}</div><div className={`hub-product__visual ${!p.image ? "hub-product__visual--pending":""}`}>{p.image?<img src={p.image} alt={p.alt}/>:<><p.icon size={42}/><strong>מוקד חכם</strong><div className="neutral-capabilities"><span>זמינות עובדים</span><span>הפסקות</span><span>שיבוץ משמרות</span></div></>}</div></article>)}</section><section className="hub-cta"><h2>רוצים לראות מערכת שמתאימה לתהליך שלכם?</h2><a className="btn btn--primary" href="/#contact">לבקשת הדגמה <ArrowLeft size={17}/></a></section></main><SiteFooter/></div>}

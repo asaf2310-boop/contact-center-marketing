@@ -1,28 +1,23 @@
 import React, { useEffect, useState } from "react";
 import {
   ArrowLeft,
-  BarChart3,
-  Bot,
   CalendarCheck,
-  CheckCircle2,
-  Clock,
+  Check,
   CreditCard,
   ExternalLink,
   Headphones,
-  MapPin,
-  Search,
-  ShieldCheck,
-  ShoppingCart,
+  LayoutDashboard,
+  RefreshCw,
   Sparkles,
-  TrendingUp,
   Users,
-  Zap,
+  Utensils,
+  Workflow,
 } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
 import Reveal from "@/components/Reveal";
 import SiteContactLine from "@/components/SiteContactLine";
-
-/* ---------- קישורים ---------- */
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
 
 const contactCenterDemoUrl =
   import.meta.env.VITE_CONTACT_CENTER_DEMO_URL ||
@@ -31,304 +26,84 @@ const contactCenterDemoUrl =
 
 const contactUrl = "#contact";
 
-/* ---------- מוקאפ דשבורד בהירו ---------- */
-
-function HeroDashboard() {
-  return (
-    <div className="hero-visual" aria-hidden="true">
-      <div className="glass-window">
-        <div className="glass-window__bar">
-          <span className="dot dot--r" />
-          <span className="dot dot--y" />
-          <span className="dot dot--g" />
-          <em>AllInCenter · תמונת מצב חיה</em>
-          <span className="live-pill">
-            <i />LIVE
-          </span>
-        </div>
-
-        <div className="glass-window__body">
-          <div className="metric-tiles">
-            <div className="metric-tile">
-              <small>הכנסות החודש</small>
-              <strong>₪48,200</strong>
-              <span className="delta up">
-                <TrendingUp size={13} /> 12%+
-              </span>
-            </div>
-            <div className="metric-tile">
-              <small>לקוחות פעילים</small>
-              <strong>312</strong>
-              <span className="delta up">
-                <TrendingUp size={13} /> 24+
-              </span>
-            </div>
-            <div className="metric-tile">
-              <small>שעות שנחסכו</small>
-              <strong>6.5</strong>
-              <span className="delta">ביום</span>
-            </div>
-          </div>
-
-          <div className="chart-card">
-            <div className="chart-card__head">
-              <small>תשלומים שהתקבלו</small>
-              <span>7 ימים</span>
-            </div>
-            <div className="chart-bars">
-              {[42, 66, 51, 78, 64, 90, 72].map((h, i) => (
-                <i key={i} style={{ height: `${h}%`, animationDelay: `${i * 90}ms` }} />
-              ))}
-            </div>
-          </div>
-
-          <div className="feed-card">
-            <div className="feed-row">
-              <span className="feed-icon feed-icon--pay">
-                <CreditCard size={14} />
-              </span>
-              <div>
-                <strong>תשלום התקבל · ₪320</strong>
-                <small>דנה כהן · טיפול פנים</small>
-              </div>
-              <em>עכשיו</em>
-            </div>
-            <div className="feed-row">
-              <span className="feed-icon feed-icon--cal">
-                <CalendarCheck size={14} />
-              </span>
-              <div>
-                <strong>תור חדש נקבע</strong>
-                <small>יוסי לוי · מחר 12:00</small>
-              </div>
-              <em>לפני 4 דק׳</em>
-            </div>
-            <div className="feed-row">
-              <span className="feed-icon feed-icon--lead">
-                <MapPin size={14} />
-              </span>
-              <div>
-                <strong>ליד חדש ממפות Google</strong>
-                <small>קליניקת אסתטיקה · תל אביב</small>
-              </div>
-              <em>לפני 9 דק׳</em>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="float-chip float-chip--a">
-        <Zap size={15} />
-        אוטומציה פעילה
-      </div>
-      <div className="float-chip float-chip--b">
-        <ShieldCheck size={15} />
-        נתונים מאובטחים בענן
-      </div>
-    </div>
-  );
-}
-
-/* ---------- מוקאפ מפת לידים ---------- */
-
-function LeadsMapMock() {
-  const pins = [
-    { top: "22%", right: "30%", hot: true },
-    { top: "48%", right: "14%" },
-    { top: "38%", right: "58%", hot: true },
-    { top: "66%", right: "42%" },
-    { top: "58%", right: "72%" },
-    { top: "78%", right: "20%" },
-  ];
-  return (
-    <div className="map-mock" aria-hidden="true">
-      <div className="map-grid" />
-      <div className="map-roads" />
-      {pins.map((pin, i) => (
-        <span
-          key={i}
-          className={`map-pin ${pin.hot ? "map-pin--hot" : ""}`}
-          style={{ top: pin.top, right: pin.right, animationDelay: `${i * 350}ms` }}
-        >
-          <MapPin size={14} />
-        </span>
-      ))}
-      <div className="map-result">
-        <Search size={13} />
-        <div>
-          <strong>38 עסקים נמצאו</strong>
-          <small>קליניקות · מרכז תל אביב</small>
-        </div>
-        <span className="map-score">92</span>
-      </div>
-    </div>
-  );
-}
-
-/* ---------- נתונים ---------- */
-
 const navLinks = [
+  { href: "/systems", label: "מערכות" },
+  { href: "/services", label: "שירותים" },
+  { href: "/guides", label: "מרכז הידע" },
   { href: "/about", label: "מי אנחנו" },
-  { href: "#platform", label: "הפלטפורמה" },
-  { href: "#solutions", label: "המערכות" },
-  { href: "#process", label: "איך זה עובד" },
-  { href: "/allincenter-pelecard", label: "חבילת פלאקארד" },
-  { href: "/pricing", label: "מחירון" },
-  { href: "/lp", label: "השארת פרטים" },
 ];
 
-const heroStats = [
-  { value: "3", label: "מערכות חיות בפרודקשן" },
-  { value: "40%−", label: "פחות עבודה ידנית" },
-  { value: "24/7", label: "זמינות בענן" },
-];
-
-const bentoBlocks = [
+const products = [
   {
-    id: "payments",
-    size: "lg",
-    icon: CreditCard,
-    title: "תשלומים ודוחות הכנסה במקום אחד",
-    text: "מעקב תשלומים בזמן אמת, סטטוסים, ביט וסליקה, ודוחות הכנסה לפי תקופה, שירות ולקוח — בלי גיליונות.",
-    visual: "chart",
-  },
-  {
-    id: "crm",
-    size: "md",
-    icon: Users,
-    title: "CRM שמכיר כל לקוח",
-    text: "כרטיס לקוח מלא: היסטוריה, תורים, תשלומים ותקשורת — הכול נגיש בלחיצה.",
-  },
-  {
-    id: "leads",
-    size: "tall",
-    icon: MapPin,
-    title: "איתור לידים ממפות Google",
-    text: "סריקה חכמה של עסקים באזור שלך דרך Google Places, ציון התאמה אוטומטי והזרמה ישירה למערכת הלידים.",
-    visual: "map",
-  },
-  {
-    id: "automation",
-    size: "md",
-    icon: Bot,
-    title: "אוטומציה שחוסכת שעות",
-    text: "תזכורות, אישורי תורים וזרימות עבודה אוטומטיות — הצוות מתפנה לשירות ומכירה.",
-  },
-  {
-    id: "scheduling",
-    size: "md",
-    icon: CalendarCheck,
-    title: "יומן ותורים אונליין",
-    text: "לקוחות קובעים תור לבד, המערכת מונעת התנגשויות ושומרת מרווחים.",
-  },
-  {
-    id: "security",
-    size: "lg",
-    icon: ShieldCheck,
-    title: "ענן מאובטח ומהיר",
-    text: "פריסה על תשתית ענן מהירה, גיבויים והרשאות — בלי שרתים אצלך במשרד.",
-  },
-];
-
-const solutions = [
-  {
-    id: "mayaclinic",
-    icon: CalendarCheck,
-    kicker: "קליניקות ועסקי שירות",
+    id: "appointments",
+    eyebrow: "לעסקי שירות וקליניקות",
     title: "מערכת ניהול תורים",
-    description: "זימון תורים אונליין, ניהול לקוחות, יומן ואוטומציות במקום אחד.",
-    bullets: ["הזמנה עצמאית ללקוחות", "ניהול יומן ולקוחות", "תזכורות ואוטומציות"],
-    actions: [
-      { label: "לפרטים על מערכת התורים", href: "/appointment-management", primary: true },
-    ],
+    description: "ניהול תורים, לקוחות, זמינות ותהליכים — בסביבת עבודה אחת שמותאמת לעסק.",
+    capabilities: ["הזמנה אונליין", "ניהול יומן ולקוחות", "תזכורות ואוטומציות"],
+    href: "/appointment-management",
+    image: "/assets/home-appointment-ui.jpg",
+    imageAlt: "ממשק אמיתי של מערכת ניהול התורים של AllInCenter",
+    icon: CalendarCheck,
   },
   {
-    id: "orders",
-    icon: ShoppingCart,
-    kicker: "הזמנות ולקוחות",
-    title: "מערכת הזמנות",
-    description: "מערכת לקבלת וניהול הזמנות אונליין, לקוחות ותהליך העבודה במקום אחד.",
-    bullets: ["קבלת הזמנות אונליין", "ניהול הזמנות במקום אחד", "התאמה לתהליך העבודה של העסק"],
-    actions: [{ label: "לפרטים על מערכת ההזמנות", href: "/restaurant-reservations", primary: true }],
+    id: "restaurants",
+    eyebrow: "למסעדות ומתחמי אירוח",
+    title: "מערכת הזמנות למסעדות",
+    description: "מהזמנת השולחן ועד מפת הישיבה — תמונה תפעולית ברורה לצוות, בזמן אמת.",
+    capabilities: ["הזמנת שולחן אונליין", "ניהול הזמנות", "מפת שולחנות ואזורי ישיבה"],
+    href: "/restaurant-reservations",
+    image: "/assets/home-restaurant-dashboard.jpg",
+    imageAlt: "לוח הבקרה האמיתי של מערכת ההזמנות למסעדות",
+    icon: Utensils,
   },
   {
     id: "contact-center",
-    icon: Headphones,
-    kicker: "מוקדים וצוותים",
+    eyebrow: "למוקדים וצוותי שירות",
     title: "מוקד חכם",
-    description: "מערכת לניהול העבודה במוקד, נציגים ותהליכי שירות ותמיכה במקום אחד.",
-    bullets: ["לוח זמינות והפסקות בזמן אמת", "שיבוץ משמרות לפי אילוצים", "פחות תיאומים בוואטסאפ"],
-    actions: [{ label: "לדמו החי", href: contactCenterDemoUrl, primary: true, external: true }],
+    description: "ניהול זמינות, הפסקות ושיבוץ משמרות לצוותי מוקד — עם תמונת מצב משותפת וברורה.",
+    capabilities: ["זמינות והפסקות בזמן אמת", "שיבוץ לפי אילוצים", "סביבת דמו פעילה"],
+    href: contactCenterDemoUrl,
+    image: null,
+    imageAlt: "",
+    icon: Headphones,
+    external: true,
   },
 ];
 
-function SolutionsSection() {
+function ProductVisual({ product, hero = false }) {
   return (
-    <section className="section section--solutions" id="solutions">
-      <Reveal>
-        <div className="section__head">
-          <span className="kicker">המערכות</span>
-          <h2>המערכות שלנו</h2>
-          <p>שלוש מערכות מרכזיות שנבנו כדי לנהל את העבודה השוטפת של העסק בצורה פשוטה, מסודרת ומותאמת לתהליך שלכם.</p>
-        </div>
-      </Reveal>
-
-      <div className="solutions">
-        {solutions.map((solution, i) => {
-          const Icon = solution.icon;
-          return (
-            <Reveal key={solution.id} delay={i * 100}>
-              <article className="solution-card">
-                <div className="solution-card__top">
-                  <span className="solution-card__icon"><Icon size={22} /></span>
-                  <span className="solution-card__kicker">{solution.kicker}</span>
-                </div>
-                <h3>{solution.title}</h3>
-                <p>{solution.description}</p>
-                <ul>
-                  {solution.bullets.map((bullet) => <li key={bullet}><CheckCircle2 size={16} />{bullet}</li>)}
-                </ul>
-                <div className="solution-card__actions">
-                  {solution.actions.map((action) => (
-                    <a
-                      key={action.label}
-                      className={`btn ${action.primary ? "btn--primary" : "btn--ghost"} btn--sm`}
-                      href={action.href}
-                      {...(action.external ? { target: "_blank", rel: "noreferrer" } : {})}
-                    >
-                      {action.label}
-                      {action.external ? <ExternalLink size={15} /> : <ArrowLeft size={15} />}
-                    </a>
-                  ))}
-                </div>
-              </article>
-            </Reveal>
-          );
-        })}
+    <figure className={`home-product-visual ${hero ? "home-product-visual--hero" : ""}`}>
+      <div className="home-product-visual__bar" aria-hidden="true">
+        <span /><span /><span />
+        <small>AllInCenter</small>
       </div>
-    </section>
+      <img src={product.image} alt={product.imageAlt} loading={hero ? "eager" : "lazy"} />
+      <figcaption><product.icon size={15} /> {product.title}</figcaption>
+    </figure>
   );
 }
 
-const processSteps = [
-  {
-    icon: Search,
-    title: "אבחון קצר",
-    text: "שיחה של 20 דקות על העסק: איפה הזמן הולך לאיבוד ומה כואב בתפעול.",
-  },
-  {
-    icon: Sparkles,
-    title: "דמו מותאם",
-    text: "מקבלים סביבת הדגמה חיה עם התהליכים שלכם — רואים את המערכת לפני שמתחייבים.",
-  },
-  {
-    icon: Zap,
-    title: "עלייה לאוויר",
-    text: "הקמה תוך 7–14 ימי עסקים, הדרכה לצוות וליווי שוטף אחרי ההשקה.",
-  },
-];
-
-/* ---------- העמוד ---------- */
+function ProductSection({ product, index }) {
+  return (
+    <Reveal>
+      <article className={`home-product ${index % 2 ? "home-product--reverse" : ""}`}>
+        <div className="home-product__copy">
+          <span className="home-eyebrow"><product.icon size={16} />{product.eyebrow}</span>
+          <h3>{product.title}</h3>
+          <p>{product.description}</p>
+          <ul>
+            {product.capabilities.map((item) => <li key={item}><Check size={16} />{item}</li>)}
+          </ul>
+          <a className="home-text-link" href={product.href} {...(product.external ? { target: "_blank", rel: "noreferrer" } : {})}>
+            {product.external ? "לצפייה בדמו" : "לפרטים על המערכת"}
+            {product.external ? <ExternalLink size={16} /> : <ArrowLeft size={16} />}
+          </a>
+        </div>
+        <ProductVisual product={product} />
+      </article>
+    </Reveal>
+  );
+}
 
 export default function MarketingHome() {
   const [scrolled, setScrolled] = useState(false);
@@ -341,241 +116,114 @@ export default function MarketingHome() {
   }, []);
 
   return (
-    <div className="page">
-      <div className="bg-aurora" aria-hidden="true" />
+    <div className="page home-refresh">
+      <SiteHeader />
 
-      {/* ניווט */}
-      <header className={`nav ${scrolled ? "nav--scrolled" : ""}`}>
-        <div className="nav__inner">
-          <a className="nav__brand" href="#top">
-            <img src="/assets/allincenter-logo.png" alt="AllInCenter" />
-            <span>
-              All<b>In</b>Center
-            </span>
-          </a>
-          <nav className="nav__links">
-            {navLinks.map((link) => (
-              <a key={link.href} href={link.href}>
-                {link.label}
-              </a>
-            ))}
-          </nav>
-          <a className="btn btn--primary btn--sm" href={contactUrl}>
-            לבקשת הדגמה
-            <ArrowLeft size={16} />
-          </a>
-        </div>
-      </header>
-
-      {/* הירו */}
       <main id="top">
-        <section className="hero">
-          <div className="hero__copy">
-            <Reveal>
-              <span className="tag">
-                <Sparkles size={14} />
-                Connect · Manage · Grow
-              </span>
+        <section className="home-hero">
+          <div className="home-hero__copy">
+            <Reveal><span className="tag"><Sparkles size={14} />Connect · Manage · Grow</span></Reveal>
+            <Reveal delay={70}>
+              <h1>העסק שלך.<br /><span>מערכת אחת שמנהלת הכול.</span></h1>
             </Reveal>
-            <Reveal delay={80}>
-              <h1>
-                העסק שלך.
-                <br />
-                <span className="gradient-text">מערכת אחת שמנהלת הכול.</span>
-              </h1>
+            <Reveal delay={140}>
+              <p>AllInCenter מפתחת מערכות ניהול ואוטומציה מותאמות לעסקים בישראל — מערכות אמיתיות שמחברות את העבודה, הלקוחות והצוות במקום אחד.</p>
             </Reveal>
-            <Reveal delay={160}>
-              <p className="hero__sub">
-                AllInCenter מפתחת מערכות ניהול מותאמות לעסקים בישראל — תשלומים, לקוחות, תורים ולידים
-                במקום אחד. בלי גיליונות, בלי כפילויות, בלי לבזבז שעות צוות יקרות.
-              </p>
-            </Reveal>
-            <Reveal delay={240}>
-              <div className="hero__actions">
-                <a className="btn btn--primary" href={contactUrl}>
-                  לבקשת הדגמה חינם
-                  <ArrowLeft size={18} />
-                </a>
-                <a className="btn btn--ghost" href="#solutions">
-                  לצפייה במערכות החיות
-                </a>
+            <Reveal delay={210}>
+              <div className="home-actions">
+                <a className="btn btn--primary" href={contactUrl}>לבקשת הדגמה <ArrowLeft size={18} /></a>
+                <a className="btn btn--ghost" href="/systems">לצפייה במערכות</a>
               </div>
             </Reveal>
-            <Reveal delay={320}>
-              <div className="hero__stats">
-                {heroStats.map((stat) => (
-                  <div key={stat.label}>
-                    <strong>{stat.value}</strong>
-                    <span>{stat.label}</span>
-                  </div>
-                ))}
+            <Reveal delay={280}>
+              <div className="home-proof" aria-label="יתרונות המערכת">
+                <span><Check size={15} />ממשק מלא בעברית</span>
+                <span><Check size={15} />התאמה לתהליכי העסק</span>
+                <span><Check size={15} />מערכות פעילות ודמואים</span>
               </div>
             </Reveal>
           </div>
-
-          <Reveal delay={200} className="hero__visual-wrap">
-            <HeroDashboard />
-          </Reveal>
-        </section>
-
-        <SolutionsSection />
-
-        {/* בנטו */}
-        <section className="section" id="platform">
-          <Reveal>
-            <div className="section__head">
-              <span className="kicker">הפלטפורמה</span>
-              <h2>
-                כל מה שהעסק צריך, <span className="gradient-text">בממשק אחד</span>
-              </h2>
-              <p>
-                במקום חמישה כלים נפרדים ורשימות מפוזרות — מערכת אחת שמחברת תשלומים, לקוחות,
-                יומן ולידים.
-              </p>
+          <Reveal delay={160} className="home-hero__visual">
+            <div className="home-hero__composition">
+              <ProductVisual product={products[1]} hero />
+              <div className="home-hero__side"><img src="/assets/restaurant-guest-booking.jpg" alt="ממשק הזמנת שולחן ללקוח" /></div>
             </div>
           </Reveal>
-
-          <div className="bento">
-            {bentoBlocks.map((block, i) => {
-              const Icon = block.icon;
-              return (
-                <Reveal key={block.id} delay={i * 70} className={`bento__cell bento__cell--${block.size}`}>
-                  <article className="bento-card">
-                    <span className="bento-card__icon">
-                      <Icon size={20} />
-                    </span>
-                    <h3>{block.title}</h3>
-                    <p>{block.text}</p>
-                    {block.visual === "chart" && (
-                      <div className="bento-chart" aria-hidden="true">
-                        {[35, 58, 44, 72, 60, 88, 70, 95].map((h, j) => (
-                          <i key={j} style={{ height: `${h}%` }} />
-                        ))}
-                      </div>
-                    )}
-                    {block.visual === "map" && <LeadsMapMock />}
-                  </article>
-                </Reveal>
-              );
-            })}
-          </div>
         </section>
 
-        {/* תהליך */}
-        <section className="section" id="process">
+        <section className="home-product-suite home-preview-section" id="solutions" aria-labelledby="products-heading">
           <Reveal>
-            <div className="section__head">
-              <span className="kicker">איך זה עובד</span>
-              <h2>
-                מהיכרות לעלייה לאוויר — <span className="gradient-text">בשלושה שלבים</span>
-              </h2>
+            <div className="home-section-head">
+              <span className="kicker">המערכות</span>
+              <h2 id="products-heading">המערכות שלנו</h2>
+              <p>מערכות פעילות שמותאמות לתהליכי עבודה אמיתיים — עם ממשק מלא בעברית.</p>
             </div>
           </Reveal>
-
-          <div className="process">
-            {processSteps.map((step, i) => {
-              const Icon = step.icon;
-              return (
-                <Reveal key={step.title} delay={i * 120}>
-                  <article className="process-card">
-                    <span className="process-card__num">0{i + 1}</span>
-                    <span className="process-card__icon">
-                      <Icon size={20} />
-                    </span>
-                    <h3>{step.title}</h3>
-                    <p>{step.text}</p>
-                  </article>
-                </Reveal>
-              );
-            })}
-          </div>
+          <div className="home-preview-grid">{products.map((product) => <article className="home-preview-card" key={product.id}><div className={`home-preview-card__visual ${product.id === "contact-center" ? "home-preview-card__visual--pending" : ""}`}>{product.id === "contact-center" ? <><Headphones size={34}/><strong>מוקד חכם</strong><div className="neutral-capabilities"><span>זמינות עובדים</span><span>הפסקות</span><span>שיבוץ משמרות</span></div></> : <img src={product.image} alt={product.imageAlt}/>}</div><h3>{product.title}</h3><p>{product.description}</p><a className="home-text-link" href={product.id === "contact-center" ? "/systems" : product.href}>לפרטים <ArrowLeft size={16}/></a></article>)}</div>
+          <a className="home-all-link" href="/systems">לכל המערכות <ArrowLeft size={17}/></a>
         </section>
 
-        {/* טופס יצירת קשר */}
+        <section className="home-services-preview" aria-labelledby="services-heading">
+          <Reveal><div className="home-section-head"><span className="kicker">שירותים מקצועיים</span><h2 id="services-heading">השירותים שלנו</h2><p>תכנון, פיתוח וחיבור של תהליכים עסקיים — מהממשק ועד האוטומציה.</p></div></Reveal>
+          <div className="home-service-grid">
+            <article><LayoutDashboard/><h3>פיתוח מערכות ניהול מותאמות</h3><p>מערכות שנבנות סביב הלקוחות, ההזמנות ותהליכי העבודה של העסק.</p><a href="/services">לפרטים <ArrowLeft size={15}/></a></article>
+            <article><Workflow/><h3>AI ואוטומציה לעסקים</h3><p>זיהוי, תכנון והובלת תהליכי AI ואוטומציה משלב האפיון ועד ההטמעה.</p><a href="/ai">לפרטים <ArrowLeft size={15}/></a></article>
+            <article><Sparkles/><h3>נראות בגוגל ובמנועי AI</h3><p>תשתית דיגיטלית שעוזרת לעסק להימצא, להיות מובן ולהפוך חשיפה לפניות.</p><a href="/google-ai-visibility">לפרטים <ArrowLeft size={15}/></a></article>
+          </div>
+          <a className="home-all-link" href="/services">לכל השירותים <ArrowLeft size={17}/></a>
+        </section>
+
+        <section className="home-platform" id="platform" aria-labelledby="platform-heading">
+          <Reveal>
+            <div className="home-section-head home-section-head--center">
+              <span className="kicker">מערכת אחת. תהליך אחד.</span>
+              <h2 id="platform-heading">כך העבודה מתחברת מקצה לקצה</h2>
+              <p>במקום מידע מפוזר בין כלים ושיחות, כל שלב ממשיך באופן טבעי לשלב הבא.</p>
+            </div>
+          </Reveal>
+          <Reveal delay={100}>
+            <div className="home-flow">
+              {[
+                [Users, "לקוח"], [CalendarCheck, "תור או הזמנה"], [LayoutDashboard, "ניהול"],
+                [CreditCard, "תשלום"], [Workflow, "אוטומציה ו־AI"], [RefreshCw, "מעקב"],
+              ].map(([Icon, label], index, all) => (
+                <React.Fragment key={label}>
+                  <div className="home-flow__step"><span><Icon size={21} /></span><strong>{label}</strong></div>
+                  {index < all.length - 1 && <ArrowLeft className="home-flow__arrow" size={19} aria-hidden="true" />}
+                </React.Fragment>
+              ))}
+            </div>
+          </Reveal>
+        </section>
+
+        <section className="home-trust" aria-labelledby="trust-heading">
+          <Reveal>
+            <div>
+              <span className="kicker">מוצר לפני הבטחות</span>
+              <h2 id="trust-heading">רואים את המערכת לפני שמחליטים.</h2>
+              <p>הדגמה שמבוססת על תהליכי העבודה של העסק, ממשקים בעברית וקישורים למערכות קיימות — בלי נתונים מומצאים ובלי מסכי שיווק.</p>
+            </div>
+            <a className="btn btn--ghost" href="/systems">לצפייה במערכות <ArrowLeft size={17} /></a>
+          </Reveal>
+        </section>
+
+
         <section className="section" id="contact">
           <Reveal>
             <div className="contact-section">
               <div className="contact-section__copy">
-                <span className="kicker">בואו נדבר</span>
-                <h2>
-                  ספרו לנו מה העסק צריך, <span className="gradient-text">ונחזור עם כיוון</span>
-                </h2>
-                <p>
-                  השאירו פרטים ונחזור לשיחת היכרות קצרה. הפנייה נכנסת ישירות למערכת הלידים
-                  שלנו כדי שלא תלך לאיבוד.
-                </p>
-                <ul>
-                  <li>
-                    <CheckCircle2 size={18} />
-                    שיחת אבחון קצרה וללא התחייבות
-                  </li>
-                  <li>
-                    <CheckCircle2 size={18} />
-                    דמו שמותאם לתהליכים של העסק
-                  </li>
-                  <li>
-                    <CheckCircle2 size={18} />
-                    הערכת זמן ועלות לפני שמתחילים
-                  </li>
-                </ul>
+                <span className="kicker">לבקשת הדגמה</span>
+                <h2>בואו נראה איך המערכת יכולה להתאים לעסק שלכם.</h2>
+                <p>השאירו פרטים ונחזור לשיחת היכרות קצרה, כדי להבין את התהליך ולבנות הדגמה רלוונטית.</p>
+                <ul><li><Check size={18} />היכרות עם תהליך העבודה</li><li><Check size={18} />הדגמה של מערכת אמיתית</li><li><Check size={18} />כיוון ברור להמשך</li></ul>
               </div>
               <ContactForm />
             </div>
           </Reveal>
         </section>
-
-        {/* CTA */}
-        <section className="section">
-          <Reveal>
-            <div className="cta">
-              <div className="cta__glow" aria-hidden="true" />
-              <span className="kicker kicker--light">מתחילים?</span>
-              <h2>רוצים לראות איך זה נראה על העסק שלכם?</h2>
-              <p>
-                שלחו פרטים ותקבלו הדגמה חיה מותאמת — כולל הערכת חיסכון בזמן ובכסף, בלי
-                התחייבות.
-              </p>
-              <div className="cta__actions">
-                <a className="btn btn--light" href={contactUrl}>
-                  לבקשת הדגמה חינם
-                  <ArrowLeft size={18} />
-                </a>
-                <a className="btn btn--outline" href="#solutions">
-                  עוד הצצה למערכות
-                </a>
-              </div>
-            </div>
-          </Reveal>
-        </section>
       </main>
 
-      {/* פוטר */}
-      <footer className="footer">
-        <div className="footer__inner">
-          <div className="footer__brand">
-            <img src="/assets/allincenter-logo.png" alt="AllInCenter" />
-            <div>
-              <strong>AllInCenter</strong>
-              <small>Connect · Manage · Grow</small>
-            </div>
-          </div>
-          <nav className="footer__links">
-            {navLinks.map((link) => (
-              <a key={link.href} href={link.href}>
-                {link.label}
-              </a>
-            ))}
-            <a href={contactUrl}>יצירת קשר</a>
-            <a href="/ai">ייעוץ AI ואוטומציה</a>
-            <a href="/guides">מרכז הידע</a>
-          </nav>
-          <SiteContactLine />
-          <small className="footer__note">
-            © {new Date().getFullYear()} AllInCenter · allincenter.co.il · מערכות ניהול
-            מותאמות לעסקים בישראל
-          </small>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

@@ -20,6 +20,8 @@ import ContactForm from "@/components/ContactForm";
 import CaseStudyCard from "@/components/CaseStudyCard";
 import Reveal from "@/components/Reveal";
 import SiteContactLine from "@/components/SiteContactLine";
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
 import { getWhatsAppHref } from "@/lib/site";
 import { aiCaseStudies } from "@/data/aiCaseStudies";
 
@@ -173,22 +175,7 @@ export default function AiConsulting() {
     <div className="page ai-page">
       <div className="bg-aurora" aria-hidden="true" />
 
-      <header className={`ai-nav ${scrolled ? "ai-nav--scrolled" : ""}`}>
-        <nav className="ai-nav__inner">
-          <a className="ai-nav__brand" href="/">
-            <img src="/assets/allincenter-logo.png" alt="AllInCenter" width="44" height="44" />
-            <span className="ai-nav__names">
-              <strong>אסף אריאלי</strong>
-              <em>×</em>
-              <span>AllInCenter</span>
-            </span>
-          </a>
-          <a className="btn btn--primary btn--sm" href="#opportunity">
-            בואו נדבר
-            <ArrowLeft size={16} />
-          </a>
-        </nav>
-      </header>
+      <SiteHeader />
 
       <main id="top">
         <section className="ai-hero">
@@ -199,18 +186,14 @@ export default function AiConsulting() {
               </span>
             </Reveal>
             <Reveal delay={70}>
-              <p className="ai-hero__name">אסף אריאלי</p>
-              <p className="ai-hero__role" dir="ltr">
-                AI & Automation Project Manager
-              </p>
+              <p className="ai-hero__name">AllInCenter · AI &amp; Automation</p>
+              <p className="ai-hero__role">בהובלת אסף אריאלי · AI &amp; Automation Project Manager</p>
             </Reveal>
             <Reveal delay={140}>
-              <h1>
-                מחברים בין ניסיון עסקי, תפעול ו-AI כדי להפוך תהליכים{" "}
-                <span className="gradient-text">למדויקים, יעילים וחכמים יותר.</span>
-              </h1>
+              <h1>ייעוץ, ניהול פרויקטים ויישום AI ואוטומציה לעסקים</h1>
             </Reveal>
             <Reveal delay={200}>
+              <p className="ai-hero__lead">מחברים בין ניסיון עסקי, תפעול ו‑AI כדי להפוך תהליכים <span className="gradient-text">למדויקים, יעילים וחכמים יותר.</span></p>
               <p className="ai-hero__sub">
                 אני עוזר לחברות לזהות איפה AI ואוטומציה יכולים לייצר ערך אמיתי — ומוביל את הדרך מהבעיה
                 העסקית, דרך האפיון והפיתוח ועד לפתרון שעובד בפועל.
@@ -556,25 +539,7 @@ export default function AiConsulting() {
         </section>
       </main>
 
-      <footer className="footer">
-        <div className="footer__inner">
-          <div className="footer__brand">
-            <img src="/assets/allincenter-logo.png" alt="AllInCenter" />
-            <div>
-              <strong>אסף אריאלי × AllInCenter</strong>
-              <small>AI & Automation Project Manager</small>
-            </div>
-          </div>
-          <nav className="footer__links">
-            <a href="/">לאתר AllInCenter</a>
-            <a href="#opportunity">יצירת קשר</a>
-          </nav>
-          <SiteContactLine />
-          <small className="footer__note">
-            © {new Date().getFullYear()} AllInCenter · ייעוץ, ניהול והובלת פרויקטי AI ואוטומציה
-          </small>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

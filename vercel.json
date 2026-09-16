@@ -72,6 +72,22 @@
       "destination": "/about/index.html"
     },
     {
+      "source": "/systems",
+      "destination": "/systems/index.html"
+    },
+    {
+      "source": "/systems/",
+      "destination": "/systems/index.html"
+    },
+    {
+      "source": "/services",
+      "destination": "/services/index.html"
+    },
+    {
+      "source": "/services/",
+      "destination": "/services/index.html"
+    },
+    {
       "source": "/appointment-management",
       "destination": "/appointment-management/index.html"
     },
@@ -110,6 +126,14 @@
     {
       "source": "/guides/how-to-choose-appointment-system/",
       "destination": "/guides/how-to-choose-appointment-system/index.html"
+    },
+    {
+      "source": "/google-ai-visibility",
+      "destination": "/google-ai-visibility/index.html"
+    },
+    {
+      "source": "/google-ai-visibility/",
+      "destination": "/google-ai-visibility/index.html"
     }
   ],
   "headers": [

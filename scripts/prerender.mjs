@@ -196,12 +196,15 @@ for (const loc of [
   "https://www.allincenter.co.il/lp",
   "https://www.allincenter.co.il/pricing",
   "https://www.allincenter.co.il/ai",
+  "https://www.allincenter.co.il/systems",
+  "https://www.allincenter.co.il/services",
   "https://www.allincenter.co.il/about",
   "https://www.allincenter.co.il/appointment-management",
   "https://www.allincenter.co.il/restaurant-reservations",
   "https://www.allincenter.co.il/allincenter-pelecard",
   "https://www.allincenter.co.il/guides",
   "https://www.allincenter.co.il/guides/how-to-choose-appointment-system",
+  "https://www.allincenter.co.il/google-ai-visibility",
 ]) {
   if (!sitemap.includes(`<loc>${loc}</loc>`)) fail(`sitemap.xml missing ${loc}`);
 }

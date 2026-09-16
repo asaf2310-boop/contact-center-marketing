@@ -100,6 +100,35 @@ export const routeSeo = {
     twitterCard: "summary",
     jsonLd: graph(),
   },
+  "/systems": {
+    title: "מערכות AllInCenter | מערכות ניהול לעסקים",
+    description: "הכירו את מערכות AllInCenter: מערכת ניהול תורים, מערכת הזמנות למסעדות ומוקד חכם — מערכות ניהול פעילות בעברית ובהתאמה לעסק.",
+    canonical: `${SITE.url}/systems`, ogImage: SITE.logo, twitterCard: "summary",
+    jsonLd: graph([
+      { "@type":"WebPage", "@id":`${SITE.url}/systems#webpage`, url:`${SITE.url}/systems`, name:"מערכות AllInCenter", inLanguage:SITE.language, isPartOf:{"@id":websiteId} },
+      { "@type":"BreadcrumbList", "@id":`${SITE.url}/systems#breadcrumb`, itemListElement:[{"@type":"ListItem",position:1,name:"דף הבית",item:`${SITE.url}/`},{"@type":"ListItem",position:2,name:"מערכות",item:`${SITE.url}/systems`}] },
+      { "@type":"ItemList", name:"מערכות AllInCenter", itemListElement:[
+        {"@type":"ListItem",position:1,name:"מערכת ניהול תורים",url:`${SITE.url}/appointment-management`},
+        {"@type":"ListItem",position:2,name:"מערכת הזמנות למסעדות",url:`${SITE.url}/restaurant-reservations`},
+        {"@type":"ListItem",position:3,name:"מוקד חכם"},
+      ]},
+    ]),
+  },
+  "/services": {
+    title: "שירותי AllInCenter לעסקים | פיתוח, אוטומציה ו-AI",
+    description: "שירותי AllInCenter לעסקים: פיתוח מערכות ניהול מותאמות, AI ואוטומציה, נראות בגוגל ובמנועי AI ואינטגרציות בין מערכות.",
+    canonical: `${SITE.url}/services`, ogImage: SITE.logo, twitterCard: "summary",
+    jsonLd: graph([
+      { "@type":"WebPage", "@id":`${SITE.url}/services#webpage`, url:`${SITE.url}/services`, name:"שירותי AllInCenter לעסקים", inLanguage:SITE.language, isPartOf:{"@id":websiteId} },
+      { "@type":"BreadcrumbList", "@id":`${SITE.url}/services#breadcrumb`, itemListElement:[{"@type":"ListItem",position:1,name:"דף הבית",item:`${SITE.url}/`},{"@type":"ListItem",position:2,name:"שירותים",item:`${SITE.url}/services`}] },
+      { "@type":"ItemList", name:"שירותי AllInCenter", itemListElement:[
+        {"@type":"ListItem",position:1,name:"פיתוח מערכות ניהול מותאמות"},
+        {"@type":"ListItem",position:2,name:"AI ואוטומציה לעסקים",url:`${SITE.url}/ai`},
+        {"@type":"ListItem",position:3,name:"נראות בגוגל ובמנועי AI",url:`${SITE.url}/google-ai-visibility`},
+        {"@type":"ListItem",position:4,name:"אינטגרציות וחיבור מערכות"},
+      ]},
+    ]),
+  },
   "/about": {
     title: "מי אנחנו | AllInCenter",
     description:
@@ -264,6 +293,31 @@ export const routeSeo = {
         { "@type": "ListItem", position: 2, name: "מרכז הידע", item: `${SITE.url}/guides` },
         { "@type": "ListItem", position: 3, name: "איך לבחור מערכת ניהול תורים לעסק", item: `${SITE.url}/guides/how-to-choose-appointment-system` },
       ] },
+    ]),
+  },
+  "/google-ai-visibility": {
+    title: "קידום ונראות בגוגל ובמנועי AI | AllInCenter",
+    description: "עוזרים לעסקים מקומיים להופיע בצורה טובה יותר בגוגל, במפות ובמנועי AI, עם אתר מותאם, Google Business, תוכן, ביקורות ומערכת שמחברת את החשיפה לפניות ולקביעת תורים.",
+    canonical: `${SITE.url}/google-ai-visibility`,
+    ogImage: SITE.logo,
+    twitterCard: "summary",
+    jsonLd: graph([
+      { "@type": "WebPage", "@id": `${SITE.url}/google-ai-visibility#webpage`, url: `${SITE.url}/google-ai-visibility`, name: "נראות בגוגל ובמנועי AI", description: "שירות לעסקים מקומיים המחבר אתר, Google Business, Local SEO, תוכן, ביקורות ומדידה כדי לחזק נראות ולהפוך חשיפה לפניות.", inLanguage: SITE.language, isPartOf: { "@id": websiteId }, about: { "@id": `${SITE.url}/google-ai-visibility#service` } },
+      { "@type": "Service", "@id": `${SITE.url}/google-ai-visibility#service`, name: "נראות בגוגל ובמנועי AI", description: "שירות לשיפור הנוכחות של עסקים מקומיים בגוגל, במפות ובמנועי AI באמצעות תשתית אתר, תוכן, פרופיל עסק, ביקורות ומדידה.", provider: { "@id": orgId }, areaServed: SITE.areaServed, url: `${SITE.url}/google-ai-visibility` },
+      { "@type": "BreadcrumbList", "@id": `${SITE.url}/google-ai-visibility#breadcrumb`, itemListElement: [
+        { "@type": "ListItem", position: 1, name: "דף הבית", item: `${SITE.url}/` },
+        { "@type": "ListItem", position: 2, name: "נראות בגוגל ובמנועי AI", item: `${SITE.url}/google-ai-visibility` },
+      ] },
+      { "@type": "FAQPage", "@id": `${SITE.url}/google-ai-visibility#faq`, mainEntity: [
+        ["האם אפשר להבטיח מקום ראשון בגוגל?", "לא. אף גורם רציני אינו יכול להבטיח מיקום ראשון. ניתן לבנות תשתית ולחזק לאורך זמן את הסיכוי להופיע בחיפושים רלוונטיים."],
+        ["כמה זמן לוקח לראות תוצאות?", "נראות אורגנית ומקומית נבנית בהדרגה ותלויה בתחרות, בנוכחות הקיימת, באתר, בביקורות ובגורמים נוספים."],
+        ["האם השירות כולל Google Business?", "כן, כאשר הוא רלוונטי לחבילת השירות ולעסק."],
+        ["האם אפשר לקדם עסק גם ב-ChatGPT?", "אי אפשר להבטיח הכללה בתשובות, אך ניתן לבנות אתר ונוכחות ציבורית שמקלים על מנועי AI לגלות ולהבין את העסק."],
+        ["האם חייבים אתר?", "אתר איכותי מומלץ מאוד, וניתן לבנות או לשפר אותו כחלק מהשירות."],
+        ["האם אתם מטפלים גם בביקורות?", "ניתן ליצור תהליך לבקשת ביקורות אמיתיות מלקוחות לאחר קבלת השירות."],
+        ["האם אפשר לחבר את זה למערכת התורים?", "כן. בשימוש במערכת התורים של AllInCenter ניתן לחבר קריאות לפעולה ותהליכי בקשת ביקורת."],
+        ["למי השירות מתאים?", "לעסקים מקומיים ונותני שירות שלקוחות מחפשים לפי שירות ואזור."],
+      ].map(([name,text]) => ({ "@type": "Question", name, acceptedAnswer: { "@type": "Answer", text } })) },
     ]),
   },
 };

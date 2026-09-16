@@ -10,6 +10,9 @@ import AppointmentManagement from "@/pages/AppointmentManagement";
 import RestaurantReservations from "@/pages/RestaurantReservations";
 import Guides from "@/pages/Guides";
 import GuideArticle from "@/pages/GuideArticle";
+import GoogleAiVisibility from "@/pages/GoogleAiVisibility";
+import SystemsHub from "@/pages/SystemsHub";
+import ServicesHub from "@/pages/ServicesHub";
 import NotFoundPage from "@/pages/NotFound";
 import Seo from "@/components/Seo";
 import { trackPageView } from "@/lib/fbpixel";
@@ -45,6 +48,9 @@ export function AppRoutes() {
         <Route path="/restaurant-reservations" element={<RestaurantReservations />} />
         <Route path="/guides" element={<Guides />} />
         <Route path="/guides/:slug" element={<GuideArticle />} />
+        <Route path="/google-ai-visibility" element={<GoogleAiVisibility />} />
+        <Route path="/systems" element={<SystemsHub />} />
+        <Route path="/services" element={<ServicesHub />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>

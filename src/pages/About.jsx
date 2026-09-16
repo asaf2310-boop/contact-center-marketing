@@ -1,42 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { ArrowLeft } from "lucide-react";
-import SiteContactLine from "@/components/SiteContactLine";
-
-const navLinks = [
-  { href: "/about", label: "מי אנחנו" },
-  { href: "/#platform", label: "הפלטפורמה" },
-  { href: "/#solutions", label: "המערכות" },
-  { href: "/allincenter-pelecard", label: "חבילת פלאקארד" },
-  { href: "/pricing", label: "מחירון" },
-];
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
 
 export default function About() {
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   return (
     <div className="page about-page" dir="rtl">
       <div className="bg-aurora" aria-hidden="true" />
-      <header className={`nav ${scrolled ? "nav--scrolled" : ""}`}>
-        <div className="nav__inner">
-          <a className="nav__brand" href="/" aria-label="AllInCenter - דף הבית">
-            <img src="/assets/allincenter-logo.png" alt="AllInCenter" />
-            <span>All<b>In</b>Center</span>
-          </a>
-          <nav className="nav__links" aria-label="ניווט ראשי">
-            {navLinks.map((link) => <a key={link.href} href={link.href}>{link.label}</a>)}
-          </nav>
-          <a className="btn btn--primary btn--sm" href="/#contact">
-            לבקשת הדגמה <ArrowLeft size={16} />
-          </a>
-        </div>
-      </header>
+      <SiteHeader />
 
       <main className="about-main">
         <section className="about-hero">
@@ -87,23 +58,7 @@ export default function About() {
         </section>
       </main>
 
-      <footer className="footer">
-        <div className="footer__inner">
-          <div className="footer__brand">
-            <img src="/assets/allincenter-logo.png" alt="AllInCenter" />
-            <div><strong>AllInCenter</strong><small>Connect · Manage · Grow</small></div>
-          </div>
-          <nav className="footer__links" aria-label="ניווט תחתון">
-            <a href="/">דף הבית</a>
-            <a href="/pricing">מחירון</a>
-            <a href="/about">מי אנחנו</a>
-            <a href="/#contact">יצירת קשר</a>
-            <a href="/ai">ייעוץ AI ואוטומציה</a>
-          </nav>
-          <SiteContactLine />
-          <small className="footer__note">© {new Date().getFullYear()} AllInCenter · allincenter.co.il · מערכות ניהול מותאמות לעסקים בישראל</small>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

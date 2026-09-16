@@ -6,3 +6,11 @@ dist-ssr
 .DS_Store
 *.log
 .node-portable
+.edge-*/
+.pdf-edge-profile/
+.venv-tts/
+tmp-ai-qa/
+tmp-video-frames/
+processed/
+/preview-*.png
+/tunnel-check*.png

@@ -9,11 +9,14 @@ const urlList = [
   `https://${host}/pricing`,
   `https://${host}/about`,
   `https://${host}/ai`,
+  `https://${host}/systems`,
+  `https://${host}/services`,
   `https://${host}/allincenter-pelecard`,
   `https://${host}/appointment-management`,
   `https://${host}/restaurant-reservations`,
   `https://${host}/guides`,
   `https://${host}/guides/how-to-choose-appointment-system`,
+  `https://${host}/google-ai-visibility`,
 ];
 
 const response = await fetch(endpoint, {

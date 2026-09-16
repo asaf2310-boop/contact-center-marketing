@@ -12,19 +12,15 @@ import {
   Zap,
 } from "lucide-react";
 import SiteContactLine from "@/components/SiteContactLine";
+import SiteFooter from "@/components/SiteFooter";
 
 const demoRoot = import.meta.env.VITE_MAYACLINIC_DEMO_URL || "https://mayaclinic-demo.vercel.app";
 const bookingDemoUrl = `${demoRoot.replace(/\/$/, "")}/book`;
 const adminDemoUrl = `${demoRoot.replace(/\/$/, "")}/admin`;
 
 const navLinks = [
-  { href: "/about", label: "מי אנחנו" },
-  { href: "/#platform", label: "הפלטפורמה" },
-  { href: "/#solutions", label: "המערכות" },
-  { href: "/#process", label: "איך זה עובד" },
-  { href: "/allincenter-pelecard", label: "חבילת פלאקארד" },
-  { href: "/pricing", label: "מחירון" },
-  { href: "/lp", label: "השארת פרטים" },
+  { href: "/systems", label: "מערכות" }, { href: "/services", label: "שירותים" },
+  { href: "/guides", label: "מרכז הידע" }, { href: "/about", label: "מי אנחנו" },
 ];
 
 const capabilities = [
@@ -151,7 +147,7 @@ export default function AppointmentManagement() {
             <a className="btn btn--primary" href={bookingDemoUrl} target="_blank" rel="noreferrer">לצפייה בדמו הזמנה <ExternalLink size={17} /></a>
             <a className="btn btn--ghost" href={adminDemoUrl} target="_blank" rel="noreferrer">לצפייה בדמו ניהול <ExternalLink size={17} /></a>
           </div>
-          <a className="appointment-back" href="/#solutions">לכל המערכות של AllInCenter <ArrowLeft size={16} /></a>
+          <a className="appointment-back" href="/systems">לכל המערכות של AllInCenter <ArrowLeft size={16} /></a>
         </section>
 
         <section className="appointment-section appointment-faq" aria-labelledby="faq-title">
@@ -163,14 +159,7 @@ export default function AppointmentManagement() {
         <aside className="appointment-guide-link">מתלבטים איזו מערכת מתאימה לכם? <a href="/guides/how-to-choose-appointment-system">קראו את המדריך לבחירת מערכת ניהול תורים.</a></aside>
       </main>
 
-      <footer className="footer">
-        <div className="footer__inner">
-          <div className="footer__brand"><img src="/assets/allincenter-logo.png" alt="AllInCenter" /><div><strong>AllInCenter</strong><small>Connect · Manage · Grow</small></div></div>
-          <nav className="footer__links" aria-label="ניווט תחתון"><a href="/">דף הבית</a><a href="/pricing">מחירון</a><a href="/about">מי אנחנו</a><a href="/guides">מרכז הידע</a><a href="/#contact">יצירת קשר</a><a href="/ai">ייעוץ AI ואוטומציה</a></nav>
-          <SiteContactLine />
-          <small className="footer__note">© {new Date().getFullYear()} AllInCenter · allincenter.co.il · מערכות ניהול מותאמות לעסקים בישראל</small>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }
