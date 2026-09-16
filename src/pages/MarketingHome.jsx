@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   ArrowLeft,
   CalendarCheck,
@@ -7,7 +7,9 @@ import {
   ExternalLink,
   Headphones,
   LayoutDashboard,
+  MessageCircle,
   RefreshCw,
+  Search,
   Sparkles,
   Users,
   Utensils,
@@ -15,7 +17,6 @@ import {
 } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
 import Reveal from "@/components/Reveal";
-import SiteContactLine from "@/components/SiteContactLine";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 
@@ -23,15 +24,6 @@ const contactCenterDemoUrl =
   import.meta.env.VITE_CONTACT_CENTER_DEMO_URL ||
   import.meta.env.VITE_PRODUCT_URL ||
   "https://smart-break-shift-demo.vercel.app";
-
-const contactUrl = "#contact";
-
-const navLinks = [
-  { href: "/systems", label: "מערכות" },
-  { href: "/services", label: "שירותים" },
-  { href: "/guides", label: "מרכז הידע" },
-  { href: "/about", label: "מי אנחנו" },
-];
 
 const products = [
   {
@@ -42,7 +34,7 @@ const products = [
     capabilities: ["הזמנה אונליין", "ניהול יומן ולקוחות", "תזכורות ואוטומציות"],
     href: "/appointment-management",
     image: "/assets/home-appointment-ui.jpg",
-    imageAlt: "ממשק אמיתי של מערכת ניהול התורים של AllInCenter",
+    imageAlt: "ממשק מערכת ניהול התורים של AllInCenter",
     icon: CalendarCheck,
   },
   {
@@ -70,159 +62,138 @@ const products = [
   },
 ];
 
-function ProductVisual({ product, hero = false }) {
+function ContactCenterPanel() {
+  const capabilities = ["זמינות עובדים", "ניהול הפסקות", "שיבוץ משמרות", "תמונת מצב לצוות"];
   return (
-    <figure className={`home-product-visual ${hero ? "home-product-visual--hero" : ""}`}>
-      <div className="home-product-visual__bar" aria-hidden="true">
-        <span /><span /><span />
-        <small>AllInCenter</small>
+    <div className="operations-panel" role="img" aria-label="המחשה תפעולית של יכולות מערכת המוקד החכם">
+      <div className="operations-panel__top"><strong>מוקד חכם / LIVE</strong><span aria-hidden="true" /></div>
+      <div className="operations-panel__body">
+        <div className="operations-panel__states" aria-label="מצבי עבודה במערכת">
+          <span><i aria-hidden="true" />זמין</span>
+          <span><i aria-hidden="true" />בהפסקה</span>
+          <span><i aria-hidden="true" />במשמרת</span>
+        </div>
+        <div className="operations-panel__timeline" aria-hidden="true">
+          <div><span /><span /><span /></div>
+          <div><span /><span /></div>
+          <div><span /><span /><span /></div>
+        </div>
+        <div className="operations-panel__capabilities">
+          {capabilities.map((capability, index) => <div key={capability}><small aria-hidden="true">0{index + 1}</small><span>{capability}</span><Check size={15} aria-hidden="true" /></div>)}
+        </div>
       </div>
-      <img src={product.image} alt={product.imageAlt} loading={hero ? "eager" : "lazy"} />
-      <figcaption><product.icon size={15} /> {product.title}</figcaption>
-    </figure>
+    </div>
   );
 }
 
-function ProductSection({ product, index }) {
+function ProductRow({ product, index }) {
   return (
     <Reveal>
-      <article className={`home-product ${index % 2 ? "home-product--reverse" : ""}`}>
-        <div className="home-product__copy">
+      <article className={`editorial-product ${index % 2 ? "editorial-product--reverse" : ""}`}>
+        <div className="editorial-product__visual">
+          <div className="editorial-product__chrome" aria-hidden="true"><span /><span /><span /><small>AllInCenter / {String(index + 1).padStart(2, "0")}</small></div>
+          {product.id === "contact-center" ? <ContactCenterPanel /> : <img src={product.image} alt={product.imageAlt} loading="lazy" />}
+        </div>
+        <div className="editorial-product__copy">
+          <span className="editorial-index" aria-hidden="true">0{index + 1} / SYSTEM</span>
           <span className="home-eyebrow"><product.icon size={16} />{product.eyebrow}</span>
           <h3>{product.title}</h3>
           <p>{product.description}</p>
-          <ul>
-            {product.capabilities.map((item) => <li key={item}><Check size={16} />{item}</li>)}
-          </ul>
+          <ul>{product.capabilities.map((item) => <li key={item}><Check size={16} />{item}</li>)}</ul>
           <a className="home-text-link" href={product.href} {...(product.external ? { target: "_blank", rel: "noreferrer" } : {})}>
             {product.external ? "לצפייה בדמו" : "לפרטים על המערכת"}
             {product.external ? <ExternalLink size={16} /> : <ArrowLeft size={16} />}
           </a>
         </div>
-        <ProductVisual product={product} />
       </article>
     </Reveal>
   );
 }
 
 export default function MarketingHome() {
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   return (
-    <div className="page home-refresh">
+    <div className="page home-refresh home-editorial">
       <SiteHeader />
-
       <main id="top">
         <section className="home-hero">
           <div className="home-hero__copy">
-            <Reveal><span className="tag"><Sparkles size={14} />Connect · Manage · Grow</span></Reveal>
-            <Reveal delay={70}>
-              <h1>העסק שלך.<br /><span>מערכת אחת שמנהלת הכול.</span></h1>
-            </Reveal>
-            <Reveal delay={140}>
-              <p>AllInCenter מפתחת מערכות ניהול ואוטומציה מותאמות לעסקים בישראל — מערכות אמיתיות שמחברות את העבודה, הלקוחות והצוות במקום אחד.</p>
-            </Reveal>
-            <Reveal delay={210}>
+            <Reveal><span className="home-hero__eyebrow">מערכות ניהול לעסקים בישראל</span></Reveal>
+            <Reveal delay={60}><h1>פחות הודעות.<br /><span>יותר תורים מסודרים.</span></h1></Reveal>
+            <Reveal delay={120}><p>אתר, WhatsApp ומערכת ניהול שעובדים יחד — מהחיפוש הראשון ועד לתור או להזמנה.</p></Reveal>
+            <Reveal delay={180}>
               <div className="home-actions">
-                <a className="btn btn--primary" href={contactUrl}>לבקשת הדגמה <ArrowLeft size={18} /></a>
+                <a className="btn btn--primary" href="#contact">לבקשת הדגמה <ArrowLeft size={18} /></a>
                 <a className="btn btn--ghost" href="/systems">לצפייה במערכות</a>
               </div>
             </Reveal>
-            <Reveal delay={280}>
-              <div className="home-proof" aria-label="יתרונות המערכת">
-                <span><Check size={15} />ממשק מלא בעברית</span>
-                <span><Check size={15} />התאמה לתהליכי העסק</span>
-                <span><Check size={15} />מערכות פעילות ודמואים</span>
+            <Reveal delay={220}><p className="home-proof">ממשק בעברית <i /> התאמה לעסק <i /> מערכת פעילה</p></Reveal>
+          </div>
+
+          <Reveal delay={100} className="home-hero__visual">
+            <div className="home-hero__stage">
+              <div className="home-hero__frame">
+                <div className="home-hero__frame-bar" aria-hidden="true"><span /><span /><span /><small>AllInCenter / LIVE SYSTEM</small></div>
+                <img src="/assets/home-restaurant-dashboard.jpg" alt="לוח הבקרה האמיתי של מערכת ההזמנות למסעדות" />
               </div>
-            </Reveal>
-          </div>
-          <Reveal delay={160} className="home-hero__visual">
-            <div className="home-hero__composition">
-              <ProductVisual product={products[1]} hero />
-              <div className="home-hero__side"><img src="/assets/restaurant-guest-booking.jpg" alt="ממשק הזמנת שולחן ללקוח" /></div>
+              <div className="home-status-card" aria-label="חיבור ל-WhatsApp זמין">
+                <MessageCircle size={19} aria-hidden="true" />
+                <div><strong>WhatsApp מחובר</strong><span>המשך תהליך אוטומטי</span></div>
+                <i aria-hidden="true" />
+              </div>
+              <div className="home-hero__serial" aria-hidden="true">AIC / 2026</div>
             </div>
           </Reveal>
+
+          <div className="home-journey" aria-hidden="true">
+            <span>SEARCH</span><i /><span>WHATSAPP</span><i /><span>BOOKING</span><i /><span>MANAGEMENT</span>
+          </div>
         </section>
 
-        <section className="home-product-suite home-preview-section" id="solutions" aria-labelledby="products-heading">
+        <section className="home-product-suite" id="solutions" aria-labelledby="products-heading">
           <Reveal>
-            <div className="home-section-head">
-              <span className="kicker">המערכות</span>
-              <h2 id="products-heading">המערכות שלנו</h2>
-              <p>מערכות פעילות שמותאמות לתהליכי עבודה אמיתיים — עם ממשק מלא בעברית.</p>
+            <div className="home-section-head home-section-head--split">
+              <span className="editorial-index" aria-hidden="true">01 / SYSTEMS</span>
+              <div><h2 id="products-heading">מערכות שעובדות<br />בתוך העסק.</h2><p>מערכות פעילות שמותאמות לתהליכי עבודה אמיתיים — עם ממשק מלא בעברית.</p></div>
             </div>
           </Reveal>
-          <div className="home-preview-grid">{products.map((product) => <article className="home-preview-card" key={product.id}><div className={`home-preview-card__visual ${product.id === "contact-center" ? "home-preview-card__visual--pending" : ""}`}>{product.id === "contact-center" ? <><Headphones size={34}/><strong>מוקד חכם</strong><div className="neutral-capabilities"><span>זמינות עובדים</span><span>הפסקות</span><span>שיבוץ משמרות</span></div></> : <img src={product.image} alt={product.imageAlt}/>}</div><h3>{product.title}</h3><p>{product.description}</p><a className="home-text-link" href={product.id === "contact-center" ? "/systems" : product.href}>לפרטים <ArrowLeft size={16}/></a></article>)}</div>
-          <a className="home-all-link" href="/systems">לכל המערכות <ArrowLeft size={17}/></a>
-        </section>
-
-        <section className="home-services-preview" aria-labelledby="services-heading">
-          <Reveal><div className="home-section-head"><span className="kicker">שירותים מקצועיים</span><h2 id="services-heading">השירותים שלנו</h2><p>מערכות ניהול לעסק, וחיבור של האתר והחיפוש אל התורים, ההזמנות והפניות.</p></div></Reveal>
-          <div className="home-service-grid">
-            <article><LayoutDashboard/><h3>פיתוח מערכות ניהול מותאמות</h3><p>מערכות תורים, הזמנות וניהול שנבנות סביב הלקוחות ותהליכי העבודה של העסק.</p><a href="/services">לפרטים <ArrowLeft size={15}/></a></article>
-            <article><Workflow/><h3>חיבור ל‑WhatsApp ולאוטומציות</h3><p>ניתן לחבר את האתר ואת מערכות התורים או ההזמנות ל‑WhatsApp ולתהליכים חוזרים — בהתאם לעסק.</p><a href="/services">לפרטים <ArrowLeft size={15}/></a></article>
-            <article><Sparkles/><h3>בניית אתרים, SEO ונראות בחיפוש</h3><p>אתר ו‑SEO שמחברים חיפוש בגוגל ובמנועי AI לפנייה, לתור או להזמנה — בלי הבטחה לדירוג.</p><a href="/google-ai-visibility">לפרטים <ArrowLeft size={15}/></a></article>
-          </div>
-          <a className="home-all-link" href="/services">לכל השירותים <ArrowLeft size={17}/></a>
+          <div className="home-product-list">{products.map((product, index) => <ProductRow product={product} index={index} key={product.id} />)}</div>
+          <a className="home-all-link" href="/systems">לכל המערכות <ArrowLeft size={17} /></a>
         </section>
 
         <section className="home-platform" id="platform" aria-labelledby="platform-heading">
           <Reveal>
-            <div className="home-section-head home-section-head--center">
-              <span className="kicker">מערכת אחת. תהליך אחד.</span>
-              <h2 id="platform-heading">כך העבודה מתחברת מקצה לקצה</h2>
-              <p>במקום מידע מפוזר בין כלים ושיחות, כל שלב ממשיך באופן טבעי לשלב הבא.</p>
+            <div className="home-section-head home-section-head--split home-section-head--light">
+              <span className="editorial-index">02 / CONNECT</span>
+              <div><h2 id="platform-heading">מהחיפוש<br />ועד לניהול.</h2><p>במקום מידע מפוזר בין כלים ושיחות, כל שלב ממשיך באופן טבעי לשלב הבא.</p></div>
             </div>
           </Reveal>
-          <Reveal delay={100}>
+          <Reveal delay={80}>
             <div className="home-flow">
-              {[
-                [Users, "לקוח"], [CalendarCheck, "תור או הזמנה"], [LayoutDashboard, "ניהול"],
-                [CreditCard, "תשלום"], [Workflow, "אוטומציה ו־AI"], [RefreshCw, "מעקב"],
-              ].map(([Icon, label], index, all) => (
-                <React.Fragment key={label}>
-                  <div className="home-flow__step"><span><Icon size={21} /></span><strong>{label}</strong></div>
-                  {index < all.length - 1 && <ArrowLeft className="home-flow__arrow" size={19} aria-hidden="true" />}
-                </React.Fragment>
+              {[[Search,"חיפוש"],[MessageCircle,"WhatsApp"],[CalendarCheck,"תור או הזמנה"],[LayoutDashboard,"ניהול"],[CreditCard,"תשלום"],[RefreshCw,"מעקב"]].map(([Icon,label], index) => (
+                <div className="home-flow__step" key={label}><small>0{index + 1}</small><span><Icon size={21} /></span><strong>{label}</strong></div>
               ))}
             </div>
           </Reveal>
         </section>
 
-        <section className="home-trust" aria-labelledby="trust-heading">
-          <Reveal>
-            <div>
-              <span className="kicker">מוצר לפני הבטחות</span>
-              <h2 id="trust-heading">רואים את המערכת לפני שמחליטים.</h2>
-              <p>הדגמה שמבוססת על תהליכי העבודה של העסק, ממשקים בעברית וקישורים למערכות קיימות — בלי נתונים מומצאים ובלי מסכי שיווק.</p>
-            </div>
-            <a className="btn btn--ghost" href="/systems">לצפייה במערכות <ArrowLeft size={17} /></a>
-          </Reveal>
+        <section className="home-services-preview" aria-labelledby="services-heading">
+          <Reveal><div className="home-section-head home-section-head--split"><span className="editorial-index">03 / SERVICES</span><div><h2 id="services-heading">המערכת במרכז.<br />האתר מביא אליה.</h2><p>מערכות ניהול לעסק, וחיבור של האתר והחיפוש אל התורים, ההזמנות והפניות.</p></div></div></Reveal>
+          <div className="home-service-list">
+            <article><span>01</span><LayoutDashboard/><div><h3>פיתוח מערכות ניהול מותאמות</h3><p>מערכות תורים, הזמנות וניהול שנבנות סביב הלקוחות ותהליכי העבודה של העסק.</p></div><a href="/services" aria-label="לפרטים על פיתוח מערכות"><ArrowLeft /></a></article>
+            <article><span>02</span><Workflow/><div><h3>חיבור ל‑WhatsApp ולאוטומציות</h3><p>ניתן לחבר את האתר ואת מערכות התורים או ההזמנות ל‑WhatsApp ולתהליכים חוזרים — בהתאם לעסק.</p></div><a href="/services" aria-label="לפרטים על חיבור ל-WhatsApp"><ArrowLeft /></a></article>
+            <article><span>03</span><Sparkles/><div><h3>בניית אתרים, SEO ונראות בחיפוש</h3><p>אתר ו‑SEO שמחברים חיפוש בגוגל ובמנועי AI לפנייה, לתור או להזמנה — בלי הבטחה לדירוג.</p></div><a href="/google-ai-visibility" aria-label="לפרטים על אתרים ונראות בחיפוש"><ArrowLeft /></a></article>
+          </div>
+          <a className="home-all-link" href="/services">לכל השירותים <ArrowLeft size={17}/></a>
         </section>
 
+        <section className="home-trust" aria-labelledby="trust-heading">
+          <Reveal><span className="editorial-index">04 / REAL PRODUCT</span><div><h2 id="trust-heading">רואים את המערכת<br />לפני שמחליטים.</h2><p>הדגמה שמבוססת על תהליכי העבודה של העסק, ממשקים בעברית וקישורים למערכות קיימות — בלי נתונים מומצאים ובלי מסכי שיווק.</p></div><a className="btn btn--ghost" href="/systems">לצפייה במערכות <ArrowLeft size={17} /></a></Reveal>
+        </section>
 
         <section className="section" id="contact">
-          <Reveal>
-            <div className="contact-section">
-              <div className="contact-section__copy">
-                <span className="kicker">לבקשת הדגמה</span>
-                <h2>בואו נראה איך המערכת יכולה להתאים לעסק שלכם.</h2>
-                <p>השאירו פרטים ונחזור לשיחת היכרות קצרה, כדי להבין את התהליך ולבנות הדגמה רלוונטית.</p>
-                <ul><li><Check size={18} />היכרות עם תהליך העבודה</li><li><Check size={18} />הדגמה של מערכת אמיתית</li><li><Check size={18} />כיוון ברור להמשך</li></ul>
-              </div>
-              <ContactForm />
-            </div>
-          </Reveal>
+          <Reveal><div className="contact-section"><div className="contact-section__copy"><span className="editorial-index">05 / DEMO</span><h2>בואו נראה איך המערכת יכולה להתאים לעסק שלכם.</h2><p>השאירו פרטים ונחזור לשיחת היכרות קצרה, כדי להבין את התהליך ולבנות הדגמה רלוונטית.</p><ul><li><Check size={18} />היכרות עם תהליך העבודה</li><li><Check size={18} />הדגמה של מערכת אמיתית</li><li><Check size={18} />כיוון ברור להמשך</li></ul></div><ContactForm /></div></Reveal>
         </section>
       </main>
-
       <SiteFooter />
     </div>
   );
