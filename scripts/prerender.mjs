@@ -193,7 +193,6 @@ if (sitemap.includes("<html") || looksLikeSpaShell(sitemap) || !sitemap.includes
 }
 for (const loc of [
   "https://www.allincenter.co.il/",
-  "https://www.allincenter.co.il/lp",
   "https://www.allincenter.co.il/pricing",
   "https://www.allincenter.co.il/ai",
   "https://www.allincenter.co.il/systems",
@@ -215,3 +214,12 @@ if (sitemap.includes("https://www.allincenter.co.il/pelecard</loc>")) {
   fail("sitemap.xml must not include /pelecard");
 }
 console.log("validated sitemap.xml");
+
+const landingPage = fs.readFileSync(path.join(dist, "lp", "index.html"), "utf8");
+if (!landingPage.includes('name="robots" content="noindex, follow"')) {
+  fail("dist/lp/index.html must be noindex, follow");
+}
+if (sitemap.includes("https://www.allincenter.co.il/lp</loc>")) {
+  fail("sitemap.xml must not include the campaign landing page /lp");
+}
+console.log("validated campaign landing page indexing policy");

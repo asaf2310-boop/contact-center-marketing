@@ -2,6 +2,7 @@ import { SITE } from "@/lib/site";
 
 const orgId = `${SITE.url}/#organization`;
 const websiteId = `${SITE.url}/#website`;
+const founderId = `${SITE.url}/about#asaf-ariely`;
 
 export const organizationSchema = {
   "@type": "Organization",
@@ -12,6 +13,25 @@ export const organizationSchema = {
   telephone: SITE.phoneIntl,
   areaServed: SITE.areaServed,
   logo: SITE.logo,
+  description: "AllInCenter מפתחת מערכות ניהול מותאמות, אוטומציות ופתרונות AI לעסקים בישראל.",
+  founder: { "@id": founderId },
+};
+
+export const founderSchema = {
+  "@type": "Person",
+  "@id": founderId,
+  name: "אסף אריאלי",
+  url: `${SITE.url}/about`,
+  image: `${SITE.url}/assets/asaf-ariely.png`,
+  jobTitle: "מייסד AllInCenter ומנהל Customer Experience, Operations & AI",
+  worksFor: { "@id": orgId },
+  knowsAbout: [
+    "Customer Experience",
+    "Operations",
+    "Artificial Intelligence",
+    "Business Automation",
+    "מערכות ניהול לעסקים",
+  ],
 };
 
 export const websiteSchema = {
@@ -60,7 +80,7 @@ function serviceGraph() {
 function graph(extra = []) {
   return {
     "@context": "https://schema.org",
-    "@graph": [organizationSchema, ...extra],
+    "@graph": [organizationSchema, founderSchema, ...extra],
   };
 }
 
@@ -79,6 +99,7 @@ export const routeSeo = {
     description:
       "מערכת אחת לניהול העסק בישראל: זימון תורים, לקוחות, תשלומים ואוטומציות. קבעו הדגמה חינם והתאימו את המערכת לתהליך שלכם.",
     canonical: `${SITE.url}/lp`,
+    robots: "noindex, follow",
     ogImage: SITE.logo,
     twitterCard: "summary",
     jsonLd: graph(),
@@ -98,7 +119,25 @@ export const routeSeo = {
     canonical: `${SITE.url}/ai`,
     ogImage: `${SITE.url}/assets/asaf-ariely.png`,
     twitterCard: "summary",
-    jsonLd: graph(),
+    jsonLd: graph([
+      {
+        "@type": "WebPage",
+        "@id": `${SITE.url}/ai#webpage`,
+        url: `${SITE.url}/ai`,
+        name: "אסף אריאלי | AI & Automation Project Manager",
+        inLanguage: SITE.language,
+        isPartOf: { "@id": websiteId },
+        about: { "@id": founderId },
+      },
+      {
+        "@type": "Service",
+        "@id": `${SITE.url}/ai#service`,
+        name: "ייעוץ, ניהול והטמעת AI ואוטומציה לעסקים",
+        provider: { "@id": founderId },
+        areaServed: SITE.areaServed,
+        url: `${SITE.url}/ai`,
+      },
+    ]),
   },
   "/systems": {
     title: "מערכות AllInCenter | מערכות ניהול לעסקים",
@@ -146,6 +185,7 @@ export const routeSeo = {
           "הכירו את AllInCenter ואת אסף אריאלי, שמאחורי פיתוח מערכות ניהול, אוטומציה ופתרונות מותאמים לעסקים בישראל.",
         inLanguage: SITE.language,
         about: { "@id": orgId },
+        mainEntity: { "@id": founderId },
         isPartOf: { "@id": websiteId },
       },
     ]),
@@ -287,7 +327,7 @@ export const routeSeo = {
     twitterCard: "summary",
     jsonLd: graph([
       { "@type": "WebPage", "@id": `${SITE.url}/guides/how-to-choose-appointment-system#webpage`, url: `${SITE.url}/guides/how-to-choose-appointment-system`, name: "איך לבחור מערכת ניהול תורים לעסק? 8 דברים שכדאי לבדוק", description: "איך בוחרים מערכת ניהול תורים לעסק? 8 דברים שכדאי לבדוק לפני שבוחרים מערכת לזימון תורים, ניהול לקוחות, תשלומים ואוטומציות.", inLanguage: SITE.language, isPartOf: { "@id": websiteId } },
-      { "@type": "Article", "@id": `${SITE.url}/guides/how-to-choose-appointment-system#article`, headline: "איך לבחור מערכת ניהול תורים לעסק? 8 דברים שכדאי לבדוק", description: "איך בוחרים מערכת ניהול תורים לעסק? 8 דברים שכדאי לבדוק לפני שבוחרים מערכת לזימון תורים, ניהול לקוחות, תשלומים ואוטומציות.", mainEntityOfPage: { "@id": `${SITE.url}/guides/how-to-choose-appointment-system#webpage` }, publisher: { "@id": orgId }, author: { "@id": orgId }, inLanguage: SITE.language },
+      { "@type": "Article", "@id": `${SITE.url}/guides/how-to-choose-appointment-system#article`, headline: "איך לבחור מערכת ניהול תורים לעסק? 8 דברים שכדאי לבדוק", description: "איך בוחרים מערכת ניהול תורים לעסק? 8 דברים שכדאי לבדוק לפני שבוחרים מערכת לזימון תורים, ניהול לקוחות, תשלומים ואוטומציות.", mainEntityOfPage: { "@id": `${SITE.url}/guides/how-to-choose-appointment-system#webpage` }, publisher: { "@id": orgId }, author: { "@id": founderId }, inLanguage: SITE.language },
       { "@type": "BreadcrumbList", "@id": `${SITE.url}/guides/how-to-choose-appointment-system#breadcrumb`, itemListElement: [
         { "@type": "ListItem", position: 1, name: "AllInCenter", item: `${SITE.url}/` },
         { "@type": "ListItem", position: 2, name: "מרכז הידע", item: `${SITE.url}/guides` },

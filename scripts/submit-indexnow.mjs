@@ -5,7 +5,6 @@ const keyLocation = `https://${host}/${key}.txt`;
 
 const urlList = [
   `https://${host}/`,
-  `https://${host}/lp`,
   `https://${host}/pricing`,
   `https://${host}/about`,
   `https://${host}/ai`,
