@@ -1,36 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   ArrowLeft,
+  ArrowUpLeft,
   CalendarDays,
-  CheckCircle2,
   Clock3,
   LayoutDashboard,
-  Map,
+  Search,
   SlidersHorizontal,
   TableProperties,
-  UsersRound,
-  Utensils,
 } from "lucide-react";
-import SiteContactLine from "@/components/SiteContactLine";
+import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 
-const navLinks = [
-  { href: "/systems", label: "מערכות" }, { href: "/services", label: "שירותים" },
-  { href: "/guides", label: "מרכז הידע" }, { href: "/about", label: "מי אנחנו" },
-];
-
 const capabilities = [
-  { icon: CalendarDays, title: "הזמנת שולחן אונליין", text: "האורחים יכולים להתחיל הזמנה דיגיטלית ולמסור את פרטי ההזמנה בלי תיאום ידני." },
-  { icon: Clock3, title: "בחירת תאריך ושעה", text: "תהליך ההזמנה מאפשר לבחור תאריך ושעה מתוך המועדים המוצגים לאורח." },
-  { icon: UsersRound, title: "מספר סועדים", text: "האורח מציין את מספר הסועדים כחלק מפרטי ההזמנה." },
-  { icon: Map, title: "אזורי ישיבה", text: "האורח יכול לבחור בין אזורי הישיבה שמוגדרים עבור המסעדה ובשעות הזמינות." },
-  { icon: LayoutDashboard, title: "ניהול הזמנות", text: "הצוות מרכז את ההזמנות במסכי הניהול ועובד מתוך תמונת מצב אחת." },
-  { icon: TableProperties, title: "ניהול שולחנות", text: "מפת השולחנות מאפשרת לראות ולנהל את מצב ההושבה במסעדה." },
+  { icon: CalendarDays, title: "הזמנה אונליין ופרטי ההזמנה", text: "האורחים בוחרים מספר סועדים, תאריך ושעה בתהליך דיגיטלי." },
+  { icon: LayoutDashboard, title: "ניהול הזמנות ותמונת מצב", text: "הצוות מרכז את ההזמנות ועובד מתוך מסכי ניהול משותפים." },
+  { icon: TableProperties, title: "מפת שולחנות ואזורי ישיבה", text: "רואים ומנהלים את השולחנות ואזורי הישיבה מתוך המערכת." },
+  { icon: Clock3, title: "זמינות ותהליך העבודה של הצוות", text: "המועדים המוצגים לאורח מתחברים לתהליך הניהול במסעדה." },
+  { icon: SlidersHorizontal, title: "התאמה לאופן שבו המסעדה עובדת", text: "מתאימים את תהליך ההזמנה והניהול לצורת העבודה במסעדה." },
 ];
 
-const supportingCapabilities = [
-  { icon: Utensils, title: "חוויית אורח דיגיטלית", text: "תהליך ברור מרכז את פרטי ההזמנה עבור האורח לפני העברתם למסעדה." },
-  { icon: SlidersHorizontal, title: "שליטה בתהליך ההזמנה", text: "מסכי הניהול מרכזים את העבודה עם הזמנות, אורחים ושולחנות במקום אחד." },
+const audiences = [
+  "מסעדות",
+  "ברים עם הזמנת מקומות",
+  "בתי קפה שעובדים עם הזמנות",
+  "מסעדות עם מספר אזורי ישיבה",
 ];
 
 const faqs = [
@@ -43,131 +37,113 @@ const faqs = [
   ["האם המערכת מחליפה ניהול ידני של הזמנות?", "המערכת מרכזת את תהליך ההזמנה והניהול הדיגיטלי וכך מפחיתה את הצורך לנהל מידע ידנית בין מקומות שונים."],
 ];
 
+const journey = ["חיפוש או אתר", "בחירת תאריך ושעה", "הזמנה", "ניהול במסעדה"];
+
 export default function RestaurantReservations() {
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   return (
-    <div className="page appointment-page restaurant-page" dir="rtl">
-      <div className="bg-aurora" aria-hidden="true" />
-      <header className={`nav ${scrolled ? "nav--scrolled" : ""}`}>
-        <div className="nav__inner">
-          <a className="nav__brand" href="/" aria-label="AllInCenter - דף הבית"><img src="/assets/allincenter-logo.png" alt="AllInCenter" /><span>All<b>In</b>Center</span></a>
-          <nav className="nav__links" aria-label="ניווט ראשי">{navLinks.map((link) => <a key={link.href} href={link.href}>{link.label}</a>)}</nav>
-          <a className="btn btn--primary btn--sm" href="/#contact">לבקשת הדגמה <ArrowLeft size={16} /></a>
-        </div>
-      </header>
-
+    <div className="page restaurant-editorial" dir="rtl">
+      <SiteHeader />
       <main>
-        <section className="appointment-hero restaurant-hero">
-          <div className="appointment-hero__copy">
-            <span className="tag"><Utensils size={16} /> מערכת הזמנות וניהול שולחנות למסעדות</span>
-            <h1>מערכת הזמנות למסעדות</h1>
-            <p>מערכת שמאפשרת לאורחים להזמין שולחן אונליין ולמסעדה לנהל הזמנות, שולחנות וחוויית אורח מתוך ממשק אחד.</p>
-            <div className="appointment-actions">
-              <a className="btn btn--primary" href="#restaurant-video">צפו במערכת בפעולה <ArrowLeft size={18} /></a>
-              <a className="btn btn--ghost" href="/#contact">לתיאום הדגמה</a>
+        <section className="restaurant-product-hero" aria-labelledby="restaurant-title">
+          <div className="restaurant-product-hero__copy">
+            <span className="restaurant-index">01 / RESERVATIONS</span>
+            <p className="restaurant-product-hero__eyebrow">מהחיפוש לשולחן מסודר</p>
+            <h1 id="restaurant-title">מערכת הזמנות למסעדות</h1>
+            <p className="restaurant-product-hero__lead">אורחים עוברים מאתר המסעדה להזמנת שולחן דיגיטלית, והצוות מנהל הזמנות ושולחנות בסביבה אחת שמותאמת לאופן העבודה במסעדה.</p>
+            <div className="restaurant-actions">
+              <a className="btn btn--primary" href="/#contact">לתיאום הדגמה <ArrowLeft size={18} /></a>
+              <a className="btn btn--ghost" href="#restaurant-proof">צפו במערכת בפעולה</a>
             </div>
           </div>
-          <div className="appointment-hero__points" aria-label="יכולות מרכזיות">
-            {["הזמנת שולחן אונליין", "בחירת תאריך ושעה", "ניהול הזמנות ושולחנות", "ממשק עברי למסעדות בישראל"].map((item) => <span key={item}><CheckCircle2 size={17} />{item}</span>)}
-          </div>
-        </section>
 
-        <section className="appointment-section appointment-demo" id="restaurant-video" aria-labelledby="restaurant-video-title">
-          <div className="appointment-heading"><span className="kicker">המערכת בפעולה</span><h2 id="restaurant-video-title">מהזמנת שולחן ועד למסכי הניהול</h2></div>
-          <div className="appointment-demo__layout">
-            <div className="appointment-video restaurant-video">
-              <video controls playsInline preload="metadata" title="הדגמת מערכת הזמנות למסעדות">
-                <source src="/videos/restaurant-reservations.mp4" type="video/mp4" />
-              </video>
-            </div>
-            <p>בסרטון ניתן לראות את חוויית ההזמנה מצד האורח ואת ממשק הניהול של המסעדה — החל מבחירת מועד להזמנה ועד לניהול ההזמנות והשולחנות מתוך מערכת אחת.</p>
-          </div>
-        </section>
-
-        <section className="appointment-section" aria-labelledby="restaurant-capabilities-title">
-          <div className="appointment-heading"><span className="kicker">יכולות מרכזיות</span><h2 id="restaurant-capabilities-title">מה אפשר לנהל במערכת?</h2></div>
-          <div className="appointment-capabilities restaurant-capabilities">{capabilities.map(({ icon: Icon, title, text }) => <article key={title}><span><Icon size={22} /></span><h3>{title}</h3><p>{text}</p></article>)}</div>
-          <div className="restaurant-capabilities__summary">
-            {supportingCapabilities.map(({ icon: Icon, title, text }) => <div key={title}><Icon size={18} aria-hidden="true" /><p><strong>{title}:</strong> {text}</p></div>)}
-          </div>
-        </section>
-
-        <section className="appointment-section" aria-labelledby="restaurant-how-title">
-          <div className="appointment-heading"><span className="kicker">תהליך ההזמנה</span><h2 id="restaurant-how-title">איך ההזמנה עובדת?</h2></div>
-          <ol className="appointment-steps restaurant-steps">
-            <li><span>01</span><h3>האורח נכנס לעמוד ההזמנה</h3><p>מתחיל תהליך הזמנה דיגיטלי המותאם למסעדה.</p></li>
-            <li><span>02</span><h3>בוחר מועד ופרטי הזמנה</h3><p>בוחר מספר סועדים, תאריך, שעה ואזור ישיבה זמין.</p></li>
-            <li><span>03</span><h3>ההזמנה נכנסת למערכת</h3><p>פרטי ההזמנה עוברים לממשק הניהול של המסעדה.</p></li>
-            <li><span>04</span><h3>הצוות מנהל את ההזמנה והשולחן</h3><p>הצוות עובד עם ההזמנה ועם תמונת מצב השולחנות במקום אחד.</p></li>
-          </ol>
-        </section>
-
-        <section className="appointment-section restaurant-value" aria-labelledby="restaurant-value-title">
-          <div className="appointment-heading"><span className="kicker">עבודה מסודרת יותר</span><h2 id="restaurant-value-title">למה מסעדה צריכה מערכת הזמנות מסודרת?</h2></div>
-          <ul>{["פחות עבודה ידנית", "מידע מרוכז במקום אחד", "שליטה טובה יותר בהזמנות", "תכנון שולחנות", "חוויית הזמנה פשוטה יותר לאורח"].map((item) => <li key={item}><CheckCircle2 size={18} />{item}</li>)}</ul>
-        </section>
-
-        <section className="appointment-section appointment-custom" aria-labelledby="restaurant-search-title">
-          <div><span className="kicker">מחיפוש להזמנה</span><h2 id="restaurant-search-title">חיבור האתר לתהליך ההזמנה</h2></div>
-          <p>אפשר לחבר אתר או עמוד נחיתה של המסעדה ישירות לתהליך הזמנת השולחן, כדי שלקוחות שמגיעים מגוגל או ממנועי AI יוכלו להמשיך להזמנה. <a href="/google-ai-visibility">קראו איך בניית אתר ו‑SEO מתחברים למסלול הזה</a>.</p>
-        </section>
-
-        <section className="appointment-section restaurant-tables" aria-labelledby="tables-title">
-          <div className="restaurant-tables__copy">
-            <span className="kicker">מפת רצפה</span><h2 id="tables-title">ניהול שולחנות ותמונת מצב במסעדה</h2>
-            <p>ממשק הניהול כולל מפת שולחנות ותמונת מצב של ההזמנות במסעדה. הצוות יכול לראות את השולחנות ואזורי הישיבה, ולעבוד עם נתוני ההזמנות מתוך מסך מרכזי. ניהול ההושבה נשאר בשליטת צוות המסעדה.</p>
-          </div>
-          <figure className="restaurant-tables__visual">
-            <img src="/assets/restaurant-table-map.jpg" alt="מפת השולחנות ואזורי הישיבה בממשק הניהול של המסעדה" width="1920" height="1080" loading="lazy" />
+          <figure className="restaurant-product-hero__visual">
+            <div className="restaurant-product-hero__bar" aria-hidden="true"><i /><i /><i /><span>AllInCenter / RESTAURANTS</span></div>
+            <video controls playsInline preload="metadata" title="הדגמת מערכת הזמנות למסעדות">
+              <source src="/videos/restaurant-reservations.mp4#t=10" type="video/mp4" />
+            </video>
+            <figcaption>תהליך ההזמנה הדיגיטלי בפעולה — בחירת סועדים, מועד ואזור ישיבה.</figcaption>
           </figure>
         </section>
 
-        <section className="appointment-section" aria-labelledby="restaurant-audience-title">
-          <div className="appointment-heading"><span className="kicker">מיקוד במסעדות</span><h2 id="restaurant-audience-title">למי המערכת מתאימה?</h2></div>
-          <div className="appointment-audiences restaurant-audiences">
-            <article><h3>מסעדות</h3><p>לניהול הזמנות, אורחים ושולחנות מתוך מערכת אחת.</p></article>
-            <article><h3>ברים עם הזמנת מקומות</h3><p>לקבלת הזמנות מראש ולניהול אזורי ישיבה ושעות זמינות.</p></article>
-            <article><h3>בתי קפה שעובדים עם הזמנות</h3><p>לתהליך הזמנה דיגיטלי ותמונת מצב מסודרת לצוות.</p></article>
-            <article><h3>מסעדות עם מספר אזורי ישיבה</h3><p>להצגת אפשרויות ישיבה ולעבודה עם מפת השולחנות במסכי הניהול.</p></article>
+        <section className="restaurant-journey" aria-labelledby="restaurant-journey-title">
+          <div className="restaurant-heading">
+            <span className="restaurant-index">02 / GUEST JOURNEY</span>
+            <h2 id="restaurant-journey-title">מסלול ברור מהחיפוש ועד לניהול במסעדה.</h2>
+            <p>האתר או עמוד הנחיתה מובילים לפעולת הזמנה ממשית. פרטי ההזמנה עוברים לסביבת הניהול, שבה הצוות עובד עם ההזמנות והשולחנות.</p>
+          </div>
+          <div className="restaurant-journey__track" aria-label="תהליך מחיפוש לניהול הזמנה במסעדה">
+            {journey.map((item, index) => <React.Fragment key={item}><div><span>0{index + 1}</span><strong>{item}</strong></div>{index < journey.length - 1 && <ArrowUpLeft aria-hidden="true" />}</React.Fragment>)}
+          </div>
+          <p className="restaurant-journey__summary">חוויית ההזמנה של האורח וממשק הניהול של המסעדה הם שני צדדים של אותו תהליך: הפרטים שנבחרים בהזמנה עוברים לסביבת העבודה של הצוות.</p>
+        </section>
+
+        <section className="restaurant-proof" id="restaurant-proof" aria-labelledby="restaurant-proof-title">
+          <div className="restaurant-heading">
+            <span className="restaurant-index">03 / PRODUCT PROOF</span>
+            <h2 id="restaurant-proof-title">שלושה מסכים. תהליך אחד.</h2>
+            <p>כל ממשק מציג שלב אחר בתהליך — מההזמנה מצד האורח ועד לניהול השולחנות במסעדה.</p>
+          </div>
+
+          <article className="restaurant-proof-row restaurant-proof-row--guest">
+            <figure><img src="/assets/restaurant-guest-booking.jpg" alt="מסך בחירת שעה ואזור ישיבה בתהליך הזמנת שולחן מצד האורח" width="1920" height="1080" /><figcaption>בחירת שעה ואזור ישיבה במסך ההזמנה לאורח.</figcaption></figure>
+            <div><span>01 / GUEST BOOKING</span><h3>חוויית ההזמנה מצד האורח</h3><p>האורח רואה את פרטי ההזמנה ובוחר שעה ואזור ישיבה מתוך האפשרויות המוצגות.</p></div>
+          </article>
+
+          <article className="restaurant-proof-row restaurant-proof-row--dashboard">
+            <figure><img src="/assets/home-restaurant-dashboard.jpg" alt="לוח הבקרה של מערכת ההזמנות למסעדות" width="1920" height="1080" loading="lazy" /><figcaption>לוח בקרה מרכזי להזמנות ולפעילות המסעדה.</figcaption></figure>
+            <div><span>02 / OPERATIONS</span><h3>לוח הבקרה של המסעדה</h3><p>תמונת מצב מרכזית של ההזמנות והפעילות, מתוך ממשק הניהול בעברית.</p></div>
+          </article>
+
+          <article className="restaurant-proof-row restaurant-proof-row--tables">
+            <figure><img src="/assets/restaurant-table-map.jpg" alt="מפת השולחנות ואזורי הישיבה בממשק הניהול של המסעדה" width="1920" height="1080" loading="lazy" /><figcaption>מפת השולחנות ואזורי הישיבה בממשק הניהול.</figcaption></figure>
+            <div><span>03 / TABLE MAP</span><h3>מפת שולחנות ואזורי ישיבה</h3><p>הצוות רואה את אזורי הישיבה והשולחנות ועובד עם מצב ההושבה מתוך מסך מרכזי. ניהול ההושבה נשאר בשליטת צוות המסעדה.</p></div>
+          </article>
+        </section>
+
+        <section className="restaurant-operations" aria-labelledby="restaurant-capabilities-title">
+          <div className="restaurant-heading restaurant-heading--sticky">
+            <span className="restaurant-index">04 / OPERATIONS</span>
+            <h2 id="restaurant-capabilities-title">מערכת תפעולית להזמנות ולשולחנות.</h2>
+            <p>היכולות מתחברות לסביבת עבודה אחת שניתן להתאים לצורת העבודה של המסעדה.</p>
+          </div>
+          <div className="restaurant-capability-list">
+            {capabilities.map(({ icon: Icon, title, text }, index) => <article key={title}><span>0{index + 1}</span><Icon size={21} aria-hidden="true" /><div><h3>{title}</h3><p>{text}</p></div></article>)}
           </div>
         </section>
 
-        <section className="appointment-section appointment-custom" aria-labelledby="restaurant-custom-title">
-          <div><span className="kicker">התאמה למסעדה</span><h2 id="restaurant-custom-title">מערכת שמתאימה לאופן שבו המסעדה עובדת</h2></div>
-          <p>כל מסעדה מנהלת הזמנות והושבה בצורה מעט שונה. AllInCenter מאפשרת להתאים את תהליך ההזמנה והניהול לאופן העבודה של המסעדה, במקום לנסות להתאים את המסעדה למערכת קבועה.</p>
+        <section className="restaurant-audience" aria-labelledby="restaurant-audience-title">
+          <div className="restaurant-heading">
+            <span className="restaurant-index">05 / FIT</span>
+            <h2 id="restaurant-audience-title">למקומות שבהם ההזמנה צריכה להתחבר לשירות.</h2>
+            <p>למסעדות ומקומות אירוח שרוצים לרכז את ההזמנה והניהול בתהליך ברור לצוות.</p>
+          </div>
+          <div className="restaurant-audience__list">
+            {audiences.map((title, index) => <div key={title}><span>{String(index + 1).padStart(2, "0")}</span><strong>{title}</strong></div>)}
+          </div>
+          <aside className="restaurant-adaptation"><h3>התאמה למסעדה</h3><p>מתאימים את תהליך ההזמנה, הזמינות וניהול השולחנות לאופן שבו הצוות עובד.</p></aside>
         </section>
 
-        <section className="appointment-section restaurant-guest" aria-labelledby="restaurant-guest-title">
-          <figure className="restaurant-guest__visual">
-            <img src="/assets/restaurant-guest-booking.jpg" alt="מסך בחירת שעה ואזור ישיבה בתהליך הזמנת שולחן מצד האורח" width="1920" height="1080" loading="lazy" />
-          </figure>
-          <div className="restaurant-guest__copy">
-            <span className="kicker">חוויית האורח</span>
-            <h2 id="restaurant-guest-title">כך נראית ההזמנה מצד האורח</h2>
-            <p>האורח בוחר את פרטי ההזמנה מתוך הממשק — מספר סועדים, מועד ואזור ישיבה — וההזמנה מועברת למערכת הניהול של המסעדה.</p>
+        <section className="restaurant-search-connection" aria-labelledby="restaurant-search-title">
+          <div className="restaurant-search-connection__lead"><span className="restaurant-index">06 / SEARCH TO RESERVATION</span><Search size={34} aria-hidden="true" /><h2 id="restaurant-search-title">חיבור האתר לתהליך ההזמנה</h2></div>
+          <div className="restaurant-search-connection__copy">
+            <p>אפשר לבנות או לשפר את אתר המסעדה ולחבר מבקרים שמגיעים מגוגל או ממנועי AI ישירות לתהליך הזמנת השולחן.</p>
+            <a href="/google-ai-visibility">איך אתר, SEO וחיפוש מתחברים למסלול ההזמנה? <ArrowLeft size={16} /></a>
           </div>
         </section>
 
-        <section className="appointment-section appointment-live restaurant-cta" aria-labelledby="restaurant-cta-title">
-          <div className="appointment-heading"><span className="kicker">רוצים לראות יותר?</span><h2 id="restaurant-cta-title">הדגמה מותאמת למערכת ההזמנות</h2><p>אפשר לצפות בווידאו של המערכת או לתאם הדגמה בהתאם לתהליך העבודה של המסעדה.</p></div>
-          <div className="appointment-actions"><a className="btn btn--ghost" href="#restaurant-video">צפו במערכת בפעולה</a><a className="btn btn--primary" href="/#contact">לתיאום הדגמה <ArrowLeft size={18} /></a></div>
-          <a className="appointment-back" href="/systems">לכל המערכות של AllInCenter <ArrowLeft size={16} /></a>
+        <section className="restaurant-conversion" aria-labelledby="restaurant-conversion-title">
+          <span className="restaurant-index">07 / NEXT STEP</span>
+          <h2 id="restaurant-conversion-title">רוצים להפוך חיפוש שולחן להזמנה מסודרת?</h2>
+          <p>נראה לכם את חוויית האורח ואת סביבת הניהול ונבדוק איך להתאים את התהליך למסעדה.</p>
+          <div className="restaurant-actions"><a className="btn btn--primary" href="/#contact">לתיאום הדגמה <ArrowLeft size={18} /></a><a className="btn btn--ghost" href="#restaurant-proof">צפו במערכת בפעולה</a></div>
+          <a className="restaurant-conversion__back" href="/systems">לכל המערכות של AllInCenter <ArrowLeft size={16} /></a>
         </section>
 
-        <section className="appointment-section appointment-faq" aria-labelledby="restaurant-faq-title">
-          <div className="appointment-heading"><span className="kicker">שאלות נפוצות</span><h2 id="restaurant-faq-title">מידע נוסף על מערכת ההזמנות למסעדות</h2></div>
-          <div className="appointment-faq__list">{faqs.map(([question, answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}</div>
+        <section className="restaurant-faq" aria-labelledby="restaurant-faq-title">
+          <div className="restaurant-heading"><span className="restaurant-index">08 / FAQ</span><h2 id="restaurant-faq-title">מידע נוסף על מערכת ההזמנות למסעדות</h2></div>
+          <div className="restaurant-faq__list">{faqs.map(([question, answer], index) => <details key={question}><summary><span>{String(index + 1).padStart(2, "0")}</span>{question}</summary><p>{answer}</p></details>)}</div>
         </section>
       </main>
-
       <SiteFooter />
     </div>
   );
