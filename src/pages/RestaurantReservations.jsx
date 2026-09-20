@@ -47,21 +47,24 @@ export default function RestaurantReservations() {
         <section className="restaurant-product-hero" aria-labelledby="restaurant-title">
           <div className="restaurant-product-hero__copy">
             <span className="restaurant-index">01 / RESERVATIONS</span>
-            <p className="restaurant-product-hero__eyebrow">מהחיפוש לשולחן מסודר</p>
-            <h1 id="restaurant-title">מערכת הזמנות למסעדות</h1>
-            <p className="restaurant-product-hero__lead">אורחים עוברים מאתר המסעדה להזמנת שולחן דיגיטלית, והצוות מנהל הזמנות ושולחנות בסביבה אחת שמותאמת לאופן העבודה במסעדה.</p>
+            <p className="restaurant-product-hero__eyebrow">מערכת הזמנות למסעדות</p>
+            <h1 id="restaurant-title">מהחיפוש בגוגל<br /><span>עד לשולחן במסעדה</span></h1>
+            <p className="restaurant-product-hero__lead">האורחים מזמינים שולחן בתהליך קצר וברור. הצוות מקבל את ההזמנה ומנהל את השולחנות והישיבה מאותה מערכת.</p>
             <div className="restaurant-actions">
               <a className="btn btn--primary" href="/#contact">לתיאום הדגמה <ArrowLeft size={18} /></a>
               <a className="btn btn--ghost" href="#restaurant-proof">צפו במערכת בפעולה</a>
             </div>
+            <div className="restaurant-product-hero__signals" aria-label="יתרונות מרכזיים">
+              <span>הזמנה אונליין</span><span>ניהול שולחנות</span><span>ממשק בעברית</span>
+            </div>
           </div>
 
           <figure className="restaurant-product-hero__visual">
-            <div className="restaurant-product-hero__bar" aria-hidden="true"><i /><i /><i /><span>AllInCenter / RESTAURANTS</span></div>
-            <video controls playsInline preload="metadata" title="הדגמת מערכת הזמנות למסעדות">
+            <div className="restaurant-product-hero__bar" aria-hidden="true"><span>AllInCenter / RESTAURANTS</span><strong>הדגמת מוצר</strong></div>
+            <video controls playsInline preload="metadata" poster="/assets/restaurant-guest-booking.jpg" title="הדגמת מערכת הזמנות למסעדות">
               <source src="/videos/restaurant-reservations.mp4#t=10" type="video/mp4" />
             </video>
-            <figcaption>תהליך ההזמנה הדיגיטלי בפעולה — בחירת סועדים, מועד ואזור ישיבה.</figcaption>
+            <figcaption><strong>כך נראית ההזמנה לאורח</strong><span>בחירת סועדים, מועד ואזור ישיבה בתהליך אחד.</span></figcaption>
           </figure>
         </section>
 

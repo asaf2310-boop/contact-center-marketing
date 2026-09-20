@@ -55,21 +55,24 @@ export default function AppointmentManagement() {
         <section className="appointment-product-hero" aria-labelledby="appointment-title">
           <div className="appointment-product-hero__copy">
             <span className="editorial-index">01 / APPOINTMENTS</span>
-            <p className="appointment-product-hero__eyebrow">מתיאום ידני למערכת עבודה מסודרת</p>
-            <h1 id="appointment-title">מערכת ניהול וזימון תורים לעסקים</h1>
-            <p className="appointment-product-hero__lead">לעסקים שמנהלים תורים ב‑WhatsApp או ביומן ידני: הזמנה אונליין וניהול מרוכז של התורים והלקוחות, עם אפשרות לחיבור לבוט בהתאם לתהליך העסק.</p>
+            <p className="appointment-product-hero__eyebrow">מערכת ניהול וזימון תורים לעסקים</p>
+            <h1 id="appointment-title">התורים מסודרים<br /><span>היום עובד טוב יותר</span></h1>
+            <p className="appointment-product-hero__lead">הלקוחות קובעים אונליין, והעסק רואה במקום אחד את היומן, הלקוחות והפעולות הבאות. אפשר לחבר גם את תהליך ה‑WhatsApp בהתאם לאופן העבודה שלכם.</p>
             <div className="appointment-actions">
               <a className="btn btn--primary" href="/#contact">לתיאום הדגמה <ArrowLeft size={18} /></a>
               <a className="btn btn--ghost" href="#product-proof">צפו במערכת בפעולה</a>
             </div>
+            <div className="appointment-product-hero__signals" aria-label="יתרונות מרכזיים">
+              <span>קביעה עצמאית</span><span>יומן מרכזי</span><span>חיבור ל‑WhatsApp</span>
+            </div>
           </div>
 
           <figure className="appointment-product-hero__visual">
-            <div className="appointment-product-hero__bar" aria-hidden="true"><i /><i /><i /><span>AllInCenter / APPOINTMENTS</span></div>
-            <video controls playsInline preload="metadata" title="הדגמת מערכת ניהול וזימון תורים">
+            <div className="appointment-product-hero__bar" aria-hidden="true"><span>AllInCenter / APPOINTMENTS</span><strong>הדגמת מוצר</strong></div>
+            <video controls playsInline preload="metadata" poster="/assets/home-appointment-ui.jpg" title="הדגמת מערכת ניהול וזימון תורים">
               <source src="/videos/maya-queue-management.mp4#t=25" type="video/mp4" />
             </video>
-            <figcaption>ממשק ניהול התורים בפעולה — יומן, לקוחות והפעילות השוטפת בסביבת עבודה אחת.</figcaption>
+            <figcaption><strong>מבט אמיתי על המערכת</strong><span>יומן, לקוחות והפעילות השוטפת בסביבת עבודה אחת.</span></figcaption>
           </figure>
         </section>
 

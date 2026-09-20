@@ -4791,6 +4791,237 @@ p {
 @media(max-width:700px){.restaurant-product-hero,.restaurant-journey,.restaurant-proof,.restaurant-operations,.restaurant-audience,.restaurant-search-connection,.restaurant-conversion,.restaurant-faq{width:min(100% - 28px,1320px)}.restaurant-product-hero{min-height:0}.restaurant-product-hero__copy{padding:48px 20px 38px}.restaurant-product-hero h1{margin-top:22px;font-size:clamp(2.65rem,13.5vw,3.75rem);line-height:1.02}.restaurant-product-hero__eyebrow{margin-top:20px}.restaurant-actions{display:grid;grid-template-columns:1fr}.restaurant-actions .btn{width:100%;min-height:48px}.restaurant-product-hero__visual{margin:0 14px 24px}.restaurant-product-hero__visual figcaption{font-size:.76rem}.restaurant-journey{padding-top:66px;padding-bottom:60px}.restaurant-heading h2{font-size:clamp(2rem,10vw,3rem)}.restaurant-journey__track{grid-template-columns:1fr;gap:12px}.restaurant-journey__track>div{grid-template-columns:30px 1fr;align-items:center;padding:6px 0}.restaurant-journey__track svg{margin-right:7px;transform:rotate(-90deg)}.restaurant-proof{padding:46px 20px}.restaurant-proof-row,.restaurant-proof-row:nth-of-type(odd){grid-template-columns:1fr;gap:20px;margin-top:46px}.restaurant-proof-row:nth-of-type(odd) figure{order:0}.restaurant-proof-row>div{padding-inline:4px}.restaurant-operations{gap:34px;padding-top:66px;padding-bottom:62px}.restaurant-capability-list article{grid-template-columns:30px 28px 1fr;gap:11px;padding-block:23px}.restaurant-audience{padding-top:64px;padding-bottom:66px}.restaurant-audience__list{grid-template-columns:1fr}.restaurant-audience__list>div:nth-child(odd){border-left:0}.restaurant-adaptation{grid-template-columns:1fr;gap:10px;margin-top:36px;padding:22px 20px}.restaurant-search-connection{gap:24px;padding:42px 22px}.restaurant-search-connection__lead>svg{margin-top:28px}.restaurant-conversion{margin-top:68px;padding:48px 22px}.restaurant-faq{padding-top:70px;padding-bottom:72px}.restaurant-faq summary{grid-template-columns:30px 1fr;gap:8px}.restaurant-faq details p{margin-right:38px}}
 @media(prefers-reduced-motion:reduce){.restaurant-editorial *,.restaurant-editorial *::before,.restaurant-editorial *::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}
 
+/* Product hero refinement: lighter hierarchy, natural Hebrew rhythm and integrated demos */
+.appointment-product-hero,
+.restaurant-product-hero {
+  position: relative;
+  isolation: isolate;
+  grid-template-columns: minmax(360px, .88fr) minmax(0, 1.12fr);
+  gap: clamp(34px, 5vw, 72px);
+  min-height: 0;
+  margin-top: 34px;
+  padding: clamp(42px, 5vw, 72px);
+  overflow: hidden;
+  border: 1px solid rgba(76, 42, 128, .1);
+  border-radius: 30px;
+  background:
+    radial-gradient(circle at 96% 4%, rgba(169, 74, 255, .13), transparent 31%),
+    linear-gradient(135deg, #fff 0%, #faf8ff 54%, #f4f8ff 100%);
+  box-shadow: 0 28px 80px rgba(42, 25, 73, .09);
+}
+.appointment-product-hero::after,
+.restaurant-product-hero::after {
+  position: absolute;
+  z-index: -1;
+  right: clamp(24px, 4vw, 62px);
+  bottom: -88px;
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  background: rgba(17, 175, 232, .1);
+  content: "";
+  filter: blur(2px);
+}
+.appointment-product-hero__copy,
+.restaurant-product-hero__copy {
+  justify-content: center;
+  padding: 8px 0;
+  color: #21163c;
+}
+.appointment-product-hero__copy .editorial-index,
+.restaurant-product-hero__copy .restaurant-index {
+  color: #73529f;
+}
+.appointment-product-hero__eyebrow,
+.restaurant-product-hero__eyebrow {
+  margin-top: 18px;
+  padding-bottom: 8px;
+  border-bottom-width: 1px;
+  color: #67329a;
+  font-size: .9rem;
+  letter-spacing: 0;
+}
+.appointment-product-hero h1,
+.restaurant-product-hero h1 {
+  max-width: 620px;
+  margin: 22px 0 18px;
+  color: #1c1235;
+  font-size: clamp(2.75rem, 4.25vw, 4.15rem);
+  font-weight: 900;
+  line-height: 1.09;
+  letter-spacing: -.015em;
+  text-wrap: balance;
+}
+.appointment-product-hero h1 span,
+.restaurant-product-hero h1 span {
+  background: linear-gradient(100deg, #7d25ca, #5d45db 55%, #119fd7);
+  background-clip: text;
+  color: transparent;
+}
+.appointment-product-hero__lead,
+.restaurant-product-hero__lead {
+  max-width: 590px;
+  color: #595168;
+  font-size: clamp(1rem, 1.35vw, 1.13rem);
+  line-height: 1.78;
+}
+.appointment-editorial .appointment-actions,
+.restaurant-actions {
+  margin-top: 25px;
+}
+.appointment-product-hero .btn--ghost,
+.restaurant-product-hero .btn--ghost {
+  border-color: #cfc7db;
+  color: #2d2146;
+  background: rgba(255, 255, 255, .72);
+}
+.appointment-product-hero .btn--ghost:hover,
+.restaurant-product-hero .btn--ghost:hover {
+  border-color: #8260ae;
+  color: #221539;
+  background: #fff;
+}
+.appointment-product-hero__signals,
+.restaurant-product-hero__signals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 26px;
+}
+.appointment-product-hero__signals span,
+.restaurant-product-hero__signals span {
+  padding: 7px 11px;
+  border: 1px solid rgba(101, 62, 154, .13);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .72);
+  color: #58476c;
+  font-size: .76rem;
+  font-weight: 750;
+}
+.appointment-product-hero__visual,
+.restaurant-product-hero__visual {
+  align-self: center;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgba(58, 37, 91, .12);
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 24px 58px rgba(35, 20, 63, .17);
+  transform: translateY(3px);
+}
+.appointment-product-hero__bar,
+.restaurant-product-hero__bar {
+  display: flex;
+  min-height: 42px;
+  padding: 0 16px;
+  border-bottom: 1px solid #ece8f2;
+  background: #fff;
+  color: #766b84;
+  direction: ltr;
+}
+.appointment-product-hero__bar span,
+.restaurant-product-hero__bar span {
+  margin: 0;
+  font-size: .62rem;
+  letter-spacing: .1em;
+}
+.appointment-product-hero__bar strong,
+.restaurant-product-hero__bar strong {
+  margin-left: auto;
+  color: #5f4c74;
+  font-size: .72rem;
+  letter-spacing: 0;
+  direction: rtl;
+}
+.appointment-product-hero__visual video,
+.restaurant-product-hero__visual video {
+  width: 100%;
+  background: #0c0913;
+  object-fit: contain;
+}
+.appointment-product-hero__visual figcaption,
+.restaurant-product-hero__visual figcaption {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 15px 17px 17px;
+  background: #fff;
+  color: #71687c;
+  font-size: .8rem;
+}
+.appointment-product-hero__visual figcaption strong,
+.restaurant-product-hero__visual figcaption strong {
+  flex: none;
+  color: #2c2044;
+}
+.appointment-product-hero__visual figcaption span,
+.restaurant-product-hero__visual figcaption span {
+  line-height: 1.55;
+}
+.appointment-section-heading h2,
+.restaurant-heading h2 {
+  font-size: clamp(1.95rem, 3.4vw, 3.15rem);
+  line-height: 1.16;
+  letter-spacing: -.012em;
+  text-wrap: balance;
+}
+.appointment-conversion h2,
+.restaurant-conversion h2 {
+  font-size: clamp(2rem, 3.8vw, 3.45rem);
+  line-height: 1.12;
+  letter-spacing: -.015em;
+}
+.restaurant-proof-row h3 { font-size: clamp(1.5rem, 2.4vw, 2.15rem); letter-spacing: -.01em; }
+
+@media (max-width: 980px) {
+  .appointment-product-hero,
+  .restaurant-product-hero {
+    grid-template-columns: 1fr;
+    gap: 34px;
+    padding: 46px;
+  }
+  .appointment-product-hero__copy,
+  .restaurant-product-hero__copy { padding: 0; }
+  .appointment-product-hero__visual,
+  .restaurant-product-hero__visual { width: min(100%, 760px); margin: 0 auto; }
+}
+
+@media (max-width: 700px) {
+  .appointment-product-hero,
+  .restaurant-product-hero {
+    width: calc(100% - 20px);
+    gap: 28px;
+    margin-top: 10px;
+    padding: 34px 18px 20px;
+    border-radius: 22px;
+  }
+  .appointment-product-hero__copy,
+  .restaurant-product-hero__copy { padding: 0; }
+  .appointment-product-hero h1,
+  .restaurant-product-hero h1 {
+    margin-top: 18px;
+    font-size: clamp(2.25rem, 10.8vw, 2.85rem);
+    line-height: 1.1;
+    letter-spacing: 0;
+  }
+  .appointment-product-hero__lead,
+  .restaurant-product-hero__lead { font-size: .98rem; line-height: 1.7; }
+  .appointment-product-hero__signals,
+  .restaurant-product-hero__signals { margin-top: 20px; }
+  .appointment-product-hero__signals span,
+  .restaurant-product-hero__signals span { font-size: .71rem; }
+  .appointment-product-hero__visual,
+  .restaurant-product-hero__visual { width: 100%; margin: 0; border-radius: 14px; transform: none; }
+  .appointment-product-hero__bar,
+  .restaurant-product-hero__bar { min-height: 36px; padding-inline: 12px; }
+  .appointment-product-hero__visual figcaption,
+  .restaurant-product-hero__visual figcaption { display: grid; gap: 3px; padding: 12px 13px 14px; }
+  .appointment-section-heading h2,
+  .restaurant-heading h2 { font-size: clamp(1.8rem, 8vw, 2.35rem); line-height: 1.18; letter-spacing: 0; }
+  .appointment-conversion h2,
+  .restaurant-conversion h2 { font-size: clamp(1.9rem, 8.5vw, 2.5rem); letter-spacing: 0; }
+}
+
 @media (max-width: 680px) {
   .guides-hero, .guides-list, .guide-main { width: min(100% - 28px, 1080px); }
   .guides-hero { padding-top: 52px; text-align: start; }
