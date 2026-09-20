@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { AlertCircle, ArrowLeft, CheckCircle2, LoaderCircle } from "lucide-react";
 import { trackLead } from "@/lib/fbpixel";
+import { isDemoRequestForm, trackGoogleLead } from "@/lib/analytics";
 
 const initialForm = {
   fullName: "",
@@ -84,6 +85,12 @@ export default function ContactForm({
       setStatus("success");
       // Meta Lead only after API success (PageView unchanged elsewhere).
       trackLead();
+      // Google lead/conversion only after the server accepted the lead.
+      trackGoogleLead({
+        source,
+        interest: form.interest || defaultInterest,
+        demoRequest: isDemoRequestForm({ source, submitLabel }),
+      });
     } catch (error) {
       console.warn("Contact form submission failed — Lead event not sent", error);
       setStatus("error");

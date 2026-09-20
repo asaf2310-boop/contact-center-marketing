@@ -16,12 +16,16 @@ import ServicesHub from "@/pages/ServicesHub";
 import NotFoundPage from "@/pages/NotFound";
 import Seo from "@/components/Seo";
 import { trackPageView } from "@/lib/fbpixel";
+import { initAnalytics, installLeadLinkTracking, trackAnalyticsPageView } from "@/lib/analytics";
 
 function RouteChangeTracker() {
   const location = useLocation();
   const isInitialLoad = useRef(true);
 
   useEffect(() => {
+    initAnalytics();
+    trackAnalyticsPageView();
+
     if (isInitialLoad.current) {
       isInitialLoad.current = false;
       return;
@@ -58,6 +62,8 @@ export function AppRoutes() {
 }
 
 export default function App() {
+  useEffect(() => installLeadLinkTracking(), []);
+
   return (
     <BrowserRouter>
       <AppRoutes />
