@@ -1,27 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   ArrowLeft,
+  ArrowUpLeft,
   Bell,
   CalendarCheck,
   CalendarDays,
-  CheckCircle2,
+  Check,
   CreditCard,
   ExternalLink,
+  MessageCircle,
   SlidersHorizontal,
   UserRound,
   Zap,
 } from "lucide-react";
-import SiteContactLine from "@/components/SiteContactLine";
+import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 
 const demoRoot = import.meta.env.VITE_MAYACLINIC_DEMO_URL || "https://mayaclinic-demo.vercel.app";
 const bookingDemoUrl = `${demoRoot.replace(/\/$/, "")}/book`;
 const adminDemoUrl = `${demoRoot.replace(/\/$/, "")}/admin`;
-
-const navLinks = [
-  { href: "/systems", label: "מערכות" }, { href: "/services", label: "שירותים" },
-  { href: "/guides", label: "מרכז הידע" }, { href: "/about", label: "מי אנחנו" },
-];
 
 const capabilities = [
   { icon: CalendarCheck, title: "ניהול וזימון תורים", text: "מרכזים את התורים ביומן אחד ומנהלים את הפעילות השוטפת בצורה מסודרת." },
@@ -35,11 +32,11 @@ const capabilities = [
 ];
 
 const audiences = [
-  ["קוסמטיקאיות ועסקי יופי", "לניהול טיפולים, זמינות, לקוחות ותורים בממשק אחד."],
-  ["מטפלים עצמאיים", "לקביעת פגישות אונליין ולניהול מסודר של הלקוחות והיומן."],
-  ["קליניקות", "לריכוז התורים, הלקוחות והתשלומים כחלק מהפעילות השוטפת."],
-  ["נותני שירות", "לעסקים שמקבלים לקוחות לפי זמן ורוצים להפחית תיאומים ידניים."],
-  ["עסקים קטנים שמנהלים תורים", "לניהול פשוט בעברית שניתן להתאים לתהליך הקיים בעסק."],
+  ["קוסמטיקאיות ועסקי יופי", "טיפולים, זמינות ופרטי לקוחות כבר לא צריכים להתפזר בין היומן לשיחות."],
+  ["מטפלים עצמאיים", "לקוחות יכולים לבחור מועד פנוי, בזמן שהיומן והמידע נשארים מסודרים במקום אחד."],
+  ["קליניקות", "מרכזים תורים, לקוחות ותשלומים כחלק מתהליך עבודה רציף וברור."],
+  ["נותני שירות", "מפחיתים את סבב ההודעות סביב כל מועד ומנהלים את המשך השירות מתוך המערכת."],
+  ["עסקים קטנים שמנהלים תורים", "עוברים מתיאום ידני לממשק עברי שניתן להתאים לתהליך הקיים בעסק."],
 ];
 
 const faqs = [
@@ -53,129 +50,131 @@ const faqs = [
   ["האם המערכת מתאימה לעסקים שמנהלים תורים ב‑WhatsApp?", "כן. אפשר לעבור מתיאום ידני בצ׳אטים להזמנה אונליין ולניהול מרכזי. בהתאם לתהליך העסק, ניתן גם לחבר את הזרימה לבוט WhatsApp."],
 ];
 
+const flow = ["שיחה ב‑WhatsApp", "בחירת שירות ומועד", "תור במערכת", "ניהול המשך התהליך"];
+
 export default function AppointmentManagement() {
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   return (
-    <div className="page appointment-page" dir="rtl">
-      <div className="bg-aurora" aria-hidden="true" />
-      <header className={`nav ${scrolled ? "nav--scrolled" : ""}`}>
-        <div className="nav__inner">
-          <a className="nav__brand" href="/" aria-label="AllInCenter - דף הבית">
-            <img src="/assets/allincenter-logo.png" alt="AllInCenter" />
-            <span>All<b>In</b>Center</span>
-          </a>
-          <nav className="nav__links" aria-label="ניווט ראשי">
-            {navLinks.map((link) => <a key={link.href} href={link.href}>{link.label}</a>)}
-          </nav>
-          <a className="btn btn--primary btn--sm" href="/#contact">לבקשת הדגמה <ArrowLeft size={16} /></a>
-        </div>
-      </header>
-
+    <div className="page appointment-page appointment-editorial" dir="rtl">
+      <SiteHeader />
       <main>
-        <section className="appointment-hero">
-          <div className="appointment-hero__copy">
-            <span className="tag"><CalendarCheck size={16} /> מערכת תורים מותאמת לעסק</span>
-            <h1>מערכת ניהול וזימון תורים לעסקים</h1>
-            <p>מערכת אחת שמאפשרת ללקוחות להזמין תור אונליין ולעסק לנהל תורים, לקוחות ותהליכים במקום אחד — בהתאמה לדרך שבה העסק עובד.</p>
+        <section className="appointment-product-hero" aria-labelledby="appointment-title">
+          <div className="appointment-product-hero__copy">
+            <span className="editorial-index">01 / APPOINTMENTS</span>
+            <p className="appointment-product-hero__eyebrow">מתיאום ידני למערכת עבודה מסודרת</p>
+            <h1 id="appointment-title">מערכת ניהול וזימון תורים לעסקים</h1>
+            <p className="appointment-product-hero__lead">לעסקים שמנהלים היום תורים דרך WhatsApp, שיחות או יומן ידני — הזמנה אונליין וניהול מרכזי של התורים והלקוחות, במקום אחד.</p>
+            <p className="appointment-product-hero__note">ניתן לחבר את התהליך לבוט WhatsApp, בהתאם לתהליך העסק ובהתאם לאופן שבו העסק עובד.</p>
             <div className="appointment-actions">
-              <a className="btn btn--primary" href="#demo-video">צפו במערכת בפעולה <ArrowLeft size={18} /></a>
-              <a className="btn btn--ghost" href="/#contact">לתיאום הדגמה</a>
+              <a className="btn btn--primary" href="/#contact">לתיאום הדגמה <ArrowLeft size={18} /></a>
+              <a className="btn btn--ghost" href="#product-proof">צפו במערכת בפעולה</a>
+            </div>
+            <div className="appointment-product-hero__trust" aria-label="יכולות מרכזיות">
+              <span><Check size={15} /> הזמנה אונליין</span>
+              <span><Check size={15} /> יומן ולקוחות</span>
+              <span><Check size={15} /> התאמה לעסק</span>
             </div>
           </div>
-          <div className="appointment-hero__points" aria-label="יכולות מרכזיות">
-            {["הזמנת תור אונליין", "ניהול לקוחות ויומן", "תשלומים ואוטומציות", "ממשק עברי לעסקים בישראל"].map((item) => (
-              <span key={item}><CheckCircle2 size={17} />{item}</span>
+
+          <figure className="appointment-product-hero__visual">
+            <div className="appointment-product-hero__bar" aria-hidden="true"><i /><i /><i /><span>AllInCenter / APPOINTMENTS</span></div>
+            <video controls playsInline preload="metadata" title="הדגמת מערכת ניהול וזימון תורים">
+              <source src="/videos/maya-queue-management.mp4#t=25" type="video/mp4" />
+            </video>
+            <figcaption>ממשק ניהול התורים בפעולה — יומן, לקוחות והפעילות השוטפת בסביבת עבודה אחת.</figcaption>
+          </figure>
+        </section>
+
+        <section className="appointment-whatsapp-story" aria-labelledby="whatsapp-title">
+          <div className="appointment-section-heading">
+            <span className="editorial-index">02 / FROM CHAT TO SYSTEM</span>
+            <h2 id="whatsapp-title">כשהתורים חיים בין הודעות ליומן, קשה לראות את היום כולו.</h2>
+            <p>עסקים רבים מתחילים בתיאום ידני. ככל שהפעילות גדלה, אותן הודעות על זמינות, אישורים ושינויים מתחילות לפצל את המידע בין כמה מקומות.</p>
+          </div>
+
+          <div className="appointment-journey" aria-label="תהליך משיחה בוואטסאפ לניהול התור במערכת">
+            {flow.map((item, index) => (
+              <React.Fragment key={item}>
+                <div><span>0{index + 1}</span><strong>{item}</strong></div>
+                {index < flow.length - 1 && <ArrowUpLeft aria-hidden="true" />}
+              </React.Fragment>
+            ))}
+          </div>
+
+          <div className="appointment-pain-list">
+            <article><span>01</span><div><h3>הודעות חוזרות על זמינות</h3><p>אותן שאלות חוזרות על שעות פנויות, במקום שהלקוח יבחר מועד מתוך יומן ברור.</p></div></article>
+            <article><span>02</span><div><h3>מידע מפוזר בין צ׳אטים ליומן</h3><p>פרטי הלקוח והתור נשמרים בשיחות נפרדות, וקשה לראות תמונת יום אחת.</p></div></article>
+            <article><span>03</span><div><h3>אישור ומעקב ידניים</h3><p>כל תזכורת, אישור או שינוי דורשים עוד פעולה ידנית ומעבר נוסף בין כלים.</p></div></article>
+            <article><span>04</span><div><h3>יומן יומי פחות ברור</h3><p>כשהתיאום חי בצ׳אט, קשה לשמור על סדר קבוע של התורים לאורך היום.</p></div></article>
+          </div>
+
+          <p className="appointment-whatsapp-story__close"><MessageCircle size={20} /> ניתן לחבר את התהליך לבוט WhatsApp, כך שהשיחה תוכל להוביל לשירותים זמינים ולמועדי תור — בהתאם לאופן שבו העסק עובד.</p>
+        </section>
+
+        <section className="appointment-product-proof" id="product-proof" aria-labelledby="proof-title">
+          <div className="appointment-section-heading">
+            <span className="editorial-index">03 / PRODUCT PROOF</span>
+            <h2 id="proof-title">שני צדדים של אותו תהליך.</h2>
+            <p>הלקוח בוחר שירות ומועד במסך ההזמנה; העסק מקבל את התור ומנהל את המשך הפעילות בממשק הניהול.</p>
+          </div>
+          <div className="appointment-proof-links">
+            <a href={bookingDemoUrl} target="_blank" rel="noreferrer">
+              <span>BOOKING / CUSTOMER</span><h3>חוויית הזמנת התור</h3><p>בחירת שירות וזמן פנוי וקביעת תור אונליין.</p><strong>לפתיחת דמו ההזמנה <ExternalLink size={16} /></strong>
+            </a>
+            <a href={adminDemoUrl} target="_blank" rel="noreferrer">
+              <span>MANAGEMENT / BUSINESS</span><h3>ממשק הניהול של העסק</h3><p>התורים, הלקוחות והיומן מתוך סביבת עבודה מרכזית.</p><strong>לפתיחת דמו הניהול <ExternalLink size={16} /></strong>
+            </a>
+          </div>
+        </section>
+
+        <section className="appointment-operations" aria-labelledby="capabilities-title">
+          <div className="appointment-section-heading appointment-section-heading--sticky">
+            <span className="editorial-index">04 / OPERATIONS</span>
+            <h2 id="capabilities-title">מערכת תפעולית, לא רק יומן.</h2>
+            <p>היכולות מתחברות לתהליך אחד שניתן להתאים לצורת העבודה של העסק.</p>
+          </div>
+          <div className="appointment-capability-list">
+            {capabilities.map(({ icon: Icon, title, text }, index) => (
+              <article key={title}><span>0{index + 1}</span><Icon size={21} aria-hidden="true" /><div><h3>{title}</h3><p>{text}</p></div></article>
             ))}
           </div>
         </section>
 
-        <section className="appointment-section appointment-demo" id="demo-video" aria-labelledby="demo-title">
-          <div className="appointment-heading">
-            <span className="kicker">המערכת בפעולה</span>
-            <h2 id="demo-title">כך נראה ניהול התורים במקום אחד</h2>
+        <section className="appointment-audience-fit" aria-labelledby="audiences-title">
+          <div className="appointment-section-heading">
+            <span className="editorial-index">05 / FIT</span>
+            <h2 id="audiences-title">מתאים לעסקים שבהם הזמן הוא חלק מהשירות.</h2>
           </div>
-          <div className="appointment-demo__layout">
-            <div className="appointment-video">
-              <video controls playsInline preload="metadata" title="הדגמת מערכת ניהול וזימון תורים">
-                <source src="/videos/maya-queue-management.mp4" type="video/mp4" />
-              </video>
-            </div>
-            <p>בווידאו ניתן לראות כיצד מנהלים את לוח התורים, הלקוחות והפעילות השוטפת מתוך ממשק אחד, וכיצד העסק יכול לעבוד בצורה מסודרת יותר בלי לנהל את המידע ידנית בין מספר מערכות.</p>
+          <div className="appointment-audience-list">
+            {audiences.map(([title, text], index) => <article key={title}><span>{String(index + 1).padStart(2, "0")}</span><h3>{title}</h3><p>{text}</p></article>)}
           </div>
-        </section>
-
-        <section className="appointment-section" aria-labelledby="capabilities-title">
-          <div className="appointment-heading"><span className="kicker">יכולות מרכזיות</span><h2 id="capabilities-title">מה אפשר לנהל במערכת?</h2></div>
-          <div className="appointment-capabilities">
-            {capabilities.map(({ icon: Icon, title, text }) => (
-              <article key={title}><span><Icon size={20} /></span><h3>{title}</h3><p>{text}</p></article>
-            ))}
+          <div className="appointment-adaptation">
+            <p className="editorial-index">BUSINESS-SPECIFIC</p>
+            <h3>המערכת מתאימה את עצמה לעסק.</h3>
+            <p>במקום להתאים את העסק למערכת קבועה, AllInCenter מאפשרת לבנות את תהליך העבודה סביב הצרכים של העסק — סוגי השירותים, זמני הפעילות, אופן קביעת התורים והפעולות שנדרשות לאחר ההזמנה.</p>
           </div>
         </section>
 
-        <section className="appointment-section" aria-labelledby="how-title">
-          <div className="appointment-heading"><span className="kicker">מהזמנה לניהול</span><h2 id="how-title">איך זה עובד?</h2></div>
-          <ol className="appointment-steps">
-            <li><span>01</span><h3>הלקוח בוחר שירות וזמן פנוי</h3><p>הלקוח נכנס למסך ההזמנה, בוחר את השירות ואת המועד שמתאים לו.</p></li>
-            <li><span>02</span><h3>התור נכנס למערכת הניהול</h3><p>פרטי ההזמנה נשמרים ומופיעים ביומן ובממשק הניהול של העסק.</p></li>
-            <li><span>03</span><h3>העסק מנהל את המשך התהליך</h3><p>מנהלים את הלקוח, התור והפעולות הבאות מתוך מקום אחד.</p></li>
-          </ol>
-        </section>
-
-        <section className="appointment-section" aria-labelledby="audiences-title">
-          <div className="appointment-heading"><span className="kicker">עסקים מבוססי תורים</span><h2 id="audiences-title">למי המערכת מתאימה?</h2></div>
-          <div className="appointment-audiences">
-            {audiences.map(([title, text]) => <article key={title}><h3>{title}</h3><p>{text}</p></article>)}
-          </div>
-        </section>
-
-        <section className="appointment-section appointment-custom" aria-labelledby="custom-title">
-          <div><span className="kicker">לא תבנית קבועה</span><h2 id="custom-title">המערכת מתאימה את עצמה לעסק</h2></div>
-          <p>במקום להתאים את העסק למערכת קבועה, AllInCenter מאפשרת לבנות את תהליך העבודה סביב הצרכים של העסק — סוגי השירותים, זמני הפעילות, אופן קביעת התורים והפעולות שנדרשות לאחר ההזמנה.</p>
-        </section>
-
-        <section className="appointment-section" aria-labelledby="whatsapp-title">
-          <div className="appointment-heading"><span className="kicker">מעבר מתיאום ידני</span><h2 id="whatsapp-title">מנהלים תורים דרך WhatsApp? אפשר להפוך את התהליך למסודר יותר</h2></div>
-          <p>עסקים רבים מתאמים תורים בצ׳אטים. זה עובד — עד שההודעות, היומן והמעקב מתפזרים. מערכת תורים מרכזת את ההזמנה והניהול, ובהתאם לתהליך העסק ניתן גם לחבר את הזרימה לבוט WhatsApp.</p>
-          <div className="appointment-audiences">
-            <article><h3>הודעות חוזרות על זמינות</h3><p>אותן שאלות חוזרות על שעות פנויות, במקום שהלקוח יבחר מועד מתוך יומן ברור.</p></article>
-            <article><h3>מידע מפוזר בין צ׳אטים ליומן</h3><p>פרטי הלקוח והתור נשמרים בשיחות נפרדות, וקשה לראות תמונת יום אחת.</p></article>
-            <article><h3>אישור ומעקב ידניים</h3><p>כל תזכורת, אישור או שינוי דורשים עוד הודעה ידנית.</p></article>
-            <article><h3>יומן יומי פחות ברור</h3><p>כשהתיאום חי בצ׳אט, קשה לשמור על סדר קבוע של התורים לאורך היום.</p></article>
-          </div>
-          <div className="appointment-heading">
-            <p>הפתרון הוא תהליך הזמנה אונליין ייעודי, יחד עם ניהול מרכזי של תורים ולקוחות. ניתן לחבר את התהליך לבוט WhatsApp, כך שהשיחה תוכל להוביל לשירותים זמינים ולמועדי תור — בהתאם לאופן שבו העסק עובד.</p>
-            <p>כדי למשוך לקוחות דרך האתר והחיפוש, אפשר לחבר את מערכת התורים לאתר מותאם. <a href="/google-ai-visibility">קראו על בניית אתר, SEO וחיבור למערכת תורים</a>.</p>
-            <p>מתלבטים מה לבדוק במערכת? <a href="/guides/how-to-choose-appointment-system">מדריך לבחירת מערכת ניהול תורים</a>.</p>
-          </div>
-        </section>
-
-        <section className="appointment-section appointment-live" aria-labelledby="live-title">
-          <div className="appointment-heading"><span className="kicker">התנסות ישירה</span><h2 id="live-title">צפו בדמו של מערכת התורים</h2><p>אפשר להתנסות בנפרד בחוויית הזמנת התור של הלקוח ובממשק הניהול של העסק.</p></div>
+        <section className="appointment-conversion" aria-labelledby="conversion-title">
+          <span className="editorial-index">06 / NEXT STEP</span>
+          <h2 id="conversion-title">רוצים להפסיק לנהל תורים בין הודעות ויומנים?</h2>
+          <p>נראה לכם מערכת אמיתית ונבדוק איך לחבר את ההזמנה והניהול לתהליך שכבר עובד בעסק.</p>
           <div className="appointment-actions">
-            <a className="btn btn--primary" href={bookingDemoUrl} target="_blank" rel="noreferrer">לצפייה בדמו הזמנה <ExternalLink size={17} /></a>
-            <a className="btn btn--ghost" href={adminDemoUrl} target="_blank" rel="noreferrer">לצפייה בדמו ניהול <ExternalLink size={17} /></a>
+            <a className="btn btn--primary" href="/#contact">לתיאום הדגמה <ArrowLeft size={18} /></a>
+            <a className="appointment-conversion__guide" href="/guides/how-to-choose-appointment-system">איך לבחור מערכת ניהול תורים לעסק? <ArrowLeft size={16} /></a>
           </div>
-          <a className="appointment-back" href="/systems">לכל המערכות של AllInCenter <ArrowLeft size={16} /></a>
+          <a className="appointment-conversion__context" href="/google-ai-visibility">איך מחברים אתר, חיפוש ומערכת תורים למסלול אחד?</a>
         </section>
 
-        <section className="appointment-section appointment-faq" aria-labelledby="faq-title">
-          <div className="appointment-heading"><span className="kicker">שאלות נפוצות</span><h2 id="faq-title">מידע נוסף על מערכת ניהול התורים</h2></div>
+        <section className="appointment-faq" aria-labelledby="faq-title">
+          <div className="appointment-section-heading">
+            <span className="editorial-index">07 / FAQ</span>
+            <h2 id="faq-title">מידע נוסף על מערכת ניהול התורים</h2>
+          </div>
           <div className="appointment-faq__list">
-            {faqs.map(([question, answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}
+            {faqs.map(([question, answer], index) => <details key={question}><summary><span>{String(index + 1).padStart(2, "0")}</span>{question}</summary><p>{answer}</p></details>)}
           </div>
         </section>
-        <aside className="appointment-guide-link">מתלבטים איזו מערכת מתאימה לכם? <a href="/guides/how-to-choose-appointment-system">קראו את המדריך לבחירת מערכת ניהול תורים.</a></aside>
       </main>
-
       <SiteFooter />
     </div>
   );
