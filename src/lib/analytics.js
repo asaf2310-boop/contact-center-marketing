@@ -2,6 +2,7 @@ const DEFAULT_GA4_ID = "G-TJ6XKPDT91";
 const GA4_ID = import.meta.env.VITE_GA4_MEASUREMENT_ID?.trim() || DEFAULT_GA4_ID;
 const GOOGLE_ADS_ID = import.meta.env.VITE_GOOGLE_ADS_ID?.trim();
 const GOOGLE_ADS_LEAD_LABEL = import.meta.env.VITE_GOOGLE_ADS_LEAD_LABEL?.trim();
+const SITE_FALLBACK_ORIGIN = "https://www.allincenter.co.il";
 
 let initialized = false;
 
@@ -81,26 +82,84 @@ function cleanLinkText(link) {
   return link.textContent?.replace(/\s+/g, " ").trim().slice(0, 100) || "unlabelled";
 }
 
+export function isWhatsAppHref(href = "") {
+  const value = String(href).trim();
+  if (!value) return false;
+
+  try {
+    const url = new URL(value, typeof window !== "undefined" ? window.location.origin : SITE_FALLBACK_ORIGIN);
+    const host = url.hostname.replace(/^www\./i, "").toLowerCase();
+    return (
+      url.protocol === "whatsapp:" ||
+      host === "wa.me" ||
+      host === "api.whatsapp.com" ||
+      host === "whatsapp.com"
+    );
+  } catch {
+    return /(?:wa\.me|api\.whatsapp\.com|whatsapp\.com|whatsapp:)/i.test(value);
+  }
+}
+
+export function trackWhatsAppClick({ location, linkText } = {}) {
+  trackAnalyticsEvent("whatsapp_click", {
+    link_text: linkText || "WhatsApp",
+    ...(location ? { location } : {}),
+    transport_type: "beacon",
+  });
+}
+
+function markWhatsAppTracked(event) {
+  const native = event.nativeEvent || event;
+  if (event.__aicWhatsAppTracked || native.__aicWhatsAppTracked) return false;
+  event.__aicWhatsAppTracked = true;
+  native.__aicWhatsAppTracked = true;
+  return true;
+}
+
+export function handleWhatsAppLinkClick(event) {
+  if (!markWhatsAppTracked(event)) return;
+
+  const link = event.currentTarget;
+  if (!link) return;
+
+  trackWhatsAppClick({
+    location: link.dataset?.analyticsLocation,
+    linkText: cleanLinkText(link),
+  });
+}
+
+function findClickedLink(event) {
+  if (typeof event.composedPath === "function") {
+    const fromPath = event.composedPath().find((node) => node?.tagName === "A" && node.getAttribute?.("href"));
+    if (fromPath) return fromPath;
+  }
+  return event.target?.closest?.("a[href]") || null;
+}
+
 export function installLeadLinkTracking() {
   if (typeof document === "undefined") return () => {};
 
   function handleClick(event) {
-    const link = event.target.closest?.("a[href]");
+    const native = event.nativeEvent || event;
+    if (event.__aicWhatsAppTracked || native.__aicWhatsAppTracked) return;
+
+    const link = findClickedLink(event);
     if (!link) return;
 
     const rawHref = link.getAttribute("href") || "";
+    const resolvedHref = link.href || rawHref;
     const text = cleanLinkText(link);
 
-    if (/^(https?:\/\/)?(wa\.me|api\.whatsapp\.com|www\.whatsapp\.com)\//i.test(rawHref)) {
-      const location = link.dataset.analyticsLocation;
-      trackAnalyticsEvent("whatsapp_click", {
-        link_text: text,
-        ...(location ? { location } : {}),
+    if (isWhatsAppHref(rawHref) || isWhatsAppHref(resolvedHref)) {
+      if (!markWhatsAppTracked(event)) return;
+      trackWhatsAppClick({
+        location: link.dataset.analyticsLocation,
+        linkText: text,
       });
       return;
     }
 
-    if (rawHref.startsWith("tel:")) {
+    if (rawHref.startsWith("tel:") || resolvedHref.startsWith("tel:")) {
       trackAnalyticsEvent("phone_click", { link_text: text });
     }
   }

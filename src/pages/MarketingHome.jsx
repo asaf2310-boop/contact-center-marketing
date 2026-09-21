@@ -19,7 +19,7 @@ import ContactForm from "@/components/ContactForm";
 import Reveal from "@/components/Reveal";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import { getWhatsAppHref } from "@/lib/site";
+import WhatsAppLink from "@/components/WhatsAppLink";
 
 const contactCenterDemoUrl =
   import.meta.env.VITE_CONTACT_CENTER_DEMO_URL ||
@@ -192,7 +192,7 @@ export default function MarketingHome() {
         </section>
 
         <section className="section" id="contact">
-          <Reveal><div className="contact-section"><div className="contact-section__copy"><span className="editorial-index">05 / DEMO</span><h2>בואו נראה איך המערכת יכולה להתאים לעסק שלכם.</h2><p>השאירו פרטים ונחזור לשיחת היכרות קצרה, כדי להבין את התהליך ולבנות הדגמה רלוונטית.</p><ul><li><Check size={18} />היכרות עם תהליך העבודה</li><li><Check size={18} />הדגמה של מערכת אמיתית</li><li><Check size={18} />כיוון ברור להמשך</li></ul><a className="contact-section__whatsapp" href={getWhatsAppHref()} target="_blank" rel="noopener noreferrer" data-analytics-location="contact">דברו איתנו ב-WhatsApp <MessageCircle size={18} /></a></div><ContactForm /></div></Reveal>
+          <Reveal><div className="contact-section"><div className="contact-section__copy"><span className="editorial-index">05 / DEMO</span><h2>בואו נראה איך המערכת יכולה להתאים לעסק שלכם.</h2><p>השאירו פרטים ונחזור לשיחת היכרות קצרה, כדי להבין את התהליך ולבנות הדגמה רלוונטית.</p><ul><li><Check size={18} />היכרות עם תהליך העבודה</li><li><Check size={18} />הדגמה של מערכת אמיתית</li><li><Check size={18} />כיוון ברור להמשך</li></ul><WhatsAppLink className="contact-section__whatsapp" location="contact">דברו איתנו ב-WhatsApp</WhatsAppLink></div><ContactForm /></div></Reveal>
         </section>
       </main>
       <SiteFooter />
