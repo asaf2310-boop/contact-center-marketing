@@ -15,6 +15,9 @@ const urlList = [
   `https://${host}/restaurant-reservations`,
   `https://${host}/guides`,
   `https://${host}/guides/how-to-choose-appointment-system`,
+  `https://${host}/guides/restaurant-reservation-system`,
+  `https://${host}/guides/ai-automation-small-business`,
+  `https://${host}/guides/seo-ai-visibility-business`,
   `https://${host}/google-ai-visibility`,
 ];
 

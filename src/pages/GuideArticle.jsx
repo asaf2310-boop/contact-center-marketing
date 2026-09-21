@@ -2,19 +2,124 @@ import React from "react";
 import { ArrowLeft } from "lucide-react";
 import { useParams } from "react-router-dom";
 import GuideShell from "@/components/GuideShell";
-import { getGuideBySlug } from "@/data/guides";
+import {
+  getGuideBySlug,
+  guideReadingMinutes,
+  normalizeSection,
+} from "@/data/guides";
 import NotFoundPage from "@/pages/NotFound";
+
+function RichText({ text }) {
+  const parts = String(text).split(/\[\[(.+?)\]\]/g);
+  return parts.map((part, index) => {
+    if (index % 2 === 0) return part;
+    const [href, label] = part.split("|");
+    return <a key={`${href}-${index}`} href={href}>{label}</a>;
+  });
+}
+
+function Paragraphs({ items }) {
+  if (!items?.length) return null;
+  return items.map((item) => <p key={item}><RichText text={item} /></p>);
+}
+
+function ItemList({ items }) {
+  if (!items?.length) return null;
+  return (
+    <ul>
+      {items.map((item) => <li key={item}><RichText text={item} /></li>)}
+    </ul>
+  );
+}
 
 export default function GuideArticle() {
   const { slug } = useParams();
   const guide = getGuideBySlug(slug);
   if (!guide) return <NotFoundPage />;
-  return <GuideShell><main className="guide-main">
-    <nav className="breadcrumbs" aria-label="פירורי לחם"><a href="/">AllInCenter</a><span>›</span><a href="/guides">מרכז הידע</a><span>›</span><span aria-current="page">{guide.shortTitle}</span></nav>
-    <article className="guide-article"><header><span className="kicker">{guide.category}</span><h1>{guide.title}</h1></header>
-      <div className="guide-content">{guide.intro.map((p) => <p key={p}>{p}</p>)}{guide.sections.map(([heading, paragraphs]) => <section key={heading}><h2>{heading}</h2>{paragraphs.map((p) => <p key={p}>{p}</p>)}</section>)}</div>
-      <aside className="guide-cta"><h2>רוצים לראות איך זה עובד בפועל?</h2><a className="btn btn--primary" href="/appointment-management">לצפייה במערכת ניהול התורים של AllInCenter <ArrowLeft size={18} /></a></aside>
-      <a className="guide-back" href="/guides">חזרה למרכז הידע</a>
-    </article>
-  </main></GuideShell>;
+  const related = (guide.related || []).map(getGuideBySlug).filter(Boolean);
+
+  return (
+    <GuideShell>
+      <main className="guide-main">
+        <nav className="breadcrumbs" aria-label="פירורי לחם">
+          <a href="/">AllInCenter</a><span>›</span>
+          <a href="/guides">מרכז הידע</a><span>›</span>
+          <span aria-current="page">{guide.shortTitle}</span>
+        </nav>
+        <article className="guide-article">
+          <header>
+            <span className="kicker">{guide.category}</span>
+            <h1>{guide.title}</h1>
+            <p className="guide-lead">{guide.excerpt}</p>
+            <p className="kc-meta">{guideReadingMinutes(guide)} דקות קריאה</p>
+          </header>
+          <div className="guide-content">
+            <Paragraphs items={guide.intro} />
+            {guide.sections.map((raw) => {
+              const item = normalizeSection(raw);
+              return (
+                <section key={item.heading}>
+                  <h2>{item.heading}</h2>
+                  <Paragraphs items={item.paragraphs} />
+                  <ItemList items={item.list} />
+                  {(item.h3s || []).map((block) => (
+                    <div key={block.heading}>
+                      <h3>{block.heading}</h3>
+                      <Paragraphs items={block.paragraphs} />
+                      <ItemList items={block.list} />
+                    </div>
+                  ))}
+                  {item.callout && (
+                    <aside className="guide-callout">
+                      <strong>{item.callout.title}</strong>
+                      <p>{item.callout.text}</p>
+                    </aside>
+                  )}
+                </section>
+              );
+            })}
+            {guide.checklist && (
+              <section>
+                <h2>{guide.checklist.title}</h2>
+                <ol className="guide-checklist">
+                  {guide.checklist.items.map((item) => <li key={item}>{item}</li>)}
+                </ol>
+              </section>
+            )}
+            {guide.faq?.length ? (
+              <section className="guide-faq" aria-labelledby="guide-faq-title">
+                <h2 id="guide-faq-title">שאלות נפוצות</h2>
+                <div>
+                  {guide.faq.map(([question, answer]) => (
+                    <details key={question}>
+                      <summary>{question}</summary>
+                      <p>{answer}</p>
+                    </details>
+                  ))}
+                </div>
+              </section>
+            ) : null}
+          </div>
+          {related.length ? (
+            <section className="guide-related" aria-labelledby="guide-related-title">
+              <h2 id="guide-related-title">מדריכים קשורים</h2>
+              <ul>
+                {related.map((item) => (
+                  <li key={item.slug}><a href={`/guides/${item.slug}`}>{item.title}</a></li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
+          <aside className="guide-cta">
+            <h2>רוצים לראות איך זה מתחבר לעסק שלכם?</h2>
+            <div className="guide-cta__actions">
+              <a className="btn btn--primary" href={guide.cta.href}>{guide.cta.label} <ArrowLeft size={18} /></a>
+              <a className="btn btn--ghost" href="/#contact">לשיחה קצרה</a>
+            </div>
+          </aside>
+          <a className="guide-back" href="/guides">חזרה למרכז הידע</a>
+        </article>
+      </main>
+    </GuideShell>
+  );
 }

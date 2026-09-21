@@ -84,6 +84,34 @@ function graph(extra = []) {
   };
 }
 
+function articleSeo({ path, title, description, breadcrumbName, faq }) {
+  const url = `${SITE.url}${path}`;
+  const extra = [
+    { "@type": "WebPage", "@id": `${url}#webpage`, url, name: title, description, inLanguage: SITE.language, isPartOf: { "@id": websiteId } },
+    { "@type": "Article", "@id": `${url}#article`, headline: title, description, mainEntityOfPage: { "@id": `${url}#webpage` }, publisher: { "@id": orgId }, author: { "@id": founderId }, inLanguage: SITE.language },
+    { "@type": "BreadcrumbList", "@id": `${url}#breadcrumb`, itemListElement: [
+      { "@type": "ListItem", position: 1, name: "AllInCenter", item: `${SITE.url}/` },
+      { "@type": "ListItem", position: 2, name: "מרכז הידע", item: `${SITE.url}/guides` },
+      { "@type": "ListItem", position: 3, name: breadcrumbName, item: url },
+    ] },
+  ];
+  if (faq?.length) {
+    extra.push({
+      "@type": "FAQPage",
+      "@id": `${url}#faq`,
+      mainEntity: faq.map(([name, text]) => ({ "@type": "Question", name, acceptedAnswer: { "@type": "Answer", text } })),
+    });
+  }
+  return {
+    title: `${title} | AllInCenter`,
+    description,
+    canonical: url,
+    ogImage: SITE.logo,
+    twitterCard: "summary",
+    jsonLd: graph(extra),
+  };
+}
+
 export const routeSeo = {
   "/": {
     title: "AllInCenter | מערכות ניהול, זימון תורים ואוטומציה לעסקים",
@@ -318,7 +346,15 @@ export const routeSeo = {
     canonical: `${SITE.url}/guides`,
     ogImage: SITE.logo,
     twitterCard: "summary",
-    jsonLd: graph([{ "@type": "CollectionPage", "@id": `${SITE.url}/guides#webpage`, url: `${SITE.url}/guides`, name: "מרכז הידע של AllInCenter", inLanguage: SITE.language, isPartOf: { "@id": websiteId } }]),
+    jsonLd: graph([
+      { "@type": "CollectionPage", "@id": `${SITE.url}/guides#webpage`, url: `${SITE.url}/guides`, name: "מרכז הידע של AllInCenter", inLanguage: SITE.language, isPartOf: { "@id": websiteId } },
+      { "@type": "ItemList", "@id": `${SITE.url}/guides#itemlist`, name: "מדריכי מרכז הידע של AllInCenter", itemListElement: [
+        { "@type": "ListItem", position: 1, name: "איך לבחור מערכת ניהול תורים לעסק? 8 דברים שכדאי לבדוק", url: `${SITE.url}/guides/how-to-choose-appointment-system` },
+        { "@type": "ListItem", position: 2, name: "מערכת הזמנות למסעדה: מה חשוב לבדוק לפני שבוחרים?", url: `${SITE.url}/guides/restaurant-reservation-system` },
+        { "@type": "ListItem", position: 3, name: "אוטומציה ו-AI לעסקים קטנים: מאיפה מתחילים?", url: `${SITE.url}/guides/ai-automation-small-business` },
+        { "@type": "ListItem", position: 4, name: "SEO ונראות במנועי AI: מה עסק צריך לעשות כדי שיוכלו למצוא ולהבין אותו?", url: `${SITE.url}/guides/seo-ai-visibility-business` },
+      ] },
+    ]),
   },
   "/guides/how-to-choose-appointment-system": {
     title: "איך לבחור מערכת ניהול תורים לעסק? 8 דברים שכדאי לבדוק | AllInCenter",
@@ -336,6 +372,42 @@ export const routeSeo = {
       ] },
     ]),
   },
+  "/guides/restaurant-reservation-system": articleSeo({
+    path: "/guides/restaurant-reservation-system",
+    title: "מערכת הזמנות למסעדה: מה חשוב לבדוק לפני שבוחרים?",
+    description: "מה לבדוק במערכת הזמנות למסעדות: הזמנת שולחן אונליין, ניהול הזמנות, מפת שולחנות והתאמה לצוות — לפני שעוברים מערכת.",
+    breadcrumbName: "מערכת הזמנות למסעדה",
+    faq: [
+      ["האם אורחים חייבים להתקשר כדי להזמין שולחן?", "לא בהכרח. מערכת הזמנות טובה מאפשרת הזמנה דיגיטלית של שולחן, כולל בחירת מספר סועדים, תאריך ושעה. עדיין אפשר לקבל הזמנות בטלפון, אבל כדאי שהן ייכנסו לאותה תמונת מצב."],
+      ["מה ההבדל בין טופס באתר לבין מערכת הזמנות?", "טופס אוסף פרטים. מערכת הזמנות מחברת את הפרטים האלה לניהול הזמנות ולעבודה עם שולחנות ואזורי ישיבה. בלי הצד של הצוות, נשארים עם רשימת בקשות שצריך לטפל בה ידנית."],
+      ["האם כל מסעדה צריכה מפת שולחנות?", "לא כל מקום עובד באותו אופן. אם ההושבה פשוטה מאוד, ייתכן שמסך הזמנות מספיק. אם יש כמה אזורים, שולחנות בגדלים שונים או ערב שמשתנה לפי ביקוש — מפת שולחנות הופכת לכלי עבודה, לא לקישוט."],
+      ["מה AllInCenter כוללת במערכת ההזמנות?", "הזמנת שולחן אונליין, בחירת סועדים מועד ואזור ישיבה, לוח בקרה לניהול הזמנות, ומפת שולחנות ואזורי ישיבה בממשק בעברית. אפשר להתאים את התהליך לצורת העבודה במסעדה."],
+    ],
+  }),
+  "/guides/ai-automation-small-business": articleSeo({
+    path: "/guides/ai-automation-small-business",
+    title: "אוטומציה ו-AI לעסקים קטנים: מאיפה מתחילים?",
+    description: "מאיפה מתחילים עם אוטומציה ו-AI לעסקים קטנים: אילו תהליכים מתאימים, איפה AI עוזר, איפה הוא מיותר, ואיך למפות תהליך לפני שמחברים כלי.",
+    breadcrumbName: "אוטומציה ו-AI לעסקים קטנים",
+    faq: [
+      ["האם כל עסק קטן צריך AI?", "לא. עסק שחוזר על אותה פעולה פשוטה יכול להרוויח מאוטומציה של כלל, בלי מודל שפה. AI נכנס כשיש הבנה של טקסט או מיון שאי אפשר לכסות בכלל קבוע."],
+      ["מאיפה מתחילים אם אין תקציב גדול?", "מתהליך אחד, מוגדר, עם קלט ופלט ברורים. עדיף לייצב פנייה־אישור־תזכורת מאשר לפזר כמה ניסיונות כלים בלי בעלים לתהליך."],
+      ["האם אוטומציה מחליפה עובדים?", "המדריך הזה לא מניח כזה דבר. ברוב העסקים הקטנים המטרה היא להוריד העתקה ידנית ותיאום כפול, כדי שהצוות יטפל במה שדורש שיחה, שיקול דעת ושירות."],
+      ["מה AllInCenter עושה בתחום הזה?", "AllInCenter עוזרת לאפיין תהליך, לחבר פעולות חוזרות ולהוביל פתרון AI או אוטומציה לפי הצורך העסקי — עד ההטמעה. לא כל פרויקט מתחיל במודל, ולא כל תהליך צריך כזה."],
+    ],
+  }),
+  "/guides/seo-ai-visibility-business": articleSeo({
+    path: "/guides/seo-ai-visibility-business",
+    title: "SEO ונראות במנועי AI: מה עסק צריך לעשות כדי שיוכלו למצוא ולהבין אותו?",
+    description: "מה עסק צריך באתר כדי שאפשר יהיה למצוא ולהבין אותו בגוגל ובמנועי AI: סריקה, תוכן, עמודי שירות, קישורים פנימיים ו-Schema — בלי הבטחה לדירוג או לאזכור.",
+    breadcrumbName: "SEO ונראות במנועי AI",
+    faq: [
+      ["האם Schema מבטיח שאזכירו את העסק במנוע AI?", "לא. Schema יכול לעזור להבין מבנה ומידע, אם הוא תואם את העמוד. הוא לא הבטחה לציטוט, לאזכור או לתנועה ממנוע שיחה."],
+      ["האם צריך אתר כדי להופיע בחיפוש?", "כן, אתר ברור הוא הבסיס. אפשר לבנות אתר חדש או לשפר אתר קיים. בלי עמודים שאפשר לסרוק ולהבין, קשה לבנות נראות יציבה."],
+      ["האם נראות ב-AI מחליפה קידום בגוגל?", "לא. אלו שכבות שונות. יסודות SEO — סריקה, תוכן, עמודי שירות וקישורים — נשארים הכרחיים. מנוע AI עשוי להשתמש במקורות מהרשת, בלי התחייבות להופעה."],
+      ["מה AllInCenter עושה כאן בפועל?", "בנייה או שיפור של אתר, SEO טכני ומבנה תוכן, וחיבור למסלול פנייה: טופס, WhatsApp, מערכת תורים או מערכת הזמנות — לפי תהליך העסק. בלי הבטחה לדירוג או להופעה בתשובות AI."],
+    ],
+  }),
   "/google-ai-visibility": {
     title: "בניית אתרים, SEO ונראות במנועי AI | AllInCenter",
     description: "בניית ושיפור אתרים לעסקים, SEO וחיבור למערכת תורים, מערכת הזמנות או WhatsApp — כדי להפוך חיפושים בגוגל ובמנועי AI לפניות וללקוחות.",

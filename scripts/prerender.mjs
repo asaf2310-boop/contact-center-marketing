@@ -203,6 +203,9 @@ for (const loc of [
   "https://www.allincenter.co.il/allincenter-pelecard",
   "https://www.allincenter.co.il/guides",
   "https://www.allincenter.co.il/guides/how-to-choose-appointment-system",
+  "https://www.allincenter.co.il/guides/restaurant-reservation-system",
+  "https://www.allincenter.co.il/guides/ai-automation-small-business",
+  "https://www.allincenter.co.il/guides/seo-ai-visibility-business",
   "https://www.allincenter.co.il/google-ai-visibility",
 ]) {
   if (!sitemap.includes(`<loc>${loc}</loc>`)) fail(`sitemap.xml missing ${loc}`);

@@ -128,6 +128,30 @@
       "destination": "/guides/how-to-choose-appointment-system/index.html"
     },
     {
+      "source": "/guides/restaurant-reservation-system",
+      "destination": "/guides/restaurant-reservation-system/index.html"
+    },
+    {
+      "source": "/guides/restaurant-reservation-system/",
+      "destination": "/guides/restaurant-reservation-system/index.html"
+    },
+    {
+      "source": "/guides/ai-automation-small-business",
+      "destination": "/guides/ai-automation-small-business/index.html"
+    },
+    {
+      "source": "/guides/ai-automation-small-business/",
+      "destination": "/guides/ai-automation-small-business/index.html"
+    },
+    {
+      "source": "/guides/seo-ai-visibility-business",
+      "destination": "/guides/seo-ai-visibility-business/index.html"
+    },
+    {
+      "source": "/guides/seo-ai-visibility-business/",
+      "destination": "/guides/seo-ai-visibility-business/index.html"
+    },
+    {
       "source": "/google-ai-visibility",
       "destination": "/google-ai-visibility/index.html"
     },

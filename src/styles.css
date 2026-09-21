@@ -4789,6 +4789,106 @@ p {
 .guide-cta { margin-top: 52px; padding: 28px; border: 1px solid rgba(139,47,214,.14); border-radius: var(--radius); background: linear-gradient(135deg, rgba(139,47,214,.06), rgba(25,169,242,.06)); }
 .guide-cta h2 { margin-bottom: 18px; font-size: 1.35rem; }
 .guide-back { display: inline-block; margin-top: 28px; color: var(--violet-deep); font-weight: 700; }
+
+.guides-page { position: relative; overflow-x: clip; }
+.guides-page .kicker { letter-spacing: .04em; text-transform: none; }
+.kc-main { width: min(100% - 44px, 1180px); margin-inline: auto; }
+.kc-hero {
+  display: grid; grid-template-columns: minmax(280px, 1.05fr) minmax(240px, .9fr); gap: 36px 48px;
+  align-items: center; padding: 48px 0 20px;
+}
+.kc-hero h1 {
+  max-width: 16ch; margin-top: 12px; color: #241b45;
+  font-size: clamp(2.125rem, 1.4rem + 2.4vw, 3.25rem); line-height: 1.2; letter-spacing: -.028em; text-wrap: pretty;
+}
+.kc-hero p { max-width: 38rem; margin-top: 14px; color: #625c72; font-size: 1.05rem; line-height: 1.75; }
+.kc-index {
+  overflow: hidden; border: 1px solid rgba(48,38,75,.1); border-radius: 20px; background: #fff;
+  box-shadow: 0 18px 44px rgba(33,26,57,.08);
+}
+.kc-index__bar {
+  display: flex; align-items: center; gap: 6px; min-height: 34px; padding: 0 12px;
+  border-bottom: 1px solid rgba(48,38,75,.08); background: #fbfafd;
+}
+.kc-index__bar span { width: 7px; height: 7px; border-radius: 50%; background: #e4deee; }
+.kc-index__bar span:nth-child(1) { background: #f0c9c9; }
+.kc-index__bar span:nth-child(2) { background: #ead9a8; }
+.kc-index__bar span:nth-child(3) { background: #cde6cf; }
+.kc-index__bar small { margin-inline-start: auto; color: #8a8298; font-size: .66rem; font-weight: 700; }
+.kc-index ol { display: grid; gap: 0; margin: 0; padding: 6px 0; list-style: none; }
+.kc-index li { display: grid; gap: 2px; padding: 10px 14px; border-bottom: 1px solid rgba(48,38,75,.06); }
+.kc-index li:last-child { border-bottom: 0; }
+.kc-index small { color: #6d1fb8; font-size: .72rem; font-weight: 800; }
+.kc-index strong { color: #241b45; font-size: .92rem; line-height: 1.4; }
+.kc-featured {
+  margin: 12px 0 28px; padding: 28px; border: 1px solid rgba(48,38,75,.08); border-radius: 26px;
+  background: linear-gradient(135deg, rgba(255,255,255,.9), rgba(243,237,255,.55));
+  box-shadow: 0 14px 36px rgba(33,26,57,.05);
+}
+.kc-featured__label { color: #6d1fb8; font-size: .78rem; font-weight: 800; }
+.kc-featured h2 { max-width: 22ch; margin-top: 10px; color: #241b45; font-size: clamp(1.7rem, 1.4rem + 1.1vw, 2.2rem); line-height: 1.25; }
+.kc-featured p { max-width: 42rem; margin-top: 10px; color: #625c72; line-height: 1.7; }
+.kc-featured .btn { margin-top: 18px; }
+.kc-meta { color: #8a8298 !important; font-size: .86rem !important; font-weight: 700; }
+.kc-list { padding: 8px 0 88px; }
+.kc-list__head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; align-items: end; margin-bottom: 20px; }
+.kc-list h2 { color: #241b45; font-size: 1.45rem; }
+.kc-filters { display: flex; flex-wrap: wrap; gap: 8px; }
+.kc-filters button {
+  min-height: 40px; padding: 8px 14px; border: 1px solid rgba(48,38,75,.12); border-radius: 999px;
+  background: #fff; color: #3d3550; font-size: .86rem; font-weight: 750; cursor: pointer;
+}
+.kc-filters button.is-active { border-color: rgba(109,31,184,.35); background: #f7f1ff; color: #6d1fb8; }
+.kc-empty { color: #625c72; }
+.kc-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; }
+.kc-card {
+  display: flex; flex-direction: column; min-width: 0; padding: 22px; border: 1px solid rgba(48,38,75,.08);
+  border-radius: 22px; background: rgba(255,255,255,.86);
+}
+.kc-card > span { color: #6d1fb8; font-size: .78rem; font-weight: 800; }
+.kc-card h3 { margin-top: 10px; color: #241b45; font-size: 1.18rem; line-height: 1.35; }
+.kc-card p { margin-top: 10px; color: #625c72; line-height: 1.65; }
+.kc-card small { display: block; margin-top: 12px; color: #8a8298; font-weight: 700; }
+.kc-card a { display: inline-flex; align-items: center; gap: 6px; margin-top: auto; padding-top: 16px; color: #6321aa; font-weight: 800; }
+.guides-page .guide-main { width: min(100% - 44px, 850px); max-width: 850px; padding: 36px 0 88px; }
+.guides-page .guide-article { margin-top: 22px; padding: clamp(22px, 4vw, 48px); }
+.guides-page .guide-article header h1 {
+  max-width: 22ch; margin-top: 10px; font-size: clamp(2.05rem, 1.5rem + 1.6vw, 3.05rem); line-height: 1.22; letter-spacing: -.03em;
+}
+.guides-page .guide-lead { margin-top: 12px; color: #625c72; font-size: 1.05rem; line-height: 1.7; }
+.guides-page .guide-content { max-width: 820px; margin-top: 28px; }
+.guides-page .guide-content p { font-size: 1.125rem; line-height: 1.85; }
+.guides-page .guide-content h2 { font-size: clamp(1.25rem, 1.1rem + .8vw, 1.55rem); }
+.guides-page .guide-content h3 { margin: 18px 0 10px; color: #241b45; font-size: 1.12rem; }
+.guides-page .guide-content ul, .guides-page .guide-checklist { display: grid; gap: 8px; margin: 8px 0 20px; padding: 0; padding-inline-start: 1.2em; }
+.guides-page .guide-content li { color: #3c3757; font-size: 1.05rem; line-height: 1.7; }
+.guide-callout {
+  margin: 8px 0 20px; padding: 16px 18px; border: 1px solid rgba(109,31,184,.14); border-radius: 16px; background: #faf7ff;
+}
+.guide-callout strong { display: block; margin-bottom: 6px; color: #4a2278; }
+.guide-callout p { margin: 0 !important; }
+.guide-faq details { border-bottom: 1px solid #ece8f2; }
+.guide-faq summary { padding: 14px 2px; cursor: pointer; font-weight: 800; }
+.guide-faq details p { padding-bottom: 14px; }
+.guide-related { margin-top: 36px; }
+.guide-related h2 { margin-bottom: 10px; font-size: 1.2rem; }
+.guide-related ul { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.guide-related a { color: #6321aa; font-weight: 750; line-height: 1.5; }
+.guide-cta__actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+@media (max-width: 900px) {
+  .kc-hero { grid-template-columns: 1fr; gap: 22px; padding-top: 32px; }
+  .kc-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 430px) {
+  .kc-hero h1 { max-width: none; font-size: clamp(2.125rem, 8vw, 2.35rem); }
+  .kc-filters button { min-height: 42px; }
+  .kc-featured { padding: 20px 16px; }
+  .guides-page .guide-main { width: min(100% - 28px, 850px); }
+  .guide-cta__actions { display: grid; }
+  .guide-cta__actions .btn { width: 100%; justify-content: center; }
+}
+
 .appointment-guide-link { width: min(100% - 44px, 900px); margin: 20px auto 72px; padding: 22px 26px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); color: var(--muted); text-align: center; line-height: 1.7; }
 .appointment-guide-link a { color: var(--violet-deep); font-weight: 800; }
 

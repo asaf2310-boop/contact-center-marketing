@@ -56,6 +56,21 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.allincenter.co.il/guides/restaurant-reservation-system</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.allincenter.co.il/guides/ai-automation-small-business</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.allincenter.co.il/guides/seo-ai-visibility-business</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.allincenter.co.il/google-ai-visibility</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
