@@ -51,16 +51,19 @@
 .guides-page .guide-editorial .guide-faq summary{cursor:pointer;font-weight:700;line-height:1.7}
 .guides-page .guide-editorial .guide-faq details p{margin:16px 0 0}
 .guides-page .guide-editorial .guide-related{margin-top:60px;padding-top:32px;border-top:1px solid #dedce8}
-.guides-page .guide-editorial .guide-related ul{grid-template-columns:1fr 1fr;gap:20px;margin-top:22px}
-.guides-page .guide-editorial .guide-related a{display:flex;flex-direction:column;height:100%;padding:28px;background:#fff;border:1px solid #dfdbe8;border-radius:16px;text-decoration:none}
-.guides-page .guide-editorial .ge-related-category{font-size:12px;color:#79548c;margin-bottom:12px}
-.guides-page .guide-editorial .guide-related strong{font-size:22px;line-height:1.5;color:#302043}
-.guides-page .guide-editorial .guide-related p{font-size:15px;font-weight:400;color:#6a6176;line-height:1.8;margin:14px 0 24px}
-.guides-page .guide-editorial .ge-related-link{display:flex;align-items:center;gap:10px;font-size:14px;margin-top:auto}
+.guides-page .guide-editorial .guide-related ul{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
+.guides-page .guide-editorial .ge-related-card{display:flex;flex-direction:column;height:100%;padding:22px 22px 20px;background:#fff;border:1px solid #e4e0ea;border-radius:14px;text-decoration:none;color:inherit;font-weight:400;box-shadow:none;transition:border-color .16s ease,box-shadow .16s ease}
+.guides-page .guide-editorial .ge-related-card:hover{border-color:#d3c9e0;box-shadow:0 8px 22px #24183a0a}
+.guides-page .guide-editorial .ge-related-category{font-size:12px;font-weight:750;color:#79548c;margin-bottom:10px}
+.guides-page .guide-editorial .guide-related strong{display:block;font-size:1.12rem;line-height:1.4;color:#2c2142;font-weight:750}
+.guides-page .guide-editorial .guide-related p{font-size:15px;font-weight:400;color:#6a6176;line-height:1.7;margin:10px 0 0}
+.guides-page .guide-editorial .ge-related-meta{display:block;margin-top:12px;color:#8a8298;font-size:.82rem;font-weight:700}
+.guides-page .guide-editorial .ge-related-link{display:inline-flex;align-items:center;gap:8px;margin-top:auto;padding-top:16px;color:#6321aa;font-size:.9rem;font-weight:800}
+@media (prefers-reduced-motion:reduce){.guides-page .guide-editorial .ge-related-card{transition:none}}
 .guides-page .guide-editorial .guide-cta{background:#29203e;color:#fff;border:0;padding:38px;margin-top:36px}
 .guides-page .guide-editorial .guide-cta h2{font-size:28px;color:#fff;line-height:1.5}
 .guides-page .guide-editorial .guide-cta .btn--ghost{color:#fff;border-color:#8a799d;background:transparent}
 .guides-page .guide-editorial a:focus-visible,.guides-page .guide-editorial summary:focus-visible{outline:3px solid #78549a;outline-offset:4px}
 @media(max-width:1000px){.guides-page .guide-editorial .ge-reading-layout{grid-template-columns:minmax(0,760px);gap:28px}.guides-page .guide-editorial .ge-toc{position:static;max-height:none;padding:18px;background:#f3f0f7;border-radius:12px;border:1px solid #e1dbe9}.guides-page .guide-editorial .ge-toc nav{grid-template-columns:1fr 1fr}.guides-page .guide-editorial .ge-hero{gap:24px}}
 @media(max-width:780px){.guides-page .guide-main.guide-editorial{width:calc(100% - 36px)}.guides-page .guide-editorial .ge-hero{grid-template-columns:1fr;padding-top:20px;gap:24px}.guides-page .guide-editorial .ge-hero-copy{max-width:660px}.guides-page .guide-editorial .ge-hero .ge-media{transform:none}.guides-page .guide-editorial .ge-hero h1{font-size:36px}.guides-page .guide-editorial .ge-reading-layout{margin-top:26px}.guides-page .guide-editorial .ge-comparison{grid-template-columns:1fr}.guides-page .guide-editorial .guide-related ul{grid-template-columns:1fr}.guides-page .guide-editorial .guide-content p{font-size:17px}.guides-page .guide-editorial .ge-checklist-panel{padding:22px}.guides-page .guide-editorial .guide-cta{padding:26px}.guides-page .guide-editorial .guide-cta .btn{white-space:normal;text-align:center;line-height:1.6}}
-@media(max-width:480px){.guides-page .guide-editorial .ge-hero h1{font-size:32px}.guides-page .guide-editorial .ge-toc nav{grid-template-columns:1fr}.guides-page .guide-editorial .ge-flow{padding:18px}.guides-page .guide-editorial .ge-flow ol{grid-template-columns:1fr}.guides-page .guide-editorial .ge-flow li{padding:13px}.guides-page .guide-editorial .ge-media-label{padding:12px;font-size:11px}.guides-page .guide-editorial .guide-related a{padding:22px}}
+@media(max-width:480px){.guides-page .guide-editorial .ge-hero h1{font-size:32px}.guides-page .guide-editorial .ge-toc nav{grid-template-columns:1fr}.guides-page .guide-editorial .ge-flow{padding:18px}.guides-page .guide-editorial .ge-flow ol{grid-template-columns:1fr}.guides-page .guide-editorial .ge-flow li{padding:13px}.guides-page .guide-editorial .ge-media-label{padding:12px;font-size:11px}.guides-page .guide-editorial .ge-related-card{padding:20px}}

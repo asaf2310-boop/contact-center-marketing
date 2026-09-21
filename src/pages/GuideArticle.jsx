@@ -122,7 +122,15 @@ export default function GuideArticle() {
               <h2 id="guide-related-title">מדריכים קשורים</h2>
               <ul>
                 {related.map((item) => (
-                  <li key={item.slug}><a href={`/guides/${item.slug}`}><span className="ge-related-category">{item.category}</span><strong>{item.title}</strong><p>{item.excerpt}</p><span className="ge-related-link">לקריאת המדריך <ArrowLeft size={18} aria-hidden="true" /></span></a></li>
+                  <li key={item.slug}>
+                    <a className="ge-related-card" href={`/guides/${item.slug}`}>
+                      <span className="ge-related-category">{item.category}</span>
+                      <strong>{item.title}</strong>
+                      <p>{item.excerpt}</p>
+                      <span className="ge-related-meta">{guideReadingMinutes(item)} דקות קריאה</span>
+                      <span className="ge-related-link">לקריאת המדריך <ArrowLeft size={16} aria-hidden="true" /></span>
+                    </a>
+                  </li>
                 ))}
               </ul>
             </section>
