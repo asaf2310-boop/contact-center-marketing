@@ -251,6 +251,8 @@
   gap: 14px;
 }
 .about-page .about-formula article {
+  display: flex;
+  flex-direction: column;
   min-width: 0;
   padding: 22px 20px;
   border: 1px solid rgba(48, 38, 75, .1);
@@ -270,12 +272,23 @@
   font-size: 1.12rem;
   line-height: 1.4;
 }
+.about-page .about-formula p {
+  margin: 10px 0 0;
+  color: #241b45;
+  font-size: 1.12rem;
+  font-weight: 750;
+  line-height: 1.4;
+}
 .about-page .about-formula__result {
   background: #29203e;
   border-color: #29203e;
 }
 .about-page .about-formula__result span { color: #cbb9e4; }
 .about-page .about-formula__result strong { color: #fff; }
+.about-page .about-formula__result p {
+  color: rgba(255, 255, 255, .78);
+  font-weight: 650;
+}
 
 .about-page .about-cta {
   margin-top: 36px;

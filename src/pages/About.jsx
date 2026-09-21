@@ -116,6 +116,7 @@ export default function About() {
             <article className="about-formula__result">
               <span>החיבור</span>
               <strong>AllInCenter</strong>
+              <p>מערכות שמחברות בין העסק לטכנולוגיה</p>
             </article>
           </div>
         </section>
