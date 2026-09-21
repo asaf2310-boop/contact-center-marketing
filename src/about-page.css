@@ -279,14 +279,15 @@
   font-weight: 750;
   line-height: 1.4;
 }
-.about-page .about-formula__result {
+.about-page .about-formula article.about-formula__result {
   background: #29203e;
   border-color: #29203e;
+  color: #fff;
 }
-.about-page .about-formula__result span { color: #cbb9e4; }
-.about-page .about-formula__result strong { color: #fff; }
-.about-page .about-formula__result p {
-  color: rgba(255, 255, 255, .78);
+.about-page .about-formula article.about-formula__result span { color: #cbb9e4; }
+.about-page .about-formula article.about-formula__result strong { color: #fff; }
+.about-page .about-formula article.about-formula__result p {
+  color: rgba(255, 255, 255, .82);
   font-weight: 650;
 }
 
