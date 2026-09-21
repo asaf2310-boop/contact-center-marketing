@@ -108,10 +108,12 @@ export default function About() {
             <article>
               <span>ניסיון עסקי</span>
               <strong>שירות · תמיכה · תפעול</strong>
+              <p>היכרות עם תהליכי העבודה והאתגרים בעסק</p>
             </article>
             <article>
               <span>טכנולוגיה</span>
               <strong>מערכות · אוטומציה · AI</strong>
+              <p>כלים שמפשטים תהליכים ועבודה יומיומית</p>
             </article>
             <article className="about-formula__result">
               <span>החיבור</span>
