@@ -92,7 +92,11 @@ export function installLeadLinkTracking() {
     const text = cleanLinkText(link);
 
     if (/^(https?:\/\/)?(wa\.me|api\.whatsapp\.com|www\.whatsapp\.com)\//i.test(rawHref)) {
-      trackAnalyticsEvent("whatsapp_click", { link_text: text });
+      const location = link.dataset.analyticsLocation;
+      trackAnalyticsEvent("whatsapp_click", {
+        link_text: text,
+        ...(location ? { location } : {}),
+      });
       return;
     }
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { SITE } from "@/lib/site";
+import { getWhatsAppHref, SITE } from "@/lib/site";
 
 export default function SiteContactLine({ showAiLink = false }) {
   return (
@@ -7,6 +7,15 @@ export default function SiteContactLine({ showAiLink = false }) {
       <a href={`tel:${SITE.phoneIntl}`}>{SITE.phoneDisplay}</a>
       <span aria-hidden="true"> · </span>
       <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+      <span aria-hidden="true"> · </span>
+      <a
+        href={getWhatsAppHref()}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-analytics-location="footer"
+      >
+        WhatsApp
+      </a>
       {showAiLink ? (
         <>
           <span aria-hidden="true"> · </span>
