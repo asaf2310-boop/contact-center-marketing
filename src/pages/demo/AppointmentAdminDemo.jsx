@@ -1,10 +1,11 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import DemoFrame from "@/pages/demo/DemoFrame";
 import useAppointmentDemo from "@/lib/useAppointmentDemo";
 import { formatIsraeliPhoneDisplay, getEmailError, getIsraeliPhoneError } from "@/lib/israeliValidators";
 import {
   ADMIN_TIMES,
+  CLINIC,
   PAYMENT_OPTIONS,
   SERVICES,
   STATUS_OPTIONS,
@@ -17,6 +18,8 @@ import {
   formatShortDate,
   formatWeekday,
   getService,
+  isFreshOnlineBooking,
+  nextUpcoming,
   onlineBookings,
   patchAppointment,
   paymentLabel,
@@ -53,23 +56,30 @@ function PaymentBadge({ status }) {
   return <span className={`ad-pay ad-pay--${status}`}>{paymentLabel(status)}</span>;
 }
 
-function AppointmentButton({ appointment, customer, onOpen }) {
+function AppointmentButton({ appointment, customer, onOpen, compact = false }) {
   const service = getService(appointment.serviceId);
+  const fromSite = appointment.source === "booking";
+  const fresh = isFreshOnlineBooking(appointment);
   return (
     <button
       type="button"
-      className={`ad-appt${appointment.status === "cancelled" ? " is-cancelled" : ""}${appointment.source === "booking" ? " is-new" : ""}`}
+      className={`ad-appt${compact ? " ad-appt--compact" : ""}${appointment.status === "cancelled" ? " is-cancelled" : ""}${fromSite ? " is-online" : ""}${fresh ? " is-new" : ""}`}
       onClick={() => onOpen(appointment.id)}
     >
-      <strong>{appointment.time} · {customer?.name || "לקוח"}</strong>
-      <small>{service.name}</small>
-      <StatusBadge status={appointment.status} />
+      <span className="ad-appt__time">{appointment.time}</span>
+      <span className="ad-name ad-appt__name">{customer?.name || "לקוח"}</span>
+      <small className="ad-appt__service">{service.name}</small>
+      <span className="ad-appt__meta">
+        <StatusBadge status={appointment.status} />
+        {fromSite ? <span className="ad-chip">חדש מהאתר</span> : null}
+      </span>
     </button>
   );
 }
 
 export default function AppointmentAdminDemo() {
   const [state, commit] = useAppointmentDemo();
+  const [searchParams] = useSearchParams();
   const [view, setView] = useState("calendar");
   const [range, setRange] = useState("day");
   const [cursor, setCursor] = useState(() => todayIso());
@@ -82,6 +92,7 @@ export default function AppointmentAdminDemo() {
   const [formErrors, setFormErrors] = useState({});
   const [confirmReset, setConfirmReset] = useState(false);
   const [confirmCancel, setConfirmCancel] = useState(false);
+  const focusedFromBooking = useRef(false);
 
   useEffect(() => {
     if (!state || !selectedId) return;
@@ -90,6 +101,20 @@ export default function AppointmentAdminDemo() {
       setEditing(false);
     }
   }, [state, selectedId]);
+
+  useEffect(() => {
+    if (!state || focusedFromBooking.current) return;
+    const focusId = searchParams.get("focus");
+    const fromBooking = searchParams.get("from") === "booking";
+    const target = (focusId && state.appointments.find((appointment) => appointment.id === focusId))
+      || (fromBooking ? onlineBookings(state)[0] : null);
+    if (!target) return;
+    focusedFromBooking.current = true;
+    setView("calendar");
+    setRange("day");
+    setCursor(target.date);
+    setSelectedId(target.id);
+  }, [state, searchParams]);
 
   useEffect(() => {
     if (!selectedId && !customerId && !creating) return undefined;
@@ -106,12 +131,14 @@ export default function AppointmentAdminDemo() {
   }, [selectedId, customerId, creating]);
 
   const today = todayIso();
-  const summary = state ? todaySummary(state, today) : null;
+  const summary = state ? todaySummary(state) : null;
+  const upcoming = state ? nextUpcoming(state) : null;
+  const upcomingCustomer = upcoming ? findCustomer(state, upcoming.customerId) : null;
   const selected = state?.appointments.find((appointment) => appointment.id === selectedId) || null;
   const selectedCustomer = selected ? findCustomer(state, selected.customerId) : null;
   const activeCustomer = state?.customers.find((customer) => customer.id === customerId) || null;
   const customerDetails = state && activeCustomer ? describeCustomer(state, activeCustomer, today) : null;
-  const bookedOnline = state ? onlineBookings(state) : [];
+  const bookedOnline = state ? onlineBookings(state).filter((appointment) => isFreshOnlineBooking(appointment)) : [];
   const weekStart = startOfWeek(cursor);
   const weekDays = Array.from({ length: 7 }, (_, index) => addDays(weekStart, index));
   const customers = useMemo(() => {
@@ -233,17 +260,44 @@ export default function AppointmentAdminDemo() {
   return (
     <DemoFrame
       title="מרכז הבקרה"
-      subtitle="דמו AllInCenter"
-      extraNav={<Link className="ad-navlink" to="/demo/appointments/booking">צפייה בחוויית הלקוח</Link>}
+      subtitle={CLINIC.name}
+      switchTo="/demo/appointments/booking"
+      switchLabel="חוויית הלקוח"
     >
-      {!state || !summary ? <p className="ad-loading">טוען את סביבת ההדגמה…</p> : (
+      {!state || !summary ? <p className="ad-loading">טוענים את היומן…</p> : (
         <>
           <section className="ad-summary" aria-label="סיכום היום">
-            <article className="ad-stat"><span>תורים היום</span><strong>{summary.appointments}</strong></article>
-            <article className="ad-stat"><span>לקוחות</span><strong>{summary.customers}</strong></article>
-            <article className="ad-stat"><span>הכנסות היום</span><strong>{formatMoney(summary.revenue)}</strong></article>
-            <article className="ad-stat"><span>תורים שממתינים לאישור</span><strong>{summary.pending}</strong></article>
+            <article className="ad-stat">
+              <span>תורים היום</span>
+              <strong>{summary.appointments}</strong>
+              <small>{summary.remaining > 0 ? `${summary.remaining} נותרו להמשך היום` : "אין תורים נוספים היום"}</small>
+            </article>
+            <article className="ad-stat">
+              <span>לקוחות</span>
+              <strong>{summary.customers}</strong>
+              <small>כרטיסים פעילים</small>
+            </article>
+            <article className="ad-stat">
+              <span>הכנסות היום</span>
+              <strong>{formatMoney(summary.revenue)}</strong>
+              <small>מטיפולים ששולמו</small>
+            </article>
+            <article className="ad-stat">
+              <span>ממתינים לאישור</span>
+              <strong>{summary.pending}</strong>
+              <small>{summary.completed} הושלמו היום</small>
+            </article>
           </section>
+
+          {upcoming && upcomingCustomer && (
+            <button type="button" className="ad-next" onClick={() => { setView("calendar"); setRange("day"); setCursor(upcoming.date); openAppointment(upcoming.id); }}>
+              <span>התור הבא</span>
+              <strong>{upcoming.time}</strong>
+              <b className="ad-name">{upcomingCustomer.name}</b>
+              <small>{getService(upcoming.serviceId).name}</small>
+              <StatusBadge status={upcoming.status} />
+            </button>
+          )}
 
           <div className="ad-toolbar">
             <div className="ad-tabs" role="tablist" aria-label="תצוגות">
@@ -270,14 +324,14 @@ export default function AppointmentAdminDemo() {
             <section className="ad-panel" aria-label="יומן תורים">
               {bookedOnline.length > 0 && (
                 <div className="ad-banner">
-                  <strong>נקבעו בחוויית הלקוח</strong>
+                  <strong>נוסף עכשיו דרך ההזמנה אונליין</strong>
                   <ul>
                     {bookedOnline.map((appointment) => {
                       const customer = findCustomer(state, appointment.customerId);
                       return (
                         <li key={appointment.id}>
                           <button type="button" className="ad-textlink" onClick={() => revealBooking(appointment)}>
-                            {customer?.name} · {formatShortDate(appointment.date)} · {appointment.time} · {getService(appointment.serviceId).name}
+                            <span className="ad-name">{customer?.name}</span> · {formatShortDate(appointment.date)} · {appointment.time} · {getService(appointment.serviceId).name}
                           </button>
                         </li>
                       );
@@ -329,6 +383,7 @@ export default function AppointmentAdminDemo() {
                           {items.length === 0 ? <p className="ad-muted">אין תורים</p> : items.map((appointment) => (
                             <AppointmentButton
                               key={appointment.id}
+                              compact
                               appointment={appointment}
                               customer={findCustomer(state, appointment.customerId)}
                               onOpen={(id) => { setCursor(iso); openAppointment(id); }}
@@ -349,9 +404,9 @@ export default function AppointmentAdminDemo() {
               <table className="ad-table">
                 <thead>
                   <tr>
-                    <th>שם</th>
+                    <th>לקוח</th>
                     <th>טלפון</th>
-                    <th>תור אחרון</th>
+                    <th>ביקור אחרון</th>
                     <th>תור הבא</th>
                     <th>מספר ביקורים</th>
                     <th>סה״כ תשלומים</th>
@@ -362,13 +417,13 @@ export default function AppointmentAdminDemo() {
                     const details = describeCustomer(state, customer, today);
                     return (
                       <tr key={customer.id}>
-                        <td data-label="שם">
-                          <button type="button" className="ad-rowbtn" onClick={() => { setSelectedId(null); setCustomerId(customer.id); }}>
+                        <td data-label="לקוח">
+                          <button type="button" className="ad-rowbtn ad-name" onClick={() => { setSelectedId(null); setCustomerId(customer.id); }}>
                             {customer.name}
                           </button>
                         </td>
                         <td data-label="טלפון">{customer.phone}</td>
-                        <td data-label="תור אחרון">{details.last ? formatShortDate(details.last.date) : "—"}</td>
+                        <td data-label="ביקור אחרון">{details.last ? formatShortDate(details.last.date) : "—"}</td>
                         <td data-label="תור הבא">{details.next ? `${formatShortDate(details.next.date)} ${details.next.time}` : "—"}</td>
                         <td data-label="מספר ביקורים">{details.visits}</td>
                         <td data-label="סה״כ תשלומים">{formatMoney(details.totalPaid)}</td>
@@ -380,7 +435,8 @@ export default function AppointmentAdminDemo() {
             </section>
           )}
 
-          <p className="ad-footnote">כל הנתונים פיקטיביים ונשמרים רק בדפדפן זה.</p>
+          <p className="ad-footnote">זהו דמו בלבד. לא נוצר תור אמיתי ולא נשלחים הודעות או בקשות תשלום.</p>
+          <p className="ad-customize">המערכת, השירותים, הצבעים ותהליך ההזמנה מותאמים לעסק.</p>
 
           {selected && selectedCustomer && (
             <div className="ad-overlay" onClick={closeDrawer} onKeyDown={onKeyDown}>
@@ -392,11 +448,12 @@ export default function AppointmentAdminDemo() {
                 onClick={(event) => event.stopPropagation()}
               >
                 <div className="ad-drawer__head">
-                  <h2 id="appointment-drawer-title">{selectedCustomer.name}</h2>
+                  <h2 id="appointment-drawer-title" className="ad-name">{selectedCustomer.name}</h2>
                   <button type="button" className="ad-btn ad-btn--ghost" onClick={closeDrawer}>סגירה</button>
                 </div>
+                {selected.source === "booking" ? <p className="ad-chip ad-chip--block">חדש מהאתר</p> : null}
                 <dl className="ad-meta">
-                  <dt>לקוח</dt><dd>{selectedCustomer.name}</dd>
+                  <dt>לקוח</dt><dd className="ad-name">{selectedCustomer.name}</dd>
                   <dt>טלפון</dt><dd>{selectedCustomer.phone}</dd>
                   {!editing && (
                     <>
@@ -474,7 +531,7 @@ export default function AppointmentAdminDemo() {
             <div className="ad-overlay" onClick={closeDrawer} onKeyDown={onKeyDown}>
               <aside className="ad-drawer" role="dialog" aria-modal="true" aria-labelledby="customer-drawer-title" onClick={(event) => event.stopPropagation()}>
                 <div className="ad-drawer__head">
-                  <h2 id="customer-drawer-title">{activeCustomer.name}</h2>
+                  <h2 id="customer-drawer-title" className="ad-name">{activeCustomer.name}</h2>
                   <button type="button" className="ad-btn ad-btn--ghost" onClick={closeDrawer}>סגירה</button>
                 </div>
                 <dl className="ad-meta">
@@ -508,7 +565,7 @@ export default function AppointmentAdminDemo() {
                   <h2 id="create-title">תור חדש</h2>
                   <button type="button" className="ad-btn ad-btn--ghost" onClick={() => setCreating(false)}>סגירה</button>
                 </div>
-                <p className="ad-note">התור נשמר רק בדמו המקומי ומופיע מיד ביומן.</p>
+                <p className="ad-note">התור יופיע מיד ביומן הקליניקה.</p>
                 <form className="ad-form" noValidate onSubmit={submitCreate}>
                   <label className="ad-field">
                     <span>שם מלא</span>

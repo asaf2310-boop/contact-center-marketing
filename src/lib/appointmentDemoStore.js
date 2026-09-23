@@ -2,10 +2,15 @@ import { formatIsraeliPhoneDisplay, phoneDigitsOnly } from "@/lib/israeliValidat
 
 export const DEMO_STORAGE_KEY = "allincenter.appointmentsDemo.v1";
 
+export const CLINIC = {
+  name: "LIV Clinic",
+  tagline: "קליניקה לטיפולי יופי ואסתטיקה",
+};
+
 export const SERVICES = [
-  { id: "personal", name: "טיפול אישי", duration: 60, price: 250 },
-  { id: "consult", name: "פגישת ייעוץ", duration: 45, price: 180 },
-  { id: "followup", name: "טיפול המשך", duration: 30, price: 150 },
+  { id: "personal", name: "טיפול פנים בהתאמה אישית", duration: 60, price: 250 },
+  { id: "consult", name: "פגישת ייעוץ קוסמטי", duration: 45, price: 180 },
+  { id: "followup", name: "טיפול פנים קצר", duration: 30, price: 150 },
 ];
 
 export const BOOKING_SLOTS = ["08:30", "09:30", "11:00", "16:00", "17:30", "18:30"];
@@ -177,12 +182,12 @@ export function createSeed(now = new Date()) {
     appointment("a-past-6", "c6", "personal", addDays(today, -2), "08:30", "completed", "paid", "המשך טיפול."),
     appointment("a-past-7", "c10", "followup", addDays(today, -1), "10:00", "cancelled", "unpaid", "בוטל יום לפני המועד."),
     appointment("a-past-8", "c11", "consult", addDays(today, -9), "18:30", "completed", "paid", ""),
-    appointment("a-today-1", "c1", "personal", today, "08:30", "confirmed", "paid", "הגיעה בזמן."),
-    appointment("a-today-2", "c7", "personal", today, "09:30", "confirmed", "paid", "לקוח חדש בדמו."),
-    appointment("a-today-3", "c2", "consult", today, "10:00", "confirmed", "paid", ""),
-    appointment("a-today-4", "c9", "consult", today, "11:00", "confirmed", "paid", ""),
-    appointment("a-today-5", "c3", "followup", today, "11:30", "completed", "paid", "הטיפול הושלם."),
-    appointment("a-today-6", "c8", "consult", today, "14:30", "completed", "paid", ""),
+    appointment("a-today-1", "c1", "personal", today, "08:30", "completed", "paid", "הטיפול הסתיים."),
+    appointment("a-today-2", "c7", "personal", today, "09:30", "completed", "paid", "לקוחה חדשה."),
+    appointment("a-today-3", "c2", "consult", today, "10:00", "completed", "paid", ""),
+    appointment("a-today-4", "c3", "followup", today, "11:30", "confirmed", "paid", "המשך סדרה."),
+    appointment("a-today-5", "c9", "consult", today, "13:00", "confirmed", "paid", ""),
+    appointment("a-today-6", "c8", "followup", today, "14:30", "confirmed", "paid", ""),
     appointment("a-today-7", "c4", "personal", today, "16:00", "pending", "paid", "ממתינה לאישור סופי."),
     appointment("a-today-8", "c5", "consult", today, "17:30", "pending", "unpaid", "ביקשה לאשר לפני ההגעה."),
     appointment("a-next-1", "c6", "personal", addDays(today, 1), "09:30", "confirmed", "pending", "המשך טיפול."),
@@ -264,7 +269,7 @@ export function addOnlineBooking(state, input) {
     time: input.time,
     status: "pending",
     paymentStatus: "unpaid",
-    notes: "נקבע בחוויית ההזמנה של הדמו.",
+    notes: "נקבע דרך ההזמנה אונליין.",
     source: "booking",
     createdAt: Date.now(),
   };
@@ -302,7 +307,7 @@ export function createManualAppointment(state, input) {
     time: input.time,
     status: input.status || "confirmed",
     paymentStatus: input.paymentStatus || "pending",
-    notes: input.notes?.trim() || "נוצר ידנית בדמו הניהול.",
+    notes: input.notes?.trim() || "נוסף ידנית ממרכז הבקרה.",
     source: "manual",
     createdAt: Date.now(),
   };
@@ -323,18 +328,40 @@ export function patchAppointment(state, appointmentId, patch) {
   };
 }
 
-export function todaySummary(state, iso = todayIso()) {
+export function todaySummary(state, now = new Date()) {
+  const clock = now instanceof Date ? now : new Date();
+  const iso = now instanceof Date ? todayIso(now) : String(now || todayIso());
+  const minutesNow = clock.getHours() * 60 + clock.getMinutes();
   const todays = state.appointments.filter((appointment) => appointment.date === iso && appointment.status !== "cancelled");
   const revenue = todays
     .filter((appointment) => appointment.paymentStatus === "paid")
     .reduce((sum, appointment) => sum + getService(appointment.serviceId).price, 0);
+  const remaining = todays.filter((appointment) => (
+    appointment.status !== "completed" && slotMinutes(appointment.time) > minutesNow
+  )).length;
+  const completed = todays.filter((appointment) => appointment.status === "completed").length;
 
   return {
     appointments: todays.length,
     customers: state.customers.length,
     revenue,
     pending: todays.filter((appointment) => appointment.status === "pending").length,
+    remaining,
+    completed,
   };
+}
+
+export function nextUpcoming(state, now = new Date()) {
+  const iso = todayIso(now);
+  const minutesNow = now.getHours() * 60 + now.getMinutes();
+  return state.appointments
+    .filter((appointment) => appointment.status !== "cancelled" && appointment.status !== "completed")
+    .filter((appointment) => appointment.date > iso || (appointment.date === iso && slotMinutes(appointment.time) > minutesNow))
+    .sort((a, b) => `${a.date}${a.time}`.localeCompare(`${b.date}${b.time}`))[0] || null;
+}
+
+export function isFreshOnlineBooking(appointment, now = Date.now()) {
+  return appointment.source === "booking" && appointment.status !== "cancelled" && now - (appointment.createdAt || 0) < 1000 * 60 * 60 * 12;
 }
 
 export function describeCustomer(state, customer, iso = todayIso()) {

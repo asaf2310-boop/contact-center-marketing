@@ -38,10 +38,13 @@ export function initAnalytics() {
 
 export function trackAnalyticsPageView() {
   if (!ensureGtag() || !GA4_ID) return;
+  const pagePath = `${window.location.pathname}${window.location.search}`;
+  const isProductDemo = window.location.pathname.startsWith("/demo/");
   window.gtag("event", "page_view", {
     page_title: document.title,
     page_location: window.location.href,
-    page_path: `${window.location.pathname}${window.location.search}`,
+    page_path: pagePath,
+    ...(isProductDemo ? { content_group: "product_demo" } : {}),
   });
 }
 

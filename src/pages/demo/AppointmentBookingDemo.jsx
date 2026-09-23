@@ -163,12 +163,14 @@ export default function AppointmentBookingDemo() {
       phone: details.phone,
       email: details.email,
     });
+    const created = next.appointments[next.appointments.length - 1];
     commit(next);
     setConfirmation({
       service: getService(serviceId),
       date,
       time,
       name: details.name.trim(),
+      appointmentId: created.id,
     });
     setStep(5);
     setFormError("");
@@ -178,10 +180,12 @@ export default function AppointmentBookingDemo() {
 
   return (
     <DemoFrame
-      title="דמו מערכת זימון תורים"
-      extraNav={<Link className="ad-navlink" to="/demo/appointments/admin">צפייה בממשק הניהול</Link>}
+      variant="clinic"
+      title="קביעת תור"
+      switchTo="/demo/appointments/admin"
+      switchLabel="ממשק הניהול"
     >
-      {!state ? <p className="ad-loading">טוען את סביבת ההדגמה…</p> : (
+      {!state ? <p className="ad-loading">טוענים את היומן…</p> : (
         <div className="ad-booking">
           <ol className="ad-steps" aria-label="שלבי ההזמנה">
             {STEPS.map((label, index) => {
@@ -201,16 +205,18 @@ export default function AppointmentBookingDemo() {
             {step === 5 && confirmation ? (
               <>
                 <h2>התור נקבע בהצלחה</h2>
-                <p className="ad-lead">התור נוסף ליומן הדמו בדפדפן זה. אפשר לראות אותו בממשק הניהול.</p>
+                <p className="ad-lead">פרטי התור נשמרו ביומן הקליניקה.</p>
                 <dl className="ad-success">
                   <div><dt>שירות</dt><dd>{confirmation.service.name}</dd></div>
                   <div><dt>תאריך</dt><dd>{formatLongDate(confirmation.date)}</dd></div>
                   <div><dt>שעה</dt><dd>{confirmation.time}</dd></div>
-                  <div><dt>שם</dt><dd>{confirmation.name}</dd></div>
+                  <div><dt>שם הלקוח</dt><dd className="ad-name">{confirmation.name}</dd></div>
                 </dl>
                 <div className="ad-actions">
-                  <button type="button" className="ad-btn ad-btn--ghost" onClick={restart}>חזרה לדמו</button>
-                  <Link className="ad-btn ad-btn--primary" to="/demo/appointments/admin">מעבר לממשק הניהול</Link>
+                  <Link className="ad-btn ad-btn--primary ad-btn--cta" to={`/demo/appointments/admin?from=booking&focus=${encodeURIComponent(confirmation.appointmentId)}`}>
+                    ראו איך התור מופיע במערכת הניהול
+                  </Link>
+                  <button type="button" className="ad-btn ad-btn--ghost" onClick={restart}>קביעת תור נוסף</button>
                 </div>
               </>
             ) : (
@@ -218,7 +224,7 @@ export default function AppointmentBookingDemo() {
                 {step === 1 && (
                   <>
                     <h2>איזה שירות תרצו לקבוע?</h2>
-                    <p className="ad-lead">קליניקה לדוגמה · בחרו שירות כדי לראות זמנים פנויים.</p>
+                    <p className="ad-lead">בחרו טיפול, ואז תאריך ושעה פנויים.</p>
                     <div className="ad-choice-grid" role="radiogroup" aria-label="בחירת שירות">
                       {SERVICES.map((item) => (
                         <button
@@ -283,12 +289,12 @@ export default function AppointmentBookingDemo() {
                 {step === 4 && (
                   <>
                     <h2>הפרטים שלכם</h2>
-                    <p className="ad-note">זהו דמו בלבד – אין צורך להזין פרטים אמיתיים</p>
+                    <p className="ad-lead">מלאו שם, טלפון ואימייל להשלמת ההזמנה.</p>
                     <form className="ad-form" noValidate onSubmit={submit}>
                       <label className="ad-field">
                         <span>שם מלא</span>
                         <input
-                          name="demo-full-name"
+                          name="full-name"
                           autoComplete="off"
                           value={details.name}
                           aria-invalid={Boolean(errors.name)}
@@ -299,7 +305,7 @@ export default function AppointmentBookingDemo() {
                       <label className="ad-field">
                         <span>טלפון</span>
                         <input
-                          name="demo-phone"
+                          name="phone"
                           inputMode="tel"
                           autoComplete="off"
                           placeholder="050-100-2002"
@@ -312,7 +318,7 @@ export default function AppointmentBookingDemo() {
                       <label className="ad-field">
                         <span>אימייל</span>
                         <input
-                          name="demo-email"
+                          name="email"
                           type="email"
                           inputMode="email"
                           autoComplete="off"
@@ -345,7 +351,8 @@ export default function AppointmentBookingDemo() {
               </>
             )}
           </section>
-          <p className="ad-footnote">סביבת הדגמה מקומית. לא נוצר תור אמיתי, ולא נשלחים דוא״ל, הודעות או בקשות תשלום.</p>
+          <p className="ad-footnote">זהו דמו בלבד. לא נוצר תור אמיתי ולא נשלחים הודעות או בקשות תשלום.</p>
+          <p className="ad-customize">המערכת, השירותים, הצבעים ותהליך ההזמנה מותאמים לעסק.</p>
         </div>
       )}
     </DemoFrame>
