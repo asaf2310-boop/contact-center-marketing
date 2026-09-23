@@ -14,6 +14,8 @@ import GoogleAiVisibility from "@/pages/GoogleAiVisibility";
 import SystemsHub from "@/pages/SystemsHub";
 import ServicesHub from "@/pages/ServicesHub";
 import NotFoundPage from "@/pages/NotFound";
+import AppointmentBookingDemo from "@/pages/demo/AppointmentBookingDemo";
+import AppointmentAdminDemo from "@/pages/demo/AppointmentAdminDemo";
 import Seo from "@/components/Seo";
 import { trackPageView } from "@/lib/fbpixel";
 import { initAnalytics, installLeadLinkTracking, trackAnalyticsPageView } from "@/lib/analytics";
@@ -49,6 +51,8 @@ export function AppRoutes() {
         <Route path="/ai" element={<AiConsulting />} />
         <Route path="/about" element={<About />} />
         <Route path="/appointment-management" element={<AppointmentManagement />} />
+        <Route path="/demo/appointments/booking" element={<AppointmentBookingDemo />} />
+        <Route path="/demo/appointments/admin" element={<AppointmentAdminDemo />} />
         <Route path="/restaurant-reservations" element={<RestaurantReservations />} />
         <Route path="/guides" element={<Guides />} />
         <Route path="/guides/:slug" element={<GuideArticle />} />

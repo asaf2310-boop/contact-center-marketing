@@ -96,6 +96,22 @@
       "destination": "/appointment-management/index.html"
     },
     {
+      "source": "/demo/appointments/booking",
+      "destination": "/demo/appointments/booking/index.html"
+    },
+    {
+      "source": "/demo/appointments/booking/",
+      "destination": "/demo/appointments/booking/index.html"
+    },
+    {
+      "source": "/demo/appointments/admin",
+      "destination": "/demo/appointments/admin/index.html"
+    },
+    {
+      "source": "/demo/appointments/admin/",
+      "destination": "/demo/appointments/admin/index.html"
+    },
+    {
       "source": "/restaurant-reservations",
       "destination": "/restaurant-reservations/index.html"
     },

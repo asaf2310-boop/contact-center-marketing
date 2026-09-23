@@ -140,19 +140,23 @@ for (const url of prerenderPaths) {
   const html = fs.readFileSync(outPath, "utf8");
   const relative = path.relative(dist, outPath);
 
-  assertContains(
-    html,
-    [
-      `<title>${escapeHtml(seo.title)}</title>`,
-      `content="${escapeAttr(seo.description)}"`,
-      `rel="canonical" href="${seo.canonical}"`,
-      "<h1",
-      "application/ld+json",
-      "050-267-7765",
-      "info@allincenter.co.il",
-    ],
-    relative,
-  );
+  const isProductDemo = url.startsWith("/demo/");
+  const needles = [
+    `<title>${escapeHtml(seo.title)}</title>`,
+    `content="${escapeAttr(seo.description)}"`,
+    `rel="canonical" href="${seo.canonical}"`,
+    "<h1",
+    "application/ld+json",
+  ];
+  if (isProductDemo) {
+    needles.push('name="robots" content="noindex, nofollow"', "סביבת הדגמה");
+  } else {
+    needles.push("050-267-7765", "info@allincenter.co.il");
+  }
+  assertContains(html, needles, relative);
+  if (isProductDemo && /ofirbaby/i.test(html)) {
+    fail(`${relative} must not mention OFIRBABY`);
+  }
   if (html.includes('<div id="root"></div>')) {
     fail(`${relative} still has an empty #root`);
   }
@@ -224,5 +228,8 @@ if (!landingPage.includes('name="robots" content="noindex, follow"')) {
 }
 if (sitemap.includes("https://www.allincenter.co.il/lp</loc>")) {
   fail("sitemap.xml must not include the campaign landing page /lp");
+}
+if (sitemap.includes("/demo/appointments")) {
+  fail("sitemap.xml must not include appointment demo routes");
 }
 console.log("validated campaign landing page indexing policy");

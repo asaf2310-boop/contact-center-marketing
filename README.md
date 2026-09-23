@@ -149,8 +149,6 @@ Workflow `.github/workflows/deploy-check.yml` מריץ `npm ci` + `npm run build
 
 | `VITE_CONTACT_CENTER_DEMO_URL` | קישור דמו מוקד חכם |
 
-| `VITE_MAYACLINIC_DEMO_URL` | קישור דמו Maya Clinic |
-
 | `VITE_CONTACT_URL` | mailto או טופס יצירת קשר |
 
 | `VITE_PRODUCT_URL` | (אופציונלי) גיבוי לכתובת דמו המוקד |

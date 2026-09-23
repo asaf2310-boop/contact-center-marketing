@@ -13,10 +13,6 @@ import {
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 
-const demoRoot = import.meta.env.VITE_MAYACLINIC_DEMO_URL || "https://mayaclinic-demo.vercel.app";
-const bookingDemoUrl = `${demoRoot.replace(/\/$/, "")}/book`;
-const adminDemoUrl = `${demoRoot.replace(/\/$/, "")}/admin`;
-
 const capabilities = [
   { icon: CalendarCheck, title: "הזמנה אונליין ושירותים", text: "לקוחות בוחרים שירות וזמן פנוי וקובעים תור אונליין." },
   { icon: CalendarDays, title: "יומן, זמינות וניהול תורים", text: "מנהלים שעות פעילות, זמינות ותורים מתוך יומן מרכזי." },
@@ -105,10 +101,10 @@ export default function AppointmentManagement() {
             <h2 id="proof-title">שני צדדים של אותו תהליך.</h2>
           </div>
           <div className="appointment-proof-links">
-            <a href={bookingDemoUrl} target="_blank" rel="noreferrer">
+            <a href="/demo/appointments/booking" target="_blank" rel="noreferrer nofollow">
               <span>BOOKING / CUSTOMER</span><h3>חוויית הזמנת התור</h3><p>בחירת שירות וזמן פנוי וקביעת תור אונליין.</p><strong>לפתיחת דמו ההזמנה <ExternalLink size={16} /></strong>
             </a>
-            <a href={adminDemoUrl} target="_blank" rel="noreferrer">
+            <a href="/demo/appointments/admin" target="_blank" rel="noreferrer nofollow">
               <span>MANAGEMENT / BUSINESS</span><h3>ממשק הניהול של העסק</h3><p>התורים, הלקוחות והיומן מתוך סביבת עבודה מרכזית.</p><strong>לפתיחת דמו הניהול <ExternalLink size={16} /></strong>
             </a>
           </div>

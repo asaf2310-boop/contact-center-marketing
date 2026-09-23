@@ -175,7 +175,6 @@
 | משתנה | ערך לדוגמה | הסבר |
 |--------|------------|------|
 | `VITE_CONTACT_CENTER_DEMO_URL` | `https://smart-break-shift-demo.vercel.app` | קישור לדמו **מוקד חכם** בדף הנחיתה |
-| `VITE_MAYACLINIC_DEMO_URL` | `https://mayaclinic-demo.vercel.app` | קישור לדמו **Maya Clinic** |
 | `VITE_CONTACT_URL` | `mailto:info@example.com?subject=בקשת הדגמה` | כפתור יצירת קשר (mailto או URL) |
 | `VITE_PRODUCT_URL` | *(אופציונלי)* | גיבוי לכתובת דמו המוקד |
 

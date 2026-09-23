@@ -432,6 +432,24 @@ export const routeSeo = {
       ].map(([name,text]) => ({ "@type": "Question", name, acceptedAnswer: { "@type": "Answer", text } })) },
     ]),
   },
+  "/demo/appointments/booking": {
+    title: "דמו הזמנת תור | AllInCenter Appointments",
+    description: "סביבת הדגמה מקומית לקביעת תור במערכת AllInCenter. הנתונים פיקטיביים ונשמרים רק בדפדפן.",
+    canonical: `${SITE.url}/demo/appointments/booking`,
+    robots: "noindex, nofollow",
+    ogImage: SITE.logo,
+    twitterCard: "summary",
+    jsonLd: graph(),
+  },
+  "/demo/appointments/admin": {
+    title: "דמו ניהול תורים | AllInCenter Appointments",
+    description: "סביבת הדגמה מקומית לניהול יומן ולקוחות במערכת AllInCenter. הנתונים פיקטיביים ונשמרים רק בדפדפן.",
+    canonical: `${SITE.url}/demo/appointments/admin`,
+    robots: "noindex, nofollow",
+    ogImage: SITE.logo,
+    twitterCard: "summary",
+    jsonLd: graph(),
+  },
 };
 
 export const prerenderPaths = Object.keys(routeSeo);
