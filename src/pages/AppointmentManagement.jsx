@@ -66,7 +66,7 @@ export default function AppointmentManagement() {
           <figure className="appointment-product-hero__visual">
             <div className="appointment-product-hero__bar" aria-hidden="true"><span>AllInCenter / APPOINTMENTS</span><strong>הדגמת מוצר</strong></div>
             <video controls playsInline preload="metadata" poster="/assets/home-appointment-ui.jpg" title="הדגמת מערכת ניהול וזימון תורים">
-              <source src="/videos/maya-queue-management.mp4#t=25" type="video/mp4" />
+              <source src="/videos/allincenter-appointments-demo.mp4" type="video/mp4" />
             </video>
             <figcaption><strong>מבט אמיתי על המערכת</strong><span>יומן, לקוחות והפעילות השוטפת בסביבת עבודה אחת.</span></figcaption>
           </figure>
