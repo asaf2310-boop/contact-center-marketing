@@ -15,6 +15,9 @@ export const organizationSchema = {
   logo: SITE.logo,
   description: "AllInCenter מפתחת מערכות ניהול מותאמות, אוטומציות ופתרונות AI לעסקים בישראל.",
   founder: { "@id": founderId },
+  sameAs: [
+    "https://www.google.com/search?kgmid=/g/11nvs68ph0&q=AllInCenter",
+  ],
 };
 
 export const founderSchema = {
