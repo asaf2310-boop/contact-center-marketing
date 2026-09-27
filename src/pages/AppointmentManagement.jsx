@@ -23,19 +23,22 @@ const capabilities = [
 ];
 
 const audiences = [
-  "קוסמטיקאיות ועסקי יופי",
-  "מטפלים עצמאיים",
   "קליניקות",
+  "קוסמטיקאיות",
+  "מטפלים",
+  "שינניות",
   "נותני שירות",
-  "עסקים קטנים שמנהלים תורים",
+  "עסקים שעובדים לפי תורים",
 ];
 
 const faqs = [
-  ["מהי מערכת ניהול וזימון תורים?", "מערכת שמרכזת קביעת תורים אונליין, ניהול יומן ומידע על לקוחות במקום אחד."],
-  ["למי מתאימה מערכת זימון תורים של AllInCenter?", "לקוסמטיקאיות ועסקי יופי, מטפלים עצמאיים, קליניקות, נותני שירות ועסקים קטנים שמנהלים תורים."],
-  ["האם הלקוחות יכולים לקבוע תור לבד?", "כן. הלקוחות יכולים לבחור שירות וזמן פנוי ולקבוע תור אונליין."],
+  ["מהי מערכת ניהול תורים?", "מערכת שמאפשרת ללקוחות לקבוע תור אונליין, ולעסק לנהל יומן, זמינות ולקוחות במקום אחד — במקום לתאם הכל ידנית בין הודעות."],
+  ["למי מתאימה מערכת ניהול תורים לעסק?", "לקליניקות, קוסמטיקאיות, מטפלים, שינניות, נותני שירות ולעסקים שעובדים לפי תורים ורוצים לנהל את היומן והלקוחות במקום אחד."],
+  ["האם לקוחות יכולים לקבוע תור אונליין?", "כן. הלקוחות בוחרים שירות וזמן פנוי וקובעים תור אונליין, בלי לחכות לשיחה או להודעה חוזרת."],
+  ["האם ניתן לשלוח תזכורות ללקוחות?", "כן. אפשר לשלב תזכורות ואישורי תור בתהליך, כדי שהמעקב לא יישאר ידני אחרי כל הזמנה."],
   ["האם אפשר לנהל גם לקוחות ולא רק תורים?", "כן. המערכת משלבת ניהול לקוחות עם התורים והפעילות השוטפת של העסק."],
   ["האם המערכת מתאימה לקוסמטיקאיות ומטפלים?", "כן. ניתן להתאים את סוגי השירותים, זמני הפעילות ותהליך קביעת התור לעסקי יופי ולטיפולים."],
+  ["האם המערכת מתאימה לעסק עם כמה אנשי צוות?", "כן. אפשר להתאים שירותים, זמינות ויומן גם לעסק עם כמה אנשי צוות, ולא רק ליומן של אדם אחד."],
   ["האם ניתן להתאים את המערכת לתהליך העבודה של העסק?", "כן. המערכת מותאמת לסוגי השירותים, זמני הפעילות, אופן קביעת התורים והפעולות הנדרשות לאחר ההזמנה."],
   ["האם המערכת מתאימה לעסקים בישראל?", "כן. AllInCenter מפתחת את המערכת עבור עסקים בישראל ובממשק עברי."],
   ["האם המערכת מתאימה לעסקים שמנהלים תורים ב‑WhatsApp?", "כן. אפשר לעבור מתיאום ידני בצ׳אטים להזמנה אונליין ולניהול מרכזי. בהתאם לתהליך העסק, ניתן גם לחבר את הזרימה לבוט WhatsApp."],
@@ -51,9 +54,9 @@ export default function AppointmentManagement() {
         <section className="appointment-product-hero" aria-labelledby="appointment-title">
           <div className="appointment-product-hero__copy">
             <span className="editorial-index">01 / APPOINTMENTS</span>
-            <p className="appointment-product-hero__eyebrow">מערכת ניהול וזימון תורים לעסקים</p>
-            <h1 id="appointment-title">התורים מסודרים<br /><span>היום עובד טוב יותר</span></h1>
-            <p className="appointment-product-hero__lead">הלקוחות קובעים אונליין, והעסק רואה במקום אחד את היומן, הלקוחות והפעולות הבאות. אפשר לחבר גם את תהליך ה‑WhatsApp בהתאם לאופן העבודה שלכם.</p>
+            <p className="appointment-product-hero__eyebrow">לקליניקות, מטפלים ונותני שירות</p>
+            <h1 id="appointment-title">מערכת ניהול תורים<br /><span>היום עובד טוב יותר</span></h1>
+            <p className="appointment-product-hero__lead">הלקוחות קובעים תור אונליין, והעסק מנהל במקום אחד את היומן, הלקוחות והפעולות הבאות. במקום לתאם הכל בין הודעות, רואים את היום כולו — ואפשר לחבר גם WhatsApp לפי תהליך העבודה.</p>
             <div className="appointment-actions">
               <a className="btn btn--primary" href="/#contact">לתיאום הדגמה <ArrowLeft size={18} /></a>
               <a className="btn btn--ghost" href="#product-proof">צפו במערכת בפעולה</a>
@@ -126,8 +129,8 @@ export default function AppointmentManagement() {
         <section className="appointment-audience-fit" aria-labelledby="audiences-title">
           <div className="appointment-section-heading">
             <span className="editorial-index">05 / FIT</span>
-            <h2 id="audiences-title">מתאים לעסקים שבהם הזמן הוא חלק מהשירות.</h2>
-            <p>לעסקי שירות שרוצים לרכז את התורים, הלקוחות והיומן במקום אחד.</p>
+            <h2 id="audiences-title">למי המערכת מתאימה?</h2>
+            <p>לעסקים שבהם הזמן הוא חלק מהשירות, ורוצים לרכז תורים, לקוחות ויומן במקום אחד.</p>
           </div>
           <div className="appointment-audience-list">
             {audiences.map((title, index) => <div key={title}><span>{String(index + 1).padStart(2, "0")}</span><strong>{title}</strong></div>)}
@@ -138,8 +141,16 @@ export default function AppointmentManagement() {
           </div>
         </section>
 
+        <section className="appointment-trust" aria-labelledby="trust-title">
+          <div className="appointment-section-heading">
+            <span className="editorial-index">06 / IN PRACTICE</span>
+            <h2 id="trust-title">מערכות שעובדות אצל עסקים אמיתיים</h2>
+            <p>פתרונות AllInCenter כבר משמשים עסקים לניהול תורים, לקוחות והעבודה השוטפת. המערכת מותאמת לתהליך הקיים: קביעת תור אונליין, יומן מרכזי והמשך הטיפול בלקוח.</p>
+          </div>
+        </section>
+
         <section className="appointment-conversion" aria-labelledby="conversion-title">
-          <span className="editorial-index">06 / NEXT STEP</span>
+          <span className="editorial-index">07 / NEXT STEP</span>
           <h2 id="conversion-title">רוצים להפסיק לנהל תורים בין הודעות ויומנים?</h2>
           <p>נראה לכם מערכת אמיתית ונבדוק איך להתאים אותה לתהליך העסק.</p>
           <div className="appointment-actions">
@@ -151,7 +162,7 @@ export default function AppointmentManagement() {
 
         <section className="appointment-faq" aria-labelledby="faq-title">
           <div className="appointment-section-heading">
-            <span className="editorial-index">07 / FAQ</span>
+            <span className="editorial-index">08 / FAQ</span>
             <h2 id="faq-title">מידע נוסף על מערכת ניהול התורים</h2>
           </div>
           <div className="appointment-faq__list">
