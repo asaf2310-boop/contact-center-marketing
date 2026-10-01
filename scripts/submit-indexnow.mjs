@@ -12,6 +12,7 @@ const urlList = [
   `https://${host}/services`,
   `https://${host}/allincenter-pelecard`,
   `https://${host}/appointment-management`,
+  `https://${host}/appointment-system-therapists-clinics`,
   `https://${host}/restaurant-reservations`,
   `https://${host}/guides`,
   `https://${host}/guides/how-to-choose-appointment-system`,

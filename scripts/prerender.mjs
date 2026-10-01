@@ -203,6 +203,7 @@ for (const loc of [
   "https://www.allincenter.co.il/services",
   "https://www.allincenter.co.il/about",
   "https://www.allincenter.co.il/appointment-management",
+  "https://www.allincenter.co.il/appointment-system-therapists-clinics",
   "https://www.allincenter.co.il/restaurant-reservations",
   "https://www.allincenter.co.il/allincenter-pelecard",
   "https://www.allincenter.co.il/guides",

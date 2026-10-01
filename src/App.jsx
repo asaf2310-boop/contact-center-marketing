@@ -7,6 +7,7 @@ import PelecardBrochure from "@/pages/PelecardBrochure";
 import AiConsulting from "@/pages/AiConsulting";
 import About from "@/pages/About";
 import AppointmentManagement from "@/pages/AppointmentManagement";
+import TherapistClinicAppointments from "@/pages/TherapistClinicAppointments";
 import RestaurantReservations from "@/pages/RestaurantReservations";
 import Guides from "@/pages/Guides";
 import GuideArticle from "@/pages/GuideArticle";
@@ -51,6 +52,7 @@ export function AppRoutes() {
         <Route path="/ai" element={<AiConsulting />} />
         <Route path="/about" element={<About />} />
         <Route path="/appointment-management" element={<AppointmentManagement />} />
+        <Route path="/appointment-system-therapists-clinics" element={<TherapistClinicAppointments />} />
         <Route path="/demo/appointments/booking" element={<AppointmentBookingDemo />} />
         <Route path="/demo/appointments/admin" element={<AppointmentAdminDemo />} />
         <Route path="/restaurant-reservations" element={<RestaurantReservations />} />

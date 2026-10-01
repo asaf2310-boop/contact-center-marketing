@@ -96,6 +96,14 @@
       "destination": "/appointment-management/index.html"
     },
     {
+      "source": "/appointment-system-therapists-clinics",
+      "destination": "/appointment-system-therapists-clinics/index.html"
+    },
+    {
+      "source": "/appointment-system-therapists-clinics/",
+      "destination": "/appointment-system-therapists-clinics/index.html"
+    },
+    {
       "source": "/demo/appointments/booking",
       "destination": "/demo/appointments/booking/index.html"
     },

@@ -285,6 +285,65 @@ export const routeSeo = {
       },
     ]),
   },
+  "/appointment-system-therapists-clinics": {
+    title: "מערכת זימון תורים למטפלים וקליניקות | AllInCenter",
+    description:
+      "מערכת זימון תורים למטפלים וקליניקות שמאפשרת ללקוחות לקבוע תור אונליין, לנהל זמינות ויומן תורים ולהפחית את ההתעסקות בקביעת פגישות.",
+    canonical: `${SITE.url}/appointment-system-therapists-clinics`,
+    ogImage: SITE.logo,
+    twitterCard: "summary",
+    jsonLd: graph([
+      {
+        "@type": "WebPage",
+        "@id": `${SITE.url}/appointment-system-therapists-clinics#webpage`,
+        url: `${SITE.url}/appointment-system-therapists-clinics`,
+        name: "מערכת זימון תורים למטפלים וקליניקות | AllInCenter",
+        description:
+          "מערכת זימון תורים למטפלים וקליניקות שמאפשרת ללקוחות לקבוע תור אונליין, לנהל זמינות ויומן תורים ולהפחית את ההתעסקות בקביעת פגישות.",
+        inLanguage: SITE.language,
+        isPartOf: { "@id": websiteId },
+        about: { "@id": `${SITE.url}/appointment-system-therapists-clinics#service` },
+      },
+      {
+        "@type": "Service",
+        "@id": `${SITE.url}/appointment-system-therapists-clinics#service`,
+        name: "מערכת זימון תורים למטפלים וקליניקות",
+        description:
+          "זימון תורים אונליין למטפלים ולקליניקות קטנות: זמינות, יומן תורים וקביעת תור על ידי הלקוח. לא מערכת לניהול תיק רפואי.",
+        provider: { "@id": orgId },
+        areaServed: SITE.areaServed,
+        url: `${SITE.url}/appointment-system-therapists-clinics`,
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${SITE.url}/appointment-system-therapists-clinics#breadcrumb`,
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "דף הבית", item: `${SITE.url}/` },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "מערכת זימון תורים למטפלים וקליניקות",
+            item: `${SITE.url}/appointment-system-therapists-clinics`,
+          },
+        ],
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${SITE.url}/appointment-system-therapists-clinics#faq`,
+        mainEntity: [
+          ["מהי מערכת זימון תורים למטפלים?", "מערכת שמאפשרת ללקוחות לקבוע תור אונליין, ולמטפל או לקליניקה לנהל זמינות ויומן במקום אחד. היא מסדרת את קביעת הפגישות, ולא מחליפה תיק רפואי או תיעוד טיפולי."],
+          ["האם הלקוחות יכולים לקבוע תור בעצמם?", "כן. הלקוח בוחר שירות ומועד פנוי מתוך הזמינות, בלי לחכות לתשובה על כל שעה."],
+          ["האם אפשר לקבוע זמינות מראש?", "כן. מגדירים מתי ניתן לקבוע תור, והלקוח רואה רק מועדים פנויים."],
+          ["האם המערכת מתאימה גם לקליניקה קטנה?", "כן. היא מתאימה למטפל עצמאי ולקליניקה קטנה שעובדת לפי פגישות, ורוצה יומן מסודר במקום תיאום בהודעות."],
+          ["איך מתחילים להשתמש במערכת?", "אפשר קודם לנסות את הדמו ולראות איך לקוח קובע תור. אחר כך בודקים יחד איך להתאים זמינות ושירותים ליומן שלכם."],
+        ].map(([name, text]) => ({
+          "@type": "Question",
+          name,
+          acceptedAnswer: { "@type": "Answer", text },
+        })),
+      },
+    ]),
+  },
   "/restaurant-reservations": {
     title: "מערכת הזמנות למסעדות | AllInCenter",
     description:
