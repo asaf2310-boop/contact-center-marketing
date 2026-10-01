@@ -10,6 +10,7 @@ const products = [
     text: "ניהול תורים, לקוחות, זמינות ותהליכים במקום אחד.",
     points: ["הזמנה אונליין", "ניהול יומן ולקוחות", "תזכורות ואוטומציות"],
     href: "/appointment-management",
+    cta: "מערכת ניהול תורים",
     image: "/assets/home-appointment-ui.jpg",
     alt: "ממשק מערכת ניהול התורים של AllInCenter",
   },
@@ -65,7 +66,7 @@ export default function SystemsHub() {
           <div className="systems-hero__copy">
             <span className="kicker">מוצרי AllInCenter</span>
             <h1>מערכות שעושות סדר בעסק</h1>
-            <p>מערכות AllInCenter לניהול תורים, הזמנות ומוקדים — <span>בעברית, בהתאמה לעסק ובמקום אחד.</span></p>
+            <p>מערכות AllInCenter ל<a href="/appointment-management">ניהול תורים לעסק</a>, הזמנות ומוקדים — <span>בעברית, בהתאמה לעסק ובמקום אחד.</span></p>
             <div className="systems-hero__actions">
               <a className="btn btn--primary" href="/#contact">לבקשת הדגמה <ArrowLeft size={18} /></a>
               <a className="btn btn--ghost" href="#systems-products">צפו במערכות</a>
@@ -119,7 +120,7 @@ export default function SystemsHub() {
                   ))}
                 </ul>
                 {product.image ? (
-                  <a className="btn btn--ghost" href={product.href}>לעמוד המוצר <ArrowLeft size={16} /></a>
+                  <a className="btn btn--ghost" href={product.href}>{product.cta || "לעמוד המוצר"} <ArrowLeft size={16} /></a>
                 ) : (
                   <a className="btn btn--ghost" href="/#contact">לבקשת הדגמה <ArrowLeft size={16} /></a>
                 )}

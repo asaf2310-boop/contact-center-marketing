@@ -34,6 +34,7 @@ const products = [
     description: "ניהול תורים, לקוחות, זמינות ותהליכים — בסביבת עבודה אחת שמותאמת לעסק.",
     capabilities: ["הזמנה אונליין", "ניהול יומן ולקוחות", "תזכורות ואוטומציות"],
     href: "/appointment-management",
+    linkLabel: "מערכת ניהול תורים",
     image: "/assets/home-appointment-ui.jpg",
     imageAlt: "ממשק מערכת ניהול התורים של AllInCenter",
     icon: CalendarCheck,
@@ -102,7 +103,7 @@ function ProductRow({ product, index }) {
           <p>{product.description}</p>
           <ul>{product.capabilities.map((item) => <li key={item}><Check size={16} />{item}</li>)}</ul>
           <a className="home-text-link" href={product.href} {...(product.external ? { target: "_blank", rel: "noreferrer" } : {})}>
-            {product.external ? "לצפייה בדמו" : "לפרטים על המערכת"}
+            {product.linkLabel || (product.external ? "לצפייה בדמו" : "לפרטים על המערכת")}
             {product.external ? <ExternalLink size={16} /> : <ArrowLeft size={16} />}
           </a>
         </div>

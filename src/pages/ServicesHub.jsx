@@ -222,7 +222,7 @@ export default function ServicesHub() {
         <section className="svc-list" id="services-list" aria-label="שירותי AllInCenter לעסקים">
           <div className="svc-list__intro">
             <span className="kicker">שירותי AllInCenter לעסקים</span>
-            <p>AllInCenter עוזרת לעסקים לנהל תורים והזמנות, לבנות או לשפר את האתר, לחזק SEO, ולחבר את החיפוש לפנייה — כולל חיבור ל‑WhatsApp בהתאם לתהליך העסק.</p>
+            <p>AllInCenter עוזרת לעסקים עם <a href="/appointment-management">מערכת ניהול תורים</a> והזמנות, לבנות או לשפר את האתר, לחזק SEO, ולחבר את החיפוש לפנייה — כולל חיבור ל‑WhatsApp בהתאם לתהליך העסק.</p>
           </div>
           {services.map((service, index) => {
             const Visual = visuals[service.key];
