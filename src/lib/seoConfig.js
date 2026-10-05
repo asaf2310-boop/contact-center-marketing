@@ -137,7 +137,7 @@ export const routeSeo = {
   },
   "/pricing": {
     title: "מחירון AllInCenter | מערכות ניהול וזימון תורים לעסקים",
-    description: "חבילות AllInCenter למערכות זימון תורים, ניהול לקוחות, אוטומציות וכלים לניהול העסק.",
+    description: "חבילות שנתיות של AllInCenter למערכות זימון תורים ולבניית אתר לעסקים — בלי עלות הקמה.",
     canonical: `${SITE.url}/pricing`,
     ogImage: SITE.logo,
     twitterCard: "summary",
@@ -395,14 +395,6 @@ export const routeSeo = {
         ].map(([name, text]) => ({ "@type": "Question", name, acceptedAnswer: { "@type": "Answer", text } })),
       },
     ]),
-  },
-  "/allincenter-pelecard": {
-    title: "AllInCenter + Pelecard | מערכת ניהול וסליקה לעסקים",
-    description: "פתרון משולב של AllInCenter ו-Pelecard לניהול העסק, תשלומים, לקוחות ותהליכים במקום אחד.",
-    canonical: `${SITE.url}/allincenter-pelecard`,
-    ogImage: `${SITE.url}/assets/og-allincenter-pelecard.png`,
-    twitterCard: "summary_large_image",
-    jsonLd: graph(),
   },
   "/guides": {
     title: "מרכז הידע לעסקים | AllInCenter",

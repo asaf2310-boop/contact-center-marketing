@@ -3,9 +3,7 @@ import {
   ArrowLeft,
   CalendarClock,
   Check,
-  Clock,
   Globe,
-  Repeat,
   Sparkles,
 } from "lucide-react";
 import Reveal from "@/components/Reveal";
@@ -20,15 +18,14 @@ const products = [
     description:
       "יומן חכם, קביעת תורים אונליין, תזכורות אוטומטיות וניהול לקוחות — הכול במקום אחד.",
     video: "/videos/maya-queue-management.mp4",
-    setup: "₪500",
+    packageLabel: "חבילה שנתית",
+    price: "900 ₪ לשנה",
+    packageNote: "כולל שירות ותמיכה לאורך השנה",
+    setupNote: "ללא עלות הקמה",
     features: [
       "הזמנת תור עצמאית ללקוח",
       "תזכורות ואישורי תורים אוטומטיים",
       "ניהול לקוחות ותשלומים",
-    ],
-    options: [
-      { icon: Repeat, label: "מסלול חודשי", price: "₪100", unit: "לחודש" },
-      { icon: Clock, label: "בנק שעות", price: "₪250", unit: "לשעה" },
     ],
   },
   {
@@ -38,15 +35,14 @@ const products = [
     title: "בניית אתר",
     description:
       "אתר תדמית מודרני, מהיר ומותאם למובייל — כולל עיצוב, תוכן וחיבור למערכות הניהול שלך.",
-    setup: "₪2,000",
+    packageLabel: "חבילה שנתית",
+    price: "2,000 ₪ לשנה",
+    packageNote: "כולל בניית האתר, שירות ותמיכה לאורך השנה",
+    setupNote: "ללא עלות הקמה",
     features: [
       "עיצוב מותאם אישית ורספונסיבי",
       "מותאם SEO ומהיר טעינה",
       "חיבור לטפסים ולמערכות הלידים",
-    ],
-    options: [
-      { icon: Repeat, label: "מסלול חודשי", price: "₪200", unit: "לחודש" },
-      { icon: Clock, label: "בנק שעות", price: "₪250", unit: "לשעה" },
     ],
   },
 ];
@@ -83,9 +79,8 @@ export default function Pricing() {
           </Reveal>
           <Reveal delay={160}>
             <p className="pricing-hero__sub">
-              חבילות למערכות ניהול וזימון תורים לעסקים בישראל. בוחרים מוצר, בוחרים
-              מסלול — חודשי קבוע או בנק שעות גמיש. הקמה חד-פעמית וליווי מלא לאורך
-              הדרך.
+              חבילות שנתיות למערכות ניהול וזימון תורים לעסקים בישראל. בוחרים
+              מוצר ומתחילים — בלי עלות הקמה.
             </p>
           </Reveal>
           <Reveal delay={220}>
@@ -124,9 +119,19 @@ export default function Pricing() {
                       </div>
                     ) : null}
 
-                    <div className="pricing-card__setup">
-                      <span className="pricing-card__setup-label">הקמה חד-פעמית</span>
-                      <span className="pricing-card__setup-price">{product.setup}</span>
+                    <div className="pricing-card__annual">
+                      <span className="pricing-card__annual-label">
+                        {product.packageLabel}
+                      </span>
+                      <span className="pricing-card__annual-price">
+                        {product.price}
+                      </span>
+                      <span className="pricing-card__annual-note">
+                        {product.packageNote}
+                      </span>
+                      <span className="pricing-card__annual-setup">
+                        {product.setupNote}
+                      </span>
                     </div>
 
                     <ul className="pricing-card__features">
@@ -137,28 +142,6 @@ export default function Pricing() {
                         </li>
                       ))}
                     </ul>
-
-                    <span className="pricing-card__divider">
-                      ובנוסף — בוחרים מסלול:
-                    </span>
-
-                    <div className="pricing-card__options">
-                      {product.options.map((option) => {
-                        const OptIcon = option.icon;
-                        return (
-                          <div className="pricing-option" key={option.label}>
-                            <span className="pricing-option__label">
-                              <OptIcon size={15} />
-                              {option.label}
-                            </span>
-                            <span className="pricing-option__price">
-                              {option.price}
-                              <small>{option.unit}</small>
-                            </span>
-                          </div>
-                        );
-                      })}
-                    </div>
 
                     <a className="btn btn--primary pricing-card__cta" href="/lp">
                       להשארת פרטים

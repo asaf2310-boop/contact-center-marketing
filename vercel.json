@@ -5,12 +5,22 @@
   "redirects": [
     {
       "source": "/pelecard",
-      "destination": "/allincenter-pelecard",
+      "destination": "/pricing",
       "permanent": true
     },
     {
       "source": "/pelecard/",
-      "destination": "/allincenter-pelecard",
+      "destination": "/pricing",
+      "permanent": true
+    },
+    {
+      "source": "/allincenter-pelecard",
+      "destination": "/pricing",
+      "permanent": true
+    },
+    {
+      "source": "/allincenter-pelecard/",
+      "destination": "/pricing",
       "permanent": true
     }
   ],
@@ -126,14 +136,6 @@
     {
       "source": "/restaurant-reservations/",
       "destination": "/restaurant-reservations/index.html"
-    },
-    {
-      "source": "/allincenter-pelecard",
-      "destination": "/allincenter-pelecard/index.html"
-    },
-    {
-      "source": "/allincenter-pelecard/",
-      "destination": "/allincenter-pelecard/index.html"
     },
     {
       "source": "/guides",

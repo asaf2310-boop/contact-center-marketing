@@ -205,7 +205,6 @@ for (const loc of [
   "https://www.allincenter.co.il/appointment-management",
   "https://www.allincenter.co.il/appointment-system-therapists-clinics",
   "https://www.allincenter.co.il/restaurant-reservations",
-  "https://www.allincenter.co.il/allincenter-pelecard",
   "https://www.allincenter.co.il/guides",
   "https://www.allincenter.co.il/guides/how-to-choose-appointment-system",
   "https://www.allincenter.co.il/guides/restaurant-reservation-system",
@@ -215,11 +214,11 @@ for (const loc of [
 ]) {
   if (!sitemap.includes(`<loc>${loc}</loc>`)) fail(`sitemap.xml missing ${loc}`);
 }
-if (sitemap.includes("/pelecard</loc>") && !sitemap.includes("/allincenter-pelecard")) {
-  fail("sitemap.xml unexpectedly lists /pelecard");
-}
 if (sitemap.includes("https://www.allincenter.co.il/pelecard</loc>")) {
   fail("sitemap.xml must not include /pelecard");
+}
+if (sitemap.includes("https://www.allincenter.co.il/allincenter-pelecard</loc>")) {
+  fail("sitemap.xml must not include /allincenter-pelecard");
 }
 console.log("validated sitemap.xml");
 

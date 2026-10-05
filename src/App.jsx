@@ -1,9 +1,8 @@
 import React, { useEffect, useRef } from "react";
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import MarketingHome from "@/pages/MarketingHome";
 import LandingLeads from "@/pages/LandingLeads";
 import Pricing from "@/pages/Pricing";
-import PelecardBrochure from "@/pages/PelecardBrochure";
 import AiConsulting from "@/pages/AiConsulting";
 import About from "@/pages/About";
 import AppointmentManagement from "@/pages/AppointmentManagement";
@@ -48,7 +47,8 @@ export function AppRoutes() {
         <Route path="/" element={<MarketingHome />} />
         <Route path="/lp" element={<LandingLeads />} />
         <Route path="/pricing" element={<Pricing />} />
-        <Route path="/allincenter-pelecard" element={<PelecardBrochure />} />
+        <Route path="/allincenter-pelecard" element={<Navigate to="/pricing" replace />} />
+        <Route path="/pelecard" element={<Navigate to="/pricing" replace />} />
         <Route path="/ai" element={<AiConsulting />} />
         <Route path="/about" element={<About />} />
         <Route path="/appointment-management" element={<AppointmentManagement />} />
