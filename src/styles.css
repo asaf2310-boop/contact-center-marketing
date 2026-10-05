@@ -2702,32 +2702,41 @@ p {
   color: var(--muted);
 }
 
-.pricing-card__setup {
+.pricing-card__annual {
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 10px;
+  flex-direction: column;
+  gap: 8px;
   padding: 16px 18px;
   border-radius: var(--radius);
   border: 1px solid rgba(139, 47, 214, 0.18);
   background: rgba(139, 47, 214, 0.05);
 }
 
-.pricing-card__setup-label {
+.pricing-card__annual-label {
   font-size: 0.95rem;
   font-weight: 700;
   color: #3c3757;
 }
 
-.pricing-card__setup-price {
+.pricing-card__annual-price {
   font-size: 1.9rem;
   font-weight: 900;
-  line-height: 1;
+  line-height: 1.15;
   background: linear-gradient(120deg, #8b2fd6, #19a9f2);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+.pricing-card__annual-note,
+.pricing-card__annual-setup {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #3c3757;
+}
+
+.pricing-card__annual-setup {
+  font-weight: 700;
 }
 
 .pricing-card__features {
