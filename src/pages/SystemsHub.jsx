@@ -7,19 +7,20 @@ const products = [
   {
     icon: CalendarCheck,
     title: "מערכת ניהול תורים",
-    text: "ניהול תורים, לקוחות, זמינות ותהליכים במקום אחד.",
+    text: "ניהול תורים לעסק: לקוחות, זמינות ותהליכים במקום אחד.",
     points: ["הזמנה אונליין", "ניהול יומן ולקוחות", "תזכורות ואוטומציות"],
     href: "/appointment-management",
-    cta: "מערכת ניהול תורים",
+    cta: "למערכת ניהול תורים לעסקים",
     image: "/assets/home-appointment-ui.jpg",
     alt: "ממשק מערכת ניהול התורים של AllInCenter",
   },
   {
     icon: Utensils,
     title: "מערכת הזמנות למסעדות",
-    text: "הזמנות שולחן ומפת ישיבה בסביבת ניהול אחת לצוות.",
+    text: "מערכת הזמנות למסעדה: הזמנות שולחן ומפת ישיבה בסביבת ניהול אחת לצוות.",
     points: ["הזמנת שולחן אונליין", "ניהול הזמנות", "מפת שולחנות"],
     href: "/restaurant-reservations",
+    cta: "למערכת הזמנות למסעדות",
     image: "/assets/home-restaurant-dashboard.jpg",
     alt: "לוח הבקרה של מערכת ההזמנות למסעדות",
   },
@@ -66,7 +67,7 @@ export default function SystemsHub() {
           <div className="systems-hero__copy">
             <span className="kicker">מוצרי AllInCenter</span>
             <h1>מערכות שעושות סדר בעסק</h1>
-            <p>מערכות AllInCenter ל<a href="/appointment-management">ניהול תורים לעסק</a>, הזמנות ומוקדים — <span>בעברית, בהתאמה לעסק ובמקום אחד.</span></p>
+            <p>מערכות AllInCenter ל<a href="/appointment-management">ניהול תורים לעסק</a>, <a href="/restaurant-reservations">הזמנות למסעדות</a> ומוקדים — <span>בעברית, בהתאמה לעסק ובמקום אחד.</span></p>
             <div className="systems-hero__actions">
               <a className="btn btn--primary" href="/#contact">לבקשת הדגמה <ArrowLeft size={18} /></a>
               <a className="btn btn--ghost" href="#systems-products">צפו במערכות</a>

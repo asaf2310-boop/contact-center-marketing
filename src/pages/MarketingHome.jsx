@@ -31,10 +31,10 @@ const products = [
     id: "appointments",
     eyebrow: "לעסקי שירות וקליניקות",
     title: "מערכת ניהול תורים",
-    description: "ניהול תורים, לקוחות, זמינות ותהליכים — בסביבת עבודה אחת שמותאמת לעסק.",
+    description: "ניהול תורים לעסק: לקוחות, זמינות ותהליכים — בסביבת עבודה אחת שמותאמת לעסק.",
     capabilities: ["הזמנה אונליין", "ניהול יומן ולקוחות", "תזכורות ואוטומציות"],
     href: "/appointment-management",
-    linkLabel: "מערכת ניהול תורים",
+    linkLabel: "למערכת ניהול תורים לעסקים",
     image: "/assets/home-appointment-ui.jpg",
     imageAlt: "ממשק מערכת ניהול התורים של AllInCenter",
     icon: CalendarCheck,
@@ -43,9 +43,10 @@ const products = [
     id: "restaurants",
     eyebrow: "למסעדות ומתחמי אירוח",
     title: "מערכת הזמנות למסעדות",
-    description: "מהזמנת השולחן ועד מפת הישיבה — תמונה תפעולית ברורה לצוות, בזמן אמת.",
+    description: "מערכת הזמנות למסעדה — מהזמנת השולחן ועד מפת הישיבה, בתמונה תפעולית ברורה לצוות.",
     capabilities: ["הזמנת שולחן אונליין", "ניהול הזמנות", "מפת שולחנות ואזורי ישיבה"],
     href: "/restaurant-reservations",
+    linkLabel: "למערכת הזמנות למסעדות",
     image: "/assets/home-restaurant-dashboard.jpg",
     imageAlt: "לוח הבקרה האמיתי של מערכת ההזמנות למסעדות",
     icon: Utensils,
@@ -121,7 +122,7 @@ export default function MarketingHome() {
           <div className="home-hero__copy">
             <Reveal><span className="home-hero__eyebrow">מערכות ניהול לעסקים בישראל</span></Reveal>
             <Reveal delay={60}><h1>פחות הודעות.<br /> <span>יותר תורים מסודרים.</span></h1></Reveal>
-            <Reveal delay={120}><p>אתר, WhatsApp ומערכת ניהול תורים שעובדים יחד — מהחיפוש הראשון ועד לתור או להזמנה.</p></Reveal>
+            <Reveal delay={120}><p>אתר, WhatsApp ו<a href="/appointment-management">מערכת ניהול תורים</a> שעובדים יחד — מהחיפוש הראשון ועד לתור או <a href="/restaurant-reservations">הזמנת שולחן במסעדה</a>.</p></Reveal>
             <Reveal delay={180}>
               <div className="home-actions">
                 <a className="btn btn--primary" href="#contact">לבקשת הדגמה <ArrowLeft size={18} /></a>
@@ -155,7 +156,7 @@ export default function MarketingHome() {
           <Reveal>
             <div className="home-section-head home-section-head--split">
               <span className="editorial-index" aria-hidden="true">01 / SYSTEMS</span>
-              <div><h2 id="products-heading">מערכות שעובדות<br />בתוך העסק.</h2><p>מערכות פעילות שמותאמות לתהליכי עבודה אמיתיים — עם ממשק מלא בעברית.</p></div>
+              <div><h2 id="products-heading">מערכות שעובדות<br />בתוך העסק.</h2><p>מערכות פעילות ל<a href="/appointment-management">ניהול תורים לעסק</a> ול<a href="/restaurant-reservations">הזמנות במסעדות</a> — עם ממשק מלא בעברית.</p></div>
             </div>
           </Reveal>
           <div className="home-product-list">{products.map((product, index) => <ProductRow product={product} index={index} key={product.id} />)}</div>
@@ -189,7 +190,7 @@ export default function MarketingHome() {
         </section>
 
         <section className="home-trust" aria-labelledby="trust-heading">
-          <Reveal><span className="editorial-index">04 / REAL PRODUCT</span><div><h2 id="trust-heading">רואים את המערכת<br />לפני שמחליטים.</h2><p>הדגמה שמבוססת על תהליכי העבודה של העסק, ממשקים בעברית וקישורים למערכות קיימות — בלי נתונים מומצאים ובלי מסכי שיווק.</p></div><a className="btn btn--ghost" href="/systems">לצפייה במערכות <ArrowLeft size={17} /></a></Reveal>
+          <Reveal><span className="editorial-index">04 / REAL PRODUCT</span><div><h2 id="trust-heading">רואים את המערכת<br />לפני שמחליטים.</h2><p>הדגמה שמבוססת על תהליכי העבודה של העסק — אפשר להתחיל ב<a href="/appointment-management">מערכת ניהול התורים</a> או ב<a href="/restaurant-reservations">מערכת ההזמנות למסעדות</a>, בלי נתונים מומצאים ובלי מסכי שיווק.</p></div><a className="btn btn--ghost" href="/systems">לצפייה במערכות <ArrowLeft size={17} /></a></Reveal>
         </section>
 
         <section className="section" id="contact">

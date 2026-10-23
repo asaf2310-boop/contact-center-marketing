@@ -2813,9 +2813,32 @@ p {
   color: var(--muted);
 }
 
+.pricing-card__product-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 4px;
+  color: #4e267d;
+  font-size: 0.92rem;
+  font-weight: 750;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.pricing-card__product-link:hover {
+  color: #8b2fd6;
+}
+
 .pricing-card__cta {
   margin-top: auto;
   width: 100%;
+}
+
+.pricing-hero__sub a {
+  color: inherit;
+  font-weight: 750;
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 .pricing__note {
@@ -4295,6 +4318,14 @@ p {
 .home-hero h1 { max-width: 690px; margin-top: 22px; color: #20173c; font-size: clamp(3.8rem,5.6vw,5.8rem); line-height: 1.04; letter-spacing: -.065em; }
 .home-hero h1 span { background: linear-gradient(110deg,#6d1fb8 8%,#5846dd 55%,#148ac5); background-clip: text; color: transparent; }
 .home-hero__copy > .reveal > p { max-width: 610px; margin-top: 25px; color: #5a546d; font-size: 1.13rem; line-height: 1.85; }
+.home-hero__copy > .reveal > p a,
+.home-section-head p a,
+.home-trust p a {
+  color: inherit;
+  font-weight: 750;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
 .home-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 31px; }
 .home-proof { display: flex; flex-wrap: wrap; gap: 14px 22px; margin-top: 27px; color: #565069; font-size: .88rem; font-weight: 700; }
 .home-proof span { display: flex; align-items: center; gap: 6px; }

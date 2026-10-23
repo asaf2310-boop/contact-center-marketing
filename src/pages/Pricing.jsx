@@ -22,6 +22,8 @@ const products = [
     price: "900 ₪ לשנה",
     packageNote: "כולל שירות ותמיכה לאורך השנה",
     setupNote: "ללא עלות הקמה",
+    productHref: "/appointment-management",
+    productLinkLabel: "לפרטים על מערכת ניהול התורים",
     features: [
       "הזמנת תור עצמאית ללקוח",
       "תזכורות ואישורי תורים אוטומטיים",
@@ -39,6 +41,8 @@ const products = [
     price: "2,000 ₪ לשנה",
     packageNote: "כולל בניית האתר, שירות ותמיכה לאורך השנה",
     setupNote: "ללא עלות הקמה",
+    productHref: "/google-ai-visibility",
+    productLinkLabel: "לפרטים על אתר, SEO וחיבור למערכות",
     features: [
       "עיצוב מותאם אישית ורספונסיבי",
       "מותאם SEO ומהיר טעינה",
@@ -79,8 +83,9 @@ export default function Pricing() {
           </Reveal>
           <Reveal delay={160}>
             <p className="pricing-hero__sub">
-              חבילות שנתיות למערכות ניהול וזימון תורים לעסקים בישראל. בוחרים
-              מוצר ומתחילים — בלי עלות הקמה.
+              חבילות שנתיות ל<a href="/appointment-management">מערכת ניהול תורים</a>{" "}
+              ולבניית אתר לעסקים בישראל. בוחרים מוצר ומתחילים — בלי עלות הקמה.
+              למסעדות יש גם <a href="/restaurant-reservations">מערכת הזמנות נפרדת</a>.
             </p>
           </Reveal>
           <Reveal delay={220}>
@@ -142,6 +147,13 @@ export default function Pricing() {
                         </li>
                       ))}
                     </ul>
+
+                    {product.productHref ? (
+                      <a className="pricing-card__product-link" href={product.productHref}>
+                        {product.productLinkLabel}
+                        <ArrowLeft size={16} />
+                      </a>
+                    ) : null}
 
                     <a className="btn btn--primary pricing-card__cta" href="/lp">
                       להשארת פרטים
