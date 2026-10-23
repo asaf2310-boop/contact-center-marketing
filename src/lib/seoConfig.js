@@ -166,7 +166,7 @@ export const routeSeo = {
           "@type": "Offer",
           "@id": `${SITE.url}/pricing#appointment-annual-offer`,
           name: "חבילה שנתית",
-          description: "כולל שירות ותמיכה לאורך השנה. ללא עלות הקמה. המחירים אינם כוללים מע״מ.",
+          description: "900 ₪ לשנה, ללא עלות הקמה וללא תוספת מע״מ. כולל שירות ותמיכה לאורך השנה.",
           price: "900",
           priceCurrency: "ILS",
           url: `${SITE.url}/pricing`,

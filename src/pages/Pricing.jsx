@@ -19,9 +19,9 @@ const products = [
       "יומן חכם, קביעת תורים אונליין, תזכורות אוטומטיות וניהול לקוחות — הכול במקום אחד.",
     video: "/videos/maya-queue-management.mp4",
     packageLabel: "חבילה שנתית",
-    price: "900 ₪ לשנה",
+    price: "900 ₪ לשנה, ללא עלות הקמה וללא תוספת מע״מ.",
     packageNote: "כולל שירות ותמיכה לאורך השנה",
-    setupNote: "ללא עלות הקמה",
+    setupNote: "",
     productHref: "/appointment-management",
     productLinkLabel: "לפרטים על מערכת ניהול התורים",
     features: [
@@ -40,7 +40,7 @@ const products = [
     packageLabel: "חבילה שנתית",
     price: "2,000 ₪ לשנה",
     packageNote: "כולל בניית האתר, שירות ותמיכה לאורך השנה",
-    setupNote: "ללא עלות הקמה",
+    setupNote: "ללא עלות הקמה וללא תוספת מע״מ.",
     productHref: "/google-ai-visibility",
     productLinkLabel: "לפרטים על אתר, SEO וחיבור למערכות",
     features: [
@@ -89,7 +89,7 @@ export default function Pricing() {
             </p>
           </Reveal>
           <Reveal delay={220}>
-            <p className="pricing-hero__vat">המחירים אינם כוללים מע״מ</p>
+            <p className="pricing-hero__vat">ללא תוספת מע״מ.</p>
           </Reveal>
         </section>
 
@@ -134,9 +134,11 @@ export default function Pricing() {
                       <span className="pricing-card__annual-note">
                         {product.packageNote}
                       </span>
-                      <span className="pricing-card__annual-setup">
-                        {product.setupNote}
-                      </span>
+                      {product.setupNote ? (
+                        <span className="pricing-card__annual-setup">
+                          {product.setupNote}
+                        </span>
+                      ) : null}
                     </div>
 
                     <ul className="pricing-card__features">

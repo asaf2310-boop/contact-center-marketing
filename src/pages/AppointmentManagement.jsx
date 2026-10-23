@@ -87,18 +87,10 @@ export default function AppointmentManagement() {
               ומעקב תשלומים — עם אפשרות לחיבור WhatsApp לפי תהליך העסק. ממשק בעברית, לעסקים בישראל.
             </p>
           </div>
-          <dl className="appointment-facts__grid">
+          <dl className="appointment-facts__grid appointment-facts__grid--compact">
             <div>
               <dt>חבילה שנתית</dt>
-              <dd>₪900 לשנה</dd>
-            </div>
-            <div>
-              <dt>עלות הקמה</dt>
-              <dd>ללא עלות הקמה</dd>
-            </div>
-            <div>
-              <dt>מע״מ</dt>
-              <dd>המחירים אינם כוללים מע״מ</dd>
+              <dd>900 ₪ לשנה, ללא עלות הקמה וללא תוספת מע״מ.</dd>
             </div>
             <div>
               <dt>מחירון מלא</dt>

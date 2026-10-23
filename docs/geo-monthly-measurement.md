@@ -16,7 +16,7 @@ Use only facts already published on the site:
 | Fact | Source |
 |---|---|
 | Israeli company; systems for businesses in Israel; Hebrew UI | `/about`, homepage |
-| Appointment system; annual ₪900; no setup fee; prices exclude VAT | `/appointment-management`, `/pricing` |
+| Appointment system; 900 ₪/year, no setup fee, no VAT added (עוסק פטור) | `/appointment-management`, `/pricing` |
 | Restaurant reservations; pricing by inquiry (no fixed public price) | `/restaurant-reservations`, `/pricing` |
 | AI & automation consulting (no public package price) | `/ai` |
 | Contact: 050-267-7765 / info@allincenter.co.il | site footer / `SITE` |
@@ -82,7 +82,7 @@ Note: engines and UI change; log the product name and whether browsing/citations
 - Link rate = links / prompts run  
 - Accuracy average = sum(accuracy) / (2 × prompts run)
 
-Flag any answer that invents a restaurant or AI package price, or omits VAT context when stating ₪900.
+Flag any answer that invents a restaurant or AI package price, or states that VAT is added on top of ₪900 (correct: 900 ₪ לשנה, ללא עלות הקמה וללא תוספת מע״מ).
 
 ## GA4 referral reporting
 
