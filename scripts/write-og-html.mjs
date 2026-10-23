@@ -66,16 +66,16 @@ function writePage({ dir, meta, validate }) {
 writePage({
   dir: "ai",
   meta: {
-    title: "אסף אריאלי | AI & Automation Project Manager",
+    title: "AllInCenter | ייעוץ AI ואוטומציה לעסקים",
     description:
-      "ייעוץ, ניהול והובלת פרויקטי AI ואוטומציה לחברות וארגונים — משלב זיהוי ההזדמנות והאפיון ועד לפיתוח והטמעה בפועל.",
+      "AllInCenter מציעה ייעוץ, ניהול והטמעת AI ואוטומציה לעסקים — בהובלת אסף אריאלי, משלב זיהוי ההזדמנות והאפיון ועד לפיתוח והטמעה בפועל.",
     url: "https://www.allincenter.co.il/ai",
     image: "https://www.allincenter.co.il/assets/asaf-ariely.png",
     twitterCard: "summary",
   },
   validate(check) {
     if (
-      !check.includes("אסף אריאלי") ||
+      !check.includes("AllInCenter | ייעוץ AI ואוטומציה לעסקים") ||
       !check.includes("https://www.allincenter.co.il/ai") ||
       !check.includes("asaf-ariely.png")
     ) {

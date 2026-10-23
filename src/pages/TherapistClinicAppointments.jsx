@@ -44,7 +44,7 @@ export default function TherapistClinicAppointments() {
           <div className="appointment-product-hero__copy">
             <span className="editorial-index">01 / THERAPISTS</span>
             <p className="appointment-product-hero__eyebrow">למטפלים ולקליניקות קטנות</p>
-            <h1 id="therapist-title">מערכת זימון תורים<br /><span>למטפלים וקליניקות</span></h1>
+            <h1 id="therapist-title">מערכת זימון תורים<br /> <span>למטפלים וקליניקות</span></h1>
             <p className="appointment-product-hero__lead">פחות הודעות הלוך ושוב, יותר סדר ביומן. הלקוחות יכולים לבחור מועד פנוי ולקבוע תור אונליין, והיומן נשאר מסודר במקום אחד.</p>
             <div className="appointment-actions">
               <a className="btn btn--primary" href={demoHref} target="_blank" rel="noreferrer nofollow">לצפייה בהדגמה <ArrowLeft size={18} /></a>
