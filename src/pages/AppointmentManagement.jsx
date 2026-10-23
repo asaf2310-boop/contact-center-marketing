@@ -55,7 +55,7 @@ export default function AppointmentManagement() {
           <div className="appointment-product-hero__copy">
             <span className="editorial-index">01 / APPOINTMENTS</span>
             <p className="appointment-product-hero__eyebrow">לקליניקות, מטפלים ונותני שירות</p>
-            <h1 id="appointment-title">מערכת ניהול תורים<br /><span>היום עובד טוב יותר</span></h1>
+            <h1 id="appointment-title">מערכת ניהול תורים<br /> <span>היום עובד טוב יותר</span></h1>
             <p className="appointment-product-hero__lead">הלקוחות קובעים תור אונליין, והעסק מנהל במקום אחד את היומן, הלקוחות והפעולות הבאות. במקום לתאם הכל בין הודעות, רואים את היום כולו — ואפשר לחבר גם WhatsApp לפי תהליך העבודה.</p>
             <div className="appointment-actions">
               <a className="btn btn--primary" href="/#contact">לתיאום הדגמה <ArrowLeft size={18} /></a>

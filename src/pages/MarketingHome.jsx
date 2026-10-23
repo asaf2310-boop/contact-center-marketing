@@ -120,8 +120,8 @@ export default function MarketingHome() {
         <section className="home-hero">
           <div className="home-hero__copy">
             <Reveal><span className="home-hero__eyebrow">מערכות ניהול לעסקים בישראל</span></Reveal>
-            <Reveal delay={60}><h1>פחות הודעות.<br /><span>יותר תורים מסודרים.</span></h1></Reveal>
-            <Reveal delay={120}><p>אתר, WhatsApp ומערכת ניהול שעובדים יחד — מהחיפוש הראשון ועד לתור או להזמנה.</p></Reveal>
+            <Reveal delay={60}><h1>פחות הודעות.<br /> <span>יותר תורים מסודרים.</span></h1></Reveal>
+            <Reveal delay={120}><p>אתר, WhatsApp ומערכת ניהול תורים שעובדים יחד — מהחיפוש הראשון ועד לתור או להזמנה.</p></Reveal>
             <Reveal delay={180}>
               <div className="home-actions">
                 <a className="btn btn--primary" href="#contact">לבקשת הדגמה <ArrowLeft size={18} /></a>
