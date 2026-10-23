@@ -78,6 +78,35 @@ export default function AppointmentManagement() {
           </figure>
         </section>
 
+        <section className="appointment-facts" aria-labelledby="appointment-facts-title">
+          <div className="appointment-section-heading">
+            <span className="editorial-index">01B / FACTS</span>
+            <h2 id="appointment-facts-title">עובדות על מערכת ניהול התורים</h2>
+            <p>
+              מערכת אחת לזימון תורים אונליין, יומן וזמינות, לקוחות, תזכורות ואישורי תור,
+              ומעקב תשלומים — עם אפשרות לחיבור WhatsApp לפי תהליך העסק. ממשק בעברית, לעסקים בישראל.
+            </p>
+          </div>
+          <dl className="appointment-facts__grid">
+            <div>
+              <dt>חבילה שנתית</dt>
+              <dd>₪900 לשנה</dd>
+            </div>
+            <div>
+              <dt>עלות הקמה</dt>
+              <dd>ללא עלות הקמה</dd>
+            </div>
+            <div>
+              <dt>מע״מ</dt>
+              <dd>המחירים אינם כוללים מע״מ</dd>
+            </div>
+            <div>
+              <dt>מחירון מלא</dt>
+              <dd><a href="/pricing">למחירון AllInCenter</a></dd>
+            </div>
+          </dl>
+        </section>
+
         <section className="appointment-whatsapp-story" aria-labelledby="whatsapp-title">
           <div className="appointment-section-heading">
             <span className="editorial-index">02 / FROM CHAT TO SYSTEM</span>

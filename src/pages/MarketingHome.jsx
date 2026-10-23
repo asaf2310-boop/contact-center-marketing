@@ -123,6 +123,12 @@ export default function MarketingHome() {
             <Reveal><span className="home-hero__eyebrow">מערכות ניהול לעסקים בישראל</span></Reveal>
             <Reveal delay={60}><h1>פחות הודעות.<br /> <span>יותר תורים מסודרים.</span></h1></Reveal>
             <Reveal delay={120}><p>אתר, WhatsApp ו<a href="/appointment-management">מערכת ניהול תורים</a> שעובדים יחד — מהחיפוש הראשון ועד לתור או <a href="/restaurant-reservations">הזמנת שולחן במסעדה</a>.</p></Reveal>
+            <Reveal delay={150}>
+              <p className="home-entity-blurb">
+                AllInCenter מפתחת מערכות ניהול מותאמות לעסקים בישראל — תורים, הזמנות למסעדות, אוטומציה ו‑AI — בממשק בעברית.{" "}
+                <a href="/about">מי אנחנו</a>
+              </p>
+            </Reveal>
             <Reveal delay={180}>
               <div className="home-actions">
                 <a className="btn btn--primary" href="#contact">לבקשת הדגמה <ArrowLeft size={18} /></a>

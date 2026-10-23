@@ -24,6 +24,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import { getWhatsAppHref } from "@/lib/site";
 import { aiCaseStudies } from "@/data/aiCaseStudies";
+import { aiConsultingFaqs } from "@/data/aiConsultingFaqs";
 
 const experienceCards = [
   {
@@ -455,6 +456,29 @@ export default function AiConsulting() {
               </div>
             </div>
           </Reveal>
+        </section>
+
+        <section className="section ai-section" id="faq" aria-labelledby="ai-faq-title">
+          <Reveal>
+            <div className="section__head">
+              <span className="kicker">שאלות נפוצות</span>
+              <h2 id="ai-faq-title">שאלות נפוצות על ייעוץ AI ואוטומציה</h2>
+              <p>תשובות קצרות על השירותים שמתוארים בעמוד — בלי מחירים שלא פורסמו ובלי הבטחות לתוצאה.</p>
+            </div>
+          </Reveal>
+          <div className="ai-faq__list">
+            {aiConsultingFaqs.map(([question, answer], index) => (
+              <Reveal key={question} delay={index * 40}>
+                <details>
+                  <summary>
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    {question}
+                  </summary>
+                  <p>{answer}</p>
+                </details>
+              </Reveal>
+            ))}
+          </div>
         </section>
 
         <section className="section ai-section" id="opportunity">

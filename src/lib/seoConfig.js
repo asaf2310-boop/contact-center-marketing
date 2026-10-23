@@ -1,4 +1,5 @@
 import { SITE } from "@/lib/site";
+import { aiConsultingFaqs } from "@/data/aiConsultingFaqs";
 
 const orgId = `${SITE.url}/#organization`;
 const websiteId = `${SITE.url}/#website`;
@@ -199,6 +200,15 @@ export const routeSeo = {
         areaServed: SITE.areaServed,
         url: `${SITE.url}/ai`,
       },
+      {
+        "@type": "FAQPage",
+        "@id": `${SITE.url}/ai#faq`,
+        mainEntity: aiConsultingFaqs.map(([name, text]) => ({
+          "@type": "Question",
+          name,
+          acceptedAnswer: { "@type": "Answer", text },
+        })),
+      },
     ]),
   },
   "/systems": {
@@ -233,7 +243,7 @@ export const routeSeo = {
   "/about": {
     title: "מי אנחנו | AllInCenter",
     description:
-      "הכירו את AllInCenter ואת אסף אריאלי, שמאחורי פיתוח מערכות ניהול, אוטומציה ופתרונות מותאמים לעסקים בישראל.",
+      "AllInCenter היא חברה ישראלית שמפתחת מערכות ניהול תורים, הזמנות למסעדות, אוטומציה ו‑AI לעסקים בישראל — בהובלת אסף אריאלי.",
     canonical: `${SITE.url}/about`,
     ogImage: SITE.logo,
     twitterCard: "summary",
@@ -244,7 +254,7 @@ export const routeSeo = {
         url: `${SITE.url}/about`,
         name: "מי אנחנו | AllInCenter",
         description:
-          "הכירו את AllInCenter ואת אסף אריאלי, שמאחורי פיתוח מערכות ניהול, אוטומציה ופתרונות מותאמים לעסקים בישראל.",
+          "AllInCenter היא חברה ישראלית שמפתחת מערכות ניהול תורים, הזמנות למסעדות, אוטומציה ו‑AI לעסקים בישראל — בהובלת אסף אריאלי.",
         inLanguage: SITE.language,
         about: { "@id": orgId },
         mainEntity: { "@id": founderId },
@@ -425,6 +435,7 @@ export const routeSeo = {
           ["האם המערכת מתאימה למסעדות בישראל?", "כן. המערכת מיועדת למסעדות בישראל וכוללת ממשק בעברית."],
           ["האם ניתן להתאים את מערכת ההזמנות לצורת העבודה של המסעדה?", "כן. ניתן להתאים את תהליך ההזמנה והניהול לאופן העבודה של המסעדה."],
           ["האם המערכת מחליפה ניהול ידני של הזמנות?", "המערכת מרכזת את תהליך ההזמנה והניהול הדיגיטלי וכך מפחיתה את הצורך לנהל מידע ידנית בין מקומות שונים."],
+          ["כמה עולה מערכת ההזמנות למסעדות?", "מחיר מערכת ההזמנות למסעדות נקבע לפי המסעדה והתאמת התהליך. אין מחיר קבוע בעמוד זה — לקבלת הצעת מחיר יש להשאיר פרטים לבקשת הדגמה."],
         ].map(([name, text]) => ({ "@type": "Question", name, acceptedAnswer: { "@type": "Answer", text } })),
       },
     ]),
