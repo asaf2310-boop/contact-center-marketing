@@ -8,6 +8,7 @@ import {
   Headphones,
   LayoutDashboard,
   MessageCircle,
+  Package,
   RefreshCw,
   Search,
   Sparkles,
@@ -65,6 +66,21 @@ const products = [
   },
 ];
 
+const stockProduct = {
+  id: "stock",
+  eyebrow: "לעסקים עם מלאי וספקים · לפני השקה פומבית",
+  title: "Stock: ניהול מלאי ובקרת מחירי ספקים",
+  description: "מלאי לפי מחסן עם כל שינוי מתועד, ו-PriceGuard שמשווה כל שורה בחשבונית ספק למחיר שסוכם.",
+  capabilities: ["מלאי לפי מחסן והתראות מינימום", "סריקת ברקוד באייפון", "השוואת חשבוניות ספקים למחירון"],
+  href: "/inventory-management",
+  linkLabel: "ניהול מלאי לעסקים",
+  image: "/assets/stock/stock-01-dashboard.webp",
+  imageAlt: "מסך הבית של אפליקציית Stock: מוצרים מתחת למינימום, שווי מלאי וחיובי יתר לבדיקה (נתוני הדגמה)",
+  icon: Package,
+  portrait: true,
+};
+products.splice(2, 0, stockProduct);
+
 function ContactCenterPanel() {
   const capabilities = ["זמינות עובדים", "ניהול הפסקות", "שיבוץ משמרות", "תמונת מצב לצוות"];
   return (
@@ -95,7 +111,7 @@ function ProductRow({ product, index }) {
       <article className={`editorial-product ${index % 2 ? "editorial-product--reverse" : ""}`}>
         <div className="editorial-product__visual">
           <div className="editorial-product__chrome" aria-hidden="true"><span /><span /><span /><small>AllInCenter / {String(index + 1).padStart(2, "0")}</small></div>
-          {product.id === "contact-center" ? <ContactCenterPanel /> : <img src={product.image} alt={product.imageAlt} loading="lazy" />}
+          {product.id === "contact-center" ? <ContactCenterPanel /> : <img src={product.image} alt={product.imageAlt} loading="lazy" className={product.portrait ? "editorial-product__phone" : undefined} {...(product.portrait ? { width: 600, height: 1304 } : {})} />}
         </div>
         <div className="editorial-product__copy">
           <span className="editorial-index" aria-hidden="true">0{index + 1} / SYSTEM</span>
@@ -122,7 +138,7 @@ export default function MarketingHome() {
           <div className="home-hero__copy">
             <Reveal><span className="home-hero__eyebrow">מערכות ניהול לעסקים בישראל</span></Reveal>
             <Reveal delay={60}><h1>פחות הודעות.<br /><span>יותר תורים מסודרים.</span></h1></Reveal>
-            <Reveal delay={120}><p>אתר, WhatsApp ומערכת ניהול שעובדים יחד — מהחיפוש הראשון ועד לתור או להזמנה.</p></Reveal>
+            <Reveal delay={120}><p>AllInCenter מפתחת מערכת ניהול תורים, מערכת הזמנות למסעדות ואוטומציה ו-AI לעסקים בישראל — מהחיפוש הראשון ועד לתור או להזמנה.</p></Reveal>
             <Reveal delay={180}>
               <div className="home-actions">
                 <a className="btn btn--primary" href="#contact">לבקשת הדגמה <ArrowLeft size={18} /></a>
@@ -156,7 +172,7 @@ export default function MarketingHome() {
           <Reveal>
             <div className="home-section-head home-section-head--split">
               <span className="editorial-index" aria-hidden="true">01 / SYSTEMS</span>
-              <div><h2 id="products-heading">מערכות שעובדות<br />בתוך העסק.</h2><p>מערכות פעילות שמותאמות לתהליכי עבודה אמיתיים — עם ממשק מלא בעברית.</p></div>
+              <div><h2 id="products-heading">מערכות שעובדות<br />בתוך העסק.</h2><p>מערכות שמותאמות לתהליכי עבודה אמיתיים, עם ממשק מלא בעברית. Stock לניהול מלאי נמצאת לפני השקה פומבית.</p></div>
             </div>
           </Reveal>
           <div className="home-product-list">{products.map((product, index) => <ProductRow product={product} index={index} key={product.id} />)}</div>

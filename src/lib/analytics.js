@@ -181,6 +181,13 @@ export function installLeadLinkTracking() {
       return;
     }
 
+    if (link.dataset.analyticsEvent) {
+      trackAnalyticsEvent(link.dataset.analyticsEvent, {
+        location: link.dataset.analyticsLocation || "unknown",
+        link_text: text,
+      });
+    }
+
     if (isInstagramHref(resolvedHref)) {
       trackInstagramClick({ source: link.dataset.analyticsLocation, linkText: text });
       return;
