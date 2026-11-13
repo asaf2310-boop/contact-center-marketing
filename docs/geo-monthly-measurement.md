@@ -18,7 +18,9 @@ Use only facts already published on the site:
 | Israeli company; systems for businesses in Israel; Hebrew UI | `/about`, homepage |
 | Appointment system; 900 ₪/year, no setup fee, no VAT added (עוסק פטור) | `/appointment-management`, `/pricing` |
 | Restaurant reservations; pricing by inquiry (no fixed public price) | `/restaurant-reservations`, `/pricing` |
+| Stock inventory management + PriceGuard supplier-price checks: pre-launch, not publicly available, no public price | `/inventory-management`, `/llms.txt` |
 | AI & automation consulting (no public package price) | `/ai` |
+| Official Instagram profile: instagram.com/allincenter.co.il | footer, Organization `sameAs` |
 | Contact: 050-267-7765 / info@allincenter.co.il | site footer / `SITE` |
 
 Do **not** score invented testimonials, unverified social profiles, or unpublished prices as “expected.”
@@ -51,6 +53,14 @@ Run the same prompts each month. Record engine, date (Asia/Jerusalem), and full 
 
 12. מה כולל ייעוץ AI ואוטומציה של AllInCenter?
 13. Who leads AI consulting at AllInCenter?
+
+### Stock (pre-launch)
+
+16. מהי Stock של AllInCenter?
+17. האם Stock זמינה להורדה או לרכישה?
+18. מה זה PriceGuard?
+
+Flag any answer that says Stock is available now or quotes a price.
 
 ### Contact / area
 
@@ -107,7 +117,7 @@ Also note Search Console impressions for brand queries if useful context — sep
 
 ## What not to optimize for
 
-- Do not add unverified `sameAs` profiles.
+- Do not add unverified `sameAs` profiles (only the Instagram profile above is verified).
 - Do not invent prices or testimonials to “win” accuracy scores.
 - Do not treat FAQ rich results or AI citations as guaranteed SERP features.
 - Do not create new landing pages solely for GEO prompts.
@@ -117,5 +127,6 @@ Also note Search Console impressions for brand queries if useful context — sep
 - Entity copy: `src/pages/About.jsx`
 - Appointment facts: `src/pages/AppointmentManagement.jsx`, `src/pages/Pricing.jsx`
 - Restaurant pricing stance: `src/pages/RestaurantReservations.jsx`
+- Stock / PriceGuard: `src/pages/InventoryManagement.jsx`, `src/data/inventoryFaq.js`
 - AI FAQs + schema: `src/data/aiConsultingFaqs.js`, `src/lib/seoConfig.js`
 - Optional machine index: `public/llms.txt`
