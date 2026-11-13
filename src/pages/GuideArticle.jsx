@@ -69,6 +69,9 @@ export default function GuideArticle() {
             </nav>
           </details>
           <div className="guide-content">
+            {guide.answerFirst ? (
+              <p className="guide-answer-first"><RichText text={guide.answerFirst} /></p>
+            ) : null}
             <Paragraphs items={guide.intro} />
             {guide.sections.map((raw, index) => {
               const item = normalizeSection(raw);

@@ -10,7 +10,6 @@ const urlList = [
   `https://${host}/ai`,
   `https://${host}/systems`,
   `https://${host}/services`,
-  `https://${host}/allincenter-pelecard`,
   `https://${host}/appointment-management`,
   `https://${host}/appointment-system-therapists-clinics`,
   `https://${host}/restaurant-reservations`,

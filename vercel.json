@@ -5,12 +5,22 @@
   "redirects": [
     {
       "source": "/pelecard",
-      "destination": "/allincenter-pelecard",
+      "destination": "/pricing",
       "permanent": true
     },
     {
       "source": "/pelecard/",
-      "destination": "/allincenter-pelecard",
+      "destination": "/pricing",
+      "permanent": true
+    },
+    {
+      "source": "/allincenter-pelecard",
+      "destination": "/pricing",
+      "permanent": true
+    },
+    {
+      "source": "/allincenter-pelecard/",
+      "destination": "/pricing",
       "permanent": true
     }
   ],
@@ -128,14 +138,6 @@
       "destination": "/restaurant-reservations/index.html"
     },
     {
-      "source": "/allincenter-pelecard",
-      "destination": "/allincenter-pelecard/index.html"
-    },
-    {
-      "source": "/allincenter-pelecard/",
-      "destination": "/allincenter-pelecard/index.html"
-    },
-    {
       "source": "/guides",
       "destination": "/guides/index.html"
     },
@@ -182,6 +184,14 @@
     {
       "source": "/google-ai-visibility/",
       "destination": "/google-ai-visibility/index.html"
+    },
+    {
+      "source": "/stock/auth",
+      "destination": "/stock/auth/index.html"
+    },
+    {
+      "source": "/stock/auth/",
+      "destination": "/stock/auth/index.html"
     }
   ],
   "headers": [
@@ -200,6 +210,49 @@
         {
           "key": "Content-Type",
           "value": "application/xml; charset=utf-8"
+        }
+      ]
+    },
+    {
+      "source": "/stock/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "no-referrer"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), payment=()"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000"
+        }
+      ]
+    },
+    {
+      "source": "/stock/auth(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    },
+    {
+      "source": "/stock/assets/(.*).mjs",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/javascript; charset=utf-8"
         }
       ]
     }

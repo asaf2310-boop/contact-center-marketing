@@ -30,12 +30,14 @@ const audiences = [
 
 const faqs = [
   ["מהי מערכת הזמנות למסעדות?", "מערכת שמאפשרת לאורחים להזמין שולחן אונליין ולמסעדה לנהל את ההזמנות והשולחנות מתוך ממשק אחד."],
+  ["למי מתאימה מערכת הזמנות למסעדה?", "לבעלי מסעדות, ברים ובתי קפה שרוצים לרכז הזמנת שולחן, ניהול הזמנות ומפת ישיבה בתהליך אחד — בממשק בעברית."],
   ["האם האורחים יכולים להזמין שולחן אונליין?", "כן. האורחים יכולים לבחור מספר סועדים, תאריך, שעה ואזור ישיבה בתהליך הזמנה דיגיטלי."],
   ["האם ניתן לנהל את ההזמנות מתוך מערכת אחת?", "כן. מסכי הניהול מרכזים את ההזמנות ואת תמונת המצב של המסעדה במקום אחד."],
   ["האם המערכת כוללת ניהול שולחנות?", "כן. המערכת כוללת מפת שולחנות ומסכי ניהול שמאפשרים לצוות לראות ולנהל את מצב ההושבה."],
   ["האם המערכת מתאימה למסעדות בישראל?", "כן. המערכת מיועדת למסעדות בישראל וכוללת ממשק בעברית."],
   ["האם ניתן להתאים את מערכת ההזמנות לצורת העבודה של המסעדה?", "כן. ניתן להתאים את תהליך ההזמנה והניהול לאופן העבודה של המסעדה."],
   ["האם המערכת מחליפה ניהול ידני של הזמנות?", "המערכת מרכזת את תהליך ההזמנה והניהול הדיגיטלי וכך מפחיתה את הצורך לנהל מידע ידנית בין מקומות שונים."],
+  ["כמה עולה מערכת ההזמנות למסעדות?", "מחיר מערכת ההזמנות למסעדות נקבע לפי המסעדה והתאמת התהליך. אין מחיר קבוע בעמוד זה — לקבלת הצעת מחיר יש להשאיר פרטים לבקשת הדגמה."],
 ];
 
 const journey = ["חיפוש או אתר", "בחירת תאריך ושעה", "הזמנה", "ניהול במסעדה"];
@@ -48,9 +50,11 @@ export default function RestaurantReservations() {
         <section className="restaurant-product-hero" aria-labelledby="restaurant-title">
           <div className="restaurant-product-hero__copy">
             <span className="restaurant-index">01 / RESERVATIONS</span>
-            <p className="restaurant-product-hero__eyebrow">מערכת הזמנות למסעדות</p>
-            <h1 id="restaurant-title">מהחיפוש בגוגל<br /><span>עד לשולחן במסעדה</span></h1>
-            <p className="restaurant-product-hero__lead">האורחים מזמינים שולחן בתהליך קצר וברור. הצוות מקבל את ההזמנה ומנהל את השולחנות והישיבה מאותה מערכת.</p>
+            <p className="restaurant-product-hero__eyebrow">לבעלי מסעדות בישראל</p>
+            <h1 id="restaurant-title">מערכת הזמנות למסעדות<br /> <span>מהחיפוש עד לשולחן</span></h1>
+            <p className="restaurant-product-hero__lead">
+              מערכת הזמנות למסעדה שמיועדת לבעלי מסעדות: האורחים מזמינים שולחן בתהליך קצר וברור, והצוות מקבל את ההזמנה ומנהל את השולחנות והישיבה מאותה מערכת.
+            </p>
             <div className="restaurant-actions">
               <a className="btn btn--primary" href="/#contact">לתיאום הדגמה <ArrowLeft size={18} /></a>
               <a className="btn btn--ghost" href="#restaurant-proof">צפו במערכת בפעולה</a>
@@ -69,11 +73,33 @@ export default function RestaurantReservations() {
           </figure>
         </section>
 
+        <section className="restaurant-service-summary" aria-labelledby="restaurant-summary-title">
+          <div className="restaurant-heading">
+            <span className="restaurant-index">01B / SERVICE</span>
+            <h2 id="restaurant-summary-title">מה כולל השירות, ואיך מקבלים מחיר?</h2>
+            <p>
+              מערכת הזמנות למסעדות של AllInCenter מאפשרת לאורחים להזמין שולחן אונליין
+              (מספר סועדים, תאריך, שעה ואזור ישיבה), ולצוות לנהל הזמנות ומפת שולחנות בממשק בעברית —
+              עם התאמה לאופן העבודה במסעדה.
+            </p>
+          </div>
+          <aside className="restaurant-pricing-note">
+            <h3>מחיר והתאמה</h3>
+            <p>
+              מחיר מערכת ההזמנות למסעדות נקבע לפי המסעדה והתאמת התהליך.
+              אין מחיר קבוע בעמוד זה. לקבלת הצעת מחיר —{" "}
+              <a href="/#contact">השאירו פרטים לבקשת הדגמה</a>
+              {" "}או עיינו ב<a href="/pricing">מחירון המוצרים שפורסם</a>{" "}
+              (ניהול תורים ובניית אתר).
+            </p>
+          </aside>
+        </section>
+
         <section className="restaurant-journey" aria-labelledby="restaurant-journey-title">
           <div className="restaurant-heading">
             <span className="restaurant-index">02 / GUEST JOURNEY</span>
             <h2 id="restaurant-journey-title">מסלול ברור מהחיפוש ועד לניהול במסעדה.</h2>
-            <p>האתר או עמוד הנחיתה מובילים לפעולת הזמנה ממשית. פרטי ההזמנה עוברים לסביבת הניהול, שבה הצוות עובד עם ההזמנות והשולחנות.</p>
+            <p>בעלי מסעדות מחפשים מערכת שמחברת את האתר או עמוד הנחיתה לפעולת הזמנה ממשית. פרטי ההזמנה עוברים לסביבת הניהול, שבה הצוות עובד עם ההזמנות והשולחנות.</p>
           </div>
           <div className="restaurant-journey__track" aria-label="תהליך מחיפוש לניהול הזמנה במסעדה">
             {journey.map((item, index) => <React.Fragment key={item}><div><span>0{index + 1}</span><strong>{item}</strong></div>{index < journey.length - 1 && <ArrowUpLeft aria-hidden="true" />}</React.Fragment>)}
@@ -107,7 +133,7 @@ export default function RestaurantReservations() {
         <section className="restaurant-operations" aria-labelledby="restaurant-capabilities-title">
           <div className="restaurant-heading restaurant-heading--sticky">
             <span className="restaurant-index">04 / OPERATIONS</span>
-            <h2 id="restaurant-capabilities-title">מערכת תפעולית להזמנות ולשולחנות.</h2>
+            <h2 id="restaurant-capabilities-title">מה כוללת מערכת הזמנות למסעדות?</h2>
             <p>היכולות מתחברות לסביבת עבודה אחת שניתן להתאים לצורת העבודה של המסעדה.</p>
           </div>
           <div className="restaurant-capability-list">
@@ -130,22 +156,25 @@ export default function RestaurantReservations() {
         <section className="restaurant-search-connection" aria-labelledby="restaurant-search-title">
           <div className="restaurant-search-connection__lead"><span className="restaurant-index">06 / SEARCH TO RESERVATION</span><Search size={34} aria-hidden="true" /><h2 id="restaurant-search-title">חיבור האתר לתהליך ההזמנה</h2></div>
           <div className="restaurant-search-connection__copy">
-            <p>אפשר לבנות או לשפר את אתר המסעדה ולחבר מבקרים שמגיעים מגוגל או ממנועי AI ישירות לתהליך הזמנת השולחן.</p>
+            <p>אפשר לבנות או לשפר את אתר המסעדה ולחבר מבקרים שמגיעים מגוגל או ממנועי AI ישירות לתהליך הזמנת השולחן. לפני בחירה, כדאי גם לקרוא מה לבדוק ב<a href="/guides/restaurant-reservation-system">מדריך למערכת הזמנות למסעדה</a>.</p>
             <a href="/google-ai-visibility">איך אתר, SEO וחיפוש מתחברים למסלול ההזמנה? <ArrowLeft size={16} /></a>
           </div>
         </section>
 
         <section className="restaurant-conversion" aria-labelledby="restaurant-conversion-title">
           <span className="restaurant-index">07 / NEXT STEP</span>
-          <h2 id="restaurant-conversion-title">רוצים להפוך חיפוש שולחן להזמנה מסודרת?</h2>
+          <h2 id="restaurant-conversion-title">רוצים מערכת הזמנות שמתאימה לצוות המסעדה?</h2>
           <p>נראה לכם את חוויית האורח ואת סביבת הניהול ונבדוק איך להתאים את התהליך למסעדה.</p>
-          <div className="restaurant-actions"><a className="btn btn--primary" href="/#contact">לתיאום הדגמה <ArrowLeft size={18} /></a><a className="btn btn--ghost" href="#restaurant-proof">צפו במערכת בפעולה</a></div>
+          <div className="restaurant-actions">
+            <a className="btn btn--primary" href="/#contact">לתיאום הדגמה <ArrowLeft size={18} /></a>
+            <a className="btn btn--ghost" href="#restaurant-proof">צפו במערכת בפעולה</a>
+          </div>
           <a className="restaurant-conversion__back" href="/systems">לכל המערכות של AllInCenter <ArrowLeft size={16} /></a>
           <InstagramLink className="instagram-follow" location="restaurant-reservations">עקבו אחרינו באינסטגרם</InstagramLink>
         </section>
 
         <section className="restaurant-faq" aria-labelledby="restaurant-faq-title">
-          <div className="restaurant-heading"><span className="restaurant-index">08 / FAQ</span><h2 id="restaurant-faq-title">מידע נוסף על מערכת ההזמנות למסעדות</h2></div>
+          <div className="restaurant-heading"><span className="restaurant-index">08 / FAQ</span><h2 id="restaurant-faq-title">שאלות נפוצות על מערכת הזמנות למסעדות</h2></div>
           <div className="restaurant-faq__list">{faqs.map(([question, answer], index) => <details key={question}><summary><span>{String(index + 1).padStart(2, "0")}</span>{question}</summary><p>{answer}</p></details>)}</div>
         </section>
       </main>

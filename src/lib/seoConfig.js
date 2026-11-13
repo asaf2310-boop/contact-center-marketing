@@ -1,5 +1,6 @@
 import { SITE } from "@/lib/site";
 import { inventoryFaqs } from "@/data/inventoryFaq";
+import { aiConsultingFaqs } from "@/data/aiConsultingFaqs";
 
 const orgId = `${SITE.url}/#organization`;
 const websiteId = `${SITE.url}/#website`;
@@ -14,15 +15,16 @@ export const organizationSchema = {
   telephone: SITE.phoneIntl,
   areaServed: SITE.areaServed,
   logo: SITE.logo,
-  description: "AllInCenter מפתחת מערכות ניהול לעסקים בישראל: מערכת ניהול תורים, מערכת הזמנות למסעדות, אוטומציות ופתרונות AI, ובניית אתרים ו-SEO.",
+  image: SITE.logo,
+  description: "AllInCenter מפתחת מערכות ניהול מותאמות, אוטומציות ופתרונות AI לעסקים בישראל.",
   founder: { "@id": founderId },
   contactPoint: {
     "@type": "ContactPoint",
-    contactType: "customer service",
+    contactType: "customer support",
     telephone: SITE.phoneIntl,
     email: SITE.email,
     areaServed: SITE.areaServed,
-    availableLanguage: ["he", "en"],
+    availableLanguage: ["Hebrew", "he"],
   },
   sameAs: [
     "https://www.google.com/search?kgmid=/g/11nvs68ph0&q=AllInCenter",
@@ -147,16 +149,38 @@ export const routeSeo = {
   },
   "/pricing": {
     title: "מחירון AllInCenter | מערכות ניהול וזימון תורים לעסקים",
-    description: "חבילות AllInCenter למערכות זימון תורים, ניהול לקוחות, אוטומציות וכלים לניהול העסק.",
+    description: "חבילות שנתיות של AllInCenter למערכות זימון תורים ולבניית אתר לעסקים — בלי עלות הקמה.",
     canonical: `${SITE.url}/pricing`,
     ogImage: SITE.logo,
     twitterCard: "summary",
-    jsonLd: graph(),
+    jsonLd: graph([
+      {
+        "@type": "SoftwareApplication",
+        "@id": `${SITE.url}/pricing#appointment-software`,
+        name: "מערכת ניהול תורים",
+        description:
+          "יומן חכם, קביעת תורים אונליין, תזכורות אוטומטיות וניהול לקוחות — הכול במקום אחד.",
+        applicationCategory: "BusinessApplication",
+        operatingSystem: "Web",
+        url: `${SITE.url}/appointment-management`,
+        provider: { "@id": orgId },
+        offers: {
+          "@type": "Offer",
+          "@id": `${SITE.url}/pricing#appointment-annual-offer`,
+          name: "חבילה שנתית",
+          description: "900 ₪ לשנה, ללא עלות הקמה וללא תוספת מע״מ. כולל שירות ותמיכה לאורך השנה.",
+          price: "900",
+          priceCurrency: "ILS",
+          url: `${SITE.url}/pricing`,
+          seller: { "@id": orgId },
+        },
+      },
+    ]),
   },
   "/ai": {
-    title: "AI ואוטומציה לעסקים | ייעוץ והטמעה — אסף אריאלי, AllInCenter",
+    title: "AllInCenter | ייעוץ AI ואוטומציה לעסקים",
     description:
-      "ייעוץ, ניהול והובלת פרויקטי AI ואוטומציה לעסקים, חברות וארגונים — משלב זיהוי ההזדמנות והאפיון ועד לפיתוח והטמעה בפועל.",
+      "AllInCenter מציעה ייעוץ, ניהול והטמעת AI ואוטומציה לעסקים — בהובלת אסף אריאלי, משלב זיהוי ההזדמנות והאפיון ועד לפיתוח והטמעה בפועל.",
     canonical: `${SITE.url}/ai`,
     ogImage: `${SITE.url}/assets/asaf-ariely.png`,
     twitterCard: "summary",
@@ -165,18 +189,27 @@ export const routeSeo = {
         "@type": "WebPage",
         "@id": `${SITE.url}/ai#webpage`,
         url: `${SITE.url}/ai`,
-        name: "AI ואוטומציה לעסקים | ייעוץ והטמעה — אסף אריאלי, AllInCenter",
+        name: "AllInCenter | ייעוץ AI ואוטומציה לעסקים",
         inLanguage: SITE.language,
         isPartOf: { "@id": websiteId },
-        about: { "@id": founderId },
+        about: [{ "@id": orgId }, { "@id": founderId }],
       },
       {
         "@type": "Service",
         "@id": `${SITE.url}/ai#service`,
         name: "ייעוץ, ניהול והטמעת AI ואוטומציה לעסקים",
-        provider: { "@id": founderId },
+        provider: { "@id": orgId },
         areaServed: SITE.areaServed,
         url: `${SITE.url}/ai`,
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${SITE.url}/ai#faq`,
+        mainEntity: aiConsultingFaqs.map(([name, text]) => ({
+          "@type": "Question",
+          name,
+          acceptedAnswer: { "@type": "Answer", text },
+        })),
       },
     ]),
   },
@@ -213,7 +246,7 @@ export const routeSeo = {
   "/about": {
     title: "מי אנחנו | AllInCenter",
     description:
-      "הכירו את AllInCenter ואת אסף אריאלי, שמאחורי פיתוח מערכות ניהול, אוטומציה ופתרונות מותאמים לעסקים בישראל.",
+      "AllInCenter היא חברה ישראלית שמפתחת מערכות ניהול תורים, הזמנות למסעדות, אוטומציה ו‑AI לעסקים בישראל — בהובלת אסף אריאלי.",
     canonical: `${SITE.url}/about`,
     ogImage: SITE.logo,
     twitterCard: "summary",
@@ -224,7 +257,7 @@ export const routeSeo = {
         url: `${SITE.url}/about`,
         name: "מי אנחנו | AllInCenter",
         description:
-          "הכירו את AllInCenter ואת אסף אריאלי, שמאחורי פיתוח מערכות ניהול, אוטומציה ופתרונות מותאמים לעסקים בישראל.",
+          "AllInCenter היא חברה ישראלית שמפתחת מערכות ניהול תורים, הזמנות למסעדות, אוטומציה ו‑AI לעסקים בישראל — בהובלת אסף אריאלי.",
         inLanguage: SITE.language,
         about: { "@id": orgId },
         mainEntity: { "@id": founderId },
@@ -233,9 +266,9 @@ export const routeSeo = {
     ]),
   },
   "/appointment-management": {
-    title: "מערכת ניהול תורים וזימון תורים לעסקים | AllInCenter",
+    title: "מערכת ניהול תורים לעסקים | AllInCenter",
     description:
-      "מערכת ניהול תורים לעסק, עם זימון תורים אונליין וניהול יומן, לקוחות ותזכורות במקום אחד. מתאים לקליניקות, מטפלים ונותני שירות.",
+      "מערכת ניהול תורים לעסק: זימון תורים אונליין, יומן מרכזי, לקוחות ותזכורות במקום אחד. מתאימה לעסקים בישראל שעובדים לפי תורים.",
     canonical: `${SITE.url}/appointment-management`,
     ogImage: SITE.logo,
     twitterCard: "summary",
@@ -244,9 +277,9 @@ export const routeSeo = {
         "@type": "WebPage",
         "@id": `${SITE.url}/appointment-management#webpage`,
         url: `${SITE.url}/appointment-management`,
-        name: "מערכת ניהול תורים וזימון תורים לעסקים | AllInCenter",
+        name: "מערכת ניהול תורים לעסקים | AllInCenter",
         description:
-          "מערכת ניהול תורים לעסק, עם זימון תורים אונליין וניהול יומן, לקוחות ותזכורות במקום אחד. מתאים לקליניקות, מטפלים ונותני שירות.",
+          "מערכת ניהול תורים לעסק: זימון תורים אונליין, יומן מרכזי, לקוחות ותזכורות במקום אחד. מתאימה לעסקים בישראל שעובדים לפי תורים.",
         inLanguage: SITE.language,
         isPartOf: { "@id": websiteId },
         about: { "@id": `${SITE.url}/appointment-management#service` },
@@ -254,7 +287,7 @@ export const routeSeo = {
       {
         "@type": "Service",
         "@id": `${SITE.url}/appointment-management#service`,
-        name: "מערכת ניהול תורים לעסק",
+        name: "מערכת ניהול תורים לעסקים",
         description:
           "מערכת ניהול תורים לעסק: זימון תורים אונליין, ניהול יומן ולקוחות, תזכורות והתאמה לתהליך העבודה. אפשר לחבר גם WhatsApp בהתאם לתהליך העסק.",
         provider: { "@id": orgId },
@@ -269,7 +302,7 @@ export const routeSeo = {
           {
             "@type": "ListItem",
             position: 2,
-            name: "מערכת ניהול תורים לעסק",
+            name: "מערכת ניהול תורים לעסקים",
             item: `${SITE.url}/appointment-management`,
           },
         ],
@@ -280,6 +313,7 @@ export const routeSeo = {
         mainEntity: [
           ["מהי מערכת ניהול תורים?", "מערכת שמאפשרת ללקוחות לקבוע תור אונליין, ולעסק לנהל יומן, זמינות ולקוחות במקום אחד — במקום לתאם הכל ידנית בין הודעות."],
           ["למי מתאימה מערכת ניהול תורים לעסק?", "לקליניקות, קוסמטיקאיות, מטפלים, שינניות, נותני שירות ולעסקים שעובדים לפי תורים ורוצים לנהל את היומן והלקוחות במקום אחד."],
+          ["מה ההבדל בין ניהול תורים לעסק לבין יומן רגיל?", "יומן מציג מועדים. מערכת ניהול תורים לעסקים מחברת גם הזמנה אונליין, לקוחות, תזכורות והמשך תהליך — כדי שהעבודה לא תישאר מפוזרת בין הודעות וכלים נפרדים."],
           ["האם לקוחות יכולים לקבוע תור אונליין?", "כן. הלקוחות בוחרים שירות וזמן פנוי וקובעים תור אונליין, בלי לחכות לשיחה או להודעה חוזרת."],
           ["האם ניתן לשלוח תזכורות ללקוחות?", "כן. אפשר לשלב תזכורות ואישורי תור בתהליך, כדי שהמעקב לא יישאר ידני אחרי כל הזמנה."],
           ["האם אפשר לנהל גם לקוחות ולא רק תורים?", "כן. המערכת משלבת ניהול לקוחות עם התורים והפעילות השוטפת של העסק."],
@@ -356,9 +390,9 @@ export const routeSeo = {
     ]),
   },
   "/restaurant-reservations": {
-    title: "מערכת הזמנות למסעדות | AllInCenter",
+    title: "מערכת הזמנות למסעדות | ניהול שולחנות לבעלי מסעדות",
     description:
-      "מערכת הזמנות וניהול שולחנות למסעדות בישראל, עם הזמנה אונליין ללקוחות, ניהול הזמנות, שולחנות ותהליך העבודה במקום אחד.",
+      "מערכת הזמנות למסעדה לבעלי מסעדות בישראל: הזמנת שולחן אונליין, ניהול הזמנות ומפת שולחנות בממשק בעברית.",
     canonical: `${SITE.url}/restaurant-reservations`,
     ogImage: SITE.logo,
     twitterCard: "summary",
@@ -367,9 +401,9 @@ export const routeSeo = {
         "@type": "WebPage",
         "@id": `${SITE.url}/restaurant-reservations#webpage`,
         url: `${SITE.url}/restaurant-reservations`,
-        name: "מערכת הזמנות למסעדות | AllInCenter",
+        name: "מערכת הזמנות למסעדות | ניהול שולחנות לבעלי מסעדות",
         description:
-          "מערכת הזמנות וניהול שולחנות למסעדות בישראל, עם הזמנה אונליין ללקוחות, ניהול הזמנות, שולחנות ותהליך העבודה במקום אחד.",
+          "מערכת הזמנות למסעדה לבעלי מסעדות בישראל: הזמנת שולחן אונליין, ניהול הזמנות ומפת שולחנות בממשק בעברית.",
         inLanguage: SITE.language,
         isPartOf: { "@id": websiteId },
         about: { "@id": `${SITE.url}/restaurant-reservations#service` },
@@ -397,12 +431,14 @@ export const routeSeo = {
         "@id": `${SITE.url}/restaurant-reservations#faq`,
         mainEntity: [
           ["מהי מערכת הזמנות למסעדות?", "מערכת שמאפשרת לאורחים להזמין שולחן אונליין ולמסעדה לנהל את ההזמנות והשולחנות מתוך ממשק אחד."],
+          ["למי מתאימה מערכת הזמנות למסעדה?", "לבעלי מסעדות, ברים ובתי קפה שרוצים לרכז הזמנת שולחן, ניהול הזמנות ומפת ישיבה בתהליך אחד — בממשק בעברית."],
           ["האם האורחים יכולים להזמין שולחן אונליין?", "כן. האורחים יכולים לבחור מספר סועדים, תאריך, שעה ואזור ישיבה בתהליך הזמנה דיגיטלי."],
           ["האם ניתן לנהל את ההזמנות מתוך מערכת אחת?", "כן. מסכי הניהול מרכזים את ההזמנות ואת תמונת המצב של המסעדה במקום אחד."],
           ["האם המערכת כוללת ניהול שולחנות?", "כן. המערכת כוללת מפת שולחנות ומסכי ניהול שמאפשרים לצוות לראות ולנהל את מצב ההושבה."],
           ["האם המערכת מתאימה למסעדות בישראל?", "כן. המערכת מיועדת למסעדות בישראל וכוללת ממשק בעברית."],
           ["האם ניתן להתאים את מערכת ההזמנות לצורת העבודה של המסעדה?", "כן. ניתן להתאים את תהליך ההזמנה והניהול לאופן העבודה של המסעדה."],
           ["האם המערכת מחליפה ניהול ידני של הזמנות?", "המערכת מרכזת את תהליך ההזמנה והניהול הדיגיטלי וכך מפחיתה את הצורך לנהל מידע ידנית בין מקומות שונים."],
+          ["כמה עולה מערכת ההזמנות למסעדות?", "מחיר מערכת ההזמנות למסעדות נקבע לפי המסעדה והתאמת התהליך. אין מחיר קבוע בעמוד זה — לקבלת הצעת מחיר יש להשאיר פרטים לבקשת הדגמה."],
         ].map(([name, text]) => ({ "@type": "Question", name, acceptedAnswer: { "@type": "Answer", text } })),
       },
     ]),
@@ -451,14 +487,6 @@ export const routeSeo = {
         mainEntity: inventoryFaqs.map(([name, text]) => ({ "@type": "Question", name, acceptedAnswer: { "@type": "Answer", text } })),
       },
     ]),
-  },
-  "/allincenter-pelecard": {
-    title: "AllInCenter + Pelecard | מערכת ניהול וסליקה לעסקים",
-    description: "פתרון משולב של AllInCenter ו-Pelecard לניהול העסק, תשלומים, לקוחות ותהליכים במקום אחד.",
-    canonical: `${SITE.url}/allincenter-pelecard`,
-    ogImage: `${SITE.url}/assets/og-allincenter-pelecard.png`,
-    twitterCard: "summary_large_image",
-    jsonLd: graph(),
   },
   "/guides": {
     title: "מרכז הידע לעסקים | AllInCenter",

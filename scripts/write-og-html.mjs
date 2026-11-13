@@ -64,38 +64,20 @@ function writePage({ dir, meta, validate }) {
 }
 
 writePage({
-  dir: "allincenter-pelecard",
-  meta: {
-    title: "AllInCenter × פלאקארד | חבילת ניהול וסליקה לעסקים",
-    description:
-      "AllInCenter בשיתוף פלאקארד — מערכת ניהול תורים או אתר + באנדל סליקה מקצועי. חבילה אחת לניהול העסק ולתשלומים.",
-    url: "https://www.allincenter.co.il/allincenter-pelecard",
-    image: "https://www.allincenter.co.il/assets/og-allincenter-pelecard.png",
-  },
-  validate(check) {
-    if (check.includes("Maya") || !check.includes("og-allincenter-pelecard.png") || !check.includes("פלאקארד")) {
-      console.error("OG HTML validation failed for /allincenter-pelecard");
-      process.exit(1);
-    }
-  },
-});
-
-writePage({
   dir: "ai",
   meta: {
-    title: "אסף אריאלי | AI & Automation Project Manager",
+    title: "AllInCenter | ייעוץ AI ואוטומציה לעסקים",
     description:
-      "ייעוץ, ניהול והובלת פרויקטי AI ואוטומציה לחברות וארגונים — משלב זיהוי ההזדמנות והאפיון ועד לפיתוח והטמעה בפועל.",
+      "AllInCenter מציעה ייעוץ, ניהול והטמעת AI ואוטומציה לעסקים — בהובלת אסף אריאלי, משלב זיהוי ההזדמנות והאפיון ועד לפיתוח והטמעה בפועל.",
     url: "https://www.allincenter.co.il/ai",
     image: "https://www.allincenter.co.il/assets/asaf-ariely.png",
     twitterCard: "summary",
   },
   validate(check) {
     if (
-      !check.includes("אסף אריאלי") ||
+      !check.includes("AllInCenter | ייעוץ AI ואוטומציה לעסקים") ||
       !check.includes("https://www.allincenter.co.il/ai") ||
-      !check.includes("asaf-ariely.png") ||
-      check.includes("og-allincenter-pelecard.png")
+      !check.includes("asaf-ariely.png")
     ) {
       console.error("OG HTML validation failed for /ai");
       process.exit(1);

@@ -22,6 +22,17 @@
 .guides-page .guide-editorial .ge-toc a:hover{background:#eeebf5;color:#542483}
 .guides-page .guide-editorial .guide-content{margin:0;max-width:760px;min-width:0}
 .guides-page .guide-editorial .guide-content p{font-size:18px;line-height:1.9}
+.guides-page .guide-editorial .guide-answer-first{
+  margin:0 0 28px;
+  padding:18px 20px;
+  border-inline-start:4px solid #79539a;
+  border-radius:0 12px 12px 0;
+  background:#f3eff8;
+  color:#2c2142;
+  font-size:18px;
+  font-weight:650;
+  line-height:1.75;
+}
 .guides-page .guide-editorial .guide-content section{margin-top:46px;scroll-margin-top:110px}
 .guides-page .guide-editorial .guide-content h2{font-size:clamp(25px,2.2vw,31px);line-height:1.4;margin-bottom:20px}
 .guides-page .guide-editorial [id]{scroll-margin-top:110px}

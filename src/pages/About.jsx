@@ -2,6 +2,7 @@ import React from "react";
 import { ArrowLeft } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import { SITE } from "@/lib/site";
 import "@/about-page.css";
 
 const storySteps = ["שירות ותפעול", "זיהוי הבעיה", "בניית מערכת", "אוטומציה ו-AI"];
@@ -55,6 +56,44 @@ export default function About() {
           <div className="about-hero__visual">
             <HeroArchitecture />
           </div>
+        </section>
+
+        <section className="about-entity" aria-labelledby="entity-title">
+          <h2 id="entity-title">מהי AllInCenter?</h2>
+          <p>
+            AllInCenter היא חברה ישראלית שמפתחת מערכות ניהול מותאמות לעסקים, כולל מערכת ניהול תורים,
+            מערכת הזמנות למסעדות, וחיבור של אוטומציה ו‑AI לתהליכי עבודה — בממשק בעברית.
+          </p>
+          <dl className="about-entity__facts">
+            <div>
+              <dt>למי זה מיועד</dt>
+              <dd>עסקים קטנים ובינוניים בישראל שעובדים עם תורים, הזמנות, לקוחות ותהליכים חוזרים.</dd>
+            </div>
+            <div>
+              <dt>מוצרים ושירותים מרכזיים</dt>
+              <dd>
+                <a href="/appointment-management">מערכת ניהול תורים</a>
+                {" · "}
+                <a href="/restaurant-reservations">מערכת הזמנות למסעדות</a>
+                {" · "}
+                <a href="/ai">ייעוץ AI ואוטומציה</a>
+                {" · "}
+                <a href="/google-ai-visibility">אתר, SEO וחיבור לפניות</a>
+              </dd>
+            </div>
+            <div>
+              <dt>אזור פעילות</dt>
+              <dd>ישראל</dd>
+            </div>
+            <div>
+              <dt>יצירת קשר</dt>
+              <dd>
+                <a href={`tel:${SITE.phoneIntl}`}>{SITE.phoneDisplay}</a>
+                {" · "}
+                <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+              </dd>
+            </div>
+          </dl>
         </section>
 
         <section className="about-story" aria-labelledby="story-title">
