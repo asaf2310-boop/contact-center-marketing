@@ -8,6 +8,7 @@ import About from "@/pages/About";
 import AppointmentManagement from "@/pages/AppointmentManagement";
 import TherapistClinicAppointments from "@/pages/TherapistClinicAppointments";
 import RestaurantReservations from "@/pages/RestaurantReservations";
+import InventoryManagement from "@/pages/InventoryManagement";
 import Guides from "@/pages/Guides";
 import GuideArticle from "@/pages/GuideArticle";
 import GoogleAiVisibility from "@/pages/GoogleAiVisibility";
@@ -56,6 +57,7 @@ export function AppRoutes() {
         <Route path="/demo/appointments/booking" element={<AppointmentBookingDemo />} />
         <Route path="/demo/appointments/admin" element={<AppointmentAdminDemo />} />
         <Route path="/restaurant-reservations" element={<RestaurantReservations />} />
+        <Route path="/inventory-management" element={<InventoryManagement />} />
         <Route path="/guides" element={<Guides />} />
         <Route path="/guides/:slug" element={<GuideArticle />} />
         <Route path="/google-ai-visibility" element={<GoogleAiVisibility />} />

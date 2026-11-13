@@ -3,6 +3,7 @@ import { ArrowLeft } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import WhatsAppLink from "@/components/WhatsAppLink";
+import InstagramLink from "@/components/InstagramLink";
 
 const demoHref = "/demo/appointments/booking";
 
@@ -126,6 +127,7 @@ export default function TherapistClinicAppointments() {
             <WhatsAppLink className="appointment-conversion__guide" location="therapist-clinic-appointments" message="היי, אשמח לשמוע על מערכת זימון תורים למטפלים וקליניקות">דברו איתנו ב-WhatsApp</WhatsAppLink>
           </div>
           <a className="appointment-conversion__context" href="/#contact">או השאירו פרטים לשיחת היכרות</a>
+          <InstagramLink className="instagram-follow" location="therapist-clinic-appointments">עקבו אחרינו באינסטגרם</InstagramLink>
         </section>
 
         <section className="appointment-faq" aria-labelledby="therapist-faq-title">

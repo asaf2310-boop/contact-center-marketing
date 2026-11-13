@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import InstagramLink from "@/components/InstagramLink";
 
 const capabilities = [
   { icon: CalendarDays, title: "הזמנה אונליין ופרטי ההזמנה", text: "האורחים בוחרים מספר סועדים, תאריך ושעה בתהליך דיגיטלי." },
@@ -169,6 +170,7 @@ export default function RestaurantReservations() {
             <a className="btn btn--ghost" href="#restaurant-proof">צפו במערכת בפעולה</a>
           </div>
           <a className="restaurant-conversion__back" href="/systems">לכל המערכות של AllInCenter <ArrowLeft size={16} /></a>
+          <InstagramLink className="instagram-follow" location="restaurant-reservations">עקבו אחרינו באינסטגרם</InstagramLink>
         </section>
 
         <section className="restaurant-faq" aria-labelledby="restaurant-faq-title">

@@ -8,6 +8,7 @@ import {
   Headphones,
   LayoutDashboard,
   MessageCircle,
+  Package,
   RefreshCw,
   Search,
   Sparkles,
@@ -16,6 +17,7 @@ import {
   Workflow,
 } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
+import InstagramLink from "@/components/InstagramLink";
 import Reveal from "@/components/Reveal";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
@@ -36,6 +38,7 @@ const products = [
     href: "/appointment-management",
     linkLabel: "למערכת ניהול תורים לעסקים",
     image: "/assets/home-appointment-ui.jpg",
+    imageClass: "is-centered",
     imageAlt: "ממשק מערכת ניהול התורים של AllInCenter",
     icon: CalendarCheck,
   },
@@ -65,6 +68,24 @@ const products = [
   },
 ];
 
+const stockProduct = {
+  id: "stock",
+  eyebrow: "לעסקים עם מלאי וספקים",
+  badge: "לפני השקה פומבית",
+  title: "Stock: ניהול מלאי ובקרת מחירי ספקים",
+  description: "מלאי לפי מחסן עם כל שינוי מתועד, ו-PriceGuard שמשווה כל שורה בחשבונית ספק למחיר שסוכם.",
+  capabilities: ["מלאי לפי מחסן והתראות מינימום", "סריקת ברקוד באייפון", "השוואת חשבוניות ספקים למחירון"],
+  href: "/inventory-management",
+  linkLabel: "ניהול מלאי לעסקים",
+  image: "/assets/stock/stock-01-dashboard.webp",
+  imageAlt: "מסך הבית של אפליקציית Stock: מוצרים מתחת למינימום, שווי מלאי וחיובי יתר לבדיקה (נתוני הדגמה)",
+  secondImage: "/assets/stock/stock-05-invoice-audit.webp",
+  secondImageAlt: "PriceGuard בודקת חשבונית ספק ומסמנת חיוב יתר מאומת בשורה אחת (נתוני הדגמה)",
+  icon: Package,
+  portrait: true,
+};
+products.splice(2, 0, stockProduct);
+
 function ContactCenterPanel() {
   const capabilities = ["זמינות עובדים", "ניהול הפסקות", "שיבוץ משמרות", "תמונת מצב לצוות"];
   return (
@@ -89,20 +110,44 @@ function ContactCenterPanel() {
   );
 }
 
+function PhoneShot({ src, alt }) {
+  const base = src.replace(/\.webp$/, "");
+  return (
+    <img
+      src={src}
+      srcSet={`${src} 600w, ${base}@900.webp 900w`}
+      sizes="(max-width: 700px) 38vw, 220px"
+      alt={alt}
+      width="600"
+      height="1304"
+      loading="lazy"
+      decoding="async"
+    />
+  );
+}
+
 function ProductRow({ product, index }) {
+  const phones = Boolean(product.portrait);
   return (
     <Reveal>
       <article className={`editorial-product ${index % 2 ? "editorial-product--reverse" : ""}`}>
-        <div className="editorial-product__visual">
-          <div className="editorial-product__chrome" aria-hidden="true"><span /><span /><span /><small>AllInCenter / {String(index + 1).padStart(2, "0")}</small></div>
-          {product.id === "contact-center" ? <ContactCenterPanel /> : <img src={product.image} alt={product.imageAlt} loading="lazy" />}
+        <div className={`editorial-product__visual ${phones ? "editorial-product__visual--phones" : ""}`}>
+          {product.id === "contact-center" ? (
+            <ContactCenterPanel />
+          ) : phones ? (
+            <>
+              <PhoneShot src={product.image} alt={product.imageAlt} />
+              <PhoneShot src={product.secondImage} alt={product.secondImageAlt} />
+            </>
+          ) : (
+            <img src={product.image} alt={product.imageAlt} loading="lazy" className={product.imageClass} />
+          )}
         </div>
         <div className="editorial-product__copy">
-          <span className="editorial-index" aria-hidden="true">0{index + 1} / SYSTEM</span>
           <span className="home-eyebrow"><product.icon size={16} />{product.eyebrow}</span>
-          <h3>{product.title}</h3>
+          <h3>{product.title}{product.badge ? <small className="editorial-product__badge">{product.badge}</small> : null}</h3>
           <p>{product.description}</p>
-          <ul>{product.capabilities.map((item) => <li key={item}><Check size={16} />{item}</li>)}</ul>
+          <ul className="editorial-product__points">{product.capabilities.map((item) => <li key={item}>{item}</li>)}</ul>
           <a className="home-text-link" href={product.href} {...(product.external ? { target: "_blank", rel: "noreferrer" } : {})}>
             {product.linkLabel || (product.external ? "לצפייה בדמו" : "לפרטים על המערכת")}
             {product.external ? <ExternalLink size={16} /> : <ArrowLeft size={16} />}
@@ -149,20 +194,16 @@ export default function MarketingHome() {
                 <div><strong>WhatsApp מחובר</strong><span>המשך תהליך אוטומטי</span></div>
                 <i aria-hidden="true" />
               </div>
-              <div className="home-hero__serial" aria-hidden="true">AIC / 2026</div>
             </div>
           </Reveal>
 
-          <div className="home-journey" aria-hidden="true">
-            <span>SEARCH</span><i /><span>WHATSAPP</span><i /><span>BOOKING</span><i /><span>MANAGEMENT</span>
-          </div>
         </section>
 
         <section className="home-product-suite" id="solutions" aria-labelledby="products-heading">
           <Reveal>
             <div className="home-section-head home-section-head--split">
               <span className="editorial-index" aria-hidden="true">01 / SYSTEMS</span>
-              <div><h2 id="products-heading">מערכות שעובדות<br />בתוך העסק.</h2><p>מערכות פעילות ל<a href="/appointment-management">ניהול תורים לעסק</a> ול<a href="/restaurant-reservations">הזמנות במסעדות</a> — עם ממשק מלא בעברית.</p></div>
+              <div><h2 id="products-heading">מערכות שעובדות<br />בתוך העסק.</h2><p>מערכות פעילות ל<a href="/appointment-management">ניהול תורים לעסק</a> ול<a href="/restaurant-reservations">הזמנות במסעדות</a> — עם ממשק מלא בעברית. <a href="/inventory-management">Stock לניהול מלאי</a> נמצאת לפני השקה פומבית.</p></div>
             </div>
           </Reveal>
           <div className="home-product-list">{products.map((product, index) => <ProductRow product={product} index={index} key={product.id} />)}</div>
@@ -189,7 +230,7 @@ export default function MarketingHome() {
           <Reveal><div className="home-section-head home-section-head--split"><span className="editorial-index">03 / SERVICES</span><div><h2 id="services-heading">המערכת במרכז.<br />האתר מביא אליה.</h2><p>מערכות ניהול לעסק, וחיבור של האתר והחיפוש אל התורים, ההזמנות והפניות.</p></div></div></Reveal>
           <div className="home-service-list">
             <article><span>01</span><LayoutDashboard/><div><h3>פיתוח מערכות ניהול מותאמות</h3><p>מערכות תורים, הזמנות וניהול שנבנות סביב הלקוחות ותהליכי העבודה של העסק.</p></div><a href="/services" aria-label="לפרטים על פיתוח מערכות"><ArrowLeft /></a></article>
-            <article><span>02</span><Workflow/><div><h3>חיבור ל‑WhatsApp ולאוטומציות</h3><p>ניתן לחבר את האתר ואת מערכות התורים או ההזמנות ל‑WhatsApp ולתהליכים חוזרים — בהתאם לעסק.</p></div><a href="/services" aria-label="לפרטים על חיבור ל-WhatsApp"><ArrowLeft /></a></article>
+            <article><span>02</span><Workflow/><div><h3>חיבור ל‑WhatsApp ולאוטומציות</h3><p>ניתן לחבר את האתר ואת מערכות התורים או ההזמנות ל‑WhatsApp ולתהליכים חוזרים — בהתאם לעסק. <a href="/ai">אוטומציה ו-AI לעסקים</a></p></div><a href="/services" aria-label="לפרטים על חיבור ל-WhatsApp"><ArrowLeft /></a></article>
             <article><span>03</span><Sparkles/><div><h3>בניית אתרים, SEO ונראות בחיפוש</h3><p>אתר ו‑SEO שמחברים חיפוש בגוגל ובמנועי AI לפנייה, לתור או להזמנה — בלי הבטחה לדירוג.</p></div><a href="/google-ai-visibility" aria-label="לפרטים על אתרים ונראות בחיפוש"><ArrowLeft /></a></article>
           </div>
           <a className="home-all-link" href="/services">לכל השירותים <ArrowLeft size={17}/></a>
@@ -200,7 +241,7 @@ export default function MarketingHome() {
         </section>
 
         <section className="section" id="contact">
-          <Reveal><div className="contact-section"><div className="contact-section__copy"><span className="editorial-index">05 / DEMO</span><h2>בואו נראה איך המערכת יכולה להתאים לעסק שלכם.</h2><p>השאירו פרטים ונחזור לשיחת היכרות קצרה, כדי להבין את התהליך ולבנות הדגמה רלוונטית.</p><ul><li><Check size={18} />היכרות עם תהליך העבודה</li><li><Check size={18} />הדגמה של מערכת אמיתית</li><li><Check size={18} />כיוון ברור להמשך</li></ul><WhatsAppLink className="contact-section__whatsapp" location="contact">דברו איתנו ב-WhatsApp</WhatsAppLink></div><ContactForm /></div></Reveal>
+          <Reveal><div className="contact-section"><div className="contact-section__copy"><span className="editorial-index">05 / DEMO</span><h2>בואו נראה איך המערכת יכולה להתאים לעסק שלכם.</h2><p>השאירו פרטים ונחזור לשיחת היכרות קצרה, כדי להבין את התהליך ולבנות הדגמה רלוונטית.</p><ul><li><Check size={18} />היכרות עם תהליך העבודה</li><li><Check size={18} />הדגמה של מערכת אמיתית</li><li><Check size={18} />כיוון ברור להמשך</li></ul><WhatsAppLink className="contact-section__whatsapp" location="contact">דברו איתנו ב-WhatsApp</WhatsAppLink><InstagramLink className="instagram-follow" location="home-contact">עקבו אחרינו באינסטגרם</InstagramLink></div><ContactForm /></div></Reveal>
         </section>
       </main>
       <SiteFooter />

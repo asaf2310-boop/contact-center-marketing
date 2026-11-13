@@ -131,6 +131,25 @@ export function handleWhatsAppLinkClick(event) {
   });
 }
 
+export function isInstagramHref(href = "") {
+  try {
+    const url = new URL(String(href).trim(), typeof window !== "undefined" ? window.location.origin : SITE_FALLBACK_ORIGIN);
+    const host = url.hostname.replace(/^www\./i, "").toLowerCase();
+    return host === "instagram.com" || host.endsWith(".instagram.com");
+  } catch {
+    return false;
+  }
+}
+
+export function trackInstagramClick({ source, linkText } = {}) {
+  trackAnalyticsEvent("instagram_click", {
+    source: source || "unknown",
+    link_text: linkText || "Instagram",
+    link_url: "https://www.instagram.com/allincenter.co.il/",
+    transport_type: "beacon",
+  });
+}
+
 function findClickedLink(event) {
   if (typeof event.composedPath === "function") {
     const fromPath = event.composedPath().find((node) => node?.tagName === "A" && node.getAttribute?.("href"));
@@ -159,6 +178,18 @@ export function installLeadLinkTracking() {
         location: link.dataset.analyticsLocation,
         linkText: text,
       });
+      return;
+    }
+
+    if (link.dataset.analyticsEvent) {
+      trackAnalyticsEvent(link.dataset.analyticsEvent, {
+        location: link.dataset.analyticsLocation || "unknown",
+        link_text: text,
+      });
+    }
+
+    if (isInstagramHref(resolvedHref)) {
+      trackInstagramClick({ source: link.dataset.analyticsLocation, linkText: text });
       return;
     }
 

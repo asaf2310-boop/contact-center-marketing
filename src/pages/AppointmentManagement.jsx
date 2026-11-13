@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import InstagramLink from "@/components/InstagramLink";
 
 const capabilities = [
   { icon: CalendarCheck, title: "הזמנה אונליין ושירותים", text: "לקוחות בוחרים שירות וזמן פנוי וקובעים תור אונליין." },
@@ -183,6 +184,7 @@ export default function AppointmentManagement() {
             <a className="appointment-conversion__guide" href="/pricing">למחירון מערכת ניהול התורים <ArrowLeft size={16} /></a>
           </div>
           <a className="appointment-conversion__context" href="/guides/how-to-choose-appointment-system">איך לבחור מערכת ניהול תורים לעסק?</a>
+          <InstagramLink className="instagram-follow" location="appointment-management">עקבו אחרינו באינסטגרם</InstagramLink>
         </section>
 
         <section className="appointment-faq" aria-labelledby="faq-title">
