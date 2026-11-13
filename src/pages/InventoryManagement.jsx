@@ -8,11 +8,12 @@ import ContactForm from "@/components/ContactForm";
 import { inventoryFaqs } from "@/data/inventoryFaq";
 
 const shot = (name) => `/assets/stock/stock-${name}.webp`;
+const shotSet = (name) => `${shot(name)} 600w, /assets/stock/stock-${name}@900.webp 900w`;
 
 function Phone({ name, alt, caption, eager = false }) {
   return (
     <figure className="stock-phone">
-      <img src={shot(name)} alt={alt} width="600" height="1304" loading={eager ? "eager" : "lazy"} decoding="async" />
+      <img src={shot(name)} srcSet={shotSet(name)} sizes="(max-width: 700px) 30vw, 260px" alt={alt} width="600" height="1304" loading={eager ? "eager" : "lazy"} decoding="async" />
       {caption ? <figcaption>{caption}</figcaption> : null}
     </figure>
   );

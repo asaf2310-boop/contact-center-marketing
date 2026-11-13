@@ -38,6 +38,7 @@ const products = [
     href: "/appointment-management",
     linkLabel: "מערכת ניהול תורים",
     image: "/assets/home-appointment-ui.jpg",
+    imageClass: "is-centered",
     imageAlt: "ממשק מערכת ניהול התורים של AllInCenter",
     icon: CalendarCheck,
   },
@@ -68,7 +69,8 @@ const products = [
 
 const stockProduct = {
   id: "stock",
-  eyebrow: "לעסקים עם מלאי וספקים · לפני השקה פומבית",
+  eyebrow: "לעסקים עם מלאי וספקים",
+  badge: "לפני השקה פומבית",
   title: "Stock: ניהול מלאי ובקרת מחירי ספקים",
   description: "מלאי לפי מחסן עם כל שינוי מתועד, ו-PriceGuard שמשווה כל שורה בחשבונית ספק למחיר שסוכם.",
   capabilities: ["מלאי לפי מחסן והתראות מינימום", "סריקת ברקוד באייפון", "השוואת חשבוניות ספקים למחירון"],
@@ -76,6 +78,8 @@ const stockProduct = {
   linkLabel: "ניהול מלאי לעסקים",
   image: "/assets/stock/stock-01-dashboard.webp",
   imageAlt: "מסך הבית של אפליקציית Stock: מוצרים מתחת למינימום, שווי מלאי וחיובי יתר לבדיקה (נתוני הדגמה)",
+  secondImage: "/assets/stock/stock-05-invoice-audit.webp",
+  secondImageAlt: "PriceGuard בודקת חשבונית ספק ומסמנת חיוב יתר מאומת בשורה אחת (נתוני הדגמה)",
   icon: Package,
   portrait: true,
 };
@@ -105,20 +109,44 @@ function ContactCenterPanel() {
   );
 }
 
+function PhoneShot({ src, alt }) {
+  const base = src.replace(/\.webp$/, "");
+  return (
+    <img
+      src={src}
+      srcSet={`${src} 600w, ${base}@900.webp 900w`}
+      sizes="(max-width: 700px) 38vw, 220px"
+      alt={alt}
+      width="600"
+      height="1304"
+      loading="lazy"
+      decoding="async"
+    />
+  );
+}
+
 function ProductRow({ product, index }) {
+  const phones = Boolean(product.portrait);
   return (
     <Reveal>
       <article className={`editorial-product ${index % 2 ? "editorial-product--reverse" : ""}`}>
-        <div className="editorial-product__visual">
-          <div className="editorial-product__chrome" aria-hidden="true"><span /><span /><span /><small>AllInCenter / {String(index + 1).padStart(2, "0")}</small></div>
-          {product.id === "contact-center" ? <ContactCenterPanel /> : <img src={product.image} alt={product.imageAlt} loading="lazy" className={product.portrait ? "editorial-product__phone" : undefined} {...(product.portrait ? { width: 600, height: 1304 } : {})} />}
+        <div className={`editorial-product__visual ${phones ? "editorial-product__visual--phones" : ""}`}>
+          {product.id === "contact-center" ? (
+            <ContactCenterPanel />
+          ) : phones ? (
+            <>
+              <PhoneShot src={product.image} alt={product.imageAlt} />
+              <PhoneShot src={product.secondImage} alt={product.secondImageAlt} />
+            </>
+          ) : (
+            <img src={product.image} alt={product.imageAlt} loading="lazy" className={product.imageClass} />
+          )}
         </div>
         <div className="editorial-product__copy">
-          <span className="editorial-index" aria-hidden="true">0{index + 1} / SYSTEM</span>
           <span className="home-eyebrow"><product.icon size={16} />{product.eyebrow}</span>
-          <h3>{product.title}</h3>
+          <h3>{product.title}{product.badge ? <small className="editorial-product__badge">{product.badge}</small> : null}</h3>
           <p>{product.description}</p>
-          <ul>{product.capabilities.map((item) => <li key={item}><Check size={16} />{item}</li>)}</ul>
+          <ul className="editorial-product__points">{product.capabilities.map((item) => <li key={item}>{item}</li>)}</ul>
           <a className="home-text-link" href={product.href} {...(product.external ? { target: "_blank", rel: "noreferrer" } : {})}>
             {product.linkLabel || (product.external ? "לצפייה בדמו" : "לפרטים על המערכת")}
             {product.external ? <ExternalLink size={16} /> : <ArrowLeft size={16} />}
@@ -159,13 +187,9 @@ export default function MarketingHome() {
                 <div><strong>WhatsApp מחובר</strong><span>המשך תהליך אוטומטי</span></div>
                 <i aria-hidden="true" />
               </div>
-              <div className="home-hero__serial" aria-hidden="true">AIC / 2026</div>
             </div>
           </Reveal>
 
-          <div className="home-journey" aria-hidden="true">
-            <span>SEARCH</span><i /><span>WHATSAPP</span><i /><span>BOOKING</span><i /><span>MANAGEMENT</span>
-          </div>
         </section>
 
         <section className="home-product-suite" id="solutions" aria-labelledby="products-heading">

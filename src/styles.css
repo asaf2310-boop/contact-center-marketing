@@ -6466,3 +6466,68 @@ p {
   .stock-phones .stock-phone img { border-radius: 14px; }
   .stock-phone figcaption { font-size: .72rem; }
 }
+
+/* Homepage product showcase: calmer spacing, consistent screenshot frames */
+.home-editorial .home-product-list { margin-top: 64px; }
+.home-editorial .editorial-product { padding: 96px 0; gap: clamp(40px, 6vw, 88px); }
+.home-editorial .editorial-product__visual { box-shadow: 0 24px 60px -32px rgba(37, 24, 67, .28); }
+.home-editorial .editorial-product__visual img { aspect-ratio: 16/10; object-fit: cover; object-position: top; }
+.home-editorial .operations-panel { aspect-ratio: 16/10; }
+.home-editorial .editorial-product__copy .home-eyebrow { font-weight: 800; }
+.home-editorial .editorial-product__badge {
+  display: inline-block;
+  margin-inline-start: 12px;
+  padding: 4px 12px;
+  border: 1px solid var(--home-line);
+  border-radius: 999px;
+  background: #f4f0fa;
+  color: #5a2d9c;
+  font-size: .8rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  vertical-align: middle;
+}
+.home-editorial .editorial-product ul.editorial-product__points { display: grid; gap: 8px; margin-top: 22px; font-size: .95rem; }
+.home-editorial .editorial-product__points li { display: flex; align-items: baseline; gap: 10px; color: #5b5368; font-weight: 500; }
+.home-editorial .editorial-product__points li::before { content: ""; flex: none; width: 5px; height: 5px; border-radius: 50%; background: #b9aed0; transform: translateY(-2px); }
+.home-editorial .editorial-product__copy > p { max-width: 46ch; }
+.home-editorial .editorial-product__copy .home-text-link { margin-top: 26px; }
+
+/* Stock phones: full portrait screens, never cropped or stretched */
+.home-editorial .editorial-product__visual--phones {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(14px, 3vw, 32px);
+  padding: clamp(28px, 4vw, 48px) 20px;
+  border: 0;
+  background: linear-gradient(160deg, #f1edf8 0%, #e8f3f3 100%);
+  overflow: visible;
+}
+.home-editorial .editorial-product__visual--phones img {
+  width: auto;
+  height: auto;
+  aspect-ratio: 600 / 1304;
+  max-width: 44%;
+  max-height: 470px;
+  object-fit: contain;
+  border-radius: 22px;
+  border: 1px solid rgba(37, 24, 67, .14);
+  background: #0d2326;
+  box-shadow: 0 22px 44px -18px rgba(20, 8, 44, .45);
+}
+.home-editorial .editorial-product__visual--phones img + img { margin-top: 44px; }
+
+@media (max-width: 900px) {
+  .home-editorial .editorial-product, .home-editorial .editorial-product--reverse { padding: 56px 0; gap: 28px; }
+  .home-editorial .editorial-product__visual--phones img { max-height: 400px; }
+}
+@media (max-width: 520px) {
+  .home-editorial .editorial-product__visual--phones { padding: 24px 12px; }
+  .home-editorial .editorial-product__visual--phones img { max-width: 46%; max-height: 340px; border-radius: 16px; }
+  .home-editorial .editorial-product__visual--phones img + img { margin-top: 28px; }
+  .home-editorial .editorial-product__badge { margin: 8px 0 0; display: table; }
+}
+
+/* The appointment screenshot is 4:3 with black letterbox bars: crop them evenly instead of showing the top bar */
+.home-editorial .editorial-product__visual img.is-centered { object-position: center; }
