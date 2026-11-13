@@ -205,6 +205,7 @@ for (const loc of [
   "https://www.allincenter.co.il/appointment-management",
   "https://www.allincenter.co.il/appointment-system-therapists-clinics",
   "https://www.allincenter.co.il/restaurant-reservations",
+  "https://www.allincenter.co.il/inventory-management",
   "https://www.allincenter.co.il/allincenter-pelecard",
   "https://www.allincenter.co.il/guides",
   "https://www.allincenter.co.il/guides/how-to-choose-appointment-system",

@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowLeft, CalendarCheck, Check, Headphones, Utensils } from "lucide-react";
+import { ArrowLeft, CalendarCheck, Check, Headphones, Package, Utensils } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 
@@ -22,6 +22,16 @@ const products = [
     href: "/restaurant-reservations",
     image: "/assets/home-restaurant-dashboard.jpg",
     alt: "לוח הבקרה של מערכת ההזמנות למסעדות",
+  },
+  {
+    icon: Package,
+    title: "Stock: ניהול מלאי",
+    badge: "לפני השקה פומבית",
+    text: "ניהול מלאי לעסקים, עם PriceGuard להשוואת חשבוניות ספקים למחירים שסוכמו.",
+    points: ["תנועות מלאי מתועדות", "מלאי לפי מחסן והתראות", "השוואת חשבוניות ספקים"],
+    href: "/inventory-management",
+    cta: "ניהול מלאי לעסקים",
+    stock: true,
   },
   {
     icon: Headphones,
@@ -50,6 +60,26 @@ function ContactCenterPreview() {
       </div>
       <ul>
         {["זמינות עובדים", "ניהול הפסקות", "שיבוץ משמרות"].map((item) => (
+          <li key={item}><Check size={15} aria-hidden="true" />{item}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function StockPreview() {
+  return (
+    <div className="systems-ops" role="img" aria-label="תצוגת יכולות של Stock: מלאי לפי מחסן, תנועות מתועדות והשוואת חשבוניות ספקים">
+      <div className="systems-ops__bar" aria-hidden="true">
+        <span /><span /><span />
+        <small>Stock + PriceGuard</small>
+      </div>
+      <div className="systems-ops__head">
+        <strong>Stock</strong>
+        <em>לפני השקה פומבית</em>
+      </div>
+      <ul>
+        {["מלאי לפי מחסן", "תנועות מתועדות", "השוואת חשבוניות ספקים"].map((item) => (
           <li key={item}><Check size={15} aria-hidden="true" />{item}</li>
         ))}
       </ul>
@@ -111,7 +141,7 @@ export default function SystemsHub() {
               id={product.href === "#contact-center-note" ? "contact-center-note" : undefined}
             >
               <div className="systems-product__copy">
-                <span className="home-eyebrow"><product.icon size={17} />מערכת פעילה</span>
+                <span className="home-eyebrow"><product.icon size={17} />{product.badge || "מערכת פעילה"}</span>
                 <h2>{product.title}</h2>
                 <p>{product.text}</p>
                 <ul>
@@ -119,7 +149,7 @@ export default function SystemsHub() {
                     <li key={point}><Check size={16} />{point}</li>
                   ))}
                 </ul>
-                {product.image ? (
+                {product.image || product.stock ? (
                   <a className="btn btn--ghost" href={product.href}>{product.cta || "לעמוד המוצר"} <ArrowLeft size={16} /></a>
                 ) : (
                   <a className="btn btn--ghost" href="/#contact">לבקשת הדגמה <ArrowLeft size={16} /></a>
@@ -128,6 +158,8 @@ export default function SystemsHub() {
               <div className={`systems-product__visual ${product.image ? "" : "systems-product__visual--preview"}`}>
                 {product.image ? (
                   <img src={product.image} alt={product.alt} loading="lazy" />
+                ) : product.stock ? (
+                  <StockPreview />
                 ) : (
                   <ContactCenterPreview />
                 )}

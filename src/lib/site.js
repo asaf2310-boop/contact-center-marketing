@@ -8,6 +8,8 @@ export const SITE = {
   logo: "https://www.allincenter.co.il/assets/allincenter-logo-clear.png",
   language: "he-IL",
   areaServed: "Israel",
+  instagram: "https://www.instagram.com/allincenter.co.il/",
+  instagramHandle: "@allincenter.co.il",
 };
 
 export function getWhatsAppHref(message = "היי, אשמח לדעת עוד על המערכת לניהול העסק") {

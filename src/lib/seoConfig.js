@@ -1,4 +1,5 @@
 import { SITE } from "@/lib/site";
+import { inventoryFaqs } from "@/data/inventoryFaq";
 
 const orgId = `${SITE.url}/#organization`;
 const websiteId = `${SITE.url}/#website`;
@@ -13,10 +14,19 @@ export const organizationSchema = {
   telephone: SITE.phoneIntl,
   areaServed: SITE.areaServed,
   logo: SITE.logo,
-  description: "AllInCenter מפתחת מערכות ניהול מותאמות, אוטומציות ופתרונות AI לעסקים בישראל.",
+  description: "AllInCenter מפתחת מערכות ניהול לעסקים בישראל: מערכת ניהול תורים, מערכת הזמנות למסעדות, אוטומציות ופתרונות AI, ובניית אתרים ו-SEO.",
   founder: { "@id": founderId },
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "customer service",
+    telephone: SITE.phoneIntl,
+    email: SITE.email,
+    areaServed: SITE.areaServed,
+    availableLanguage: ["he", "en"],
+  },
   sameAs: [
     "https://www.google.com/search?kgmid=/g/11nvs68ph0&q=AllInCenter",
+    SITE.instagram,
   ],
 };
 
@@ -119,7 +129,7 @@ export const routeSeo = {
   "/": {
     title: "AllInCenter | מערכות ניהול, זימון תורים ואוטומציה לעסקים",
     description:
-      "AllInCenter מספקת מערכות ניהול מותאמות לעסקים בישראל, כולל זימון תורים, ניהול לקוחות, אוטומציות, לידים ותהליכים עסקיים.",
+      "AllInCenter מספקת מערכות ניהול מותאמות לעסקים בישראל, כולל זימון תורים, ניהול לקוחות, אוטומציה ו-AI לעסקים, לידים ותהליכים עסקיים.",
     canonical: `${SITE.url}/`,
     ogImage: SITE.logo,
     twitterCard: "summary",
@@ -144,9 +154,9 @@ export const routeSeo = {
     jsonLd: graph(),
   },
   "/ai": {
-    title: "אסף אריאלי | AI & Automation Project Manager",
+    title: "AI ואוטומציה לעסקים | ייעוץ והטמעה — אסף אריאלי, AllInCenter",
     description:
-      "ייעוץ, ניהול והובלת פרויקטי AI ואוטומציה לחברות וארגונים — משלב זיהוי ההזדמנות והאפיון ועד לפיתוח והטמעה בפועל.",
+      "ייעוץ, ניהול והובלת פרויקטי AI ואוטומציה לעסקים, חברות וארגונים — משלב זיהוי ההזדמנות והאפיון ועד לפיתוח והטמעה בפועל.",
     canonical: `${SITE.url}/ai`,
     ogImage: `${SITE.url}/assets/asaf-ariely.png`,
     twitterCard: "summary",
@@ -155,7 +165,7 @@ export const routeSeo = {
         "@type": "WebPage",
         "@id": `${SITE.url}/ai#webpage`,
         url: `${SITE.url}/ai`,
-        name: "אסף אריאלי | AI & Automation Project Manager",
+        name: "AI ואוטומציה לעסקים | ייעוץ והטמעה — אסף אריאלי, AllInCenter",
         inLanguage: SITE.language,
         isPartOf: { "@id": websiteId },
         about: { "@id": founderId },
@@ -180,7 +190,8 @@ export const routeSeo = {
       { "@type":"ItemList", name:"מערכות AllInCenter", itemListElement:[
         {"@type":"ListItem",position:1,name:"מערכת ניהול תורים",url:`${SITE.url}/appointment-management`},
         {"@type":"ListItem",position:2,name:"מערכת הזמנות למסעדות",url:`${SITE.url}/restaurant-reservations`},
-        {"@type":"ListItem",position:3,name:"מוקד חכם"},
+        {"@type":"ListItem",position:3,name:"Stock: ניהול מלאי (לפני השקה פומבית)",url:`${SITE.url}/inventory-management`},
+        {"@type":"ListItem",position:4,name:"מוקד חכם"},
       ]},
     ]),
   },
@@ -222,7 +233,7 @@ export const routeSeo = {
     ]),
   },
   "/appointment-management": {
-    title: "מערכת ניהול תורים לעסק | AllInCenter",
+    title: "מערכת ניהול תורים וזימון תורים לעסקים | AllInCenter",
     description:
       "מערכת ניהול תורים לעסק, עם זימון תורים אונליין וניהול יומן, לקוחות ותזכורות במקום אחד. מתאים לקליניקות, מטפלים ונותני שירות.",
     canonical: `${SITE.url}/appointment-management`,
@@ -233,7 +244,7 @@ export const routeSeo = {
         "@type": "WebPage",
         "@id": `${SITE.url}/appointment-management#webpage`,
         url: `${SITE.url}/appointment-management`,
-        name: "מערכת ניהול תורים לעסק | AllInCenter",
+        name: "מערכת ניהול תורים וזימון תורים לעסקים | AllInCenter",
         description:
           "מערכת ניהול תורים לעסק, עם זימון תורים אונליין וניהול יומן, לקוחות ותזכורות במקום אחד. מתאים לקליניקות, מטפלים ונותני שירות.",
         inLanguage: SITE.language,
@@ -393,6 +404,51 @@ export const routeSeo = {
           ["האם ניתן להתאים את מערכת ההזמנות לצורת העבודה של המסעדה?", "כן. ניתן להתאים את תהליך ההזמנה והניהול לאופן העבודה של המסעדה."],
           ["האם המערכת מחליפה ניהול ידני של הזמנות?", "המערכת מרכזת את תהליך ההזמנה והניהול הדיגיטלי וכך מפחיתה את הצורך לנהל מידע ידנית בין מקומות שונים."],
         ].map(([name, text]) => ({ "@type": "Question", name, acceptedAnswer: { "@type": "Answer", text } })),
+      },
+    ]),
+  },
+  "/inventory-management": {
+    title: "ניהול מלאי לעסקים ובקרת מחירי ספקים | Stock של AllInCenter",
+    description:
+      "Stock היא מערכת של AllInCenter לניהול מלאי לעסקים קטנים ובינוניים, עם PriceGuard להשוואת חשבוניות ספקים למחירים שסוכמו. לפני השקה פומבית.",
+    canonical: `${SITE.url}/inventory-management`,
+    ogImage: SITE.logo,
+    twitterCard: "summary",
+    jsonLd: graph([
+      {
+        "@type": "WebPage",
+        "@id": `${SITE.url}/inventory-management#webpage`,
+        url: `${SITE.url}/inventory-management`,
+        name: "ניהול מלאי לעסקים ובקרת מחירי ספקים | Stock של AllInCenter",
+        description:
+          "Stock היא מערכת של AllInCenter לניהול מלאי לעסקים קטנים ובינוניים, עם PriceGuard להשוואת חשבוניות ספקים למחירים שסוכמו. לפני השקה פומבית.",
+        inLanguage: SITE.language,
+        isPartOf: { "@id": websiteId },
+        about: { "@id": `${SITE.url}/inventory-management#service` },
+      },
+      {
+        "@type": "Service",
+        "@id": `${SITE.url}/inventory-management#service`,
+        name: "Stock: ניהול מלאי ובקרת מחירי ספקים (לפני השקה פומבית)",
+        description:
+          "מערכת לניהול מלאי לפי מחסן, עם תנועות מתועדות, סריקת ברקוד באייפון, דוחות והרשאות, ו-PriceGuard להשוואת חשבוניות ספקים למחירים שסוכמו. המערכת עדיין לא זמינה לציבור.",
+        provider: { "@id": orgId },
+        areaServed: SITE.areaServed,
+        url: `${SITE.url}/inventory-management`,
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${SITE.url}/inventory-management#breadcrumb`,
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "דף הבית", item: `${SITE.url}/` },
+          { "@type": "ListItem", position: 2, name: "מערכות", item: `${SITE.url}/systems` },
+          { "@type": "ListItem", position: 3, name: "ניהול מלאי לעסקים", item: `${SITE.url}/inventory-management` },
+        ],
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${SITE.url}/inventory-management#faq`,
+        mainEntity: inventoryFaqs.map(([name, text]) => ({ "@type": "Question", name, acceptedAnswer: { "@type": "Answer", text } })),
       },
     ]),
   },

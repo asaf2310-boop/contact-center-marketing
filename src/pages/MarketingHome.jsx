@@ -16,6 +16,7 @@ import {
   Workflow,
 } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
+import InstagramLink from "@/components/InstagramLink";
 import Reveal from "@/components/Reveal";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
@@ -182,7 +183,7 @@ export default function MarketingHome() {
           <Reveal><div className="home-section-head home-section-head--split"><span className="editorial-index">03 / SERVICES</span><div><h2 id="services-heading">המערכת במרכז.<br />האתר מביא אליה.</h2><p>מערכות ניהול לעסק, וחיבור של האתר והחיפוש אל התורים, ההזמנות והפניות.</p></div></div></Reveal>
           <div className="home-service-list">
             <article><span>01</span><LayoutDashboard/><div><h3>פיתוח מערכות ניהול מותאמות</h3><p>מערכות תורים, הזמנות וניהול שנבנות סביב הלקוחות ותהליכי העבודה של העסק.</p></div><a href="/services" aria-label="לפרטים על פיתוח מערכות"><ArrowLeft /></a></article>
-            <article><span>02</span><Workflow/><div><h3>חיבור ל‑WhatsApp ולאוטומציות</h3><p>ניתן לחבר את האתר ואת מערכות התורים או ההזמנות ל‑WhatsApp ולתהליכים חוזרים — בהתאם לעסק.</p></div><a href="/services" aria-label="לפרטים על חיבור ל-WhatsApp"><ArrowLeft /></a></article>
+            <article><span>02</span><Workflow/><div><h3>חיבור ל‑WhatsApp ולאוטומציות</h3><p>ניתן לחבר את האתר ואת מערכות התורים או ההזמנות ל‑WhatsApp ולתהליכים חוזרים — בהתאם לעסק. <a href="/ai">אוטומציה ו-AI לעסקים</a></p></div><a href="/services" aria-label="לפרטים על חיבור ל-WhatsApp"><ArrowLeft /></a></article>
             <article><span>03</span><Sparkles/><div><h3>בניית אתרים, SEO ונראות בחיפוש</h3><p>אתר ו‑SEO שמחברים חיפוש בגוגל ובמנועי AI לפנייה, לתור או להזמנה — בלי הבטחה לדירוג.</p></div><a href="/google-ai-visibility" aria-label="לפרטים על אתרים ונראות בחיפוש"><ArrowLeft /></a></article>
           </div>
           <a className="home-all-link" href="/services">לכל השירותים <ArrowLeft size={17}/></a>
@@ -193,7 +194,7 @@ export default function MarketingHome() {
         </section>
 
         <section className="section" id="contact">
-          <Reveal><div className="contact-section"><div className="contact-section__copy"><span className="editorial-index">05 / DEMO</span><h2>בואו נראה איך המערכת יכולה להתאים לעסק שלכם.</h2><p>השאירו פרטים ונחזור לשיחת היכרות קצרה, כדי להבין את התהליך ולבנות הדגמה רלוונטית.</p><ul><li><Check size={18} />היכרות עם תהליך העבודה</li><li><Check size={18} />הדגמה של מערכת אמיתית</li><li><Check size={18} />כיוון ברור להמשך</li></ul><WhatsAppLink className="contact-section__whatsapp" location="contact">דברו איתנו ב-WhatsApp</WhatsAppLink></div><ContactForm /></div></Reveal>
+          <Reveal><div className="contact-section"><div className="contact-section__copy"><span className="editorial-index">05 / DEMO</span><h2>בואו נראה איך המערכת יכולה להתאים לעסק שלכם.</h2><p>השאירו פרטים ונחזור לשיחת היכרות קצרה, כדי להבין את התהליך ולבנות הדגמה רלוונטית.</p><ul><li><Check size={18} />היכרות עם תהליך העבודה</li><li><Check size={18} />הדגמה של מערכת אמיתית</li><li><Check size={18} />כיוון ברור להמשך</li></ul><WhatsAppLink className="contact-section__whatsapp" location="contact">דברו איתנו ב-WhatsApp</WhatsAppLink><InstagramLink className="instagram-follow" location="home-contact">עקבו אחרינו באינסטגרם</InstagramLink></div><ContactForm /></div></Reveal>
         </section>
       </main>
       <SiteFooter />
