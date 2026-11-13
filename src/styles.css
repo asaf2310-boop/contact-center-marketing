@@ -6451,6 +6451,7 @@ p {
 @media (max-width: 900px) {
   .stock-hero { grid-template-columns: 1fr; padding-bottom: 24px; }
   .stock-hero__visual { order: 2; }
+  .stock-hero__caption { order: 3; }
   .stock-problems { grid-template-columns: 1fr; }
   .stock-split { grid-template-columns: 1fr; }
   .stock-split--reverse .stock-phones { order: 2; }
