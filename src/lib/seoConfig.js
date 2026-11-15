@@ -1,5 +1,7 @@
 import { SITE } from "@/lib/site";
 import { inventoryFaqs } from "@/data/inventoryFaq";
+import { appointmentFaqs } from "@/data/appointmentFaqs";
+import { appointmentGuideFaqs } from "@/data/appointmentGuideFaq";
 import { aiConsultingFaqs } from "@/data/aiConsultingFaqs";
 
 const orgId = `${SITE.url}/#organization`;
@@ -266,7 +268,7 @@ export const routeSeo = {
     ]),
   },
   "/appointment-management": {
-    title: "מערכת ניהול תורים לעסקים | AllInCenter",
+    title: "מערכת ניהול תורים לעסקים: זימון תורים אונליין | AllInCenter",
     description:
       "מערכת ניהול תורים לעסק: זימון תורים אונליין, יומן מרכזי, לקוחות ותזכורות במקום אחד. מתאימה לעסקים בישראל שעובדים לפי תורים.",
     canonical: `${SITE.url}/appointment-management`,
@@ -277,7 +279,7 @@ export const routeSeo = {
         "@type": "WebPage",
         "@id": `${SITE.url}/appointment-management#webpage`,
         url: `${SITE.url}/appointment-management`,
-        name: "מערכת ניהול תורים לעסקים | AllInCenter",
+        name: "מערכת ניהול תורים לעסקים: זימון תורים אונליין | AllInCenter",
         description:
           "מערכת ניהול תורים לעסק: זימון תורים אונליין, יומן מרכזי, לקוחות ותזכורות במקום אחד. מתאימה לעסקים בישראל שעובדים לפי תורים.",
         inLanguage: SITE.language,
@@ -310,19 +312,7 @@ export const routeSeo = {
       {
         "@type": "FAQPage",
         "@id": `${SITE.url}/appointment-management#faq`,
-        mainEntity: [
-          ["מהי מערכת ניהול תורים?", "מערכת שמאפשרת ללקוחות לקבוע תור אונליין, ולעסק לנהל יומן, זמינות ולקוחות במקום אחד — במקום לתאם הכל ידנית בין הודעות."],
-          ["למי מתאימה מערכת ניהול תורים לעסק?", "לקליניקות, קוסמטיקאיות, מטפלים, שינניות, נותני שירות ולעסקים שעובדים לפי תורים ורוצים לנהל את היומן והלקוחות במקום אחד."],
-          ["מה ההבדל בין ניהול תורים לעסק לבין יומן רגיל?", "יומן מציג מועדים. מערכת ניהול תורים לעסקים מחברת גם הזמנה אונליין, לקוחות, תזכורות והמשך תהליך — כדי שהעבודה לא תישאר מפוזרת בין הודעות וכלים נפרדים."],
-          ["האם לקוחות יכולים לקבוע תור אונליין?", "כן. הלקוחות בוחרים שירות וזמן פנוי וקובעים תור אונליין, בלי לחכות לשיחה או להודעה חוזרת."],
-          ["האם ניתן לשלוח תזכורות ללקוחות?", "כן. אפשר לשלב תזכורות ואישורי תור בתהליך, כדי שהמעקב לא יישאר ידני אחרי כל הזמנה."],
-          ["האם אפשר לנהל גם לקוחות ולא רק תורים?", "כן. המערכת משלבת ניהול לקוחות עם התורים והפעילות השוטפת של העסק."],
-          ["האם המערכת מתאימה לקוסמטיקאיות ומטפלים?", "כן. ניתן להתאים את סוגי השירותים, זמני הפעילות ותהליך קביעת התור לעסקי יופי ולטיפולים."],
-          ["האם המערכת מתאימה לעסק עם כמה אנשי צוות?", "כן. אפשר להתאים שירותים, זמינות ויומן גם לעסק עם כמה אנשי צוות, ולא רק ליומן של אדם אחד."],
-          ["האם ניתן להתאים את המערכת לתהליך העבודה של העסק?", "כן. המערכת מותאמת לסוגי השירותים, זמני הפעילות, אופן קביעת התורים והפעולות הנדרשות לאחר ההזמנה."],
-          ["האם המערכת מתאימה לעסקים בישראל?", "כן. AllInCenter מפתחת את המערכת עבור עסקים בישראל ובממשק עברי."],
-          ["האם המערכת מתאימה לעסקים שמנהלים תורים ב‑WhatsApp?", "כן. אפשר לעבור מתיאום ידני בצ׳אטים להזמנה אונליין ולניהול מרכזי. בהתאם לתהליך העסק, ניתן גם לחבר את הזרימה לבוט WhatsApp."],
-        ].map(([name, text]) => ({
+        mainEntity: appointmentFaqs.map(([name, text]) => ({
           "@type": "Question",
           name,
           acceptedAnswer: { "@type": "Answer", text },
@@ -518,6 +508,11 @@ export const routeSeo = {
         { "@type": "ListItem", position: 2, name: "מרכז הידע", item: `${SITE.url}/guides` },
         { "@type": "ListItem", position: 3, name: "איך לבחור מערכת ניהול תורים לעסק", item: `${SITE.url}/guides/how-to-choose-appointment-system` },
       ] },
+      {
+        "@type": "FAQPage",
+        "@id": `${SITE.url}/guides/how-to-choose-appointment-system#faq`,
+        mainEntity: appointmentGuideFaqs.map(([name, text]) => ({ "@type": "Question", name, acceptedAnswer: { "@type": "Answer", text } })),
+      },
     ]),
   },
   "/guides/restaurant-reservation-system": articleSeo({

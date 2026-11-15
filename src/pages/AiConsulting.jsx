@@ -281,6 +281,10 @@ export default function AiConsulting() {
                 צריך לזהות את התהליכים הנכונים, להבין איפה נמצא הערך העסקי, להגדיר פתרון שאפשר באמת
                 ליישם — ולדאוג שהוא יגיע לשימוש בפועל.
               </p>
+              <p className="ai-problem__guide">
+                לפני שיחה אפשר לקרוא את המדריך{" "}
+                <a href="/guides/ai-automation-small-business">אוטומציה ו-AI לעסקים קטנים: מאיפה מתחילים?</a>
+              </p>
               <p className="ai-problem__highlight">כאן אני נכנס לתמונה.</p>
             </div>
           </Reveal>

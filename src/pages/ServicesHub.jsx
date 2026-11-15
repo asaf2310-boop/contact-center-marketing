@@ -21,6 +21,7 @@ const services = [
     points: ["אפיון תהליך", "חיבור פעולות חוזרות", "ליווי עד ההטמעה"],
     href: "/ai",
     cta: "לעמוד השירות",
+    guide: { href: "/guides/ai-automation-small-business", label: "מדריך: אוטומציה ו-AI לעסקים קטנים, מאיפה מתחילים?" },
   },
   {
     key: "seo",
@@ -238,6 +239,7 @@ export default function ServicesHub() {
                     ))}
                   </ul>
                   <a className="btn btn--ghost" href={service.href}>{service.cta} <ArrowLeft size={16} /></a>
+                  {service.guide ? <a className="svc-item__guide" href={service.guide.href}>{service.guide.label}</a> : null}
                 </div>
                 <div className="svc-item__visual">
                   <Visual />

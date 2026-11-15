@@ -6694,3 +6694,8 @@ p {
 
 /* The appointment screenshot is 4:3 with black letterbox bars: crop them evenly instead of showing the top bar */
 .home-editorial .editorial-product__visual img.is-centered { object-position: center; }
+
+/* Contextual guide links (SEO internal linking) */
+.ai-problem__guide a, .svc-item__guide { color: inherit; text-decoration: underline; text-underline-offset: 4px; font-weight: 700; }
+.svc-item__guide { display: block; margin-top: 14px; font-size: .95rem; }
+.ai-problem__guide { margin-top: 14px; }
