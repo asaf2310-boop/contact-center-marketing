@@ -13,6 +13,7 @@ import {
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import InstagramLink from "@/components/InstagramLink";
+import { appointmentFaqs } from "@/data/appointmentFaqs";
 
 const capabilities = [
   { icon: CalendarCheck, title: "הזמנה אונליין ושירותים", text: "לקוחות בוחרים שירות וזמן פנוי וקובעים תור אונליין." },
@@ -32,19 +33,6 @@ const audiences = [
   "עסקים שעובדים לפי תורים",
 ];
 
-const faqs = [
-  ["מהי מערכת ניהול תורים?", "מערכת שמאפשרת ללקוחות לקבוע תור אונליין, ולעסק לנהל יומן, זמינות ולקוחות במקום אחד — במקום לתאם הכל ידנית בין הודעות."],
-  ["למי מתאימה מערכת ניהול תורים לעסק?", "לקליניקות, קוסמטיקאיות, מטפלים, שינניות, נותני שירות ולעסקים שעובדים לפי תורים ורוצים לנהל את היומן והלקוחות במקום אחד."],
-  ["מה ההבדל בין ניהול תורים לעסק לבין יומן רגיל?", "יומן מציג מועדים. מערכת ניהול תורים לעסקים מחברת גם הזמנה אונליין, לקוחות, תזכורות והמשך תהליך — כדי שהעבודה לא תישאר מפוזרת בין הודעות וכלים נפרדים."],
-  ["האם לקוחות יכולים לקבוע תור אונליין?", "כן. הלקוחות בוחרים שירות וזמן פנוי וקובעים תור אונליין, בלי לחכות לשיחה או להודעה חוזרת."],
-  ["האם ניתן לשלוח תזכורות ללקוחות?", "כן. אפשר לשלב תזכורות ואישורי תור בתהליך, כדי שהמעקב לא יישאר ידני אחרי כל הזמנה."],
-  ["האם אפשר לנהל גם לקוחות ולא רק תורים?", "כן. המערכת משלבת ניהול לקוחות עם התורים והפעילות השוטפת של העסק."],
-  ["האם המערכת מתאימה לקוסמטיקאיות ומטפלים?", "כן. ניתן להתאים את סוגי השירותים, זמני הפעילות ותהליך קביעת התור לעסקי יופי ולטיפולים."],
-  ["האם המערכת מתאימה לעסק עם כמה אנשי צוות?", "כן. אפשר להתאים שירותים, זמינות ויומן גם לעסק עם כמה אנשי צוות, ולא רק ליומן של אדם אחד."],
-  ["האם ניתן להתאים את המערכת לתהליך העבודה של העסק?", "כן. המערכת מותאמת לסוגי השירותים, זמני הפעילות, אופן קביעת התורים והפעולות הנדרשות לאחר ההזמנה."],
-  ["האם המערכת מתאימה לעסקים בישראל?", "כן. AllInCenter מפתחת את המערכת עבור עסקים בישראל ובממשק עברי."],
-  ["האם המערכת מתאימה לעסקים שמנהלים תורים ב‑WhatsApp?", "כן. אפשר לעבור מתיאום ידני בצ׳אטים להזמנה אונליין ולניהול מרכזי. בהתאם לתהליך העסק, ניתן גם לחבר את הזרימה לבוט WhatsApp."],
-];
 
 const flow = ["שיחה ב‑WhatsApp", "בחירת שירות ומועד", "תור במערכת", "ניהול המשך התהליך"];
 
@@ -96,6 +84,10 @@ export default function AppointmentManagement() {
             <div>
               <dt>מחירון מלא</dt>
               <dd><a href="/pricing">למחירון AllInCenter</a></dd>
+            </div>
+            <div>
+              <dt>לפני שבוחרים מערכת</dt>
+              <dd><a href="/guides/how-to-choose-appointment-system">מדריך: 8 דברים שכדאי לבדוק</a></dd>
             </div>
           </dl>
         </section>
@@ -183,7 +175,7 @@ export default function AppointmentManagement() {
             <a className="btn btn--primary" href="/#contact">לתיאום הדגמה <ArrowLeft size={18} /></a>
             <a className="appointment-conversion__guide" href="/pricing">למחירון מערכת ניהול התורים <ArrowLeft size={16} /></a>
           </div>
-          <a className="appointment-conversion__context" href="/guides/how-to-choose-appointment-system">איך לבחור מערכת ניהול תורים לעסק?</a>
+          <a className="appointment-conversion__context" href="/guides/how-to-choose-appointment-system">לפני שבוחרים: איך לבחור מערכת ניהול תורים לעסק, 8 דברים שכדאי לבדוק</a>
           <InstagramLink className="instagram-follow" location="appointment-management">עקבו אחרינו באינסטגרם</InstagramLink>
         </section>
 
@@ -193,7 +185,7 @@ export default function AppointmentManagement() {
             <h2 id="faq-title">שאלות נפוצות על מערכת ניהול תורים</h2>
           </div>
           <div className="appointment-faq__list">
-            {faqs.map(([question, answer], index) => <details key={question}><summary><span>{String(index + 1).padStart(2, "0")}</span>{question}</summary><p>{answer}</p></details>)}
+            {appointmentFaqs.map(([question, answer], index) => <details key={question}><summary><span>{String(index + 1).padStart(2, "0")}</span>{question}</summary><p>{answer}</p></details>)}
           </div>
         </section>
       </main>
