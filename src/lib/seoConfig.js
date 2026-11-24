@@ -1,6 +1,7 @@
 import { SITE } from "@/lib/site";
 import { inventoryFaqs } from "@/data/inventoryFaq";
 import { appointmentFaqs } from "@/data/appointmentFaqs";
+import { restaurantFaqs } from "@/data/restaurantFaqs";
 import { appointmentGuideFaqs } from "@/data/appointmentGuideFaq";
 import { aiConsultingFaqs } from "@/data/aiConsultingFaqs";
 
@@ -268,9 +269,9 @@ export const routeSeo = {
     ]),
   },
   "/appointment-management": {
-    title: "מערכת ניהול תורים לעסקים: זימון תורים אונליין | AllInCenter",
+    title: "מערכת לניהול תורים לעסקים: יומן, לקוחות ותזכורות | AllInCenter",
     description:
-      "מערכת ניהול תורים לעסק: זימון תורים אונליין, יומן מרכזי, לקוחות ותזכורות במקום אחד. מתאימה לעסקים בישראל שעובדים לפי תורים.",
+      "מערכת לניהול תורים אונליין לעסק: הלקוחות קובעים תור, ואתם מנהלים יומן, לקוחות ותזכורות במקום אחד. 900 ₪ לשנה, ללא עלות הקמה. אפשר לחבר WhatsApp.",
     canonical: `${SITE.url}/appointment-management`,
     ogImage: SITE.logo,
     twitterCard: "summary",
@@ -279,9 +280,9 @@ export const routeSeo = {
         "@type": "WebPage",
         "@id": `${SITE.url}/appointment-management#webpage`,
         url: `${SITE.url}/appointment-management`,
-        name: "מערכת ניהול תורים לעסקים: זימון תורים אונליין | AllInCenter",
+        name: "מערכת לניהול תורים לעסקים: יומן, לקוחות ותזכורות | AllInCenter",
         description:
-          "מערכת ניהול תורים לעסק: זימון תורים אונליין, יומן מרכזי, לקוחות ותזכורות במקום אחד. מתאימה לעסקים בישראל שעובדים לפי תורים.",
+          "מערכת לניהול תורים אונליין לעסק: הלקוחות קובעים תור, ואתם מנהלים יומן, לקוחות ותזכורות במקום אחד. 900 ₪ לשנה, ללא עלות הקמה. אפשר לחבר WhatsApp.",
         inLanguage: SITE.language,
         isPartOf: { "@id": websiteId },
         about: { "@id": `${SITE.url}/appointment-management#service` },
@@ -380,9 +381,9 @@ export const routeSeo = {
     ]),
   },
   "/restaurant-reservations": {
-    title: "מערכת הזמנות למסעדות | ניהול שולחנות לבעלי מסעדות",
+    title: "הזמנות אונליין למסעדות: הזמנת שולחן וניהול הושבה | AllInCenter",
     description:
-      "מערכת הזמנות למסעדה לבעלי מסעדות בישראל: הזמנת שולחן אונליין, ניהול הזמנות ומפת שולחנות בממשק בעברית.",
+      "איך עובדות הזמנות אונליין למסעדה? האורח מזמין שולחן לפי סועדים, שעה ואזור ישיבה, והצוות מנהל הזמנות ומפת שולחנות בעברית. מחיר לפי התאמה, לבקשת הצעה.",
     canonical: `${SITE.url}/restaurant-reservations`,
     ogImage: SITE.logo,
     twitterCard: "summary",
@@ -391,9 +392,9 @@ export const routeSeo = {
         "@type": "WebPage",
         "@id": `${SITE.url}/restaurant-reservations#webpage`,
         url: `${SITE.url}/restaurant-reservations`,
-        name: "מערכת הזמנות למסעדות | ניהול שולחנות לבעלי מסעדות",
+        name: "הזמנות אונליין למסעדות: הזמנת שולחן וניהול הושבה | AllInCenter",
         description:
-          "מערכת הזמנות למסעדה לבעלי מסעדות בישראל: הזמנת שולחן אונליין, ניהול הזמנות ומפת שולחנות בממשק בעברית.",
+          "איך עובדות הזמנות אונליין למסעדה? האורח מזמין שולחן לפי סועדים, שעה ואזור ישיבה, והצוות מנהל הזמנות ומפת שולחנות בעברית. מחיר לפי התאמה, לבקשת הצעה.",
         inLanguage: SITE.language,
         isPartOf: { "@id": websiteId },
         about: { "@id": `${SITE.url}/restaurant-reservations#service` },
@@ -419,17 +420,7 @@ export const routeSeo = {
       {
         "@type": "FAQPage",
         "@id": `${SITE.url}/restaurant-reservations#faq`,
-        mainEntity: [
-          ["מהי מערכת הזמנות למסעדות?", "מערכת שמאפשרת לאורחים להזמין שולחן אונליין ולמסעדה לנהל את ההזמנות והשולחנות מתוך ממשק אחד."],
-          ["למי מתאימה מערכת הזמנות למסעדה?", "לבעלי מסעדות, ברים ובתי קפה שרוצים לרכז הזמנת שולחן, ניהול הזמנות ומפת ישיבה בתהליך אחד — בממשק בעברית."],
-          ["האם האורחים יכולים להזמין שולחן אונליין?", "כן. האורחים יכולים לבחור מספר סועדים, תאריך, שעה ואזור ישיבה בתהליך הזמנה דיגיטלי."],
-          ["האם ניתן לנהל את ההזמנות מתוך מערכת אחת?", "כן. מסכי הניהול מרכזים את ההזמנות ואת תמונת המצב של המסעדה במקום אחד."],
-          ["האם המערכת כוללת ניהול שולחנות?", "כן. המערכת כוללת מפת שולחנות ומסכי ניהול שמאפשרים לצוות לראות ולנהל את מצב ההושבה."],
-          ["האם המערכת מתאימה למסעדות בישראל?", "כן. המערכת מיועדת למסעדות בישראל וכוללת ממשק בעברית."],
-          ["האם ניתן להתאים את מערכת ההזמנות לצורת העבודה של המסעדה?", "כן. ניתן להתאים את תהליך ההזמנה והניהול לאופן העבודה של המסעדה."],
-          ["האם המערכת מחליפה ניהול ידני של הזמנות?", "המערכת מרכזת את תהליך ההזמנה והניהול הדיגיטלי וכך מפחיתה את הצורך לנהל מידע ידנית בין מקומות שונים."],
-          ["כמה עולה מערכת ההזמנות למסעדות?", "מחיר מערכת ההזמנות למסעדות נקבע לפי המסעדה והתאמת התהליך. אין מחיר קבוע בעמוד זה — לקבלת הצעת מחיר יש להשאיר פרטים לבקשת הדגמה."],
-        ].map(([name, text]) => ({ "@type": "Question", name, acceptedAnswer: { "@type": "Answer", text } })),
+        mainEntity: restaurantFaqs.map(([name, text]) => ({ "@type": "Question", name, acceptedAnswer: { "@type": "Answer", text } })),
       },
     ]),
   },
