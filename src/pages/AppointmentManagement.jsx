@@ -131,6 +131,22 @@ export default function AppointmentManagement() {
           </div>
         </section>
 
+        <section className="appointment-whatsapp-story" aria-labelledby="online-title">
+          <div className="appointment-section-heading">
+            <span className="editorial-index">03B / ONLINE BOOKING</span>
+            <h2 id="online-title">ניהול תורים אונליין לעסק קטן: יומן, לקוחות ותזכורות</h2>
+            <p>
+              זימון תורים לעסקים מתחיל בכך שהלקוח קובע בעצמו, ממשיך ביומן אחד שבו רואים את כל התורים, וכולל ניהול לקוחות לצד התורים.
+              כך מערכת לניהול תורים מחליפה תיאום ידני בהודעות — גם למטפל עצמאי, לקליניקה קטנה או לעסק עם כמה אנשי צוות.
+            </p>
+          </div>
+          <div className="appointment-pain-list">
+            <article><span>01</span><div><h3>ניהול תורים וניהול לקוחות</h3><p>פרטי הלקוח והיסטוריית התורים נשמרים במערכת, לצד היומן, ולא בשיחות ובקבצים נפרדים.</p></div></article>
+            <article><span>02</span><div><h3>תזכורות ואישורי תור</h3><p>תזכורות ואישורים משולבים בתהליך כדי שהמעקב לא יישאר ידני. ערוץ השליחה נקבע לפי תהליך העסק.</p></div></article>
+            <article><span>03</span><div><h3>ניהול תורים ו‑WhatsApp</h3><p>אם הלקוחות שלכם כבר מדברים איתכם ב‑WhatsApp, אפשר לחבר את הזרימה לבוט לפי התהליך — ולהעביר את קביעת התור להזמנה אונליין. <a href="/guides/ai-automation-small-business">על אוטומציה בעסק</a>.</p></div></article>
+          </div>
+        </section>
+
         <section className="appointment-operations" aria-labelledby="capabilities-title">
           <div className="appointment-section-heading appointment-section-heading--sticky">
             <span className="editorial-index">04 / OPERATIONS</span>
