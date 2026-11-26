@@ -22,8 +22,12 @@
 <button type="button" id="go" class="btn btn-primary" hidden></button>
 <form id="form" hidden autocomplete="on" novalidate>
   <input type="email" name="username" autocomplete="username" hidden>
-  <label for="pw" id="pw-label"></label><input id="pw" type="password" autocomplete="new-password" minlength="8" required>
-  <label for="pw2" id="pw2-label"></label><input id="pw2" type="password" autocomplete="new-password" minlength="8" required>
+  <label for="pw" id="pw-label"></label>
+  <div class="pwrow"><input id="pw" type="password" autocomplete="new-password" minlength="8" required dir="ltr" autocapitalize="none" spellcheck="false" aria-describedby="rules"><button type="button" class="eye" data-eye="pw" aria-controls="pw" aria-pressed="false"></button></div>
+  <ul id="rules" class="rules" aria-live="polite"><li data-rule="length"><span class="t"></span><span class="sr-only"></span></li><li data-rule="upper"><span class="t"></span><span class="sr-only"></span></li><li data-rule="lower"><span class="t"></span><span class="sr-only"></span></li><li data-rule="digit"><span class="t"></span><span class="sr-only"></span></li></ul>
+  <label for="pw2" id="pw2-label"></label>
+  <div class="pwrow"><input id="pw2" type="password" autocomplete="new-password" minlength="8" required dir="ltr" autocapitalize="none" spellcheck="false" aria-describedby="match"><button type="button" class="eye" data-eye="pw2" aria-controls="pw2" aria-pressed="false"></button></div>
+  <p id="match" class="pwmatch" aria-live="polite"></p>
   <button type="submit" id="save" class="btn btn-primary"></button>
 </form>
 <div id="actions" class="actions"></div>

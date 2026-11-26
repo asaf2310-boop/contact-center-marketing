@@ -43,11 +43,16 @@ export function parseFragment(hash) {
   }
   const invite = p.get('invite');
   if (invite !== null && !UUID.test(invite)) return { kind: 'invalid' };
+  // `intent=verify` (e-mail_change only): the FIRST e-mail of a phone-registered account. Cosmetic: the token type and
+  // its single-use exchange are unchanged; it only selects the "confirm your address" wording instead of "address changed".
+  const intent = p.get('intent');
+  if (intent !== null && intent !== 'verify') return { kind: 'invalid' };
   if (keys.length === 1 && invite !== null) return { kind: 'invite', token: invite.toLowerCase() };
   const tokenHash = p.get('token_hash') ?? ''; const type = p.get('type') ?? '';
   if (!VERIFY_TYPES.has(type) || !TOKEN_HASH.test(tokenHash)) return { kind: 'invalid' };
   // a sign-up confirmation may carry the invitation it was started from; nothing else may carry extra parameters
   if (keys.length === 2 && invite === null) return { kind: 'verify', type, tokenHash };
+  if (keys.length === 3 && intent === 'verify' && invite === null && type === 'email_change') return { kind: 'verify', type, tokenHash, first: true };
   if (keys.length === 3 && invite !== null && type === 'signup') return { kind: 'verify', type, tokenHash, invite: invite.toLowerCase() };
   return { kind: 'invalid' };
 }
@@ -70,6 +75,13 @@ export function errorMessageKey(code, reasons) {
     same_password: 'same', over_request_rate_limit: 'rate', validation_failed: 'invalid' })[code] ?? 'generic';
 }
 
+/** Password rules — the SAME four rules as the app (src/domain/registration.ts `passwordChecks`; unit-tested equal). */
+export const PASSWORD_RULES = ['length', 'upper', 'lower', 'digit'];
+export const passwordChecks = (pw) => ({ length: pw.length >= 8, upper: /[A-Z]/.test(pw), lower: /[a-z]/.test(pw), digit: /\d/.test(pw) });
+export const passwordOk = (pw) => Object.values(passwordChecks(pw)).every(Boolean);
+/** '' (nothing typed in the confirmation yet) | 'match' | 'mismatch'. */
+export const confirmState = (pw, pw2) => (!pw2 ? '' : pw === pw2 ? 'match' : 'mismatch');
+
 export function pickLang(navLangs, stored) {
   if (['he', 'en', 'ar'].includes(stored)) return stored;
   for (const l of navLangs ?? []) { const b = String(l).toLowerCase().slice(0, 2); if (b === 'he' || b === 'iw') return 'he'; if (b === 'ar') return 'ar'; if (b === 'en') return 'en'; }
@@ -78,21 +90,27 @@ export function pickLang(navLangs, stored) {
 
 export const TEXT = {
   he: { dir: 'rtl', confirmPrompt: 'כדי לאשר את כתובת האימייל, לחצו על הכפתור.', confirmBtn: 'אישור כתובת האימייל', changePrompt: 'כדי לאשר את שינוי כתובת האימייל, לחצו על הכפתור.', changeBtn: 'אישור השינוי', resetPrompt: 'בחרו סיסמה חדשה לחשבון Stock.', title: 'Stock — אישור חשבון', working: 'רגע, בודקים את הקישור…', confirmed: 'כתובת האימייל אומתה.', confirmedHint: 'אפשר להיכנס עכשיו לאפליקציה או לאתר עם האימייל והסיסמה.',
-    resetTitle: 'בחירת סיסמה חדשה', newPw: 'סיסמה חדשה', newPw2: 'אימות הסיסמה', save: 'שמירת הסיסמה', mismatch: 'הסיסמאות אינן זהות.', short: 'הסיסמה צריכה לכלול לפחות 8 תווים.',
+    resetTitle: 'בחירת סיסמה חדשה', newPw: 'סיסמה חדשה', newPw2: 'אימות הסיסמה', save: 'שמירת הסיסמה', mismatch: 'הסיסמאות אינן זהות.', rules: 'הסיסמה צריכה לעמוד בכל הדרישות: לפחות 8 תווים, אות גדולה ואות קטנה באנגלית ומספר.',
+    rulesTitle: 'דרישות הסיסמה', rLength: 'לפחות 8 תווים', rUpper: 'אות גדולה (A-Z)', rLower: 'אות קטנה (a-z)', rDigit: 'מספר', met: '(מתקיים)', unmet: '(עדיין לא מתקיים)',
+    match: 'הסיסמאות זהות', showPw: 'הצגת הסיסמה', showPw2: 'הצגת אימות הסיסמה', computerNote: 'במחשב? אפשר להיכנס גם באתר Stock עם הסיסמה החדשה.',
     resetDone: 'הסיסמה עודכנה.', resetDoneHint: 'היכנסו לאפליקציה או לאתר עם הסיסמה החדשה.', confirmedInviteHint: 'עכשיו אפשר לפתוח את ההזמנה ולהיכנס עם האימייל והסיסמה שבחרתם.', changeHalf: 'האישור התקבל.', changeHalfHint: 'כדי להשלים את שינוי האימייל, פתחו גם את הקישור שנשלח לכתובת השנייה.', changed: 'כתובת האימייל עודכנה.', changedHint: 'מעכשיו נכנסים עם הכתובת החדשה.',
     appNotOpened: 'נראה שהאפליקציה לא נפתחה. אם היא לא מותקנת במכשיר הזה, המשיכו באתר או התקינו את Stock ונסו שוב.', invite: 'הוזמנתם להצטרף לעסק ב-Stock.', inviteHint: 'פתחו את ההזמנה באפליקציה והיכנסו עם כתובת האימייל שאליה נשלחה.',
     openApp: 'פתיחה באפליקציית Stock', openWeb: 'המשך באתר', noApp: 'האפליקציה לא נפתחה? ודאו שהיא מותקנת, או המשיכו באתר.',
     invalid: 'הקישור אינו תקין.', expired: 'הקישור פג תוקף או שכבר נעשה בו שימוש. בקשו קישור חדש מהאפליקציה.', weak: 'הסיסמה חלשה מדי. בחרו סיסמה ארוכה ומגוונת יותר.',
     pwned: 'הסיסמה הזו הופיעה בדליפת מידע ידועה. בחרו סיסמה אחרת.', same: 'הסיסמה החדשה זהה לקודמת.', rate: 'יותר מדי ניסיונות. נסו שוב בעוד כמה דקות.', generic: 'משהו השתבש. נסו שוב או בקשו קישור חדש.' },
   en: { dir: 'ltr', confirmPrompt: 'To confirm your e-mail address, press the button.', confirmBtn: 'Confirm e-mail address', changePrompt: 'To confirm the change of your e-mail address, press the button.', changeBtn: 'Confirm the change', resetPrompt: 'Choose a new password for your Stock account.', title: 'Stock — account', working: 'One moment, checking the link…', confirmed: 'Your e-mail address is confirmed.', confirmedHint: 'You can now sign in in the app or on the website with your e-mail and password.',
-    resetTitle: 'Choose a new password', newPw: 'New password', newPw2: 'Confirm the password', save: 'Save password', mismatch: 'The passwords do not match.', short: 'The password needs at least 8 characters.',
+    resetTitle: 'Choose a new password', newPw: 'New password', newPw2: 'Confirm the password', save: 'Save password', mismatch: 'The passwords do not match.', rules: 'The password must meet every requirement: at least 8 characters, an uppercase and a lowercase English letter, and a number.',
+    rulesTitle: 'Password requirements', rLength: 'At least 8 characters', rUpper: 'Uppercase letter (A-Z)', rLower: 'Lowercase letter (a-z)', rDigit: 'A number', met: '(met)', unmet: '(not met yet)',
+    match: 'The passwords match', showPw: 'Show password', showPw2: 'Show password confirmation', computerNote: 'On a computer? You can also sign in on the Stock website with the new password.',
     resetDone: 'Your password was changed.', resetDoneHint: 'Sign in to the app or the website with the new password.', confirmedInviteHint: 'You can now open the invitation and sign in with the e-mail and password you chose.', changeHalf: 'Confirmation received.', changeHalfHint: 'To finish changing your e-mail, also open the link sent to your other address.', changed: 'Your e-mail address was changed.', changedHint: 'From now on, sign in with the new address.',
     appNotOpened: 'The app does not seem to have opened. If it is not installed on this device, continue on the website, or install Stock and try again.', invite: 'You were invited to join a business on Stock.', inviteHint: 'Open the invitation in the app and sign in with the e-mail address it was sent to.',
     openApp: 'Open in the Stock app', openWeb: 'Continue on the website', noApp: 'The app did not open? Make sure it is installed, or continue on the website.',
     invalid: 'This link is not valid.', expired: 'This link has expired or was already used. Request a new one in the app.', weak: 'This password is too weak. Choose a longer, more varied one.',
     pwned: 'This password appeared in a known data breach. Choose a different one.', same: 'The new password is the same as the old one.', rate: 'Too many attempts. Try again in a few minutes.', generic: 'Something went wrong. Try again or request a new link.' },
   ar: { dir: 'rtl', confirmPrompt: 'لتأكيد بريدك الإلكتروني، اضغط الزر.', confirmBtn: 'تأكيد البريد الإلكتروني', changePrompt: 'لتأكيد تغيير بريدك الإلكتروني، اضغط الزر.', changeBtn: 'تأكيد التغيير', resetPrompt: 'اختر كلمة مرور جديدة لحساب Stock.', title: 'Stock — الحساب', working: 'لحظة، نتحقق من الرابط…', confirmed: 'تم تأكيد بريدك الإلكتروني.', confirmedHint: 'يمكنك الآن تسجيل الدخول في التطبيق أو الموقع بالبريد وكلمة المرور.',
-    resetTitle: 'اختيار كلمة مرور جديدة', newPw: 'كلمة المرور الجديدة', newPw2: 'تأكيد كلمة المرور', save: 'حفظ كلمة المرور', mismatch: 'كلمتا المرور غير متطابقتين.', short: 'يجب أن تحتوي كلمة المرور على 8 أحرف على الأقل.',
+    resetTitle: 'اختيار كلمة مرور جديدة', newPw: 'كلمة المرور الجديدة', newPw2: 'تأكيد كلمة المرور', save: 'حفظ كلمة المرور', mismatch: 'كلمتا المرور غير متطابقتين.', rules: 'يجب أن تستوفي كلمة المرور كل المتطلبات: 8 أحرف على الأقل، وحرف إنجليزي كبير وحرف صغير، ورقم.',
+    rulesTitle: 'متطلبات كلمة المرور', rLength: '8 أحرف على الأقل', rUpper: 'حرف كبير (A-Z)', rLower: 'حرف صغير (a-z)', rDigit: 'رقم', met: '(متحقق)', unmet: '(غير متحقق بعد)',
+    match: 'كلمتا المرور متطابقتان', showPw: 'إظهار كلمة المرور', showPw2: 'إظهار تأكيد كلمة المرور', computerNote: 'على الحاسوب؟ يمكنك أيضًا تسجيل الدخول في موقع Stock بكلمة المرور الجديدة.',
     resetDone: 'تم تغيير كلمة المرور.', resetDoneHint: 'سجّل الدخول إلى التطبيق أو الموقع بكلمة المرور الجديدة.', confirmedInviteHint: 'يمكنك الآن فتح الدعوة وتسجيل الدخول بالبريد وكلمة المرور اللذين اخترتهما.', changeHalf: 'تم استلام التأكيد.', changeHalfHint: 'لإكمال تغيير البريد، افتح أيضًا الرابط المرسل إلى عنوانك الآخر.', changed: 'تم تغيير بريدك الإلكتروني.', changedHint: 'من الآن سجّل الدخول بالعنوان الجديد.',
     appNotOpened: 'يبدو أن التطبيق لم يُفتح. إذا لم يكن مثبتًا على هذا الجهاز، تابع في الموقع أو ثبّت Stock وحاول مجددًا.', invite: 'تمت دعوتك للانضمام إلى مصلحة على Stock.', inviteHint: 'افتح الدعوة في التطبيق وسجّل الدخول بالبريد الذي أُرسلت إليه.',
     openApp: 'فتح في تطبيق Stock', openWeb: 'المتابعة في الموقع', noApp: 'لم يُفتح التطبيق؟ تأكد من تثبيته أو تابع في الموقع.',
@@ -119,9 +137,9 @@ export function start(doc = document, win = window) {
   let lang = pickLang(win.navigator.languages, stored);
   const $ = (id) => doc.getElementById(id);
   let view = { name: 'working' };
-  const actions = (route) => {
+  const actions = (route, { prominent = false } = {}) => {
     const box = $('actions'); box.replaceChildren();
-    const a = doc.createElement('a'); a.className = 'btn btn-primary'; a.href = appLink(route); a.textContent = TEXT[lang].openApp; a.id = 'open-app';
+    const a = doc.createElement('a'); a.className = prominent ? 'btn btn-primary btn-lg' : 'btn btn-primary'; a.href = appLink(route); a.textContent = TEXT[lang].openApp; a.id = 'open-app';
     const w = doc.createElement('a'); w.className = 'btn'; w.href = websiteLink(route); w.textContent = TEXT[lang].openWeb; w.rel = 'noopener'; w.id = 'open-web';
     const n = doc.createElement('p'); n.className = 'muted small'; n.id = 'no-app'; n.textContent = TEXT[lang].noApp;
     // If the app is not installed the custom-scheme link does nothing (or iOS shows an error); the page stays visible.
@@ -131,6 +149,24 @@ export function start(doc = document, win = window) {
       win.setTimeout(() => { if (!left && !doc.hidden) { n.textContent = TEXT[lang].appNotOpened; n.className = 'notice'; } }, 1800);
     });
     box.append(a, w, n);
+    if (prominent) { const c = doc.createElement('p'); c.className = 'muted'; c.id = 'computer-note'; c.textContent = TEXT[lang].computerNote; box.append(c); }
+  };
+  // live password rules, confirmation state and show/hide toggles (reset form)
+  const updatePw = () => {
+    const T = TEXT[lang]; const pw = $('pw').value; const c = passwordChecks(pw);
+    for (const li of doc.querySelectorAll('#rules [data-rule]')) {
+      const k = li.dataset.rule; const met = c[k];
+      li.className = met ? 'ok' : ''; li.dataset.met = String(met);
+      li.querySelector('.t').textContent = T[`r${k[0].toUpperCase()}${k.slice(1)}`]; li.querySelector('.sr-only').textContent = ` ${met ? T.met : T.unmet}`;
+    }
+    const st = confirmState(pw, $('pw2').value); const m = $('match');
+    m.dataset.state = st; m.className = `pwmatch ${st}`; m.textContent = st === 'match' ? T.match : st === 'mismatch' ? T.mismatch : '';
+  };
+  const setEyes = (reset = false) => {
+    for (const b of doc.querySelectorAll('[data-eye]')) {
+      const input = $(b.dataset.eye); if (reset) { input.type = 'password'; b.setAttribute('aria-pressed', 'false'); }
+      b.setAttribute('aria-label', TEXT[lang][b.dataset.eye === 'pw2' ? 'showPw2' : 'showPw']);
+    }
   };
   const render = () => {
     const T = TEXT[lang];
@@ -138,24 +174,30 @@ export function start(doc = document, win = window) {
     for (const b of doc.querySelectorAll('[data-lang]')) b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
     $('form').hidden = view.name !== 'reset'; $('actions').replaceChildren();
     const go = $('go'); go.hidden = view.name !== 'confirm'; go.disabled = false;
-    if (view.name === 'confirm') { go.textContent = view.type === 'email_change' ? T.changeBtn : T.confirmBtn; }
+    if (view.name === 'confirm') { go.textContent = view.type === 'email_change' && !view.first ? T.changeBtn : T.confirmBtn; }
     const msg = $('message'); const hint = $('hint'); msg.className = ''; hint.textContent = '';
     if (view.name === 'working') msg.textContent = T.working;
-    if (view.name === 'confirm') msg.textContent = view.type === 'email_change' ? T.changePrompt : T.confirmPrompt;
+    if (view.name === 'confirm') msg.textContent = view.type === 'email_change' && !view.first ? T.changePrompt : T.confirmPrompt;
     if (view.name === 'error') { msg.textContent = T[view.key]; msg.className = 'error'; }
     if (view.name === 'confirmed') { msg.textContent = T.confirmed; hint.textContent = view.invite ? T.confirmedInviteHint : T.confirmedHint; actions(view.invite ? { invite: view.invite } : 'login'); }
     if (view.name === 'changeHalf') { msg.textContent = T.changeHalf; hint.textContent = T.changeHalfHint; }
     if (view.name === 'changed') { msg.textContent = T.changed; hint.textContent = T.changedHint; actions('login'); }
-    if (view.name === 'done') { msg.textContent = T.resetDone; hint.textContent = T.resetDoneHint; actions('login'); }
+    if (view.name === 'done') { msg.textContent = T.resetDone; hint.textContent = T.resetDoneHint; actions('login', { prominent: true }); }
     if (view.name === 'invite') { msg.textContent = T.invite; hint.textContent = T.inviteHint; actions({ invite: view.token }); }
     if (view.name === 'reset') {
       msg.textContent = T.resetTitle; hint.textContent = T.resetPrompt; $('pw-label').textContent = T.newPw; $('pw2-label').textContent = T.newPw2; $('save').textContent = T.save;
+      $('rules').setAttribute('aria-label', T.rulesTitle); setEyes(); updatePw();
       if (view.err) { hint.textContent = T[view.err]; hint.className = 'error'; } else hint.className = 'muted';
       $('save').disabled = false;
     }
   };
   const show = (v) => { view = v; render(); };
   for (const b of doc.querySelectorAll('[data-lang]')) b.addEventListener('click', () => { lang = b.dataset.lang; render(); });
+  $('pw').addEventListener('input', updatePw); $('pw2').addEventListener('input', updatePw);
+  for (const b of doc.querySelectorAll('[data-eye]')) b.addEventListener('click', () => {
+    const input = $(b.dataset.eye); const show = input.type === 'password';
+    input.type = show ? 'text' : 'password'; b.setAttribute('aria-pressed', String(show));
+  });
 
   let session = null; // memory only
   let used = false;   // the one-time token is sent at most once per page load
@@ -173,12 +215,12 @@ export function start(doc = document, win = window) {
     if (input.type === 'email_change' && !r.data?.access_token) return show({ name: 'changeHalf' });
     if (!r.data?.access_token) return show({ name: 'error', key: 'generic' });
     await signOut(r.data.access_token);
-    show(input.type === 'email_change' ? { name: 'changed' } : { name: 'confirmed', invite: input.invite });
+    show(input.type === 'email_change' && !input.first ? { name: 'changed' } : { name: 'confirmed', invite: input.invite });
   });
   $('form').addEventListener('submit', async (e) => {
     e.preventDefault();
     const pw = $('pw').value; const pw2 = $('pw2').value;
-    if (pw.length < 8) return show({ name: 'reset', err: 'short' });
+    if (!passwordOk(pw)) return show({ name: 'reset', err: 'rules' });
     if (pw !== pw2) return show({ name: 'reset', err: 'mismatch' });
     if ($('save').disabled) return;
     $('save').disabled = true;
@@ -194,7 +236,7 @@ export function start(doc = document, win = window) {
       if (key === 'expired') { session = null; return show({ name: 'error', key }); } // the link's session is gone
       return show({ name: 'reset', err: key });
     }
-    $('pw').value = ''; $('pw2').value = '';
+    $('pw').value = ''; $('pw2').value = ''; setEyes(true);
     await signOut(session); session = null; show({ name: 'done' });
   });
 
@@ -203,5 +245,5 @@ export function start(doc = document, win = window) {
   if (input.kind === 'error') return show({ name: 'error', key: errorMessageKey(input.code) });
   if (input.kind === 'invite') return show({ name: 'invite', token: input.token });
   // Nothing is sent to the server on page load: link scanners that open the page cannot consume the token.
-  return show(input.type === 'recovery' ? { name: 'reset' } : { name: 'confirm', type: input.type });
+  return show(input.type === 'recovery' ? { name: 'reset' } : { name: 'confirm', type: input.type, first: input.first === true });
 }
